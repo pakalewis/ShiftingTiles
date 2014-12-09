@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -73,7 +73,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="letsPlayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cwy-E7-gku"/>
                                     <segue destination="EGT-XM-OAO" kind="show" identifier="playGame" id="b9m-fU-xoq"/>
                                 </connections>
                             </button>
@@ -113,7 +112,7 @@
                                 </connections>
                             </stepper>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="i6b-8I-ASw" firstAttribute="leading" secondItem="8Fb-MQ-XGx" secondAttribute="leading" id="4vW-Do-NQW"/>
                             <constraint firstItem="v4I-w7-kZS" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="10" id="6LM-zf-fpo"/>
@@ -181,7 +180,7 @@
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap two tiles to swap their positions. " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C42-AY-08P">
                                 <rect key="frame" x="20" y="40" width="494" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1Ug-51-sxy"/>
                                     <constraint firstAttribute="height" constant="50" id="IRc-Iv-LQE"/>
@@ -205,7 +204,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C42-AY-08P" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" constant="20" id="0bA-EF-SEz"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="top" secondItem="C42-AY-08P" secondAttribute="top" id="5O8-cT-y3k"/>

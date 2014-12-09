@@ -39,17 +39,13 @@ class MainScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageArray =  [image0, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10]
+        imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
         self.imageCycler.image = imageArray[currentIndex]
         self.tilesPerRowLabel.text = "3"
         stepper.wraps = true
         stepper.autorepeat = true
         stepper.maximumValue = 10
         stepper.minimumValue = 3
-    }
-
-    @IBAction func letsPlayButton(sender: AnyObject) {
-        // Let's Play button pressed
     }
 
     
@@ -59,7 +55,7 @@ class MainScreen: UIViewController {
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var gameScreen = segue.destinationViewController as GameScreen
         if (segue.identifier == "playGame") {
             self.imageToSolve = imageArray[currentIndex]

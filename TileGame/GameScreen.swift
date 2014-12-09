@@ -76,10 +76,10 @@ class GameScreen: UIViewController {
                 var imagePiece = UIImage(CGImage: dataToMakeUIImage, scale: UIScreen.mainScreen().scale, orientation: self.imageToSolve.imageOrientation)
 
                 // not sure why but the image pieces come out smaller than they should so I resize them here
-                imagePiece = resizeImage(imagePiece, size: tileSideLength)
+                imagePiece = resizeImage(imagePiece!, size: tileSideLength)
 
                 // add the small image tile to the array
-                self.imagePiecesArray.append(imagePiece)
+                self.imagePiecesArray.append(imagePiece!)
 
                 // make button and put in array
                 var button = UIButton(frame: tileFrame)
