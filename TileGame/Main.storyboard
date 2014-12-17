@@ -174,7 +174,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="TileGame" customModuleProvider="target">
                                 <rect key="frame" x="15" y="-60" width="570" height="570"/>
                                 <color key="backgroundColor" red="1" green="0.91465844699999999" blue="0.48046743609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -200,12 +200,12 @@
                     </view>
                     <connections>
                         <outlet property="congratsMessage" destination="BUW-hI-3S5" id="9QG-8l-vOm"/>
-                        <outlet property="tileArea" destination="oHF-Bx-sTb" id="Pv9-cM-yCf"/>
+                        <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="73"/>
+            <point key="canvasLocation" x="1336" y="153"/>
         </scene>
     </scenes>
     <resources>
