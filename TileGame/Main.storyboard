@@ -153,7 +153,7 @@
                                     <action selector="backToMainScreen:" destination="EGT-XM-OAO" eventType="touchUpInside" id="oZx-ZW-9F9"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap two tiles to swap their positions. " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C42-AY-08P">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap two tiles to swap their positions. " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C42-AY-08P" userLabel="InstructionsLabel">
                                 <rect key="frame" x="20" y="40" width="494" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>

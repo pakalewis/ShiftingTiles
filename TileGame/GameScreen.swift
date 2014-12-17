@@ -35,7 +35,14 @@ class GameScreen: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.createImagePieces(tilesPerRow)
+        self.createImagePieces()
+        self.createTileArray()
+        
+        self.margin = (self.tileArea.frame.width / CGFloat(self.tilesPerRow)) * 0.05
+        println("self.tileArea.frame.width = \(self.tileArea.frame.width)")
+        println("margin = \(self.margin)")
+        self.layoutTilesWithMargin(self.margin)
+
         self.shuffleImages()
         self.loadImagesIntoTiles()
 
@@ -47,27 +54,15 @@ class GameScreen: UIViewController {
     
     // Cut up the main image into an array of imagePieces (uiimage)
     // At the same time, create an array of tiles (uiimageviews)
-    func createImagePieces(size:Int) {
+    func createImagePieces() {
         
-        var count = 0
-        
-        // Tile measuerments
-        var totalWidth = self.tileArea.frame.width
-        var margin:CGFloat = 4
-        var totalMargin = CGFloat(margin * CGFloat(size-1))
-        var tileSideLength:CGFloat  = (totalWidth - totalMargin) / CGFloat(size)
-
         // Image measurements
-        var imageSideLength:CGFloat = CGFloat(self.imageToSolve.size.width / CGFloat(size))
-
+        var imageSideLength:CGFloat = CGFloat(self.imageToSolve.size.width / CGFloat(self.tilesPerRow))
         
-        
-        for index1 in 0..<size { // go down the rows
-            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileSideLength + margin)
+        for index1 in 0..<self.tilesPerRow { // go down the rows
             var imagePositionY:CGFloat = CGFloat(index1) * (imageSideLength)
 
-            for index2 in 0..<size { // get the tiles in each row
-                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileSideLength + margin)
+            for index2 in 0..<self.tilesPerRow { // get the tiles in each row
                 var imagePositionX:CGFloat = CGFloat(index2) * (imageSideLength)
                 
                 
@@ -78,22 +73,26 @@ class GameScreen: UIViewController {
                 var tileUIImage = UIImage(CGImage: tileCGImage)
                 // add the small image tile to the array
                 self.imagePiecesArray.append(tileUIImage!)
+            }
+        }
+    }
+    
+    func createTileArray() {
+        var count = 0
+        
+        for index1 in 0..<self.tilesPerRow { // go down the rows
+            for index2 in 0..<self.tilesPerRow { // get the tiles in each row
                 
-                
-                
-                // set the boundaries of the tile
-                var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileSideLength, tileSideLength)
-                var tile = UIImageView(frame: tileFrame)
+                var tile = UIImageView()
                 tile.userInteractionEnabled = true;
                 tile.tag = count
                 // Add tile to the array
                 self.tileArray.append(tile)
-
                 
                 //Add gesture recognizer instead of button
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
                 tile.addGestureRecognizer(tapGesture)
-
+                
                 // Add the imageview to the tile area
                 self.tileArea.addSubview(tile)
                 
@@ -101,15 +100,50 @@ class GameScreen: UIViewController {
                 count++
             }
         }
+  
     }
     
     
-    func shuffleImages() {
+    func layoutTilesWithMargin(margin:CGFloat) {
+        var count = 0
         
+        // Tile measuerments
+        var totalWidth = self.tileArea.frame.width
+        var totalMargin = CGFloat(margin * CGFloat(self.tilesPerRow - 1))
+        var tileWidth:CGFloat  = (totalWidth - totalMargin) / CGFloat(self.tilesPerRow)
+        println("\(margin)")
+
+        for index1 in 0..<self.tilesPerRow { // go down the rows
+            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileWidth + margin)
+            
+            for index2 in 0..<self.tilesPerRow { // get the tiles in each row
+                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth + margin)
+                println("tile xPOS = \(tileAreaPositionX) and tile yPOS = \(tileAreaPositionY)")
+                
+                
+                // set the boundaries of the tile
+                var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
+                
+                
+                UIView.animateWithDuration(0.2, delay: 0.1, options: nil, animations: {
+                    self.tileArray[count].backgroundColor = UIColor.redColor()
+                    self.tileArray[count].frame = tileFrame
+                    }, completion: nil)
+
+                
+                count++;
+            }
+        }
+    }
+
+
+    
+    func shuffleImages() {
+    
         for var index = self.tileArray.count - 1; index > 0; index-- {
             // Random int from 0 to index-1
             var j = Int(arc4random_uniform(UInt32(index-1)))
-            
+    
             var tempTag = self.tileArray[j].tag
             self.tileArray[j].tag = self.tileArray[index].tag
             self.tileArray[index].tag = tempTag
@@ -169,7 +203,22 @@ class GameScreen: UIViewController {
         var tempImage = imagePiecesArray[index1]
         imagePiecesArray[index1] = imagePiecesArray[index2]
         imagePiecesArray[index2] = tempImage
-        self.loadImagesIntoTiles()
+        
+        UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+            
+            self.tileArray[index1].alpha = 0
+            self.tileArray[index2].alpha = 0
+        }) { (finished) -> Void in
+            
+            self.tileArray[index1].image = self.imagePiecesArray[index1]
+            self.tileArray[index2].image = self.imagePiecesArray[index2]
+
+            UIView.animateWithDuration(0.15, animations: { () -> Void in
+                self.tileArray[index1].alpha = 1
+                self.tileArray[index2].alpha = 1
+            })
+            
+        }
         
         // Swap tags
         var temptag = self.tileArray[index1].tag
@@ -199,7 +248,8 @@ class GameScreen: UIViewController {
         self.congratsMessage.backgroundColor = UIColor.blueColor()
         
         self.solved = true
-        self.moveTilesToFormCompletePicture()
+        self.layoutTilesWithMargin(0.0)
+//        self.moveTilesToFormCompletePicture()
         return true
     }
 
@@ -211,53 +261,23 @@ class GameScreen: UIViewController {
     
     
     func moveTilesToFormCompletePicture() {
-        // testing animation
-        // OMG my logic is so convoluted right here!!!
-        // i need a much simpler way of figuring out if a tile moves up vs down and left vs right
-        // I should really have the button in a 2d array so I can just pull the row and column
-        
-        var numTiles = self.imagePiecesArray.count
+
         var centerTile:Int = 0
         var whichColumn = 1
         var whichRow = 1
         
-        if numTiles % 2 != 0 {
+        if self.imagePiecesArray.count % 2 != 0 { // Puzzle had odd rows/columns
             centerTile = tilesPerRow / 2 + 1
-            println("odd \(centerTile)")
             for tile in self.tileArray {
-                println("row: \(whichRow) column: \(whichColumn)")
-                if whichColumn < centerTile {
-                    println("move tile right")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.x += self.margin * CGFloat((centerTile - whichColumn))
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichColumn > centerTile {
-                    println("move tile left")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.x += self.margin * CGFloat((centerTile - whichColumn))
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichRow < centerTile {
-                    println("move tile down")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.y += self.margin * CGFloat((centerTile - whichRow))
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichRow > centerTile {
-                    println("move tile up")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.y += self.margin * CGFloat((centerTile - whichRow))
-                        tile.frame = frame
-                        }, completion: nil)
-                }
+
+                var frame = tile.frame
+                frame.origin.x += self.margin * CGFloat((centerTile - whichColumn))
+                frame.origin.y += self.margin * CGFloat((centerTile - whichRow))
+                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                    tile.frame = frame
+                    }, completion: nil)
+
+                // increment the column and row
                 whichColumn++
                 if whichColumn > tilesPerRow {
                     whichColumn = 1
@@ -265,52 +285,26 @@ class GameScreen: UIViewController {
                 }
             }
         }
-        else {
+        else { // Puzzle had even rows/columns
             centerTile = tilesPerRow / 2
-            println("even \(centerTile)")
             for tile in self.tileArray {
-                println("row: \(whichRow) column: \(whichColumn)")
-                if whichColumn <= centerTile {
-                    println("move tile right")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.x += (self.margin * CGFloat((centerTile - whichColumn))) + self.margin / 2
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichColumn > centerTile {
-                    println("move tile left")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.x += (self.margin * CGFloat((centerTile - whichColumn))) + self.margin / 2
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichRow <= centerTile {
-                    println("move tile down")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.y += (self.margin * CGFloat((centerTile - whichRow))) + self.margin / 2
-                        tile.frame = frame
-                        }, completion: nil)
-                }
-                if whichRow > centerTile {
-                    println("move tile up")
-                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                        var frame = tile.frame
-                        frame.origin.y += (self.margin * CGFloat((centerTile - whichRow))) + self.margin / 2
-                        tile.frame = frame
-                        }, completion: nil)
-                }
+
+                var frame = tile.frame
+                frame.origin.x += (self.margin * CGFloat((centerTile - whichColumn))) + self.margin / 2
+                frame.origin.y += (self.margin * CGFloat((centerTile - whichRow))) + self.margin / 2
+                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                    tile.frame = frame
+                    }, completion: nil)
+
+                // increment the column and row
+
                 whichColumn++
                 if whichColumn > tilesPerRow {
                     whichColumn = 1
                     whichRow++
                 }
             }
-            
         }
-        
     }
 
     
