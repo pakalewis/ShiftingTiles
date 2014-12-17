@@ -172,20 +172,31 @@
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5">
                                 <rect key="frame" x="30" y="540" width="540" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.9929069318" blue="0.17882314599999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="05X-KY-avX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb">
+                                <rect key="frame" x="15" y="-60" width="570" height="570"/>
+                                <color key="backgroundColor" red="1" green="0.91465844699999999" blue="0.48046743609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="1:1" id="mCM-5H-gkw"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C42-AY-08P" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" constant="20" id="0bA-EF-SEz"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="top" secondItem="C42-AY-08P" secondAttribute="top" id="5O8-cT-y3k"/>
                             <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" multiplier="0.95" id="LoK-aU-fcA"/>
+                            <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="30" id="R02-eF-xTW"/>
                             <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="BUW-hI-3S5" secondAttribute="bottom" constant="20" id="j7W-q6-FMp"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="leading" secondItem="C42-AY-08P" secondAttribute="trailing" constant="20" id="mrg-Qd-Y0S"/>
+                            <constraint firstAttribute="centerX" secondItem="oHF-Bx-sTb" secondAttribute="centerX" id="nfC-ek-FJC"/>
                             <constraint firstItem="C42-AY-08P" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="20" id="w73-xT-c8C"/>
                             <constraint firstAttribute="trailing" secondItem="BUW-hI-3S5" secondAttribute="trailing" constant="30" id="wgb-JP-LDw"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="trailing" secondItem="a6F-6c-ZDX" secondAttribute="trailingMargin" id="xQt-vW-vPQ"/>
@@ -194,6 +205,7 @@
                     </view>
                     <connections>
                         <outlet property="congratsMessage" destination="BUW-hI-3S5" id="9QG-8l-vOm"/>
+                        <outlet property="tileArea" destination="oHF-Bx-sTb" id="Pv9-cM-yCf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>

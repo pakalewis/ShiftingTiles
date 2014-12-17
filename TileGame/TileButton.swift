@@ -8,17 +8,19 @@
 
 import Foundation
 import UIKit
+
+class TileButton {
+    let positionNumber : Int?
+    let frame: CGRect?
+    let image: UIImage?
+    let imageFrame: CGRect?
+    let button: UIButton?
+    
+//    init() {
 //
-//class TileButton: UIButton {
-//    var positionNumber:Int
-//    
-//    init(frame:CGRect, num:Int) {
-//        self.positionNumber = num
-//        super.init(frame: frame)
 //    }
-//    
-//    required init(coder aDecoder: NSCoder!) {
-//        self.positionNumber = num
-//        super.init()
-//    }
-//}
+    
+
+
+
+}

@@ -21,31 +21,36 @@ class GameScreen: UIViewController {
     var correctArray = [UIImage]()
     var tileButtonArray = [UIButton]()
     var margin:CGFloat = 5.0
-    var tileArea:UIView = UIView()
+//    var tileArea:UIView = UIView()
 
     
+    var packageArray = [TileButton]()
+    
+    @IBOutlet weak var tileArea: UIView!
     @IBOutlet weak var congratsMessage: UILabel!
     
     
     override func viewDidLoad() {
-        makeTileArea()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         createImagePieces(tilesPerRow)
         shuffleTiles()
         loadImagesIntoButtons()
-
+        
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
+
     }
-    
-    func makeTileArea() {
-        var screenSize = UIScreen.mainScreen().applicationFrame
-        var tileAreaWidth = screenSize.size.width - 20.0
-        // need to set this with math. without using 40
-        var tileAreaPosY = (screenSize.size.height / 2) - (tileAreaWidth / 2) + 40
-        var tileAreaFrame = CGRectMake(10, tileAreaPosY, tileAreaWidth, tileAreaWidth)
-        tileArea = UIView(frame: tileAreaFrame)
-        self.view.addSubview(tileArea)
-    }
+//    func makeTileArea() {
+//        var screenSize = UIScreen.mainScreen().applicationFrame
+//        var tileAreaWidth = screenSize.size.width - 20.0
+//        // need to set this with math. without using 40
+//        var tileAreaPosY = (screenSize.size.height / 2) - (tileAreaWidth / 2) + 40
+//        var tileAreaFrame = CGRectMake(10, tileAreaPosY, tileAreaWidth, tileAreaWidth)
+//        tileArea = UIView(frame: tileAreaFrame)
+//        self.view.addSubview(tileArea)
+//    }
     
     // cuts up the main image into pieces and stores them in an array
     // at the same time, create buttons with the same dimensions and also put in an array
