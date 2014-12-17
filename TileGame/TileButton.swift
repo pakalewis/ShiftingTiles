@@ -11,14 +11,15 @@ import UIKit
 
 class TileButton {
     let positionNumber : Int?
-    let frame: CGRect?
+//    let frame: CGRect?
     let image: UIImage?
+    let imageView: UIImageView?
     let imageFrame: CGRect?
     let button: UIButton?
     
-//    init() {
-//
-//    }
+    init() {
+
+    }
     
 
 
