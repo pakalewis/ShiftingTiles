@@ -21,6 +21,9 @@ class MainScreen: UIViewController {
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
+    
+    @IBOutlet weak var letsPlayButton: UIButton!
+    
     let image0 = UIImage(named: "augs")
     let image1 = UIImage(named: "image1")
     let image2 = UIImage(named: "image2")
@@ -41,16 +44,23 @@ class MainScreen: UIViewController {
         super.viewDidLoad()
         imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
         self.imageCycler.image = imageArray[currentIndex]
-        self.tilesPerRowLabel.text = "3"
+        self.tilesPerRowLabel.text = "3 Tiles Per Row"
         stepper.wraps = true
         stepper.autorepeat = true
         stepper.maximumValue = 10
         stepper.minimumValue = 3
+        
+        self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        self.letsPlayButton.layer.cornerRadius = 3
+        self.letsPlayButton.layer.borderWidth = 2
+        self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.letsPlayButton.sizeToFit()
     }
 
     
     @IBAction func stepperPressed(sender: UIStepper) {
-        self.tilesPerRowLabel.text = Int(sender.value).description
+        self.tilesPerRowLabel.text = "\(Int(sender.value).description) Tiles Per Row"
         self.tilesPerRow = Int(sender.value)
     }
     
