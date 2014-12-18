@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class GameScreen: UIViewController {
+class GameScreen: UIViewController, PuzzleSolvedProtocol {
+    
+
     
     var imageToSolve = UIImage()
     var solved = false
@@ -36,6 +38,8 @@ class GameScreen: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
 
+        self.tileArea.delegate = self
+        
         self.tileArea.imageToSolve = self.imageToSolve
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.margin = (self.tileArea.frame.width / CGFloat(self.tilesPerRow)) * 0.05
@@ -55,29 +59,15 @@ class GameScreen: UIViewController {
     
  
 
-    
-    
-   
-    // checks to see if the image pieces are in the correct order
-    func checkIfSolved() -> Bool {
-        for index in 0..<self.tileArray.count {
-            println("Does tag \(self.tileArray[index].tag) = \(index)??")
-            if self.tileArray[index].tag != index {
-                println("Test fails at at \(index)")
-                return false
-            }
-        }
-
+    func puzzleIsSolved() {
         println("Puzzle is solved!")
-        //TODO: move congrats message stuff/animations to new func
         congratsMessage.text = "CONGRATULATIONS"
         self.congratsMessage.backgroundColor = UIColor.blueColor()
-        
         self.solved = true
-//        self.layoutTilesWithMargin(0.0)
-//        self.moveTilesToFormCompletePicture()
-        return true
     }
+
+    
+   
     
     @IBAction func backToMainScreen(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

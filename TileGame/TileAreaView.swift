@@ -10,6 +10,8 @@ import UIKit
 
 class TileAreaView: UIView {
 
+    var delegate : PuzzleSolvedProtocol?
+
     var imageToSolve = UIImage()
     var tilesPerRow = 3
     var firstTileSelectedBool = true
@@ -23,7 +25,7 @@ class TileAreaView: UIView {
     func initialize() {
         self.createTileArray()
         self.createImagePieces()
-        self.shuffleImages()
+//        self.shuffleImages()
         self.loadImagesIntoTiles()
         self.layoutTilesWithMargin(self.margin)
     }
@@ -78,7 +80,7 @@ class TileAreaView: UIView {
                 var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
                 
                 
-                UIView.animateWithDuration(0.2, delay: 0.1, options: nil, animations: {
+                UIView.animateWithDuration(0.9, delay: 0.0, options: nil, animations: {
                     self.tileArray[count].frame = tileFrame
                     self.tileArray[count].backgroundColor = UIColor.redColor()
                     }, completion: nil)
@@ -188,17 +190,16 @@ class TileAreaView: UIView {
                 UIView.animateWithDuration(0.15, animations: { () -> Void in
                     self.tileArray[index1].alpha = 1
                     self.tileArray[index2].alpha = 1
-                })
-                
+                }) { (finished) -> Void in
+                    // Swap tags
+                    var temptag = self.tileArray[index1].tag
+                    self.tileArray[index1].tag = self.tileArray[index2].tag
+                    self.tileArray[index2].tag = temptag
+                    
+                    // After swapping, check if the puzzle is solved
+                    self.checkIfSolved()
+                }
         }
-        
-        // Swap tags
-        var temptag = self.tileArray[index1].tag
-        self.tileArray[index1].tag = self.tileArray[index2].tag
-        self.tileArray[index2].tag = temptag
-        
-        // After swapping, check if the puzzle is solved
-        self.checkIfSolved()
     }
 
     
@@ -212,9 +213,11 @@ class TileAreaView: UIView {
             }
         }
         
-        println("Puzzle is solved!")
         self.layoutTilesWithMargin(0.0)
 //        self.moveTilesToFormCompletePicture()
+        
+        self.delegate!.puzzleIsSolved()
+
         return true
     }
     
