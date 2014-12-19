@@ -42,13 +42,17 @@ class MainScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
         self.imageCycler.image = imageArray[currentIndex]
-        self.tilesPerRowLabel.text = "3 Tiles Per Row"
+
+        stepper.value = 6
+        self.tilesPerRow = Int(stepper.value)
+        self.tilesPerRowLabel.text = "\(Int(stepper.value).description) Tiles Per Row"
         stepper.wraps = true
         stepper.autorepeat = true
         stepper.maximumValue = 10
-        stepper.minimumValue = 3
+        stepper.minimumValue = 2
         
         self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true
         

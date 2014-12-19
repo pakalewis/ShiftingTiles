@@ -10,6 +10,7 @@ import UIKit
 
 class Tile {
 
+    var imageSection = UIImage()
     var imageView = UIImageView()
     var doubleIndex : DoubleIndex!
     

@@ -35,15 +35,12 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     override func viewDidAppear(animated: Bool) {
 
+        // Initialize tileArea
         self.tileArea.delegate = self
-        
         self.tileArea.imageToSolve = self.imageToSolve
         self.tileArea.tilesPerRow = self.tilesPerRow
-        
-        // Initialize tileArea
+        self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
-        
-
         
         // Initialize row/column gestures
         self.initializeGestures()
@@ -67,7 +64,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             var leftBankGesturePositionY = leftBankGestureHeight * CGFloat(index)
             
             var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureWidth, topBankGestureHeight)
-//            println("topBankGestureFrame is \(topBankGestureFrame)")
             var topGestureArea = UIView(frame: topBankGestureFrame)
             var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             topGestureArea.tag = index
@@ -76,7 +72,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             
             var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight)
-//            println("leftBankGestureFrame is \(leftBankGestureFrame)")
             var leftGestureArea = UIView(frame: leftBankGestureFrame)
             var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             leftGestureArea.tag = index + 100
@@ -115,13 +110,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
    
     
     @IBAction func backToMainScreen(sender: AnyObject) {
-        self.tileArea.checkIfSolved()
-//        self.tileArea.displayTagsFromTileArray()
-//        self.tileArea.shuffleImages()
-
-        
-        
-        //        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
