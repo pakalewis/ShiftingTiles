@@ -16,19 +16,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var imageToSolve = UIImage()
     var solved = false
     var tilesPerRow = 3
-    var firstTileSelectedBool = true
-    var firstTileNumber = 0
-    var secondTileNumber = 0
-    var imagePiecesArray = [UIImage]()
-    var tileArray = [UIImageView]()
-    var margin:CGFloat = 5.0
-
+    var firstRowOrColumnTapped = -1
+    var secondRowOrColumnTapped = -1
+    var isFirstRowOrColumnTapped = false
     
-    
-    @IBOutlet weak var tileArea: TileAreaView!
+    @IBOutlet weak var tileArea: TileAreaView2!
     @IBOutlet weak var congratsMessage: UILabel!
     
-    
+    @IBOutlet weak var topBank: UIView!
+    @IBOutlet weak var leftBank: UIView!
+
     override func viewDidLoad() {
     }
     
@@ -42,23 +39,71 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         self.tileArea.imageToSolve = self.imageToSolve
         self.tileArea.tilesPerRow = self.tilesPerRow
-        self.margin = (self.tileArea.frame.width / CGFloat(self.tilesPerRow)) * 0.05
-        println("self.tileArea.frame.width = \(self.tileArea.frame.width)")
-        println("margin = \(self.margin)")
-
-        
         
         // Initialize tileArea
         self.tileArea.initialize()
         
 
+        
+        // Initialize row/column gestures
+        self.initializeGestures()
+        
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
     }
     
     
+    func initializeGestures() {
+        
+        for index in 0..<self.tilesPerRow {
+            
+            // Measuerments to make the frames
+            var topBankGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
+            var topBankGestureHeight = self.topBank.frame.height
+            var topBankGesturePositionX = topBankGestureWidth * CGFloat(index)
+
+            var leftBankGestureWidth = self.leftBank.frame.width
+            var leftBankGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
+            var leftBankGesturePositionY = leftBankGestureHeight * CGFloat(index)
+            
+            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureWidth, topBankGestureHeight)
+//            println("topBankGestureFrame is \(topBankGestureFrame)")
+            var topGestureArea = UIView(frame: topBankGestureFrame)
+            var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
+            topGestureArea.tag = index
+            topGestureArea.addGestureRecognizer(topGesture)
+            self.topBank.addSubview(topGestureArea)
+            
+            
+            var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight)
+//            println("leftBankGestureFrame is \(leftBankGestureFrame)")
+            var leftGestureArea = UIView(frame: leftBankGestureFrame)
+            var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
+            leftGestureArea.tag = index + 100
+            leftGestureArea.addGestureRecognizer(leftGesture)
+            self.leftBank.addSubview(leftGestureArea)
+
+            
+        }
+        
+    }
  
 
+    
+    func bankTapped(sender: UIGestureRecognizer) {
+
+        
+        if (sender.view!.tag - 100) < 0 {
+            println("top bank tapped at column \(sender.view!.tag)")
+        } else {
+            println("left bank tapped at row \(sender.view!.tag % 100)")
+        }
+        
+        
+    }
+
+    
+    
     func puzzleIsSolved() {
         println("Puzzle is solved!")
         congratsMessage.text = "CONGRATULATIONS"
@@ -70,7 +115,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
    
     
     @IBAction func backToMainScreen(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.tileArea.checkIfSolved()
+//        self.tileArea.displayTagsFromTileArray()
+//        self.tileArea.shuffleImages()
+
+        
+        
+        //        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

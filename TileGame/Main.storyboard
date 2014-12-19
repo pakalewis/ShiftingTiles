@@ -174,33 +174,51 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="TileGame" customModuleProvider="target">
-                                <rect key="frame" x="15" y="-60" width="570" height="570"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView2" customModule="TileGame" customModuleProvider="target">
+                                <rect key="frame" x="58" y="-7" width="532" height="532"/>
                                 <color key="backgroundColor" red="1" green="0.91465844699999999" blue="0.48046743609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="1:1" id="mCM-5H-gkw"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-Xd-i17" userLabel="TopBank">
+                                <rect key="frame" x="58" y="-55" width="532" height="43"/>
+                                <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-fP-WBe" userLabel="LeftBank">
+                                <rect key="frame" x="10" y="-7" width="43" height="532"/>
+                                <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C42-AY-08P" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" constant="20" id="0bA-EF-SEz"/>
+                            <constraint firstItem="p3Q-Xd-i17" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="0.08" id="4Qg-RW-HTZ"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="top" secondItem="C42-AY-08P" secondAttribute="top" id="5O8-cT-y3k"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" id="9Cm-XD-R2I"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" multiplier="0.08" id="AaI-Zd-v5H"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="10" id="EAw-Qx-obv"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="p3Q-Xd-i17" secondAttribute="leading" id="GM9-xw-gBq"/>
                             <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
-                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" multiplier="0.95" id="LoK-aU-fcA"/>
-                            <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="30" id="R02-eF-xTW"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="5tw-fP-WBe" secondAttribute="trailing" constant="5" id="Kbl-54-OmZ"/>
+                            <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="15" id="R02-eF-xTW"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="top" secondItem="p3Q-Xd-i17" secondAttribute="bottom" constant="5" id="XgH-Ii-pou"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="top" id="f4n-Mb-Jxq"/>
+                            <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="10" id="gJs-KM-oDB"/>
                             <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="BUW-hI-3S5" secondAttribute="bottom" constant="20" id="j7W-q6-FMp"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="leading" secondItem="C42-AY-08P" secondAttribute="trailing" constant="20" id="mrg-Qd-Y0S"/>
-                            <constraint firstAttribute="centerX" secondItem="oHF-Bx-sTb" secondAttribute="centerX" id="nfC-ek-FJC"/>
                             <constraint firstItem="C42-AY-08P" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="20" id="w73-xT-c8C"/>
                             <constraint firstAttribute="trailing" secondItem="BUW-hI-3S5" secondAttribute="trailing" constant="30" id="wgb-JP-LDw"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="trailing" secondItem="a6F-6c-ZDX" secondAttribute="trailingMargin" id="xQt-vW-vPQ"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="width" secondItem="p3Q-Xd-i17" secondAttribute="width" id="yEj-bJ-FLZ"/>
                             <constraint firstItem="BUW-hI-3S5" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="30" id="yWs-bG-atg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="congratsMessage" destination="BUW-hI-3S5" id="9QG-8l-vOm"/>
+                        <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>
+                        <outlet property="topBank" destination="p3Q-Xd-i17" id="WjI-q6-ZNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>

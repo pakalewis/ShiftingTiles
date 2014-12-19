@@ -19,7 +19,6 @@ class TileAreaView: UIView {
     var secondTileNumber = 0
     var imagePiecesArray = [UIImage]()
     var tileArray = [UIImageView]()
-    var margin:CGFloat = 5.0
 
     
     func initialize() {
@@ -27,8 +26,11 @@ class TileAreaView: UIView {
         self.createImagePieces()
 //        self.shuffleImages()
         self.loadImagesIntoTiles()
-        self.layoutTilesWithMargin(self.margin)
+        
+        var margin = (self.frame.width / CGFloat(self.tilesPerRow)) * 0.05
+        self.layoutTilesWithMargin(margin)
     }
+    
     
     func createTileArray() {
         var count = 0
@@ -42,22 +44,20 @@ class TileAreaView: UIView {
                 // Add tile to the array
                 self.tileArray.append(tile)
                 
-                //Add gesture recognizer instead of button
+                //Add gesture recognizer 
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
                 tile.addGestureRecognizer(tapGesture)
                 
                 // Add the imageview to the tile area
                 self.addSubview(tile)
                 
-                
                 count++
             }
         }
-        
     }
 
     
-    
+
     
     func layoutTilesWithMargin(margin:CGFloat) {
         var count = 0
@@ -66,7 +66,6 @@ class TileAreaView: UIView {
         var totalWidth = self.frame.width
         var totalMargin = CGFloat(margin * CGFloat(self.tilesPerRow - 1))
         var tileWidth:CGFloat  = (totalWidth - totalMargin) / CGFloat(self.tilesPerRow)
-        println("\(margin)")
         
         for index1 in 0..<self.tilesPerRow { // go down the rows
             var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileWidth + margin)
@@ -75,16 +74,12 @@ class TileAreaView: UIView {
                 var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth + margin)
                 println("tile xPOS = \(tileAreaPositionX) and tile yPOS = \(tileAreaPositionY)")
                 
-                
                 // set the boundaries of the tile
                 var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
                 
-                
-                UIView.animateWithDuration(0.9, delay: 0.0, options: nil, animations: {
+                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: { () -> Void in
                     self.tileArray[count].frame = tileFrame
-                    self.tileArray[count].backgroundColor = UIColor.redColor()
-                    }, completion: nil)
-                
+                }, completion: nil)
                 
                 count++;
             }
@@ -95,21 +90,20 @@ class TileAreaView: UIView {
     func createImagePieces() {
         
         // Image measurements
-        var imageSideLength:CGFloat = CGFloat(self.imageToSolve.size.width / CGFloat(self.tilesPerRow))
+        var tileImageWidth:CGFloat = CGFloat(self.imageToSolve.size.width / CGFloat(self.tilesPerRow))
         
         for index1 in 0..<self.tilesPerRow { // go down the rows
-            var imagePositionY:CGFloat = CGFloat(index1) * (imageSideLength)
+            var imagePositionY:CGFloat = CGFloat(index1) * (tileImageWidth)
             
             for index2 in 0..<self.tilesPerRow { // get the tiles in each row
-                var imagePositionX:CGFloat = CGFloat(index2) * (imageSideLength)
-                
-                
-                //  set the boundaries of the small image
-                var imageFrame = CGRectMake(imagePositionX, imagePositionY, imageSideLength, imageSideLength)
-                // make the small image
+                var imagePositionX:CGFloat = CGFloat(index2) * (tileImageWidth)
+
+                // Set the frame of the small image
+                var imageFrame = CGRectMake(imagePositionX, imagePositionY, tileImageWidth, tileImageWidth)
+                // Make the small image
                 var tileCGImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, imageFrame)
                 var tileUIImage = UIImage(CGImage: tileCGImage)
-                // add the small image tile to the array
+                // Add the small image to the array
                 self.imagePiecesArray.append(tileUIImage!)
             }
         }
@@ -117,9 +111,9 @@ class TileAreaView: UIView {
     
     
     func shuffleImages() {
-        
+
+        // Get a Random int from 0 to index-1 and swap the tags and images
         for var index = self.tileArray.count - 1; index > 0; index-- {
-            // Random int from 0 to index-1
             var j = Int(arc4random_uniform(UInt32(index-1)))
             
             var tempTag = self.tileArray[j].tag
@@ -152,7 +146,6 @@ class TileAreaView: UIView {
                 tileIndex = index;
             }
         }
-        
         
         // Check if it is the first or second tile tapped
         // Swap images and tags when
@@ -204,51 +197,32 @@ class TileAreaView: UIView {
 
     
     // checks to see if the image pieces are in the correct order
-    func checkIfSolved() -> Bool {
+    func checkIfSolved() {
+        
         for index in 0..<self.tileArray.count {
             println("Does tag \(self.tileArray[index].tag) = \(index)??")
             if self.tileArray[index].tag != index {
                 println("Test fails at at \(index)")
-                return false
+                return
             }
         }
         
+        // Making it through the for loop means that the puzzle is solved
+        // Animate the tiles to fill up the entire view
         self.layoutTilesWithMargin(0.0)
-//        self.moveTilesToFormCompletePicture()
         
+        // Lock puzzle
+        self.lockPuzzle()
+        
+        // Notify GameScreen
         self.delegate!.puzzleIsSolved()
-
-        return true
     }
     
-    
-    func moveTilesToFormCompletePicture() {
-        
-        var whichColumn = 0
-        var whichRow = 0
-        
+    func lockPuzzle() {
         for tile in self.tileArray {
-            
-            // Find new tileWidth and make new frame for each tile
-            var tileWidth: CGFloat = (self.frame.width / CGFloat(self.tilesPerRow))
-            var xPos = (tileWidth * CGFloat(whichColumn))
-            var yPos = (tileWidth * CGFloat(whichRow))
-            var frame = CGRectMake(xPos, yPos, tileWidth, tileWidth)
-            
-            UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                tile.frame = frame
-                }, completion: nil)
-            
-            // increment the column and/or row
-            whichColumn++
-            if whichColumn > self.tilesPerRow - 1 {
-                whichColumn = 0
-                whichRow++
-            }
+            tile.userInteractionEnabled = false
         }
     }
-    
+  }
 
 
-
-}
