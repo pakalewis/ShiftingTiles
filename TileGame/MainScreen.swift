@@ -46,7 +46,7 @@ class MainScreen: UIViewController {
         imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
         self.imageCycler.image = imageArray[currentIndex]
 
-        stepper.value = 6
+        stepper.value = 3
         self.tilesPerRow = Int(stepper.value)
         self.tilesPerRowLabel.text = "\(Int(stepper.value).description) Tiles Per Row"
         stepper.wraps = true

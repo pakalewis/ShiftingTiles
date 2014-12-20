@@ -26,7 +26,7 @@ class TileAreaView2: UIView {
         self.shuffleImages()
         
         var margin = (self.frame.width / CGFloat(self.tilesPerRow)) * 0.05
-        self.layoutTilesWithMargin(margin)
+        self.layoutTilesWithMargin((margin < 3) ? 3 : margin)
     }
     
     
@@ -127,17 +127,16 @@ class TileAreaView2: UIView {
             var tile1 = self.tileArray[randomInt1][randomInt2]
             var tile2 = self.tileArray[randomInt3][randomInt4]
             
-            self.swapTiles(tile1, tile2: tile2)
+
+            self.swapTiles(tile1, tile2: tile2, completionClosure: { () -> () in
+            })
         }
-    
-    
     }
    
     
     func tileTapped(sender: UIGestureRecognizer) {
         // Grab the tag of the tile that was tapped
         var tag = sender.view!.tag
-        var tagDouble =  DoubleIndex(index1: tag / 10, index2: tag % 10)
         
         println("You tapped the tile at ROW \(tag / 10) and COLUMN \(tag % 10)")
         println("The tag is \(tag)")
@@ -155,16 +154,20 @@ class TileAreaView2: UIView {
             self.secondTile = tile2
             self.firstTileSelectedBool = true
 
-            self.swapTiles(self.firstTile!, tile2: self.secondTile!)
+            self.swapTiles(self.firstTile!, tile2: self.secondTile!, completionClosure: { () -> () in
+                println("swap is done so now check")
+                self.checkIfSolved()
+            })
+        
         }
     }
     
     
     
 //    // Swap the images and tags when the second tile is tapped
-    func swapTiles(tile1: Tile, tile2: Tile) {
+    func swapTiles(tile1: Tile, tile2: Tile, completionClosure: () ->()) {
         
-        println("SWAPPING TILES \(tile1.doubleIndex.concatenateToInt()) and \(tile2.doubleIndex.concatenateToInt())")
+//        println("SWAPPING TILES \(tile1.doubleIndex.concatenateToInt()) and \(tile2.doubleIndex.concatenateToInt())")
 
         // Animate the fade out
         UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
@@ -186,16 +189,94 @@ class TileAreaView2: UIView {
                     tile1.imageView.frame = tile2.imageView.frame
                     tile2.imageView.frame = firstFrame
 
-
                     tile1.imageView.alpha = 1
                     tile2.imageView.alpha = 1
 
                     }) { (finished) -> Void in
-                        // After swapping, check if the puzzle is solved
-                        self.checkIfSolved()
+                        completionClosure()
                 }
         }
+        
+        
     }
+    
+    
+    func swapLines(line1: Int, line2: Int) {
+        println("line1 is \(line1) and line 2 is \(line2)")
+        
+        self.displayTagsFromTileArray()
+        
+        if line1 == line2 {
+            // do nothing
+            println("do nothing")
+            return
+        }
+
+        var tileLine1 = [Tile]()
+        var tileLine2 = [Tile]()
+
+        if (line1 - 100) < 0 { // line 1 is a column
+            println("line 1 is a column")
+
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: index, index2: line1)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tile.imageView.alpha = 0.5
+                tileLine1.append(tile)
+            }
+        } else { // line1 is a row
+            println("line 1 is a row")
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: line1 - 100, index2: index)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tile.imageView.alpha = 0.5
+                tileLine1.append(tile)
+            }
+        }
+        
+        
+        
+        // Check line 2
+        if (line2 - 100) < 0 { // line2 is a column
+            println("line 2 is a column")
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: index, index2: line2)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tile.imageView.alpha = 0.5
+                tileLine2.append(tile)
+            }
+            
+        } else { // line2 is a row
+            println("line 2 is a row")
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: line2 - 100, index2: index)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tile.imageView.alpha = 0.5
+                tileLine2.append(tile)
+            }
+        }
+        
+        
+
+        
+        // swap the tiles in the lines
+        for counter in 0..<tileLine1.count {
+            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], completionClosure: { () -> () in
+
+//                if counter == tileLine1.count - 1 {
+//                    println("CHECKING SOLVE")
+//                    self.checkIfSolved()
+//                }
+            })
+        }
+//        for tile in tileLine2 {
+//            println("tile in line2 at \(tile.doubleIndex.concatenateToString())")
+//        }
+
+        
+    }
+    
+    
     
     
 //    // checks to see if the image pieces are in the correct order
@@ -241,6 +322,19 @@ class TileAreaView2: UIView {
         }
     }
 
+    
+    func findTileAtCoordinate(coordinate: DoubleIndex) -> Tile {
+        var tile = self.tileArray[0][0]
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                tile = self.tileArray[index1][index2]
+                if (tile.doubleIndex.rowIndex == coordinate.rowIndex && tile.doubleIndex.columnIndex == coordinate.columnIndex) {
+                    return tile
+                }
+            }
+        }
+        return tile
+    }
     
     func displayTagsFromTileArray() {
         for index1 in 0..<self.tilesPerRow {

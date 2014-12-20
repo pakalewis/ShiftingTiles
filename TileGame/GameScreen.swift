@@ -88,10 +88,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     func bankTapped(sender: UIGestureRecognizer) {
 
         
-        if (sender.view!.tag - 100) < 0 {
-            println("top bank tapped at column \(sender.view!.tag)")
+        if (!isFirstRowOrColumnTapped) {
+            // set the first tag
+            self.firstRowOrColumnTapped = sender.view!.tag
+            self.isFirstRowOrColumnTapped = true
         } else {
-            println("left bank tapped at row \(sender.view!.tag % 100)")
+            // set the second tag and call the swaplines func
+            self.secondRowOrColumnTapped = sender.view!.tag
+            self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
+
+            self.isFirstRowOrColumnTapped = false
         }
         
         
