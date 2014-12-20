@@ -16,7 +16,7 @@
 import Foundation
 import UIKit
 
-class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                             
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
@@ -142,6 +142,57 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     }
     
+
+    @IBAction func cameraButtonPressed(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            println("CAMERA AVAILABLE")
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            
+            var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            noCameraAlert.addAction(okAction)
+            self.presentViewController(noCameraAlert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
+
+        
+        var imageWidth  = imagePicked!.size.width
+        var imageHeight  = imagePicked!.size.height
+        var rect = CGRect()
+        if ( imageWidth < imageHeight) {
+            // Potrait mode
+            rect = CGRectMake (0, (imageHeight - imageWidth) / 2, imageWidth, imageWidth);
+        } else {
+            // Landscape mode
+            rect = CGRectMake ((imageWidth - imageHeight) / 2, 0, imageHeight, imageHeight);
+        }
+        
+        var croppedCGImage = CGImageCreateWithImageInRect(imagePicked?.CGImage, rect)
+        var croppedUIImage = UIImage(CGImage: croppedCGImage)
+        
+        self.imageToSolve = croppedUIImage!
+        self.imageCycler.image = croppedUIImage!
+        println("image selected from imagePicker")
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
+    
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
+        //this gets fired when the users cancel out of the process
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     
     override func didReceiveMemoryWarning() {

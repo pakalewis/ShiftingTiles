@@ -41,12 +41,6 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 tiles per row" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD">
-                                <rect key="frame" x="300" y="459" width="240" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="JQU-OV-dG8">
                                 <rect key="frame" x="196" y="455" width="94" height="29"/>
                                 <connections>
@@ -74,6 +68,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-mf-2KR" userLabel="Camera">
+                                <rect key="frame" x="60" y="665" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" multiplier="1:1" id="3z6-bW-35n"/>
+                                    <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" id="Kkr-qC-Fkj"/>
+                                </constraints>
+                                <state key="normal" image="camera.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Kkr-qC-Fkj"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jec-CB-dMu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 tiles per row" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD">
+                                <rect key="frame" x="300" y="459" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -87,13 +105,16 @@
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="height" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="0.15" id="Ba2-O2-tj1"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="DPt-uX-KLQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7cw-uc-rQN" secondAttribute="bottom" constant="10" id="Iyb-im-NjV"/>
+                            <constraint firstItem="8Fb-MQ-XGx" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="leading" id="JjI-Kn-Egb"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="top" secondItem="dsY-VR-BwX" secondAttribute="bottom" constant="5" id="UbL-fU-UBx"/>
                             <constraint firstItem="zGq-2D-jDD" firstAttribute="leading" secondItem="JQU-OV-dG8" secondAttribute="trailing" constant="10" id="VCY-ST-iab"/>
                             <constraint firstAttribute="centerX" secondItem="8Fb-MQ-XGx" secondAttribute="centerX" id="jRO-vF-DoX"/>
                             <constraint firstItem="zGq-2D-jDD" firstAttribute="centerY" secondItem="JQU-OV-dG8" secondAttribute="centerY" id="lcG-5w-mB9"/>
+                            <constraint firstItem="eJp-mf-2KR" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.1" id="ljJ-kw-wcQ"/>
                             <constraint firstItem="7cw-uc-rQN" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="1.11111" id="onA-EN-WDY"/>
+                            <constraint firstItem="eJp-mf-2KR" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="5" id="otd-xf-j39"/>
                             <constraint firstItem="zGq-2D-jDD" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.5" id="pyg-v9-XtQ"/>
                             <constraint firstAttribute="centerX" secondItem="7cw-uc-rQN" secondAttribute="centerX" id="t4B-0y-Mwd"/>
                             <constraint firstItem="zGq-2D-jDD" firstAttribute="trailing" secondItem="8Fb-MQ-XGx" secondAttribute="trailing" id="vtj-9L-zgt"/>
@@ -114,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="187.5" y="136"/>
+            <point key="canvasLocation" x="187" y="136"/>
         </scene>
         <!--Game Screen-->
         <scene sceneID="V7S-q6-KNc">
@@ -217,4 +238,7 @@
             <point key="canvasLocation" x="1336" y="153"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.png" width="512" height="512"/>
+    </resources>
 </document>
