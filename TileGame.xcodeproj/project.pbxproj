@@ -35,6 +35,8 @@
 		2CD422AE1A4528AE00B08420 /* 10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422A41A4528AE00B08420 /* 10.jpeg */; };
 		2CD422B01A45372800B08420 /* CollectionViewImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422AF1A45372800B08420 /* CollectionViewImageCell.xib */; };
 		2CD422B21A453CE500B08420 /* CollectionViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */; };
+		2CD422B71A45476700B08420 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422B61A45476700B08420 /* Todo */; };
+		2CD422B91A4548C400B08420 /* DrawGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B81A4548C400B08420 /* DrawGrid.swift */; };
 		2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFA65AC19B9A8F200D9F40E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		2CD422A41A4528AE00B08420 /* 10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpeg; sourceTree = "<group>"; };
 		2CD422AF1A45372800B08420 /* CollectionViewImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewImageCell.xib; sourceTree = "<group>"; };
 		2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewImageCell.swift; sourceTree = "<group>"; };
+		2CD422B61A45476700B08420 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
+		2CD422B81A4548C400B08420 /* DrawGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawGrid.swift; sourceTree = "<group>"; };
 		2CFA65AC19B9A8F200D9F40E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2CFD40C819B82A8100275DB3 /* tilePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tilePlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +128,7 @@
 		2C30EF1F19B7C17500675799 /* TileGame */ = {
 			isa = PBXGroup;
 			children = (
+				2CD422B61A45476700B08420 /* Todo */,
 				2C30EF4A19B7C1F000675799 /* images */,
 				2CD422B31A453D4100B08420 /* Main Screen */,
 				2CD422B41A453D6000B08420 /* Game Screen */,
@@ -192,6 +197,7 @@
 				2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */,
 				2CD422AF1A45372800B08420 /* CollectionViewImageCell.xib */,
 				2C30EF2419B7C17500675799 /* MainScreen.swift */,
+				2CD422B81A4548C400B08420 /* DrawGrid.swift */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -309,6 +315,7 @@
 				2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */,
 				2CD422861A450F2400B08420 /* Button.xib in Resources */,
 				2CD422AE1A4528AE00B08420 /* 10.jpeg in Resources */,
+				2CD422B71A45476700B08420 /* Todo in Resources */,
 				2CD422A51A4528AE00B08420 /* 01.jpeg in Resources */,
 				2CD422AA1A4528AE00B08420 /* 06.jpeg in Resources */,
 				2CD422AD1A4528AE00B08420 /* 09.jpeg in Resources */,
@@ -334,6 +341,7 @@
 				2C320D8E1A423C4400B87E80 /* TileAreaView.swift in Sources */,
 				2C30EF2519B7C17500675799 /* MainScreen.swift in Sources */,
 				2C320D921A438D9A00B87E80 /* TileAreaView2.swift in Sources */,
+				2CD422B91A4548C400B08420 /* DrawGrid.swift in Sources */,
 				2C320D961A439B9900B87E80 /* Tile.swift in Sources */,
 				2CD422B21A453CE500B08420 /* CollectionViewImageCell.swift in Sources */,
 				2C320D901A424C6400B87E80 /* PuzzleSolvedProtocol.swift in Sources */,

@@ -25,7 +25,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     @IBOutlet weak var letsPlayButton: UIButton!
     
-    let image0 = UIImage(named: "augs")
+    let image99 = UIImage(named: "augs")
     let image1 = UIImage(named: "01.jpeg")
     let image2 = UIImage(named: "02.jpeg")
     let image3 = UIImage(named: "03.jpeg")
@@ -39,6 +39,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var imageArray = [UIImage]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
+    var drawGrid : DrawGrid?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
-
-        imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
+        imageArray = [image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!, image99!    ]
+        self.imageToSolve = imageArray[0]
         self.imageCycler.image = imageArray[0]
+        self.imageCycler.layer.borderColor = UIColor.blackColor().CGColor
+        self.imageCycler.layer.borderWidth = 2
+
 
         stepper.value = 3
         self.tilesPerRow = Int(stepper.value)
@@ -62,18 +66,40 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         stepper.maximumValue = 10
         stepper.minimumValue = 2
         
-        self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true        
         self.letsPlayButton.layer.cornerRadius = 3
         self.letsPlayButton.layer.borderWidth = 2
         self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
         self.letsPlayButton.sizeToFit()
+        
+        
+        
+        
+        
     }
 
+    override func viewDidAppear(animated: Bool) {
+        self.drawGrid?.removeFromSuperview()
+        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+        self.drawGrid?.numRows = self.tilesPerRow
+        self.drawGrid?.backgroundColor = UIColor.clearColor()
+        self.drawGrid?.frame = self.imageCycler.frame
+        self.view.addSubview(self.drawGrid!)
+        
+
+    }
     
     @IBAction func stepperPressed(sender: UIStepper) {
         self.tilesPerRowLabel.text = "\(Int(sender.value).description) Tiles Per Row"
         self.tilesPerRow = Int(sender.value)
+
+        self.drawGrid?.removeFromSuperview()
+        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+        self.drawGrid?.numRows = self.tilesPerRow
+        self.drawGrid?.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.drawGrid!)
+
     }
     
     
@@ -97,11 +123,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         return CGSize(width: self.imageCollection.frame.height * 0.9, height: self.imageCollection.frame.height * 0.9)
 
     }
+
+    
     
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.backgroundColor = UIColor.yellowColor()
         cell.imageView.image = self.imageArray[indexPath.row]
         return cell
         

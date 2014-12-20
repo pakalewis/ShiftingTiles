@@ -217,6 +217,7 @@ class TileAreaView2: UIView {
         var tileLine1 = [Tile]()
         var tileLine2 = [Tile]()
 
+        // Create arrau of Tiles in line1
         if (line1 - 100) < 0 { // line 1 is a column
             println("line 1 is a column")
 
@@ -237,8 +238,7 @@ class TileAreaView2: UIView {
         }
         
         
-        
-        // Check line 2
+        // Create arrau of Tiles in line2
         if (line2 - 100) < 0 { // line2 is a column
             println("line 2 is a column")
             for index in 0..<self.tilesPerRow {
@@ -257,25 +257,18 @@ class TileAreaView2: UIView {
                 tileLine2.append(tile)
             }
         }
-        
-        
 
         
         // swap the tiles in the lines
         for counter in 0..<tileLine1.count {
             self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], completionClosure: { () -> () in
 
-//                if counter == tileLine1.count - 1 {
-//                    println("CHECKING SOLVE")
-//                    self.checkIfSolved()
-//                }
+                if counter == tileLine1.count - 1 {
+                    println("CHECKING SOLVE")
+                    self.checkIfSolved()
+                }
             })
         }
-//        for tile in tileLine2 {
-//            println("tile in line2 at \(tile.doubleIndex.concatenateToString())")
-//        }
-
-        
     }
     
     
