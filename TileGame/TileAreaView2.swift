@@ -20,13 +20,15 @@ class TileAreaView2: UIView {
     var secondTile : Tile?
     var tileArray = [[Tile]]()
     var isPuzzleInitialized = false;
+    var solved = false
     
     func initialize() {
         self.createTileArray()
         self.shuffleImages()
         
-        var margin = (self.frame.width / CGFloat(self.tilesPerRow)) * 0.05
-        self.layoutTilesWithMargin((margin < 3) ? 3 : margin)
+//        var margin = (self.frame.width / CGFloat(self.tilesPerRow)) * 0.0005
+//        self.layoutTilesWithMargin((margin < 2) ? 2 : margin)
+        self.layoutTilesWithMargin(2)
     }
     
     
@@ -167,37 +169,37 @@ class TileAreaView2: UIView {
 //    // Swap the images and tags when the second tile is tapped
     func swapTiles(tile1: Tile, tile2: Tile, completionClosure: () ->()) {
         
-//        println("SWAPPING TILES \(tile1.doubleIndex.concatenateToInt()) and \(tile2.doubleIndex.concatenateToInt())")
-
-        // Animate the fade out
-        UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-            
-            tile1.imageView.alpha = 0.5
-            tile2.imageView.alpha = 0.5
-
-            }) { (finished) -> Void in
-
-                // Swap doubleindex
-                var tempDoubleIndex = tile1.doubleIndex
-                tile1.doubleIndex = tile2.doubleIndex
-                tile2.doubleIndex = tempDoubleIndex
+        if solved {
+            return
+        } else {
+            // Animate the fade out
+            UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                 
-                // Now animate the fade in
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    // TEST frame
-                    var firstFrame = tile1.imageView.frame
-                    tile1.imageView.frame = tile2.imageView.frame
-                    tile2.imageView.frame = firstFrame
-
-                    tile1.imageView.alpha = 1
-                    tile2.imageView.alpha = 1
-
-                    }) { (finished) -> Void in
-                        completionClosure()
-                }
+                tile1.imageView.alpha = 0.5
+                tile2.imageView.alpha = 0.5
+                
+                }) { (finished) -> Void in
+                    
+                    // Swap doubleindex
+                    var tempDoubleIndex = tile1.doubleIndex
+                    tile1.doubleIndex = tile2.doubleIndex
+                    tile2.doubleIndex = tempDoubleIndex
+                    
+                    // Now animate the fade in
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        // TEST frame
+                        var firstFrame = tile1.imageView.frame
+                        tile1.imageView.frame = tile2.imageView.frame
+                        tile2.imageView.frame = firstFrame
+                        
+                        tile1.imageView.alpha = 1
+                        tile2.imageView.alpha = 1
+                        
+                        }) { (finished) -> Void in
+                            completionClosure()
+                    }
+            }
         }
-        
-        
     }
     
     
@@ -302,26 +304,13 @@ class TileAreaView2: UIView {
         
         // If it makes it through this loop then the puzzle is solved
         self.layoutTilesWithMargin(0.0)
-
-        
-        // Lock puzzle
-        self.lockPuzzle()
-    
-            
+        self.solved = true
 
         // Notify GameScreen
         self.delegate!.puzzleIsSolved()
     }
 
     
-    func lockPuzzle() {
-        for index1 in 0..<self.tilesPerRow {
-            for index2 in 0..<self.tilesPerRow {
-                self.tileArray[index1][index2].imageView.userInteractionEnabled = false
-            }
-        }
-    }
-
     
     func findTileAtCoordinate(coordinate: DoubleIndex) -> Tile {
         var tile = self.tileArray[0][0]

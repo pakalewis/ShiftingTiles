@@ -16,8 +16,9 @@
 import Foundation
 import UIKit
 
-class MainScreen: UIViewController {
+class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
                             
+    @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
@@ -25,26 +26,33 @@ class MainScreen: UIViewController {
     @IBOutlet weak var letsPlayButton: UIButton!
     
     let image0 = UIImage(named: "augs")
-    let image1 = UIImage(named: "image1")
-    let image2 = UIImage(named: "image2")
-    let image3 = UIImage(named: "image3")
-    let image4 = UIImage(named: "image4")
-    let image5 = UIImage(named: "image5")
-    let image6 = UIImage(named: "image6")
-    let image7 = UIImage(named: "image7")
-    let image8 = UIImage(named: "image8")
-    let image9 = UIImage(named: "image9")
-    let image10 = UIImage(named: "image10")
+    let image1 = UIImage(named: "01.jpeg")
+    let image2 = UIImage(named: "02.jpeg")
+    let image3 = UIImage(named: "03.jpeg")
+    let image4 = UIImage(named: "04.jpeg")
+    let image5 = UIImage(named: "05.jpeg")
+    let image6 = UIImage(named: "06.jpeg")
+    let image7 = UIImage(named: "07.jpeg")
+    let image8 = UIImage(named: "08.jpeg")
+    let image9 = UIImage(named: "09.jpeg")
+    let image10 = UIImage(named: "10.jpeg")
     var imageArray = [UIImage]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
-    var currentIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageCollection.delegate = self
+        self.imageCollection.dataSource = self
+        
+        
+        // register the nibs for the two types of tableview cells
+        let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
+        self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
+
 
         imageArray = [image0!, image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!    ]
-        self.imageCycler.image = imageArray[currentIndex]
+        self.imageCycler.image = imageArray[0]
 
         stepper.value = 3
         self.tilesPerRow = Int(stepper.value)
@@ -71,30 +79,50 @@ class MainScreen: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var gameScreen = segue.destinationViewController as GameScreen
-        if (segue.identifier == "playGame") {
-            self.imageToSolve = imageArray[currentIndex]
-        }
+
         gameScreen.imageToSolve = self.imageToSolve
         gameScreen.tilesPerRow = self.tilesPerRow
         
     }
     
-    
-    
-    @IBAction func nextButton(sender: AnyObject) {
-        currentIndex += 1
-        if currentIndex == imageArray.count {
-            currentIndex = 0
-        }
-        self.imageCycler.image = imageArray[currentIndex]
-    }
 
-    @IBAction func previousButton(sender: AnyObject) {
-        currentIndex -= 1
-        if currentIndex < 0 {
-            currentIndex = imageArray.count - 1
-        }
-        self.imageCycler.image = imageArray[currentIndex]
+    
+    // Number of cells = number of images
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.imageArray.count
     }
+    
+    // Cells will be square sized
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+        return CGSize(width: self.imageCollection.frame.height * 0.9, height: self.imageCollection.frame.height * 0.9)
+
+    }
+    
+    // Create cell from nib and load the appropriate image
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
+        cell.backgroundColor = UIColor.yellowColor()
+        cell.imageView.image = self.imageArray[indexPath.row]
+        return cell
+        
+    }
+    
+    // Selecting a cell loads the image to the main image view
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+            println("selected item at index \(indexPath)")
+        self.imageToSolve = imageArray[indexPath.row]
+        self.imageCycler.image = imageArray[indexPath.row]
+
+    }
+    
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        println("MEMORY WARNING")
+    }
+    
+
 
 }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
 
@@ -18,6 +19,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var tilesPerRow = 3
     var firstRowOrColumnTapped = -1
     var secondRowOrColumnTapped = -1
+    var firstButton = UIImageView()
+    var secondButton = UIImageView()
     var isFirstRowOrColumnTapped = false
     
     @IBOutlet weak var tileArea: TileAreaView2!
@@ -43,64 +46,73 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         
         // Initialize row/column gestures
-        self.initializeGestures()
+        self.initializeButtons()
         
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
     }
     
     
-    func initializeGestures() {
+    func initializeButtons() {
         
         for index in 0..<self.tilesPerRow {
             
             // Measuerments to make the frames
             var topBankGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
             var topBankGestureHeight = self.topBank.frame.height
-            var topBankGesturePositionX = topBankGestureWidth * CGFloat(index)
+            var topBankGesturePositionX = (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2)
+            
 
             var leftBankGestureWidth = self.leftBank.frame.width
             var leftBankGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
-            var leftBankGesturePositionY = leftBankGestureHeight * CGFloat(index)
+            var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2)
             
-            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureWidth, topBankGestureHeight)
-            var topGestureArea = UIView(frame: topBankGestureFrame)
+            
+            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureHeight, topBankGestureHeight)
+            var topGestureArea = UIImageView(frame: topBankGestureFrame)
+            topGestureArea.image = UIImage(named: "blueButton")
+            topGestureArea.userInteractionEnabled = true;
             var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             topGestureArea.tag = index
             topGestureArea.addGestureRecognizer(topGesture)
             self.topBank.addSubview(topGestureArea)
             
             
-            var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight)
-            var leftGestureArea = UIView(frame: leftBankGestureFrame)
+            var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureWidth)
+            var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
+            leftGestureArea.image = UIImage(named: "blueButton")
+            leftGestureArea.userInteractionEnabled = true;
             var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             leftGestureArea.tag = index + 100
             leftGestureArea.addGestureRecognizer(leftGesture)
             self.leftBank.addSubview(leftGestureArea)
-
-            
         }
-        
     }
  
 
     
     func bankTapped(sender: UIGestureRecognizer) {
-
-        
-        if (!isFirstRowOrColumnTapped) {
-            // set the first tag
-            self.firstRowOrColumnTapped = sender.view!.tag
-            self.isFirstRowOrColumnTapped = true
+        if solved {
+            return
         } else {
-            // set the second tag and call the swaplines func
-            self.secondRowOrColumnTapped = sender.view!.tag
-            self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
+            var tappedButton = sender.view as UIImageView
+            
+            if (!isFirstRowOrColumnTapped) {
+                // set the first tag
+                self.firstRowOrColumnTapped = tappedButton.tag
+                self.firstButton = tappedButton
+                tappedButton.image = UIImage(named: "darkBlueButton")
+                self.isFirstRowOrColumnTapped = true
+            } else {
+                // set the second tag and call the swaplines func
+                self.secondRowOrColumnTapped = sender.view!.tag
+                self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
+                
+                self.isFirstRowOrColumnTapped = false
+                self.firstButton.image = UIImage(named: "blueButton")
+            }
 
-            self.isFirstRowOrColumnTapped = false
         }
-        
-        
     }
 
     
