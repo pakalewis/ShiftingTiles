@@ -25,17 +25,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     @IBOutlet weak var letsPlayButton: UIButton!
     
-    let image99 = UIImage(named: "augs")
-    let image1 = UIImage(named: "01.jpeg")
-    let image2 = UIImage(named: "02.jpeg")
-    let image3 = UIImage(named: "03.jpeg")
-    let image4 = UIImage(named: "04.jpeg")
-    let image5 = UIImage(named: "05.jpeg")
-    let image6 = UIImage(named: "06.jpeg")
-    let image7 = UIImage(named: "07.jpeg")
-    let image8 = UIImage(named: "08.jpeg")
-    let image9 = UIImage(named: "09.jpeg")
-    let image10 = UIImage(named: "10.jpeg")
     var imageArray = [UIImage]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
@@ -51,7 +40,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
-        imageArray = [image1!, image2!, image3!, image4!, image5!, image6!, image7!, image8!, image9!, image10!, image99!    ]
+        var imageGallery = ImageGallery()
+        self.imageArray = imageGallery.imageArray
         self.imageToSolve = imageArray[0]
         self.imageCycler.image = imageArray[0]
         self.imageCycler.layer.borderColor = UIColor.blackColor().CGColor

@@ -20,6 +20,24 @@
 		2C57D48B1A41016400A4F1AC /* augs.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C57D4801A41016400A4F1AC /* augs.png */; };
 		2C57D4981A410CD500A4F1AC /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C57D4961A410CD500A4F1AC /* leftArrow.png */; };
 		2C57D4991A410CD500A4F1AC /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C57D4971A410CD500A4F1AC /* rightArrow.png */; };
+		2CD299E61A477D620048FDD8 /* 11.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299D51A477D620048FDD8 /* 11.jpeg */; };
+		2CD299E71A477D620048FDD8 /* 12.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299D61A477D620048FDD8 /* 12.jpeg */; };
+		2CD299E81A477D620048FDD8 /* 13.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299D71A477D620048FDD8 /* 13.jpeg */; };
+		2CD299E91A477D620048FDD8 /* 14.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299D81A477D620048FDD8 /* 14.jpeg */; };
+		2CD299EA1A477D620048FDD8 /* 15.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299D91A477D620048FDD8 /* 15.jpeg */; };
+		2CD299EB1A477D620048FDD8 /* 16.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DA1A477D620048FDD8 /* 16.jpeg */; };
+		2CD299EC1A477D620048FDD8 /* 17.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DB1A477D620048FDD8 /* 17.jpeg */; };
+		2CD299ED1A477D620048FDD8 /* 18.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DC1A477D620048FDD8 /* 18.jpeg */; };
+		2CD299EE1A477D620048FDD8 /* 19.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DD1A477D620048FDD8 /* 19.jpeg */; };
+		2CD299EF1A477D620048FDD8 /* 20.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DE1A477D620048FDD8 /* 20.jpeg */; };
+		2CD299F01A477D620048FDD8 /* 21.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299DF1A477D620048FDD8 /* 21.jpeg */; };
+		2CD299F11A477D620048FDD8 /* 22.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E01A477D620048FDD8 /* 22.jpeg */; };
+		2CD299F21A477D620048FDD8 /* 23.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E11A477D620048FDD8 /* 23.jpeg */; };
+		2CD299F31A477D620048FDD8 /* 24.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E21A477D620048FDD8 /* 24.jpeg */; };
+		2CD299F41A477D620048FDD8 /* 25.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E31A477D620048FDD8 /* 25.jpeg */; };
+		2CD299F51A477D620048FDD8 /* 26.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E41A477D620048FDD8 /* 26.jpeg */; };
+		2CD299F61A477D620048FDD8 /* 27.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E51A477D620048FDD8 /* 27.jpeg */; };
+		2CD299F81A477F640048FDD8 /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD299F71A477F640048FDD8 /* ImageGallery.swift */; };
 		2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422811A450A6F00B08420 /* darkBlueButton.png */; };
 		2CD422841A450A6F00B08420 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422821A450A6F00B08420 /* blueButton.png */; };
 		2CD422861A450F2400B08420 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422851A450F2400B08420 /* Button.xib */; };
@@ -69,6 +87,24 @@
 		2C57D4801A41016400A4F1AC /* augs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = augs.png; sourceTree = "<group>"; };
 		2C57D4961A410CD500A4F1AC /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		2C57D4971A410CD500A4F1AC /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		2CD299D51A477D620048FDD8 /* 11.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpeg; sourceTree = "<group>"; };
+		2CD299D61A477D620048FDD8 /* 12.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpeg; sourceTree = "<group>"; };
+		2CD299D71A477D620048FDD8 /* 13.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 13.jpeg; sourceTree = "<group>"; };
+		2CD299D81A477D620048FDD8 /* 14.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 14.jpeg; sourceTree = "<group>"; };
+		2CD299D91A477D620048FDD8 /* 15.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 15.jpeg; sourceTree = "<group>"; };
+		2CD299DA1A477D620048FDD8 /* 16.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16.jpeg; sourceTree = "<group>"; };
+		2CD299DB1A477D620048FDD8 /* 17.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 17.jpeg; sourceTree = "<group>"; };
+		2CD299DC1A477D620048FDD8 /* 18.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 18.jpeg; sourceTree = "<group>"; };
+		2CD299DD1A477D620048FDD8 /* 19.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 19.jpeg; sourceTree = "<group>"; };
+		2CD299DE1A477D620048FDD8 /* 20.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20.jpeg; sourceTree = "<group>"; };
+		2CD299DF1A477D620048FDD8 /* 21.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 21.jpeg; sourceTree = "<group>"; };
+		2CD299E01A477D620048FDD8 /* 22.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 22.jpeg; sourceTree = "<group>"; };
+		2CD299E11A477D620048FDD8 /* 23.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 23.jpeg; sourceTree = "<group>"; };
+		2CD299E21A477D620048FDD8 /* 24.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 24.jpeg; sourceTree = "<group>"; };
+		2CD299E31A477D620048FDD8 /* 25.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 25.jpeg; sourceTree = "<group>"; };
+		2CD299E41A477D620048FDD8 /* 26.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 26.jpeg; sourceTree = "<group>"; };
+		2CD299E51A477D620048FDD8 /* 27.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 27.jpeg; sourceTree = "<group>"; };
+		2CD299F71A477F640048FDD8 /* ImageGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
 		2CD422811A450A6F00B08420 /* darkBlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlueButton.png; sourceTree = "<group>"; };
 		2CD422821A450A6F00B08420 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
 		2CD422851A450F2400B08420 /* Button.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
@@ -188,9 +224,9 @@
 		2CD422B31A453D4100B08420 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				2C30EF2419B7C17500675799 /* MainScreen.swift */,
 				2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */,
 				2CD422AF1A45372800B08420 /* CollectionViewImageCell.xib */,
-				2C30EF2419B7C17500675799 /* MainScreen.swift */,
 				2CD422B81A4548C400B08420 /* DrawGrid.swift */,
 			);
 			name = "Main Screen";
@@ -211,6 +247,7 @@
 				2C320D8F1A424C6400B87E80 /* PuzzleSolvedProtocol.swift */,
 				2C320D951A439B9900B87E80 /* Tile.swift */,
 				2C320D931A43952C00B87E80 /* DoubleIndex.swift */,
+				2CD299F71A477F640048FDD8 /* ImageGallery.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -228,6 +265,23 @@
 				2CD422A21A4528AE00B08420 /* 08.jpeg */,
 				2CD422A31A4528AE00B08420 /* 09.jpeg */,
 				2CD422A41A4528AE00B08420 /* 10.jpeg */,
+				2CD299D51A477D620048FDD8 /* 11.jpeg */,
+				2CD299D61A477D620048FDD8 /* 12.jpeg */,
+				2CD299D71A477D620048FDD8 /* 13.jpeg */,
+				2CD299D81A477D620048FDD8 /* 14.jpeg */,
+				2CD299D91A477D620048FDD8 /* 15.jpeg */,
+				2CD299DA1A477D620048FDD8 /* 16.jpeg */,
+				2CD299DB1A477D620048FDD8 /* 17.jpeg */,
+				2CD299DC1A477D620048FDD8 /* 18.jpeg */,
+				2CD299DD1A477D620048FDD8 /* 19.jpeg */,
+				2CD299DE1A477D620048FDD8 /* 20.jpeg */,
+				2CD299DF1A477D620048FDD8 /* 21.jpeg */,
+				2CD299E01A477D620048FDD8 /* 22.jpeg */,
+				2CD299E11A477D620048FDD8 /* 23.jpeg */,
+				2CD299E21A477D620048FDD8 /* 24.jpeg */,
+				2CD299E31A477D620048FDD8 /* 25.jpeg */,
+				2CD299E41A477D620048FDD8 /* 26.jpeg */,
+				2CD299E51A477D620048FDD8 /* 27.jpeg */,
 			);
 			name = "Puzzle Images";
 			sourceTree = "<group>";
@@ -281,6 +335,7 @@
 				TargetAttributes = {
 					2C30EF1C19B7C17500675799 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = J42Q5AV837;
 					};
 					2C30EF2E19B7C17500675799 = {
 						CreatedOnToolsVersion = 6.0;
@@ -313,26 +368,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */,
+				2CD299EA1A477D620048FDD8 /* 15.jpeg in Resources */,
 				2CD422BB1A455FAD00B08420 /* camera.png in Resources */,
+				2CD299EE1A477D620048FDD8 /* 19.jpeg in Resources */,
 				2CD422B01A45372800B08420 /* CollectionViewImageCell.xib in Resources */,
 				2CD422A71A4528AE00B08420 /* 03.jpeg in Resources */,
 				2CD422A91A4528AE00B08420 /* 05.jpeg in Resources */,
 				2CD422AC1A4528AE00B08420 /* 08.jpeg in Resources */,
+				2CD299F51A477D620048FDD8 /* 26.jpeg in Resources */,
 				2CD422A61A4528AE00B08420 /* 02.jpeg in Resources */,
 				2CD422A81A4528AE00B08420 /* 04.jpeg in Resources */,
 				2CD422841A450A6F00B08420 /* blueButton.png in Resources */,
+				2CD299E71A477D620048FDD8 /* 12.jpeg in Resources */,
+				2CD299ED1A477D620048FDD8 /* 18.jpeg in Resources */,
 				2CD422AB1A4528AE00B08420 /* 07.jpeg in Resources */,
+				2CD299EB1A477D620048FDD8 /* 16.jpeg in Resources */,
+				2CD299EF1A477D620048FDD8 /* 20.jpeg in Resources */,
 				2C57D4981A410CD500A4F1AC /* leftArrow.png in Resources */,
 				2C57D4991A410CD500A4F1AC /* rightArrow.png in Resources */,
+				2CD299F41A477D620048FDD8 /* 25.jpeg in Resources */,
+				2CD299E91A477D620048FDD8 /* 14.jpeg in Resources */,
 				2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */,
+				2CD299F21A477D620048FDD8 /* 23.jpeg in Resources */,
 				2CD422861A450F2400B08420 /* Button.xib in Resources */,
+				2CD299E81A477D620048FDD8 /* 13.jpeg in Resources */,
 				2CD422AE1A4528AE00B08420 /* 10.jpeg in Resources */,
+				2CD299F61A477D620048FDD8 /* 27.jpeg in Resources */,
 				2CD422B71A45476700B08420 /* Todo in Resources */,
+				2CD299F11A477D620048FDD8 /* 22.jpeg in Resources */,
 				2CD422A51A4528AE00B08420 /* 01.jpeg in Resources */,
+				2CD299E61A477D620048FDD8 /* 11.jpeg in Resources */,
+				2CD299EC1A477D620048FDD8 /* 17.jpeg in Resources */,
 				2CD422AA1A4528AE00B08420 /* 06.jpeg in Resources */,
 				2CD422AD1A4528AE00B08420 /* 09.jpeg in Resources */,
 				2C30EF2A19B7C17500675799 /* Images.xcassets in Resources */,
+				2CD299F01A477D620048FDD8 /* 21.jpeg in Resources */,
 				2C57D48B1A41016400A4F1AC /* augs.png in Resources */,
+				2CD299F31A477D620048FDD8 /* 24.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +432,7 @@
 				2C30EF4C19B7CD0700675799 /* GameScreen.swift in Sources */,
 				2C30EF2319B7C17500675799 /* AppDelegate.swift in Sources */,
 				2C320D941A43952C00B87E80 /* DoubleIndex.swift in Sources */,
+				2CD299F81A477F640048FDD8 /* ImageGallery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,9 +539,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TileGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -477,9 +553,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TileGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
