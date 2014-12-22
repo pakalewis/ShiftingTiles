@@ -140,7 +140,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
             self.presentViewController(imagePicker, animated: true, completion: nil)
         } else {
             
@@ -150,6 +150,32 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.presentViewController(noCameraAlert, animated: true, completion: nil)
         }
     }
+    
+    
+    
+    @IBAction func galleryButtonPressed(sender: AnyObject) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    
+    }
+    
+    
+    
+    
+    @IBAction func gridButtonPressed(sender: AnyObject) {
+        
+        if self.drawGrid?.alpha == 0 {
+            self.drawGrid?.alpha = 1
+        } else {
+            self.drawGrid?.alpha = 0
+        }
+    }
+    
+  
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
@@ -182,18 +208,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         //this gets fired when the users cancel out of the process
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    
-    @IBAction func gridButtonPressed(sender: AnyObject) {
-        
-        if self.drawGrid?.alpha == 0 {
-            self.drawGrid?.alpha = 1
-        } else {
-            self.drawGrid?.alpha = 0
-        }
-    }
-    
-    
 
     
     override func didReceiveMemoryWarning() {

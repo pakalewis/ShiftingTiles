@@ -70,7 +70,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureHeight, topBankGestureHeight)
             var topGestureArea = UIImageView(frame: topBankGestureFrame)
-            topGestureArea.image = UIImage(named: "blueButton")
+            topGestureArea.image = UIImage(named: "upTriangle")
             topGestureArea.userInteractionEnabled = true;
             var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             topGestureArea.tag = index
@@ -80,7 +80,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureWidth)
             var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
-            leftGestureArea.image = UIImage(named: "blueButton")
+            leftGestureArea.image = UIImage(named: "leftTriangle")
             leftGestureArea.userInteractionEnabled = true;
             var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             leftGestureArea.tag = index + 100
@@ -92,26 +92,52 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     func bankTapped(sender: UIGestureRecognizer) {
+
         if solved {
             return
         } else {
             var tappedButton = sender.view as UIImageView
             
             if (!isFirstRowOrColumnTapped) {
-                // set the first tag
+                // Flip the bool
+                self.isFirstRowOrColumnTapped = true
+
+                // Store tag of the first line button
                 self.firstRowOrColumnTapped = tappedButton.tag
                 self.firstButton = tappedButton
-                tappedButton.image = UIImage(named: "darkBlueButton")
-                self.isFirstRowOrColumnTapped = true
-            } else {
-                // set the second tag and call the swaplines func
-                self.secondRowOrColumnTapped = sender.view!.tag
-                self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
                 
+                // Flip the image on the button
+                if (tappedButton.tag - 100) < 0 { // line 1 is a column
+                    self.firstButton.image = UIImage(named: "downTriangle")
+                } else { // line1 is a row
+                    self.firstButton.image = UIImage(named: "rightTriangle")
+                }
+                
+                // TODO: Is comparing images like this ok??
+//                if tappedButton.image == UIImage(named: "upTriangle") {
+//                    self.firstButton.image = UIImage(named: "downTriangle")
+//                } else {
+//                    self.firstButton.image = UIImage(named: "rightTriangle")
+//                }
+            } else {
+                // Flip the bool
                 self.isFirstRowOrColumnTapped = false
-                self.firstButton.image = UIImage(named: "blueButton")
-            }
 
+                // set the second tag
+                self.secondRowOrColumnTapped = sender.view!.tag
+                
+                // Flip the image on the button
+                if (self.firstButton.tag - 100) < 0 { // line 1 is a column
+                    self.firstButton.image = UIImage(named: "upTriangle")
+                } else { // line1 is a row
+                    self.firstButton.image = UIImage(named: "leftTriangle")
+                }
+                
+                // If two distinct lines were tapped, then swap
+                if self.firstRowOrColumnTapped != self.secondRowOrColumnTapped {
+                    self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
+                }
+            }
         }
     }
 
@@ -125,6 +151,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
 
     
+    @IBAction func hintButtonPressed(sender: AnyObject) {
+        self.tileArea.showFirstIncorrectTile()
+    }
    
     
     @IBAction func backToMainScreen(sender: AnyObject) {

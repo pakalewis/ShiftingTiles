@@ -39,8 +39,6 @@
 		2CD299F61A477D620048FDD8 /* 27.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E51A477D620048FDD8 /* 27.jpeg */; };
 		2CD299F81A477F640048FDD8 /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD299F71A477F640048FDD8 /* ImageGallery.swift */; };
 		2CD299FC1A47A9BA0048FDD8 /* gridIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */; };
-		2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422811A450A6F00B08420 /* darkBlueButton.png */; };
-		2CD422841A450A6F00B08420 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422821A450A6F00B08420 /* blueButton.png */; };
 		2CD422861A450F2400B08420 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422851A450F2400B08420 /* Button.xib */; };
 		2CD422A51A4528AE00B08420 /* 01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD4229B1A4528AE00B08420 /* 01.jpeg */; };
 		2CD422A61A4528AE00B08420 /* 02.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD4229C1A4528AE00B08420 /* 02.jpeg */; };
@@ -56,7 +54,12 @@
 		2CD422B21A453CE500B08420 /* CollectionViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */; };
 		2CD422B71A45476700B08420 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422B61A45476700B08420 /* Todo */; };
 		2CD422B91A4548C400B08420 /* DrawGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B81A4548C400B08420 /* DrawGrid.swift */; };
-		2CD422BB1A455FAD00B08420 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422BA1A455FAD00B08420 /* camera.png */; };
+		2CD422BB1A455FAD00B08420 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422BA1A455FAD00B08420 /* cameraIcon.png */; };
+		2CF87B121A47B7D3001CD8E9 /* galleryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */; };
+		2CF87B171A47D1AA001CD8E9 /* downTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B131A47D1AA001CD8E9 /* downTriangle.png */; };
+		2CF87B181A47D1AA001CD8E9 /* leftTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */; };
+		2CF87B191A47D1AA001CD8E9 /* rightTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B151A47D1AA001CD8E9 /* rightTriangle.png */; };
+		2CF87B1A1A47D1AA001CD8E9 /* upTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B161A47D1AA001CD8E9 /* upTriangle.png */; };
 		2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFA65AC19B9A8F200D9F40E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -107,8 +110,6 @@
 		2CD299E51A477D620048FDD8 /* 27.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 27.jpeg; sourceTree = "<group>"; };
 		2CD299F71A477F640048FDD8 /* ImageGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
 		2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridIcon.png; sourceTree = "<group>"; };
-		2CD422811A450A6F00B08420 /* darkBlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlueButton.png; sourceTree = "<group>"; };
-		2CD422821A450A6F00B08420 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
 		2CD422851A450F2400B08420 /* Button.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
 		2CD4229B1A4528AE00B08420 /* 01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 01.jpeg; sourceTree = "<group>"; };
 		2CD4229C1A4528AE00B08420 /* 02.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 02.jpeg; sourceTree = "<group>"; };
@@ -124,7 +125,12 @@
 		2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewImageCell.swift; sourceTree = "<group>"; };
 		2CD422B61A45476700B08420 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		2CD422B81A4548C400B08420 /* DrawGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawGrid.swift; sourceTree = "<group>"; };
-		2CD422BA1A455FAD00B08420 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		2CD422BA1A455FAD00B08420 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
+		2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = galleryIcon.png; sourceTree = "<group>"; };
+		2CF87B131A47D1AA001CD8E9 /* downTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downTriangle.png; sourceTree = "<group>"; };
+		2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftTriangle.png; sourceTree = "<group>"; };
+		2CF87B151A47D1AA001CD8E9 /* rightTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightTriangle.png; sourceTree = "<group>"; };
+		2CF87B161A47D1AA001CD8E9 /* upTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upTriangle.png; sourceTree = "<group>"; };
 		2CFA65AC19B9A8F200D9F40E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2CFD40C819B82A8100275DB3 /* tilePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tilePlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -213,15 +219,26 @@
 			isa = PBXGroup;
 			children = (
 				2CD422BC1A455FB900B08420 /* Puzzle Images */,
-				2CD422BA1A455FAD00B08420 /* camera.png */,
-				2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */,
-				2CD422811A450A6F00B08420 /* darkBlueButton.png */,
-				2CD422821A450A6F00B08420 /* blueButton.png */,
+				2CD299FF1A47B6490048FDD8 /* Icons */,
 				2C57D4961A410CD500A4F1AC /* leftArrow.png */,
 				2C57D4971A410CD500A4F1AC /* rightArrow.png */,
 				2C57D4801A41016400A4F1AC /* augs.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		2CD299FF1A47B6490048FDD8 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				2CF87B131A47D1AA001CD8E9 /* downTriangle.png */,
+				2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */,
+				2CF87B151A47D1AA001CD8E9 /* rightTriangle.png */,
+				2CF87B161A47D1AA001CD8E9 /* upTriangle.png */,
+				2CD422BA1A455FAD00B08420 /* cameraIcon.png */,
+				2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */,
+				2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		2CD422B31A453D4100B08420 /* Main Screen */ = {
@@ -372,16 +389,17 @@
 			files = (
 				2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */,
 				2CD299EA1A477D620048FDD8 /* 15.jpeg in Resources */,
-				2CD422BB1A455FAD00B08420 /* camera.png in Resources */,
+				2CD422BB1A455FAD00B08420 /* cameraIcon.png in Resources */,
 				2CD299EE1A477D620048FDD8 /* 19.jpeg in Resources */,
+				2CF87B191A47D1AA001CD8E9 /* rightTriangle.png in Resources */,
 				2CD422B01A45372800B08420 /* CollectionViewImageCell.xib in Resources */,
 				2CD422A71A4528AE00B08420 /* 03.jpeg in Resources */,
 				2CD422A91A4528AE00B08420 /* 05.jpeg in Resources */,
 				2CD422AC1A4528AE00B08420 /* 08.jpeg in Resources */,
 				2CD299F51A477D620048FDD8 /* 26.jpeg in Resources */,
+				2CF87B1A1A47D1AA001CD8E9 /* upTriangle.png in Resources */,
 				2CD422A61A4528AE00B08420 /* 02.jpeg in Resources */,
 				2CD422A81A4528AE00B08420 /* 04.jpeg in Resources */,
-				2CD422841A450A6F00B08420 /* blueButton.png in Resources */,
 				2CD299E71A477D620048FDD8 /* 12.jpeg in Resources */,
 				2CD299ED1A477D620048FDD8 /* 18.jpeg in Resources */,
 				2CD299FC1A47A9BA0048FDD8 /* gridIcon.png in Resources */,
@@ -389,15 +407,17 @@
 				2CD299EB1A477D620048FDD8 /* 16.jpeg in Resources */,
 				2CD299EF1A477D620048FDD8 /* 20.jpeg in Resources */,
 				2C57D4981A410CD500A4F1AC /* leftArrow.png in Resources */,
+				2CF87B121A47B7D3001CD8E9 /* galleryIcon.png in Resources */,
 				2C57D4991A410CD500A4F1AC /* rightArrow.png in Resources */,
+				2CF87B171A47D1AA001CD8E9 /* downTriangle.png in Resources */,
 				2CD299F41A477D620048FDD8 /* 25.jpeg in Resources */,
 				2CD299E91A477D620048FDD8 /* 14.jpeg in Resources */,
-				2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */,
 				2CD299F21A477D620048FDD8 /* 23.jpeg in Resources */,
 				2CD422861A450F2400B08420 /* Button.xib in Resources */,
 				2CD299E81A477D620048FDD8 /* 13.jpeg in Resources */,
 				2CD422AE1A4528AE00B08420 /* 10.jpeg in Resources */,
 				2CD299F61A477D620048FDD8 /* 27.jpeg in Resources */,
+				2CF87B181A47D1AA001CD8E9 /* leftTriangle.png in Resources */,
 				2CD422B71A45476700B08420 /* Todo in Resources */,
 				2CD299F11A477D620048FDD8 /* 22.jpeg in Resources */,
 				2CD422A51A4528AE00B08420 /* 01.jpeg in Resources */,

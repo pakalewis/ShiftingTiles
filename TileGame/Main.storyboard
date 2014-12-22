@@ -20,13 +20,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Fb-MQ-XGx">
-                                <rect key="frame" x="60" y="180" width="480" height="480"/>
+                                <rect key="frame" x="150" y="153" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="1:1" id="JoF-LC-Z4e"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="7cw-uc-rQN">
-                                <rect key="frame" x="33" y="494" width="534" height="96"/>
+                                <rect key="frame" x="133" y="530" width="334" height="60"/>
                                 <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="55"/>
                                 <state key="normal" title="Let's Play!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,13 +42,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="JQU-OV-dG8">
-                                <rect key="frame" x="196" y="455" width="94" height="29"/>
+                                <rect key="frame" x="196" y="491" width="94" height="29"/>
                                 <connections>
                                     <action selector="stepperPressed:" destination="BYZ-38-t0r" eventType="valueChanged" id="KKB-YZ-h6B"/>
                                 </connections>
                             </stepper>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dsY-VR-BwX">
-                                <rect key="frame" x="108" y="103" width="384" height="72"/>
+                                <rect key="frame" x="180" y="103" width="240" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="Cuw-V2-YLu">
                                     <size key="itemSize" width="42" height="42"/>
@@ -69,12 +69,12 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-mf-2KR" userLabel="CameraIconButton">
-                                <rect key="frame" x="60" y="665" width="48" height="48"/>
+                                <rect key="frame" x="150" y="458" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" multiplier="1:1" id="3z6-bW-35n"/>
                                     <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" id="Kkr-qC-Fkj"/>
                                 </constraints>
-                                <state key="normal" image="camera.png">
+                                <state key="normal" image="cameraIcon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -87,13 +87,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 tiles per row" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD">
-                                <rect key="frame" x="300" y="459" width="240" height="21"/>
+                                <rect key="frame" x="300" y="495" width="150" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWw-UU-QiW" userLabel="GridIconButton">
-                                <rect key="frame" x="140" y="665" width="48" height="48"/>
+                                <rect key="frame" x="212" y="458" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZWw-UU-QiW" secondAttribute="height" multiplier="1:1" id="7tM-iH-mu0"/>
                                 </constraints>
@@ -102,6 +102,18 @@
                                 </state>
                                 <connections>
                                     <action selector="gridButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8mI-MF-IVc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqA-Zr-y5z" userLabel="GalleryIconButton">
+                                <rect key="frame" x="273" y="458" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iqA-Zr-y5z" secondAttribute="height" multiplier="1:1" id="fth-h1-bfO"/>
+                                </constraints>
+                                <state key="normal" image="galleryIcon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="galleryButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vts-jM-Jqh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,11 +128,14 @@
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8MB-7W-bSl"/>
                             <constraint firstItem="7cw-uc-rQN" firstAttribute="height" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="0.2" id="92f-fE-Gzd"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="height" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="0.15" id="Ba2-O2-tj1"/>
-                            <constraint firstItem="8Fb-MQ-XGx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="DPt-uX-KLQ"/>
+                            <constraint firstItem="iqA-Zr-y5z" firstAttribute="leading" secondItem="ZWw-UU-QiW" secondAttribute="trailing" constant="31" id="C1s-Yg-uoM"/>
+                            <constraint firstItem="8Fb-MQ-XGx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="DPt-uX-KLQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7cw-uc-rQN" secondAttribute="bottom" constant="10" id="Iyb-im-NjV"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="leading" id="JjI-Kn-Egb"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
+                            <constraint firstItem="ZWw-UU-QiW" firstAttribute="width" secondItem="iqA-Zr-y5z" secondAttribute="width" id="MIR-sz-BZL"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
+                            <constraint firstItem="ZWw-UU-QiW" firstAttribute="top" secondItem="iqA-Zr-y5z" secondAttribute="top" id="SwN-t3-cLc"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="top" secondItem="dsY-VR-BwX" secondAttribute="bottom" constant="5" id="UbL-fU-UBx"/>
                             <constraint firstItem="zGq-2D-jDD" firstAttribute="leading" secondItem="JQU-OV-dG8" secondAttribute="trailing" constant="10" id="VCY-ST-iab"/>
                             <constraint firstItem="ZWw-UU-QiW" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="trailing" constant="32" id="Zru-3K-fgP"/>
@@ -210,6 +225,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-fP-WBe" userLabel="LeftBank">
                                 <rect key="frame" x="10" y="-7" width="43" height="532"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ig-wh-J89">
+                                <rect key="frame" x="58" y="40" width="70" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="B1Y-3T-Xn6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Hint?">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="EGT-XM-OAO" eventType="touchUpInside" id="x2b-vc-uOy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -217,12 +245,14 @@
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="0.08" id="4Qg-RW-HTZ"/>
                             <constraint firstItem="vI2-cd-d5v" firstAttribute="top" secondItem="C42-AY-08P" secondAttribute="top" id="5O8-cT-y3k"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" id="9Cm-XD-R2I"/>
+                            <constraint firstItem="9ig-wh-J89" firstAttribute="leading" secondItem="oHF-Bx-sTb" secondAttribute="leading" id="9lB-fD-jfM"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" multiplier="0.08" id="AaI-Zd-v5H"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="10" id="EAw-Qx-obv"/>
                             <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="p3Q-Xd-i17" secondAttribute="leading" id="GM9-xw-gBq"/>
                             <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
                             <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="5tw-fP-WBe" secondAttribute="trailing" constant="5" id="Kbl-54-OmZ"/>
                             <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="15" id="R02-eF-xTW"/>
+                            <constraint firstItem="9ig-wh-J89" firstAttribute="top" secondItem="vI2-cd-d5v" secondAttribute="top" id="WsI-LY-bxH"/>
                             <constraint firstItem="oHF-Bx-sTb" firstAttribute="top" secondItem="p3Q-Xd-i17" secondAttribute="bottom" constant="5" id="XgH-Ii-pou"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="top" id="f4n-Mb-Jxq"/>
                             <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="10" id="gJs-KM-oDB"/>
@@ -248,7 +278,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera.png" width="512" height="512"/>
+        <image name="cameraIcon.png" width="512" height="512"/>
+        <image name="galleryIcon.png" width="358" height="358"/>
         <image name="gridIcon.png" width="447" height="447"/>
     </resources>
 </document>

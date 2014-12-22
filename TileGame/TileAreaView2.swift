@@ -14,13 +14,19 @@ class TileAreaView2: UIView {
     var delegate : PuzzleSolvedProtocol?
     
     var imageToSolve = UIImage()
+    var tileArray = [[Tile]]()
     var tilesPerRow = 3
+    var isPuzzleInitialized = false;
+    var solved = false
+
+    var firstIncorrectTile : Tile?
+    
+    // For swapping
     var firstTileSelectedBool = true
     var firstTile : Tile?
     var secondTile : Tile?
-    var tileArray = [[Tile]]()
-    var isPuzzleInitialized = false;
-    var solved = false
+
+    
     
     func initialize() {
         self.createTileArray()
@@ -285,9 +291,13 @@ class TileAreaView2: UIView {
 
                 if (doubleIndex.rowIndex) == index1 && (doubleIndex.columnIndex) == index2 {
                     println("  YES")
+                    self.firstIncorrectTile = nil
 
                 } else {
                     println("  NO")
+                    var coordinate = DoubleIndex(index1: index1, index2: index2)
+                    self.firstIncorrectTile = self.findTileAtCoordinate(coordinate)
+
                     return
                 }
                 
@@ -303,6 +313,29 @@ class TileAreaView2: UIView {
         self.delegate!.puzzleIsSolved()
     }
 
+    
+    func showFirstIncorrectTile() {
+        // this checks if solved which stores self.firstIncorrectTile
+        self.checkIfSolved()
+
+        UIView.animateWithDuration(0.25, delay: 0.0, options: nil, animations: { () -> Void in
+            // TODO: figure out how to get around this stupid doubling
+            // TODO: implement a better animation than fading the alpha. maybe some wiggling or bouncing?
+            self.firstIncorrectTile?.imageView.alpha = 0.5
+            self.firstIncorrectTile?.imageView.alpha = 0.5
+        }) { (finished) -> Void in
+            
+
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.firstIncorrectTile?.imageView.alpha = 1.0
+                self.firstIncorrectTile?.imageView.alpha = 1.0
+
+            })
+        }
+
+        
+        
+    }
     
     
     func findTileAtCoordinate(coordinate: DoubleIndex) -> Tile {
