@@ -151,10 +151,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
     }
     
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
-
+        
         
         var imageWidth  = imagePicked!.size.width
         var imageHeight  = imagePicked!.size.height
@@ -175,7 +174,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         println("image selected from imagePicker")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     
     
     
@@ -183,6 +182,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         //this gets fired when the users cancel out of the process
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+
+    
+    @IBAction func gridButtonPressed(sender: AnyObject) {
+        
+        if self.drawGrid?.alpha == 0 {
+            self.drawGrid?.alpha = 1
+        } else {
+            self.drawGrid?.alpha = 0
+        }
+    }
+    
+    
 
     
     override func didReceiveMemoryWarning() {

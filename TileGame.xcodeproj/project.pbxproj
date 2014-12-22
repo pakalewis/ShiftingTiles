@@ -38,6 +38,7 @@
 		2CD299F51A477D620048FDD8 /* 26.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E41A477D620048FDD8 /* 26.jpeg */; };
 		2CD299F61A477D620048FDD8 /* 27.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299E51A477D620048FDD8 /* 27.jpeg */; };
 		2CD299F81A477F640048FDD8 /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD299F71A477F640048FDD8 /* ImageGallery.swift */; };
+		2CD299FC1A47A9BA0048FDD8 /* gridIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */; };
 		2CD422831A450A6F00B08420 /* darkBlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422811A450A6F00B08420 /* darkBlueButton.png */; };
 		2CD422841A450A6F00B08420 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422821A450A6F00B08420 /* blueButton.png */; };
 		2CD422861A450F2400B08420 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422851A450F2400B08420 /* Button.xib */; };
@@ -105,6 +106,7 @@
 		2CD299E41A477D620048FDD8 /* 26.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 26.jpeg; sourceTree = "<group>"; };
 		2CD299E51A477D620048FDD8 /* 27.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 27.jpeg; sourceTree = "<group>"; };
 		2CD299F71A477F640048FDD8 /* ImageGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
+		2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridIcon.png; sourceTree = "<group>"; };
 		2CD422811A450A6F00B08420 /* darkBlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlueButton.png; sourceTree = "<group>"; };
 		2CD422821A450A6F00B08420 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
 		2CD422851A450F2400B08420 /* Button.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				2CD422BC1A455FB900B08420 /* Puzzle Images */,
 				2CD422BA1A455FAD00B08420 /* camera.png */,
+				2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */,
 				2CD422811A450A6F00B08420 /* darkBlueButton.png */,
 				2CD422821A450A6F00B08420 /* blueButton.png */,
 				2C57D4961A410CD500A4F1AC /* leftArrow.png */,
@@ -381,6 +384,7 @@
 				2CD422841A450A6F00B08420 /* blueButton.png in Resources */,
 				2CD299E71A477D620048FDD8 /* 12.jpeg in Resources */,
 				2CD299ED1A477D620048FDD8 /* 18.jpeg in Resources */,
+				2CD299FC1A47A9BA0048FDD8 /* gridIcon.png in Resources */,
 				2CD422AB1A4528AE00B08420 /* 07.jpeg in Resources */,
 				2CD299EB1A477D620048FDD8 /* 16.jpeg in Resources */,
 				2CD299EF1A477D620048FDD8 /* 20.jpeg in Resources */,
