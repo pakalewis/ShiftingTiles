@@ -54,7 +54,8 @@
 		2CD422B21A453CE500B08420 /* CollectionViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */; };
 		2CD422B71A45476700B08420 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422B61A45476700B08420 /* Todo */; };
 		2CD422B91A4548C400B08420 /* DrawGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD422B81A4548C400B08420 /* DrawGrid.swift */; };
-		2CD422BB1A455FAD00B08420 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD422BA1A455FAD00B08420 /* cameraIcon.png */; };
+		2CD4899E1A49333E004535A6 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD4899D1A49333E004535A6 /* cameraIcon.png */; };
+		2CD489A41A4935F1004535A6 /* goIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD489A31A4935F1004535A6 /* goIcon.png */; };
 		2CF87B121A47B7D3001CD8E9 /* galleryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */; };
 		2CF87B171A47D1AA001CD8E9 /* downTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B131A47D1AA001CD8E9 /* downTriangle.png */; };
 		2CF87B181A47D1AA001CD8E9 /* leftTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */; };
@@ -125,7 +126,8 @@
 		2CD422B11A453CE500B08420 /* CollectionViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewImageCell.swift; sourceTree = "<group>"; };
 		2CD422B61A45476700B08420 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		2CD422B81A4548C400B08420 /* DrawGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawGrid.swift; sourceTree = "<group>"; };
-		2CD422BA1A455FAD00B08420 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
+		2CD4899D1A49333E004535A6 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
+		2CD489A31A4935F1004535A6 /* goIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goIcon.png; sourceTree = "<group>"; };
 		2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = galleryIcon.png; sourceTree = "<group>"; };
 		2CF87B131A47D1AA001CD8E9 /* downTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downTriangle.png; sourceTree = "<group>"; };
 		2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftTriangle.png; sourceTree = "<group>"; };
@@ -230,11 +232,12 @@
 		2CD299FF1A47B6490048FDD8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CD489A31A4935F1004535A6 /* goIcon.png */,
 				2CF87B131A47D1AA001CD8E9 /* downTriangle.png */,
 				2CF87B141A47D1AA001CD8E9 /* leftTriangle.png */,
 				2CF87B151A47D1AA001CD8E9 /* rightTriangle.png */,
+				2CD4899D1A49333E004535A6 /* cameraIcon.png */,
 				2CF87B161A47D1AA001CD8E9 /* upTriangle.png */,
-				2CD422BA1A455FAD00B08420 /* cameraIcon.png */,
 				2CD299FB1A47A9BA0048FDD8 /* gridIcon.png */,
 				2CF87B111A47B7D3001CD8E9 /* galleryIcon.png */,
 			);
@@ -389,10 +392,10 @@
 			files = (
 				2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */,
 				2CD299EA1A477D620048FDD8 /* 15.jpeg in Resources */,
-				2CD422BB1A455FAD00B08420 /* cameraIcon.png in Resources */,
 				2CD299EE1A477D620048FDD8 /* 19.jpeg in Resources */,
 				2CF87B191A47D1AA001CD8E9 /* rightTriangle.png in Resources */,
 				2CD422B01A45372800B08420 /* CollectionViewImageCell.xib in Resources */,
+				2CD4899E1A49333E004535A6 /* cameraIcon.png in Resources */,
 				2CD422A71A4528AE00B08420 /* 03.jpeg in Resources */,
 				2CD422A91A4528AE00B08420 /* 05.jpeg in Resources */,
 				2CD422AC1A4528AE00B08420 /* 08.jpeg in Resources */,
@@ -401,6 +404,7 @@
 				2CD422A61A4528AE00B08420 /* 02.jpeg in Resources */,
 				2CD422A81A4528AE00B08420 /* 04.jpeg in Resources */,
 				2CD299E71A477D620048FDD8 /* 12.jpeg in Resources */,
+				2CD489A41A4935F1004535A6 /* goIcon.png in Resources */,
 				2CD299ED1A477D620048FDD8 /* 18.jpeg in Resources */,
 				2CD299FC1A47A9BA0048FDD8 /* gridIcon.png in Resources */,
 				2CD422AB1A4528AE00B08420 /* 07.jpeg in Resources */,

@@ -16,8 +16,9 @@
 import Foundation
 import UIKit
 
-class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
                             
+    @IBOutlet weak var gameSizePicker: UIPickerView!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var stepper: UIStepper!
@@ -29,11 +30,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var imageToSolve = UIImage()
     var tilesPerRow = 3
     var drawGrid : DrawGrid?
+    let pickerData = ["2","3","4","5","6","7","8","9","10"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
+        self.gameSizePicker.delegate = self
+        self.gameSizePicker.dataSource = self
         
         
         // register the nibs for the two types of tableview cells
@@ -50,7 +54,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         stepper.value = 3
         self.tilesPerRow = Int(stepper.value)
-        self.tilesPerRowLabel.text = "\(Int(stepper.value).description) Tiles Per Row"
+        self.tilesPerRowLabel.text = "\(Int(stepper.value).description)"
         stepper.wraps = true
         stepper.autorepeat = true
         stepper.maximumValue = 10
@@ -58,7 +62,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         
         self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true        
-        self.letsPlayButton.layer.cornerRadius = 3
+        self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
         self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
         self.letsPlayButton.sizeToFit()
@@ -81,7 +85,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     @IBAction func stepperPressed(sender: UIStepper) {
-        self.tilesPerRowLabel.text = "\(Int(sender.value).description) Tiles Per Row"
+        self.tilesPerRowLabel.text = "\(Int(sender.value).description)"
         self.tilesPerRow = Int(sender.value)
 
         self.drawGrid?.removeFromSuperview()
@@ -103,6 +107,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
 
     
+    
+    //MARK: COLLECTION VIEW
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imageArray.count
@@ -114,8 +120,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     }
 
-    
-    
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
@@ -132,7 +136,33 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     }
     
+    
+    // MARK: PICKER
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.tilesPerRow = pickerData[row].toInt()!
+        
+        self.drawGrid?.removeFromSuperview()
+        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+        self.drawGrid?.numRows = self.tilesPerRow
+        self.drawGrid?.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.drawGrid!)
 
+    }
+    
+    
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             println("CAMERA AVAILABLE")

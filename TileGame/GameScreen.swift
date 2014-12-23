@@ -172,6 +172,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             }) { (finished) -> Void in
                 
+                // Bring tiles together
+                self.tileArea.layoutTilesWithMargin(0.0)
+
                 // Grow the tile area by sliding the left bank off screen to the left
                 self.leftBankMarginConstraint.constant = self.leftBankMarginConstraint.constant - self.leftBank.frame.width + 10
 
@@ -179,7 +182,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                     self.view.layoutIfNeeded()
                     
                     }) { (finished) -> Void in
+                        // Calling this again to resize all the tiles to take up the full TileArea
                         self.tileArea.layoutTilesWithMargin(0.0)
+
                 }
                 
                 
@@ -188,11 +193,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         
         
-        // TODO: where should I put these???
+        // TODO: where should do here??
         self.hintButton.alpha = 0.0
-        
-        //        self.tileArea.layoutTilesWithMargin(0.0)
-        
 
     }
 
