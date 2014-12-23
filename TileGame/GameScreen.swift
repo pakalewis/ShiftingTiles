@@ -23,20 +23,25 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var secondButton = UIImageView()
     var isFirstRowOrColumnTapped = false
     
+    
+    // VIEWS
     @IBOutlet weak var tileArea: TileAreaView2!
     @IBOutlet weak var congratsMessage: UILabel!
-    
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
-
-    @IBOutlet weak var tileAreaLeftConstraint: NSLayoutConstraint!
     
+    // CONSTRAINTS
     @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var topBankLeftConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
+    
+    // BUTTONS
     @IBOutlet weak var hintButton: UIButton!
     
     override func viewDidLoad() {
+//        self.tileAreaLeftConstraint.constant = 10
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -152,9 +157,43 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func puzzleIsSolved() {
         println("Puzzle is solved!")
-
-        self.animateToSolvedState()
         self.solved = true
+        
+        
+        congratsMessage.text = "CONGRATULATIONS!"
+        self.hintButton.userInteractionEnabled = false
+        
+        // Slide off the banks of buttons
+        self.leftBankTopConstraint.constant = 1000
+        self.topBankLeftConstraint.constant = 1000
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
+            }) { (finished) -> Void in
+                
+                // Grow the tile area by sliding the left bank off screen to the left
+                self.leftBankMarginConstraint.constant = self.leftBankMarginConstraint.constant - self.leftBank.frame.width + 10
+
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    
+                    }) { (finished) -> Void in
+                        self.tileArea.layoutTilesWithMargin(0.0)
+                }
+                
+                
+        }
+        
+        
+        
+        
+        // TODO: where should I put these???
+        self.hintButton.alpha = 0.0
+        
+        //        self.tileArea.layoutTilesWithMargin(0.0)
+        
+
     }
 
     
@@ -168,41 +207,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
     
-    func animateToSolvedState() {
-        congratsMessage.text = "CONGRATULATIONS!"
-        self.hintButton.userInteractionEnabled = false
-
-        // Slide off the banks of buttons
-        self.leftBankTopConstraint.constant = 1000
-        self.topBankLeftConstraint.constant = 1000
-
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-            
-        }) { (finished) -> Void in
-
-            // Grow the tile area
-            self.tileAreaLeftConstraint.constant = 10
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.view.layoutIfNeeded()
-                
-                }) { (finished) -> Void in
-                    self.tileArea.layoutTilesWithMargin(0.0)
-            }
-
-        
-        }
-        
-        
-        
-        
-        // TODO: where should I put these???
-        self.hintButton.alpha = 0.0
-
-//        self.tileArea.layoutTilesWithMargin(0.0)
-
-
-    }
-    
+   
     
 }

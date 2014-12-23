@@ -255,8 +255,8 @@
 		2CD422B41A453D6000B08420 /* Game Screen */ = {
 			isa = PBXGroup;
 			children = (
-				2C320D911A438D9A00B87E80 /* TileAreaView2.swift */,
 				2C30EF4B19B7CD0700675799 /* GameScreen.swift */,
+				2C320D911A438D9A00B87E80 /* TileAreaView2.swift */,
 			);
 			name = "Game Screen";
 			sourceTree = "<group>";
