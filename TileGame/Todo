@@ -17,3 +17,8 @@ nsuserdefaults to store:
 - grid or no grid
 - hints available?
 - 
+
+NOTES:
+Hint button shows the first incorrect tile and the location where it should go
+
+

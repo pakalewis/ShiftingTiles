@@ -29,6 +29,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
 
+    @IBOutlet weak var tileAreaLeftConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var topBankLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hintButton: UIButton!
+    
     override func viewDidLoad() {
     }
     
@@ -145,19 +152,57 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func puzzleIsSolved() {
         println("Puzzle is solved!")
-        congratsMessage.text = "CONGRATULATIONS"
-        self.congratsMessage.backgroundColor = UIColor.blueColor()
+
+        self.animateToSolvedState()
         self.solved = true
     }
 
     
     @IBAction func hintButtonPressed(sender: AnyObject) {
-        self.tileArea.showFirstIncorrectTile()
+        self.tileArea.showHint()
     }
    
     
     @IBAction func backToMainScreen(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    func animateToSolvedState() {
+        congratsMessage.text = "CONGRATULATIONS!"
+        self.hintButton.userInteractionEnabled = false
+
+        // Slide off the banks of buttons
+        self.leftBankTopConstraint.constant = 1000
+        self.topBankLeftConstraint.constant = 1000
+
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
+        }) { (finished) -> Void in
+
+            // Grow the tile area
+            self.tileAreaLeftConstraint.constant = 10
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+                
+                }) { (finished) -> Void in
+                    self.tileArea.layoutTilesWithMargin(0.0)
+            }
+
+        
+        }
+        
+        
+        
+        
+        // TODO: where should I put these???
+        self.hintButton.alpha = 0.0
+
+//        self.tileArea.layoutTilesWithMargin(0.0)
+
+
+    }
+    
     
 }

@@ -112,11 +112,19 @@ class TileAreaView2: UIView {
                 // set the boundaries of the tile
                 var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
                 
-                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: { () -> Void in
-
+                
+                // TODO: play around with this animation more
+                UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
                     self.tileArray[index1][index2].imageView.frame = tileFrame
-
-                    }, completion: nil)
+                    self.tileArray[index1][index2].imageView.frame = tileFrame
+                    
+                }), completion: nil)
+                
+//                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: { () -> Void in
+//
+//                    self.tileArray[index1][index2].imageView.frame = tileFrame
+//
+//                    }, completion: nil)
             }
         }
     }
@@ -306,7 +314,6 @@ class TileAreaView2: UIView {
         }
         
         // If it makes it through this loop then the puzzle is solved
-        self.layoutTilesWithMargin(0.0)
         self.solved = true
 
         // Notify GameScreen
@@ -314,26 +321,53 @@ class TileAreaView2: UIView {
     }
 
     
-    func showFirstIncorrectTile() {
+    func showHint() {
         // this checks if solved which stores self.firstIncorrectTile
         self.checkIfSolved()
-
-        UIView.animateWithDuration(0.25, delay: 0.0, options: nil, animations: { () -> Void in
-            // TODO: figure out how to get around this stupid doubling
-            // TODO: implement a better animation than fading the alpha. maybe some wiggling or bouncing?
-            self.firstIncorrectTile?.imageView.alpha = 0.5
-            self.firstIncorrectTile?.imageView.alpha = 0.5
-        }) { (finished) -> Void in
-            
-
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
-                self.firstIncorrectTile?.imageView.alpha = 1.0
-                self.firstIncorrectTile?.imageView.alpha = 1.0
-
-            })
-        }
-
         
+        
+        // Figure out which tile the firstIncorrectTile should swap with
+        var tag = self.firstIncorrectTile!.imageView.tag
+        var coordinate = DoubleIndex(index1: tag / 10, index2: tag % 10)
+        var hintTile = self.findTileAtCoordinate(coordinate)
+        
+        // Animation calculations
+        let fullRotation = CGFloat(M_PI * 2) / 72
+        let duration = 0.7
+        let relativeDuration = duration / 6
+        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
+        
+        UIView.animateKeyframesWithDuration(duration, delay: 0.0, options: nil, animations: {
+            
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/6, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(2/6, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(3/6, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(4/6, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(5/6, relativeDuration: relativeDuration, animations: {
+                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(0)
+                hintTile.imageView.transform = CGAffineTransformMakeRotation(0)
+            })
+
+            }, completion: {finished in
+                
+        })
         
     }
     
