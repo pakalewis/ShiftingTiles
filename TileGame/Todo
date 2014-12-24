@@ -1,13 +1,14 @@
 
 
+- Solve button that repeatedly calls hint (to find two tiles to swap), swap those two tiles, until the puzzle is solved
+
+- Make smaller versions of the images so the collection view on the main screen doesn't lag
 
 
 
-add buton for info page
+
+- add some sort of info page
 scroll view will slide in and user scrolls down the doc with rules and about etc
-
-
-
 
 
 
@@ -18,7 +19,21 @@ nsuserdefaults to store:
 - hints available?
 - 
 
+
+
+
+
+make STATS page
+- total number of completed puzzles
+- number of puzzle solves for each size
+-
+
+
+
+
 NOTES:
 Hint button shows the first incorrect tile and the location where it should go
+
+
 
 

@@ -16,12 +16,11 @@
 import Foundation
 import UIKit
 
-class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                             
     @IBOutlet weak var gameSizePicker: UIPickerView!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
-    @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     
     @IBOutlet weak var letsPlayButton: UIButton!
@@ -36,8 +35,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         super.viewDidLoad()
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
-        self.gameSizePicker.delegate = self
-        self.gameSizePicker.dataSource = self
         
         
         // register the nibs for the two types of tableview cells
@@ -52,13 +49,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCycler.layer.borderWidth = 2
 
 
-        stepper.value = 3
-        self.tilesPerRow = Int(stepper.value)
-        self.tilesPerRowLabel.text = "\(Int(stepper.value).description)"
-        stepper.wraps = true
-        stepper.autorepeat = true
-        stepper.maximumValue = 10
-        stepper.minimumValue = 2
+        self.tilesPerRow = 3
+        self.tilesPerRowLabel.text = "3"
         
         
         self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true        
@@ -84,18 +76,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     }
     
-    @IBAction func stepperPressed(sender: UIStepper) {
-        self.tilesPerRowLabel.text = "\(Int(sender.value).description)"
-        self.tilesPerRow = Int(sender.value)
+//        self.tilesPerRowLabel.text = "\(Int(sender.value).description)"
+//        self.tilesPerRow = Int(sender.value)
+//
+//        self.drawGrid?.removeFromSuperview()
+//        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+//        self.drawGrid?.numRows = self.tilesPerRow
+//        self.drawGrid?.backgroundColor = UIColor.clearColor()
+//        self.view.addSubview(self.drawGrid!)
 
-        self.drawGrid?.removeFromSuperview()
-        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-        self.drawGrid?.numRows = self.tilesPerRow
-        self.drawGrid?.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(self.drawGrid!)
-
-    }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var gameScreen = segue.destinationViewController as GameScreen
@@ -137,30 +126,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     
-    // MARK: PICKER
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        self.tilesPerRow = pickerData[row].toInt()!
-        
-        self.drawGrid?.removeFromSuperview()
-        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-        self.drawGrid?.numRows = self.tilesPerRow
-        self.drawGrid?.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(self.drawGrid!)
-
-    }
     
     
     @IBAction func cameraButtonPressed(sender: AnyObject) {
@@ -246,6 +211,43 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         println("MEMORY WARNING")
     }
     
+    
+    
+    
+    // MARK: Custom Stepper
+    
+    @IBAction func upButtonPressed(sender: AnyObject) {
 
+        self.tilesPerRow++
+        if self.tilesPerRow > 10 {
+            self.tilesPerRow--
+            return
+        }
+
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow)"
+
+        self.drawGrid?.removeFromSuperview()
+        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+        self.drawGrid?.numRows = self.tilesPerRow
+        self.drawGrid?.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.drawGrid!)
+   }
+
+    @IBAction func downButtonPressed(sender: AnyObject) {
+        
+        self.tilesPerRow--
+        if self.tilesPerRow < 2 {
+            self.tilesPerRow++
+            return
+        }
+        
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow)"
+        
+        self.drawGrid?.removeFromSuperview()
+        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+        self.drawGrid?.numRows = self.tilesPerRow
+        self.drawGrid?.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(self.drawGrid!)
+    }
 
 }
