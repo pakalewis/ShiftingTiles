@@ -240,6 +240,16 @@
                                     <action selector="hintButtonPressed:" destination="EGT-XM-OAO" eventType="touchUpInside" id="x2b-vc-uOy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rl5-9y-N59" userLabel="Solve">
+                                <rect key="frame" x="273" y="546" width="54" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Solve">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="solveButtonPressed:" destination="EGT-XM-OAO" eventType="touchUpInside" id="mX9-7q-lh9"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-cd-d5v">
                                 <rect key="frame" x="44" y="546" width="50" height="39"/>
                                 <constraints>
@@ -304,10 +314,12 @@
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" id="ZbR-z9-EDp"/>
                             <constraint firstAttribute="trailing" secondItem="9ig-wh-J89" secondAttribute="trailing" id="Zvd-q1-vB5"/>
                             <constraint firstItem="BUW-hI-3S5" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" multiplier="0.8" id="a5V-dP-dOF"/>
+                            <constraint firstItem="rl5-9y-N59" firstAttribute="top" secondItem="vI2-cd-d5v" secondAttribute="top" id="ajH-8w-Zn3"/>
                             <constraint firstAttribute="trailing" secondItem="row-0Z-gkW" secondAttribute="trailing" id="elv-Ec-ydJ"/>
                             <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="10" id="gJs-KM-oDB"/>
                             <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="vI2-cd-d5v" secondAttribute="leading" id="gX3-Y4-hve"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="0.08" id="lTt-0z-cu4"/>
+                            <constraint firstAttribute="centerX" secondItem="rl5-9y-N59" secondAttribute="centerX" id="odh-cz-aKc"/>
                         </constraints>
                     </view>
                     <connections>

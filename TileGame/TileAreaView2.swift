@@ -287,7 +287,7 @@ class TileAreaView2: UIView {
     }
 
     
-    func showHint() {
+    func findTilesToSwap() {
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 
@@ -300,8 +300,6 @@ class TileAreaView2: UIView {
                 if (currentTag / 10) != index1 || (currentTag % 10) != index2 {
                     self.firstTile = currentTile
                     self.secondTile = self.findTileWithTag(currentTile.doubleIndex.concatenateToInt())
-                    self.wiggleTile(self.firstTile!)
-                    self.wiggleTile(self.secondTile!)
                     return
                 }
             }

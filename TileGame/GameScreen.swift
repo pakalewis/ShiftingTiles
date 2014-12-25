@@ -15,7 +15,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     var imageToSolve = UIImage()
-    var solved = false
+    var isSolved = false
     var tilesPerRow = 3
     var firstRowOrColumnTapped = -1
     var secondRowOrColumnTapped = -1
@@ -105,7 +105,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func bankTapped(sender: UIGestureRecognizer) {
 
-        if solved {
+        if self.isSolved {
             return
         } else {
             var tappedButton = sender.view as UIImageView
@@ -157,7 +157,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func puzzleIsSolved() {
         println("Puzzle is solved!")
-        self.solved = true
+        self.isSolved = true
         
         
         congratsMessage.text = "CONGRATULATIONS!"
@@ -200,7 +200,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     @IBAction func hintButtonPressed(sender: AnyObject) {
-        self.tileArea.showHint()
+        self.tileArea.findTilesToSwap()
+        self.tileArea.wiggleTile(self.tileArea.firstTile!)
+        self.tileArea.wiggleTile(self.tileArea.secondTile!)
     }
    
     
@@ -208,7 +210,26 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func solveButtonPressed(sender: AnyObject) {
+
+        var solveAlert = UIAlertController(title: "", message: "Are you sure you want to solve the puzzle?", preferredStyle: UIAlertControllerStyle.Alert)
+        let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
+            self.solvePuzzle() }
+        solveAlert.addAction(yesAction)
+        solveAlert.addAction(noAction)
+        self.presentViewController(solveAlert, animated: true, completion: nil)
+    }
     
-   
+    func solvePuzzle() {
+        self.tileArea.findTilesToSwap()
+        self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, completionClosure: { () -> () in
+            println()
+            if !self.tileArea.checkIfSolved() {
+                println("TESTTEST")
+                self.solvePuzzle()
+            }
+        })
+    }
     
 }
