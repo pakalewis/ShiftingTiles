@@ -26,6 +26,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var letsPlayButton: UIButton!
     
     var imageArray = [UIImage]()
+    var smallImageArray = [UIImage]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
     var drawGrid : DrawGrid?
@@ -43,6 +44,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         var imageGallery = ImageGallery()
         self.imageArray = imageGallery.imageArray
+        self.smallImageArray = imageGallery.smallImageArray
         self.imageToSolve = imageArray[0]
         self.imageCycler.image = imageArray[0]
         self.imageCycler.layer.borderColor = UIColor.blackColor().CGColor
@@ -112,7 +114,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.imageView.image = self.imageArray[indexPath.row]
+        cell.imageView.image = self.smallImageArray[indexPath.row]
         return cell
         
     }

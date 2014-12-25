@@ -12,6 +12,7 @@ import UIKit
 class ImageGallery {
     
     var imageArray : [UIImage]!
+    var smallImageArray : [UIImage]!
     
     init() {
         let image99 = UIImage(named: "augs")
@@ -41,7 +42,6 @@ class ImageGallery {
         let image24 = UIImage(named: "24.jpeg")
         let image25 = UIImage(named: "25.jpeg")
         
-        
         self.imageArray = [
             image01!,
             image02!,
@@ -68,6 +68,62 @@ class ImageGallery {
             image23!,
             image24!,
             image25!,
+            image99! ]
+
+        
+        let smallImage99 = UIImage(named: "augs")
+        let smallImage01 = UIImage(named: "01small.jpeg")
+        let smallImage02 = UIImage(named: "02small.jpeg")
+        let smallImage03 = UIImage(named: "03small.jpeg")
+        let smallImage04 = UIImage(named: "04small.jpeg")
+        let smallImage05 = UIImage(named: "05small.jpeg")
+        let smallImage06 = UIImage(named: "06small.jpeg")
+        let smallImage07 = UIImage(named: "07small.jpeg")
+        let smallImage08 = UIImage(named: "08small.jpeg")
+        let smallImage09 = UIImage(named: "09small.jpeg")
+        let smallImage10 = UIImage(named: "10small.jpeg")
+        let smallImage11 = UIImage(named: "11small.jpeg")
+        let smallImage12 = UIImage(named: "12small.jpeg")
+        let smallImage13 = UIImage(named: "13small.jpeg")
+        let smallImage14 = UIImage(named: "14small.jpeg")
+        let smallImage15 = UIImage(named: "15small.jpeg")
+        let smallImage16 = UIImage(named: "16small.jpeg")
+        let smallImage17 = UIImage(named: "17small.jpeg")
+        let smallImage18 = UIImage(named: "18small.jpeg")
+        let smallImage19 = UIImage(named: "19small.jpeg")
+        let smallImage20 = UIImage(named: "20small.jpeg")
+        let smallImage21 = UIImage(named: "21small.jpeg")
+        let smallImage22 = UIImage(named: "22small.jpeg")
+        let smallImage23 = UIImage(named: "23small.jpeg")
+        let smallImage24 = UIImage(named: "24small.jpeg")
+        let smallImage25 = UIImage(named: "25small.jpeg")
+
+        self.smallImageArray = [
+            smallImage01!,
+            smallImage02!,
+            smallImage03!,
+            smallImage04!,
+            smallImage05!,
+            smallImage06!,
+            smallImage07!,
+            smallImage08!,
+            smallImage09!,
+            smallImage10!,
+            smallImage11!,
+            smallImage12!,
+            smallImage13!,
+            smallImage14!,
+            smallImage15!,
+            smallImage16!,
+            smallImage17!,
+            smallImage18!,
+            smallImage19!,
+            smallImage20!,
+            smallImage21!,
+            smallImage22!,
+            smallImage23!,
+            smallImage24!,
+            smallImage25!,
             image99! ]
     }
     

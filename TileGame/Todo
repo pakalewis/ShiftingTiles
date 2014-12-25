@@ -1,12 +1,6 @@
+- when the first tile is tapped, show some sort of indication. something better than changing the alpha
 
-- Fix how the hint button works. Find first incorrect, then find what tile should go there. Then swap
-
-
-
-- Solve button that repeatedly calls hint (to find two tiles to swap), swap those two tiles, until the puzzle is solved
-
-- Make smaller versions of the images so the collection view on the main screen doesn't lag
-
+- have an option to show the original image from the game screen as a solving reference
 
 
 

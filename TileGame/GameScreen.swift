@@ -33,22 +33,19 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // CONSTRAINTS
     @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBankLeftConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
     
     // BUTTONS
     @IBOutlet weak var hintButton: UIButton!
+    @IBOutlet weak var solveButton: UIButton!
+
     
     override func viewDidLoad() {
-//        self.tileAreaLeftConstraint.constant = 10
-
-    }
-    
-    override func viewDidLayoutSubviews() {
-        
+        super.viewDidLoad()
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
         // Initialize tileArea
         self.tileArea.delegate = self
@@ -159,10 +156,14 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         println("Puzzle is solved!")
         self.isSolved = true
         
-        
         congratsMessage.text = "CONGRATULATIONS!"
-        self.hintButton.userInteractionEnabled = false
         
+        // TODO: How to handle these buttons?
+        self.hintButton.userInteractionEnabled = false
+        self.hintButton.alpha = 0.0
+        self.solveButton.userInteractionEnabled = false
+        self.solveButton.alpha = 0.0
+
         // Slide off the banks of buttons
         self.leftBankTopConstraint.constant = 1000
         self.topBankLeftConstraint.constant = 1000
@@ -186,16 +187,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                         self.tileArea.layoutTilesWithMargin(0.0)
 
                 }
-                
-                
         }
-        
-        
-        
-        
-        // TODO: where should do here??
-        self.hintButton.alpha = 0.0
-
     }
 
     
@@ -215,7 +207,14 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         var solveAlert = UIAlertController(title: "", message: "Are you sure you want to solve the puzzle?", preferredStyle: UIAlertControllerStyle.Alert)
         let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
+            
+            // TODO: How to handle these buttons?
+            self.hintButton.userInteractionEnabled = false
+            self.hintButton.alpha = 0.0
+            self.solveButton.userInteractionEnabled = false
+            self.solveButton.alpha = 0.0
             self.solvePuzzle() }
+
         solveAlert.addAction(yesAction)
         solveAlert.addAction(noAction)
         self.presentViewController(solveAlert, animated: true, completion: nil)

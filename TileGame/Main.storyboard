@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Fb-MQ-XGx">
-                                <rect key="frame" x="30" y="189" width="540" height="540"/>
+                                <rect key="frame" x="60" y="180" width="480" height="480"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="1:1" id="JoF-LC-Z4e"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="7cw-uc-rQN" userLabel="Go Button">
-                                <rect key="frame" x="219" y="428" width="162" height="162"/>
+                                <rect key="frame" x="252" y="494" width="96" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7cw-uc-rQN" secondAttribute="height" multiplier="1:1" id="oaJ-1k-gtz"/>
                                 </constraints>
@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dsY-VR-BwX">
-                                <rect key="frame" x="84" y="103" width="432" height="81"/>
+                                <rect key="frame" x="108" y="103" width="384" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="Cuw-V2-YLu">
                                     <size key="itemSize" width="42" height="42"/>
@@ -64,7 +64,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-mf-2KR" userLabel="CameraIconButton">
-                                <rect key="frame" x="30" y="734" width="54" height="54"/>
+                                <rect key="frame" x="60" y="665" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" multiplier="1:1" id="3z6-bW-35n"/>
                                     <constraint firstAttribute="width" secondItem="eJp-mf-2KR" secondAttribute="height" id="Kkr-qC-Fkj"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWw-UU-QiW" userLabel="GridIconButton">
-                                <rect key="frame" x="116" y="734" width="54" height="54"/>
+                                <rect key="frame" x="140" y="665" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZWw-UU-QiW" secondAttribute="height" multiplier="1:1" id="7tM-iH-mu0"/>
                                 </constraints>
@@ -94,7 +94,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqA-Zr-y5z" userLabel="GalleryIconButton">
-                                <rect key="frame" x="201" y="734" width="54" height="54"/>
+                                <rect key="frame" x="219" y="665" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iqA-Zr-y5z" secondAttribute="height" multiplier="1:1" id="fth-h1-bfO"/>
                                 </constraints>
@@ -106,17 +106,17 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNp-r5-VCe" userLabel="CustomStepper">
-                                <rect key="frame" x="462" y="734" width="108" height="108"/>
+                                <rect key="frame" x="444" y="665" width="96" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD">
-                                        <rect key="frame" x="0.0" y="0.0" width="54" height="108"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="96"/>
                                         <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duK-ww-PYt" userLabel="upButton">
-                                        <rect key="frame" x="54" y="0.0" width="54" height="54"/>
+                                        <rect key="frame" x="48" y="0.0" width="48" height="48"/>
                                         <color key="backgroundColor" red="1" green="0.91465844699999999" blue="0.48046743609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duK-ww-PYt" secondAttribute="height" multiplier="1:1" id="EZ4-Wq-pkd"/>
@@ -129,7 +129,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gW-z2-Haf" userLabel="downButton">
-                                        <rect key="frame" x="54" y="54" width="54" height="54"/>
+                                        <rect key="frame" x="48" y="48" width="48" height="48"/>
                                         <color key="backgroundColor" red="0.37656584199999998" green="1" blue="0.81121733829999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0gW-z2-Haf" secondAttribute="height" multiplier="1:1" id="ewN-aM-a8T"/>
@@ -178,7 +178,7 @@
                             <constraint firstItem="7cw-uc-rQN" firstAttribute="height" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="0.2" id="92f-fE-Gzd"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="height" secondItem="8Fb-MQ-XGx" secondAttribute="height" multiplier="0.15" id="Ba2-O2-tj1"/>
                             <constraint firstItem="iqA-Zr-y5z" firstAttribute="leading" secondItem="ZWw-UU-QiW" secondAttribute="trailing" constant="31" id="C1s-Yg-uoM"/>
-                            <constraint firstItem="8Fb-MQ-XGx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="DPt-uX-KLQ"/>
+                            <constraint firstItem="8Fb-MQ-XGx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="DPt-uX-KLQ"/>
                             <constraint firstItem="UNp-r5-VCe" firstAttribute="width" secondItem="iqA-Zr-y5z" secondAttribute="width" id="Dzh-oZ-aK7"/>
                             <constraint firstItem="UNp-r5-VCe" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.2" id="G2Z-uB-pkg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7cw-uc-rQN" secondAttribute="bottom" constant="10" id="Iyb-im-NjV"/>
@@ -192,7 +192,7 @@
                             <constraint firstItem="iqA-Zr-y5z" firstAttribute="top" secondItem="UNp-r5-VCe" secondAttribute="top" id="bLP-jM-Pkc"/>
                             <constraint firstAttribute="centerX" secondItem="8Fb-MQ-XGx" secondAttribute="centerX" id="jRO-vF-DoX"/>
                             <constraint firstItem="eJp-mf-2KR" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.1" id="ljJ-kw-wcQ"/>
-                            <constraint firstItem="7cw-uc-rQN" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.3" id="onA-EN-WDY"/>
+                            <constraint firstItem="7cw-uc-rQN" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.2" id="onA-EN-WDY"/>
                             <constraint firstItem="eJp-mf-2KR" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="5" id="otd-xf-j39"/>
                             <constraint firstAttribute="centerX" secondItem="7cw-uc-rQN" secondAttribute="centerX" id="t4B-0y-Mwd"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="trailing" secondItem="UNp-r5-VCe" secondAttribute="trailing" id="tKd-xF-CBc"/>
@@ -287,7 +287,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="row-0Z-gkW">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="row-0Z-gkW" userLabel="Divider view">
                                 <rect key="frame" x="0.0" y="524" width="600" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -328,6 +328,7 @@
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
                         <outlet property="leftBankTopConstraint" destination="JGT-51-mtK" id="ha0-Wr-VIC"/>
+                        <outlet property="solveButton" destination="rl5-9y-N59" id="i5a-Hc-2fL"/>
                         <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>
                         <outlet property="topBank" destination="p3Q-Xd-i17" id="WjI-q6-ZNF"/>
                         <outlet property="topBankLeftConstraint" destination="28m-5T-c4D" id="0pT-MY-rf2"/>
