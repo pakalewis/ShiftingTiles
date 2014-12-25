@@ -1,4 +1,7 @@
 
+- Fix how the hint button works. Find first incorrect, then find what tile should go there. Then swap
+
+
 
 - Solve button that repeatedly calls hint (to find two tiles to swap), swap those two tiles, until the puzzle is solved
 

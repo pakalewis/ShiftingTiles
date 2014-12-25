@@ -18,8 +18,6 @@ class TileAreaView2: UIView {
     var tilesPerRow = 3
     var isPuzzleInitialized = false;
     var solved = false
-
-    var firstIncorrectTile : Tile?
     
     // For swapping
     var firstTileSelectedBool = true
@@ -30,17 +28,21 @@ class TileAreaView2: UIView {
     
     func initialize() {
         self.createTileArray()
-        self.shuffleImages()
-        
-//        var margin = (self.frame.width / CGFloat(self.tilesPerRow)) * 0.0005
-//        self.layoutTilesWithMargin((margin < 2) ? 2 : margin)
         self.layoutTilesWithMargin(2)
+        self.shuffleImages()
+
+        if self.checkIfSolved() {
+            println("WARNING, the initial shuffling resulted in a solved puzzle")
+        } else {
+            println("The puzzle has been Shuffled")
+        }
+
     }
     
     
     
-    // Each Tile object holds a doubleIndex property which helps monitor the arrangement of the tiles
-    // The tag property on the Tile's imageView is a way to determine the row/column for the tapped tile
+    // The doubleIndex property helps monitor the tile's current coordinate. This gets swapped in swapTile()
+    // The tag property on the Tile's imageView does not change. It is a way to determine where that tile should be positioned
     func createTileArray() {
         var arrayIndexConcatenation = 0
         
@@ -107,24 +109,17 @@ class TileAreaView2: UIView {
             
             for index2 in 0..<self.tilesPerRow { // get the tiles in each row
                 var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth + margin)
-//                println("tile xPOS = \(tileAreaPositionX) and tile yPOS = \(tileAreaPositionY)")
                 
                 // set the boundaries of the tile
                 var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
                 
-                
                 // TODO: play around with this animation more
+                // Update and animate the tile's frame
                 UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
-                    self.tileArray[index1][index2].imageView.frame = tileFrame
+
                     self.tileArray[index1][index2].imageView.frame = tileFrame
                     
                 }), completion: nil)
-                
-//                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: { () -> Void in
-//
-//                    self.tileArray[index1][index2].imageView.frame = tileFrame
-//
-//                    }, completion: nil)
             }
         }
     }
@@ -154,8 +149,9 @@ class TileAreaView2: UIView {
         // Grab the tag of the tile that was tapped
         var tag = sender.view!.tag
         
-        println("You tapped the tile at ROW \(tag / 10) and COLUMN \(tag % 10)")
-        println("The tag is \(tag)")
+        var tappedTile = self.tileArray[tag / 10][tag % 10]
+        println("This tile has a doubleIndex of \(tappedTile.doubleIndex.concatenateToString())")
+        println("This tile has a tag of \(tappedTile.imageView.tag)\n")
         
         // Check if it is the first or second tile tapped
         // Swap images and tags when
@@ -186,41 +182,28 @@ class TileAreaView2: UIView {
         if solved {
             return
         } else {
-            // Animate the fade out
-            UIView.animateWithDuration(0.15, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+            
+            // Swap doubleindex
+            var tempDoubleIndex = tile1.doubleIndex
+            tile1.doubleIndex = tile2.doubleIndex
+            tile2.doubleIndex = tempDoubleIndex
+
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
                 
-                tile1.imageView.alpha = 0.5
-                tile2.imageView.alpha = 0.5
-                
-                }) { (finished) -> Void in
-                    
-                    // Swap doubleindex
-                    var tempDoubleIndex = tile1.doubleIndex
-                    tile1.doubleIndex = tile2.doubleIndex
-                    tile2.doubleIndex = tempDoubleIndex
-                    
-                    // Now animate the fade in
-                    UIView.animateWithDuration(0.5, animations: { () -> Void in
-                        // TEST frame
-                        var firstFrame = tile1.imageView.frame
-                        tile1.imageView.frame = tile2.imageView.frame
-                        tile2.imageView.frame = firstFrame
-                        
-                        tile1.imageView.alpha = 1
-                        tile2.imageView.alpha = 1
-                        
-                        }) { (finished) -> Void in
-                            completionClosure()
-                    }
-            }
+                // Swap frames
+                var firstFrame = tile1.imageView.frame
+                tile1.imageView.frame = tile2.imageView.frame
+                tile2.imageView.frame = firstFrame
+
+                }, completion: { (finished) -> Void in
+                completionClosure()
+            })
         }
     }
     
     
+    
     func swapLines(line1: Int, line2: Int) {
-        println("line1 is \(line1) and line 2 is \(line2)")
-        
-        self.displayTagsFromTileArray()
         
         if line1 == line2 {
             // do nothing
@@ -233,20 +216,15 @@ class TileAreaView2: UIView {
 
         // Create arrau of Tiles in line1
         if (line1 - 100) < 0 { // line 1 is a column
-            println("line 1 is a column")
-
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: index, index2: line1)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tile.imageView.alpha = 0.5
                 tileLine1.append(tile)
             }
         } else { // line1 is a row
-            println("line 1 is a row")
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: line1 - 100, index2: index)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tile.imageView.alpha = 0.5
                 tileLine1.append(tile)
             }
         }
@@ -254,20 +232,15 @@ class TileAreaView2: UIView {
         
         // Create arrau of Tiles in line2
         if (line2 - 100) < 0 { // line2 is a column
-            println("line 2 is a column")
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: index, index2: line2)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tile.imageView.alpha = 0.5
                 tileLine2.append(tile)
             }
-            
         } else { // line2 is a row
-            println("line 2 is a row")
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: line2 - 100, index2: index)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tile.imageView.alpha = 0.5
                 tileLine2.append(tile)
             }
         }
@@ -289,27 +262,19 @@ class TileAreaView2: UIView {
     
     
 //    // checks to see if the image pieces are in the correct order
-    func checkIfSolved() {
+    func checkIfSolved() -> Bool {
 
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 var doubleIndex = self.tileArray[index1][index2].doubleIndex
-
-                print("Does doubleIndex \(doubleIndex.concatenateToString()) = \(index1)\(index2) ??")
+                println("Does doubleIndex \(doubleIndex.concatenateToString()) = \(index1)\(index2) ??")
 
                 if (doubleIndex.rowIndex) == index1 && (doubleIndex.columnIndex) == index2 {
                     println("  YES")
-                    self.firstIncorrectTile = nil
-
                 } else {
                     println("  NO")
-                    var coordinate = DoubleIndex(index1: index1, index2: index2)
-                    self.firstIncorrectTile = self.findTileAtCoordinate(coordinate)
-
-                    return
+                    return false
                 }
-                
-                
             }
         }
         
@@ -318,51 +283,58 @@ class TileAreaView2: UIView {
 
         // Notify GameScreen
         self.delegate!.puzzleIsSolved()
+        return true
     }
 
     
     func showHint() {
-        // this checks if solved which stores self.firstIncorrectTile
-        self.checkIfSolved()
-        
-        
-        // Figure out which tile the firstIncorrectTile should swap with
-        var tag = self.firstIncorrectTile!.imageView.tag
-        var coordinate = DoubleIndex(index1: tag / 10, index2: tag % 10)
-        var hintTile = self.findTileAtCoordinate(coordinate)
-        
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                
+                // Iterate through the array to find the first spot with the wrong tile
+                // Then find the tile that should go there and wiggle both of them
+                var doubleIndex = DoubleIndex(index1: index1, index2: index2)
+                var currentTile = self.findTileAtCoordinate(doubleIndex)
+                var currentTag = currentTile.imageView.tag
+                
+                if (currentTag / 10) != index1 || (currentTag % 10) != index2 {
+                    self.firstTile = currentTile
+                    self.secondTile = self.findTileWithTag(currentTile.doubleIndex.concatenateToInt())
+                    self.wiggleTile(self.firstTile!)
+                    self.wiggleTile(self.secondTile!)
+                    return
+                }
+            }
+        }
+    }
+
+    
+    func wiggleTile(tileToWiggle : Tile) {
         // Animation calculations
         let fullRotation = CGFloat(M_PI * 2) / 72
         let duration = 0.7
         let relativeDuration = duration / 6
         let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
-        
         UIView.animateKeyframesWithDuration(duration, delay: 0.0, options: nil, animations: {
             
             UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
                 
             })
             UIView.addKeyframeWithRelativeStartTime(1/6, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(2/6, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(3/6, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(4/6, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(5/6, relativeDuration: relativeDuration, animations: {
-                self.firstIncorrectTile!.imageView.transform = CGAffineTransformMakeRotation(0)
-                hintTile.imageView.transform = CGAffineTransformMakeRotation(0)
+                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(0)
             })
 
             }, completion: {finished in
@@ -384,15 +356,22 @@ class TileAreaView2: UIView {
         }
         return tile
     }
+
     
-    func displayTagsFromTileArray() {
+    
+    func findTileWithTag(tag: Int) -> Tile {
+
+        println("finding tile with tag \(tag)")
+        var tile = self.tileArray[0][0]
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
-                var doubleIndex = self.tileArray[index1][index2].doubleIndex
-                
-                println("doubleIndex for tile at \(index1)\(index2) is \(doubleIndex.concatenateToString())")
+                tile = self.tileArray[index1][index2]
+                if (tile.imageView.tag == tag) {
+                    return tile
+                }
             }
         }
+        return tile
     }
 
 }
