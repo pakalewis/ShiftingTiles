@@ -29,6 +29,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
+    var originalImageView: UIImageView!
     
     // CONSTRAINTS
     @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
@@ -38,7 +39,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // BUTTONS
     @IBOutlet weak var hintButton: UIButton!
     @IBOutlet weak var solveButton: UIButton!
-
+    @IBOutlet weak var showOriginalButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
+        
+        
+        self.originalImageView = UIImageView(frame: self.tileArea.frame)
+        self.originalImageView.image = self.imageToSolve
+        self.originalImageView.alpha = 0
+        self.view.addSubview(originalImageView)
+        
     }
     
     
@@ -160,10 +168,12 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         // TODO: How to handle these buttons?
         self.hintButton.userInteractionEnabled = false
-        self.hintButton.alpha = 0.0
+        self.hintButton.alpha = 0
         self.solveButton.userInteractionEnabled = false
-        self.solveButton.alpha = 0.0
-
+        self.solveButton.alpha = 0
+        self.showOriginalButton.userInteractionEnabled = false
+        self.showOriginalButton.alpha = 0
+        
         // Slide off the banks of buttons
         self.leftBankTopConstraint.constant = 1000
         self.topBankLeftConstraint.constant = 1000
@@ -190,6 +200,18 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         }
     }
 
+    
+    
+    @IBAction func showOriginal(sender: AnyObject) {
+        println("touch down")
+        self.originalImageView.alpha = 1
+        
+    }
+    
+    @IBAction func stopShowingOriginal(sender: AnyObject) {
+        println("touch up")
+        self.originalImageView.alpha = 0
+    }
     
     @IBAction func hintButtonPressed(sender: AnyObject) {
         self.tileArea.findTilesToSwap()
@@ -225,7 +247,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, completionClosure: { () -> () in
             println()
             if !self.tileArea.checkIfSolved() {
-                println("TESTTEST")
                 self.solvePuzzle()
             }
         })
