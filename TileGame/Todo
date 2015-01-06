@@ -1,11 +1,5 @@
 - when the first tile is tapped, show some sort of indication. something better than changing the alpha
 
-- have an option to show the original image from the game screen as a solving reference
-
-
-
-- add some sort of info page
-scroll view will slide in and user scrolls down the doc with rules and about etc
 
 
 
@@ -24,12 +18,6 @@ make STATS page
 - total number of completed puzzles
 - number of puzzle solves for each size
 -
-
-
-
-
-NOTES:
-Hint button shows the first incorrect tile and the location where it should go
 
 
 

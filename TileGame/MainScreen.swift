@@ -17,11 +17,18 @@ import Foundation
 import UIKit
 
 class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-                            
-    @IBOutlet weak var gameSizePicker: UIPickerView!
+
+    
+    // CONSTRAINTS
+    @IBOutlet weak var scrollTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewLeftConstraint: NSLayoutConstraint!
+    
+    // VIEWS
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var infoText: UITextView!
     
     @IBOutlet weak var letsPlayButton: UIButton!
     
@@ -63,8 +70,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         
         
+        let scrollTapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("scrollTapped:"))
+        scrollTapGestureRecognizer.numberOfTapsRequired = 1
+        scrollTapGestureRecognizer.enabled = true
+        self.infoText.addGestureRecognizer(scrollTapGestureRecognizer)
+//        self.infoText.userInteractionEnabled = false
         
-        
+        self.infoText.text = "The objective of the game is to form the original image by shifting the tiles around until they are in the proper order. Tap one tile and then another to swap their positions. The black arrows on the top and left of the tiles allow entire rows and columns to swap postions.\n\nThe HINT button shows the first incorrect tile and the correct tile which it should be swapped with.\n\nThe SOLVE button will auto-solve the puzzle by swapping tiles until complete.\n\nUse the Show Original button to remind yourself what the original image looks like.\n\nImages were culled from unsplash.com and from Dale Arveson: phalconphotography.smugmug.com\n\nFeedback, questions, comments are welcome: pakalewis@gmail.com\n\nThe source code can be viewed here: github.com/pakalewis/shiftingtiles\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest"
+
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -78,16 +91,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     }
     
-//        self.tilesPerRowLabel.text = "\(Int(sender.value).description)"
-//        self.tilesPerRow = Int(sender.value)
-//
-//        self.drawGrid?.removeFromSuperview()
-//        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-//        self.drawGrid?.numRows = self.tilesPerRow
-//        self.drawGrid?.backgroundColor = UIColor.clearColor()
-//        self.view.addSubview(self.drawGrid!)
-
     
+    // Segue to game screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         var gameScreen = segue.destinationViewController as GameScreen
 
@@ -129,6 +134,37 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
+    
+    // MARK: Button actions
+    @IBAction func infoButtonPressed(sender: AnyObject) {
+
+        self.view.bringSubviewToFront(self.scrollView)
+        self.scrollViewLeftConstraint.constant = 0
+        
+        //TODO: Why does the scroll view start somewhere in the middle of the text when it first appears?
+        var scrollRect = self.scrollView.frame
+//        self.scrollView.scrollRectToVisible(CGRectMake(0, 0, scrollRect.width, scrollRect.height), animated: false)
+        
+        self.scrollView.setContentOffset(CGPointMake(0, self.scrollView.contentInset.top), animated: false)
+        
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+
+    func scrollTapped(recognizer: UITapGestureRecognizer) {
+        
+        self.scrollViewLeftConstraint.constant = 1000
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+    
+    
+
     
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
