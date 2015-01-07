@@ -1,6 +1,6 @@
 //
 //  StatCell.swift
-//  TileGame
+//  ShiftingTiles
 //
 //  Created by Parker Lewis on 1/6/15.
 //  Copyright (c) 2015 Parker Lewis. All rights reserved.

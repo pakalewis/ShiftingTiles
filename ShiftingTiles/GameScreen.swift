@@ -1,6 +1,6 @@
 //
 //  GameScreen.swift
-//  TileGame
+//  ShiftingTiles
 //
 //  Created by Parker Lewis on 9/3/14.
 //  Copyright (c) 2014 Parker Lewis. All rights reserved.

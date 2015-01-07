@@ -1,6 +1,6 @@
 //
 //  ImageGallery.swift
-//  TileGame
+//  ShiftingTiles
 //
 //  Created by Parker Lewis on 12/21/14.
 //  Copyright (c) 2014 Parker Lewis. All rights reserved.

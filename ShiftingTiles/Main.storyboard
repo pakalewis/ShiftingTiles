@@ -10,7 +10,7 @@
         <!--Main Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainScreen" customModule="TileGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainScreen" customModule="ShiftingTiles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -276,7 +276,7 @@
         <!--Stats Screen-->
         <scene sceneID="zsk-vl-grK">
             <objects>
-                <viewController id="SIa-Ve-MQH" customClass="StatsScreen" customModule="TileGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SIa-Ve-MQH" customClass="StatsScreen" customModule="ShiftingTiles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KJ0-3Y-RjL"/>
                         <viewControllerLayoutGuide type="bottom" id="OJC-s3-onp"/>
@@ -393,7 +393,7 @@
         <!--Game Screen-->
         <scene sceneID="V7S-q6-KNc">
             <objects>
-                <viewController id="EGT-XM-OAO" customClass="GameScreen" customModule="TileGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EGT-XM-OAO" customClass="GameScreen" customModule="ShiftingTiles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qhz-G0-bft"/>
                         <viewControllerLayoutGuide type="bottom" id="fKk-Ft-N1u"/>
@@ -464,7 +464,7 @@
                                 <rect key="frame" x="0.0" y="139" width="44" height="546"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="TileGame" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="ShiftingTiles" customModuleProvider="target">
                                 <rect key="frame" x="44" y="139" width="546" height="546"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
