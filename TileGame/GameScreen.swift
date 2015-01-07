@@ -25,7 +25,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     
     // VIEWS
-    @IBOutlet weak var tileArea: TileAreaView2!
+    @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
@@ -165,6 +165,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.isSolved = true
         
         congratsMessage.text = "CONGRATULATIONS!"
+        
+        
+        
+        // Update stats
+        let stats = Stats()
+        stats.updateSolveStats(self.tilesPerRow)
+        
         
         // TODO: How to handle these buttons?
         self.hintButton.userInteractionEnabled = false

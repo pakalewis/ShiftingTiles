@@ -94,10 +94,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Segue to game screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        var gameScreen = segue.destinationViewController as GameScreen
-
-        gameScreen.imageToSolve = self.imageToSolve
-        gameScreen.tilesPerRow = self.tilesPerRow
+        
+        if segue.identifier == "showStats" {
+            
+        }
+        
+        if segue.identifier == "playGame" {
+            var gameScreen = segue.destinationViewController as GameScreen
+            
+            gameScreen.imageToSolve = self.imageToSolve
+            gameScreen.tilesPerRow = self.tilesPerRow            
+        }
         
     }
     
