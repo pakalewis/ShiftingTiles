@@ -89,6 +89,7 @@
 		2C7F08761A5DF0AA0083F668 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F08731A5DF0AA0083F668 /* Images.xcassets */; };
 		2C7F08771A5DF0AA0083F668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F08741A5DF0AA0083F668 /* Main.storyboard */; };
 		2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F087A1A5DF1750083F668 /* MainScreen.swift */; };
+		2C7F087D1A5E129E0083F668 /* Todo list in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F087C1A5E129E0083F668 /* Todo list */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +177,7 @@
 		2C7F08741A5DF0AA0083F668 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ShiftingTiles/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		2C7F08781A5DF0B70083F668 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ShiftingTiles/Info.plist; sourceTree = SOURCE_ROOT; };
 		2C7F087A1A5DF1750083F668 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreen.swift; path = ShiftingTiles/MainScreen.swift; sourceTree = SOURCE_ROOT; };
+		2C7F087C1A5E129E0083F668 /* Todo list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Todo list"; path = "ShiftingTiles/Todo list"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		2C30EF1F19B7C17500675799 /* TileGame */ = {
 			isa = PBXGroup;
 			children = (
+				2C7F087C1A5E129E0083F668 /* Todo list */,
 				2C30EF4A19B7C1F000675799 /* images */,
 				2CD422B31A453D4100B08420 /* Main Screen */,
 				2CD422B41A453D6000B08420 /* Game Screen */,
@@ -452,6 +455,7 @@
 				2C7F08521A5DF0420083F668 /* leftTriangle.png in Resources */,
 				2C7F08361A5DEFFE0083F668 /* 16small.jpeg in Resources */,
 				2C7F082B1A5DEFFE0083F668 /* 05small.jpeg in Resources */,
+				2C7F087D1A5E129E0083F668 /* Todo list in Resources */,
 				2C7F08291A5DEFFE0083F668 /* 03small.jpeg in Resources */,
 				2C7F084E1A5DF0420083F668 /* galleryIcon.png in Resources */,
 				2C7F080A1A5DEF860083F668 /* 14.jpeg in Resources */,

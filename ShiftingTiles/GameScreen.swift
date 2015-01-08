@@ -15,7 +15,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     var imageToSolve = UIImage()
-    var isSolved = false
     var tilesPerRow = 3
     var firstRowOrColumnTapped = -1
     var secondRowOrColumnTapped = -1
@@ -110,50 +109,46 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func bankTapped(sender: UIGestureRecognizer) {
 
-        if self.isSolved {
-            return
-        } else {
-            var tappedButton = sender.view as UIImageView
-            
-            if (!isFirstRowOrColumnTapped) {
-                // Flip the bool
-                self.isFirstRowOrColumnTapped = true
+        var tappedButton = sender.view as UIImageView
+        
+        if (!isFirstRowOrColumnTapped) {
+            // Flip the bool
+            self.isFirstRowOrColumnTapped = true
 
-                // Store tag of the first line button
-                self.firstRowOrColumnTapped = tappedButton.tag
-                self.firstButton = tappedButton
-                
-                // Flip the image on the button
-                if (tappedButton.tag - 100) < 0 { // line 1 is a column
-                    self.firstButton.image = UIImage(named: "downTriangle")
-                } else { // line1 is a row
-                    self.firstButton.image = UIImage(named: "rightTriangle")
-                }
-                
-                // TODO: Is comparing images like this ok??
+            // Store tag of the first line button
+            self.firstRowOrColumnTapped = tappedButton.tag
+            self.firstButton = tappedButton
+            
+            // Flip the image on the button
+            if (tappedButton.tag - 100) < 0 { // line 1 is a column
+                self.firstButton.image = UIImage(named: "downTriangle")
+            } else { // line1 is a row
+                self.firstButton.image = UIImage(named: "rightTriangle")
+            }
+            
+            // TODO: Is comparing images like this ok??
 //                if tappedButton.image == UIImage(named: "upTriangle") {
 //                    self.firstButton.image = UIImage(named: "downTriangle")
 //                } else {
 //                    self.firstButton.image = UIImage(named: "rightTriangle")
 //                }
-            } else {
-                // Flip the bool
-                self.isFirstRowOrColumnTapped = false
+        } else {
+            // Flip the bool
+            self.isFirstRowOrColumnTapped = false
 
-                // set the second tag
-                self.secondRowOrColumnTapped = sender.view!.tag
-                
-                // Flip the image on the button
-                if (self.firstButton.tag - 100) < 0 { // line 1 is a column
-                    self.firstButton.image = UIImage(named: "upTriangle")
-                } else { // line1 is a row
-                    self.firstButton.image = UIImage(named: "leftTriangle")
-                }
-                
-                // If two distinct lines were tapped, then swap
-                if self.firstRowOrColumnTapped != self.secondRowOrColumnTapped {
-                    self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
-                }
+            // set the second tag
+            self.secondRowOrColumnTapped = sender.view!.tag
+            
+            // Flip the image on the button back to normal
+            if (self.firstButton.tag - 100) < 0 { // line 1 is a column
+                self.firstButton.image = UIImage(named: "upTriangle")
+            } else { // line1 is a row
+                self.firstButton.image = UIImage(named: "leftTriangle")
+            }
+            
+            // If two distinct lines were tapped, then swap
+            if self.firstRowOrColumnTapped != self.secondRowOrColumnTapped {
+                self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
             }
         }
     }
@@ -161,12 +156,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     
     func puzzleIsSolved() {
-        println("Puzzle is solved!")
-        self.isSolved = true
         
+        // Display congrats message
+        // TODO: what else can i do? fireworks?
         congratsMessage.text = "CONGRATULATIONS!"
-        
-        
         
         // Update stats
         let stats = Stats()
@@ -208,18 +201,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
 
     
-    
+    // These two funcs toggle the image on and off
     @IBAction func showOriginal(sender: AnyObject) {
-        println("touch down")
         self.originalImageView.alpha = 1
-        
     }
     
     @IBAction func stopShowingOriginal(sender: AnyObject) {
-        println("touch up")
         self.originalImageView.alpha = 0
     }
     
+    // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(sender: AnyObject) {
         self.tileArea.findTilesToSwap()
         self.tileArea.wiggleTile(self.tileArea.firstTile!)
@@ -233,7 +224,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     @IBAction func solveButtonPressed(sender: AnyObject) {
 
-        var solveAlert = UIAlertController(title: "", message: "Are you sure you want to solve the puzzle?", preferredStyle: UIAlertControllerStyle.Alert)
+        var solveAlert = UIAlertController(title: "This will auto-solve the puzzle", message: "Are you sure you want to do this?", preferredStyle: UIAlertControllerStyle.Alert)
         let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
             
@@ -242,7 +233,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.hintButton.alpha = 0.0
             self.solveButton.userInteractionEnabled = false
             self.solveButton.alpha = 0.0
-            self.solvePuzzle() }
+            self.showOriginalButton.userInteractionEnabled = false
+            self.showOriginalButton.alpha = 0
+            self.solvePuzzle()
+        }
 
         solveAlert.addAction(yesAction)
         solveAlert.addAction(noAction)
@@ -255,6 +249,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             println()
             if !self.tileArea.checkIfSolved() {
                 self.solvePuzzle()
+            } else {
+                self.puzzleIsSolved()
             }
         })
     }

@@ -133,7 +133,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            println("selected item at index \(indexPath)")
         self.imageToSolve = imageArray[indexPath.row]
         self.imageCycler.image = imageArray[indexPath.row]
 
@@ -175,8 +174,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            println("CAMERA AVAILABLE")
-            
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
@@ -237,7 +234,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         self.imageToSolve = croppedUIImage!
         self.imageCycler.image = croppedUIImage!
-        println("image selected from imagePicker")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     

@@ -21,9 +21,7 @@ class DrawGrid: UIView {
         super.init(coder: aDecoder)
     }
     
-
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    
     override func drawRect(rect: CGRect) {
         var tileWidth = rect.width / CGFloat(self.numRows!)
 

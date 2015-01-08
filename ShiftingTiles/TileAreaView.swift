@@ -17,7 +17,8 @@ class TileAreaView: UIView {
     var tileArray = [[Tile]]()
     var tilesPerRow = 3
     var isPuzzleInitialized = false;
-    var solved = false
+    
+    var highlightedView = UIView()
     
     // For swapping
     var firstTileSelectedBool = true
@@ -30,12 +31,6 @@ class TileAreaView: UIView {
         self.createTileArray()
         self.layoutTilesWithMargin(2)
         self.shuffleImages()
-
-        if self.checkIfSolved() {
-            println("WARNING, the initial shuffling resulted in a solved puzzle")
-        } else {
-            println("The puzzle has been Shuffled")
-        }
 
     }
     
@@ -128,8 +123,8 @@ class TileAreaView: UIView {
  
     func shuffleImages() {
 
-        // Swap tiles a bunch of times
-        for index in 0...self.tilesPerRow*8 {
+        // Swap random tiles a bunch of times
+        for index in 0...self.tilesPerRow * 10 {
             var randomInt1 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
             var randomInt2 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
             var randomInt3 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
@@ -142,31 +137,50 @@ class TileAreaView: UIView {
             self.swapTiles(tile1, tile2: tile2, completionClosure: { () -> () in
             })
         }
+        
+        // Ensure that the puzzle is shuffled
+        if self.checkIfSolved() {
+            self.shuffleImages()
+        }
     }
    
     
     func tileTapped(sender: UIGestureRecognizer) {
-        // Grab the tag of the tile that was tapped
+        // Grab the tag of the tile that was tapped and use it to find the correct tile
         var tag = sender.view!.tag
-        
         var tappedTile = self.tileArray[tag / 10][tag % 10]
-//        println("This tile has a doubleIndex of \(tappedTile.doubleIndex.concatenateToString())")
-//        println("This tile has a tag of \(tappedTile.imageView.tag)\n")
         
         // Check if it is the first or second tile tapped
         // Swap images and tags when
         if self.firstTileSelectedBool {
+
+            // Add a subview behind the tapped tile to indicate that it was selected
+            var tileFrame = tappedTile.imageView.frame
+            var highlightedViewFrame = CGRectMake(tileFrame.origin.x - 2, tileFrame.origin.y - 2, tileFrame.width + 4, tileFrame.height + 4)
+            self.highlightedView = UIView(frame: highlightedViewFrame)
+            self.highlightedView.backgroundColor = UIColor.blackColor()
+            self.addSubview(self.highlightedView)
+            self.sendSubviewToBack(self.highlightedView)
+            
+            // Store the first tapped tile for later use
             var tile1 = self.tileArray[tag / 10][tag % 10]
             self.firstTile = tile1
             self.firstTileSelectedBool = false
         } else {
+            // Remove the temporary highlighting
+            self.highlightedView.removeFromSuperview()
+            
+            // Store the second tapped tile for later use
             var tile2 = self.tileArray[tag / 10][tag % 10]
             self.secondTile = tile2
             self.firstTileSelectedBool = true
 
             self.swapTiles(self.firstTile!, tile2: self.secondTile!, completionClosure: { () -> () in
-                println()
-                self.checkIfSolved()
+                // Swap the tiles and then check if the puzzle is solved
+                if self.checkIfSolved() {
+                    // Notify GameScreen
+                    self.delegate!.puzzleIsSolved()
+                }
             })
         
         }
@@ -174,10 +188,11 @@ class TileAreaView: UIView {
     
     
     
-//    // Swap the images and tags when the second tile is tapped
+    // Swap the images and tags when the second tile is tapped
     func swapTiles(tile1: Tile, tile2: Tile, completionClosure: () ->()) {
         
-        if solved {
+        if tile1.imageView.tag == tile2.imageView.tag {
+            // tiles are the same so do nothing
             return
         } else {
             
@@ -202,12 +217,6 @@ class TileAreaView: UIView {
     
     
     func swapLines(line1: Int, line2: Int) {
-        
-        if line1 == line2 {
-            // do nothing
-            println("do nothing")
-            return
-        }
 
         var tileLine1 = [Tile]()
         var tileLine2 = [Tile]()
@@ -249,7 +258,10 @@ class TileAreaView: UIView {
             self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], completionClosure: { () -> () in
 
                 if counter == tileLine1.count - 1 {
-                    self.checkIfSolved()
+                    if self.checkIfSolved() {
+                        // Notify GameScreen
+                        self.delegate!.puzzleIsSolved()
+                    }
                 }
             })
         }
@@ -264,7 +276,6 @@ class TileAreaView: UIView {
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 var doubleIndex = self.tileArray[index1][index2].doubleIndex
-//                println("Does doubleIndex \(doubleIndex.concatenateToString()) = \(index1)\(index2) ??")
 
                 if (doubleIndex.rowIndex) != index1 || (doubleIndex.columnIndex) != index2 {
                     return false
@@ -273,10 +284,6 @@ class TileAreaView: UIView {
         }
         
         // If it makes it through this loop then the puzzle is solved
-        self.solved = true
-
-        // Notify GameScreen
-        self.delegate!.puzzleIsSolved()
         return true
     }
 
@@ -353,7 +360,6 @@ class TileAreaView: UIView {
     
     func findTileWithTag(tag: Int) -> Tile {
 
-        println("finding tile with tag \(tag)")
         var tile = self.tileArray[0][0]
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
