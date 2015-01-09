@@ -162,6 +162,22 @@ class TileAreaView: UIView {
             self.addSubview(self.highlightedView)
             self.sendSubviewToBack(self.highlightedView)
             
+//            
+//            var oldtileFrame = tappedTile.imageView.frame
+//            var centerpoint = tappedTile.imageView.center
+//            var biggerTileFrame = CGRectMake(oldtileFrame.origin.x, oldtileFrame.origin.y, oldtileFrame.width * 1.1, oldtileFrame.height * 1.1)
+//            tappedTile.imageView.frame = biggerTileFrame
+//            tappedTile.imageView.center = centerpoint
+//            self.bringSubviewToFront(tappedTile.imageView)
+//            
+//            UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                self.layoutIfNeeded()
+//            })
+//            
+
+            
+            
+            
             // Store the first tapped tile for later use
             var tile1 = self.tileArray[tag / 10][tag % 10]
             self.firstTile = tile1
