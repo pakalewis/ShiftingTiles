@@ -11,16 +11,25 @@ import UIKit
 
 class TileAreaView: UIView {
     
+    // Enables this class to notify the GameScreen when the puzzle is solved
     var delegate : PuzzleSolvedProtocol?
     
+    // Image that the user selected to solve
     var imageToSolve = UIImage()
+
+    // 2D array of Tiles
     var tileArray = [[Tile]]()
+
+    // Number of rows and columns in the puzzle
     var tilesPerRow = 3
-    var isPuzzleInitialized = false;
     
+    // Indicates whether tiles should be rotated during the initial setup
+    var includeRotations = true;
+    
+    // This is a temporary view that appears as a black border around the selected tile
     var highlightedView = UIView()
     
-    // For swapping
+    // Vars for the tiles to be swapped
     var firstTileSelectedBool = true
     var firstTile : Tile?
     var secondTile : Tile?
@@ -31,6 +40,7 @@ class TileAreaView: UIView {
         self.createTileArray()
         self.layoutTilesWithMargin(2)
         self.shuffleImages()
+        self.rotateTiles()
 
     }
     
@@ -67,6 +77,7 @@ class TileAreaView: UIView {
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
                 tile.imageView.addGestureRecognizer(tapGesture)
 
+                // TODO: Make this a double tap instead?? I ran into lots of problems...
                 let longPressGesture = UILongPressGestureRecognizer(target: self, action: "tileLongPressed:")
                 longPressGesture.minimumPressDuration = 0.25
                 tile.imageView.addGestureRecognizer(longPressGesture)
@@ -147,33 +158,26 @@ class TileAreaView: UIView {
             self.shuffleImages()
         }
     }
-   
-    func tileLongPressed(sender: UIGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizerState.Ended {
+    
+    func rotateTiles() {
+        // Rotate random tiles a bunch of times
+        for index in 0...self.tilesPerRow * 10 {
+            var randomInt1 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
+            var randomInt2 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
             
-            // Grab the tag of the tile that was tapped and use it to find the correct tile
-            var tag = sender.view!.tag
-            var tappedTile = self.tileArray[tag / 10][tag % 10]
+            var tileToRotate = self.tileArray[randomInt1][randomInt2]
             
-            // Animation calculations
-            let rotation = CGFloat(M_PI) * (tappedTile.orientationCount / 2)
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                
-                tappedTile.imageView.transform = CGAffineTransformMakeRotation(rotation)
-                
+            self.rotateTile(tileToRotate, completionClosure: { () -> () in
             })
-            
-            tappedTile.orientationCount++
-            if tappedTile.orientationCount == 5 {
-                println("image is oriented")
-                tappedTile.orientationCount = 1
-            }
-            
         }
         
+        // Ensure that the puzzle is shuffled
+//        if self.checkIfSolved() {
+//            self.rotateTiles()
+//        }
         
     }
+   
     
     func tileTapped(sender: UIGestureRecognizer) {
 
@@ -238,6 +242,43 @@ class TileAreaView: UIView {
     }
     
     
+    func tileLongPressed(sender: UIGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizerState.Ended {
+            
+            // Grab the tag of the tile that was tapped and use it to find the correct tile
+            var tag = sender.view!.tag
+            var pressedTile = self.tileArray[tag / 10][tag % 10]
+            self.rotateTile(pressedTile, completionClosure: { () -> () in
+                // Rotate the tile and then check if the puzzle is solved
+                if self.checkIfSolved() {
+                    // Notify GameScreen
+                    self.delegate!.puzzleIsSolved()
+                }
+            })
+            
+        }
+    }
+
+
+    func rotateTile(tile: Tile, completionClosure: () ->()) {
+        // Animation calculations
+        let rotation = CGFloat(M_PI) * (tile.orientationCount / 2)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            tile.imageView.transform = CGAffineTransformMakeRotation(rotation)
+            tile.orientationCount++
+            if tile.orientationCount == 5 {
+                println("image is oriented")
+                tile.orientationCount = 1
+            }
+
+        }, completion: { (finished) -> Void in
+                
+                completionClosure()
+        })
+    }
+
     
     // Swap the images and tags when the second tile is tapped
     func swapTiles(tile1: Tile, tile2: Tile, completionClosure: () ->()) {
@@ -326,9 +367,11 @@ class TileAreaView: UIView {
 
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
-                var doubleIndex = self.tileArray[index1][index2].doubleIndex
+                var tileToCheck = self.tileArray[index1][index2]
 
-                if (doubleIndex.rowIndex) != index1 || (doubleIndex.columnIndex) != index2 {
+                if (tileToCheck.doubleIndex.rowIndex != index1
+                    || tileToCheck.doubleIndex.columnIndex != index2
+                    || tileToCheck.orientationCount != 1) {
                     return false
                 }
             }
