@@ -1,12 +1,12 @@
 - could make the selected tile grow in size slightly to indicate it was tapped. instead of the black border
 
 
-- Add option for rotating tiles. Should be separate from shuffling. Double tap to rotate 90 degrees. Will have to devise a way to determine that it is oriented correctly
-
+- add settings menu for users to choose rotations, shuffling, or combo. what other settings?
 
 - add draggability to tiles. tap and drag to move that tile around. wherever the tap is let go, grab that tile and swap
 
 
+- add parameter of time duration to the swapping and rotating funcs so that the auto-solve is faster
 
 
 

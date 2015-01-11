@@ -34,6 +34,7 @@ class TileAreaView: UIView {
     var firstTile : Tile?
     var secondTile : Tile?
 
+    var firstUnorientedTile: Tile?
     
     
     func initialize() {
@@ -364,7 +365,8 @@ class TileAreaView: UIView {
     
 //    // checks to see if the image pieces are in the correct order
     func checkIfSolved() -> Bool {
-
+        
+        
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 var tileToCheck = self.tileArray[index1][index2]
@@ -383,11 +385,13 @@ class TileAreaView: UIView {
 
     
     func findTilesToSwap() {
+        self.firstTile = nil
+        self.secondTile = nil
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 
                 // Iterate through the array to find the first spot with the wrong tile
-                // Then find the tile that should go there and wiggle both of them
+                // Then find the tile that should go there
                 var doubleIndex = DoubleIndex(index1: index1, index2: index2)
                 var currentTile = self.findTileAtCoordinate(doubleIndex)
                 var currentTag = currentTile.imageView.tag
@@ -400,8 +404,26 @@ class TileAreaView: UIView {
             }
         }
     }
-
     
+
+    func findFirstUnorientedTile() {
+        self.firstUnorientedTile = nil
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                
+                // Iterate through the array to find the first spot with an unoriented tile
+                var doubleIndex = DoubleIndex(index1: index1, index2: index2)
+                var currentTile = self.findTileAtCoordinate(doubleIndex)
+                
+                if currentTile.orientationCount != 1 {
+                    self.firstUnorientedTile = currentTile
+                    return
+                }
+            }
+        }
+        
+    }
+
     func wiggleTile(tileToWiggle : Tile) {
         // Animation calculations
         let fullRotation = CGFloat(M_PI * 2) / 72
@@ -411,23 +433,22 @@ class TileAreaView: UIView {
         UIView.animateKeyframesWithDuration(duration, delay: 0.0, options: nil, animations: {
             
             UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
-                
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(1/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(2/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(3/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(-fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(4/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(fullRotation)
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
             })
             UIView.addKeyframeWithRelativeStartTime(5/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformMakeRotation(0)
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
             })
 
             }, completion: {finished in

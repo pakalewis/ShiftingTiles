@@ -213,8 +213,15 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(sender: AnyObject) {
         self.tileArea.findTilesToSwap()
-        self.tileArea.wiggleTile(self.tileArea.firstTile!)
-        self.tileArea.wiggleTile(self.tileArea.secondTile!)
+        if self.tileArea.firstTile != nil && self.tileArea.secondTile != nil {
+            // Tiles are in correct order
+            self.tileArea.wiggleTile(self.tileArea.firstTile!)
+            self.tileArea.wiggleTile(self.tileArea.secondTile!)
+        } else {
+            self.tileArea.findFirstUnorientedTile()
+            self.tileArea.wiggleTile(self.tileArea.firstUnorientedTile!)
+        }
+        
     }
    
     
@@ -243,16 +250,27 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.presentViewController(solveAlert, animated: true, completion: nil)
     }
     
+    
     func solvePuzzle() {
         self.tileArea.findTilesToSwap()
-        self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, completionClosure: { () -> () in
-            println()
-            if !self.tileArea.checkIfSolved() {
-                self.solvePuzzle()
-            } else {
-                self.puzzleIsSolved()
+        if self.tileArea.firstTile != nil && self.tileArea.secondTile != nil {
+            self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, completionClosure: { () -> () in
+                if !self.tileArea.checkIfSolved() {
+                    self.solvePuzzle()
+                }
+            })
+        } else {
+            self.tileArea.findFirstUnorientedTile()
+            if self.tileArea.firstUnorientedTile != nil {
+                self.tileArea.rotateTile(self.tileArea.firstUnorientedTile!, completionClosure: { () -> () in
+                    if !self.tileArea.checkIfSolved() {
+                        self.solvePuzzle()
+                    } else {
+                        self.puzzleIsSolved()
+                    }
+                })
             }
-        })
+        }
     }
     
 }
