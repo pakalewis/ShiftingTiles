@@ -63,9 +63,14 @@ class TileAreaView: UIView {
                 var tileFrame = CGRectMake(totalWidth / 2, totalWidth / 2, 0, 0)
                 tile.imageView.frame = tileFrame
 
-                //Add gesture recognizer
+                //Add gesture recognizers
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
                 tile.imageView.addGestureRecognizer(tapGesture)
+
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: "tileLongPressed:")
+                longPressGesture.minimumPressDuration = 0.25
+                tile.imageView.addGestureRecognizer(longPressGesture)
+
                 
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
@@ -88,7 +93,6 @@ class TileAreaView: UIView {
             self.tileArray.append(rowArray)
         }
     }
-    
     
     
     
@@ -144,8 +148,35 @@ class TileAreaView: UIView {
         }
     }
    
+    func tileLongPressed(sender: UIGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizerState.Ended {
+            
+            // Grab the tag of the tile that was tapped and use it to find the correct tile
+            var tag = sender.view!.tag
+            var tappedTile = self.tileArray[tag / 10][tag % 10]
+            
+            // Animation calculations
+            let rotation = CGFloat(M_PI) * (tappedTile.orientationCount / 2)
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                
+                tappedTile.imageView.transform = CGAffineTransformMakeRotation(rotation)
+                
+            })
+            
+            tappedTile.orientationCount++
+            if tappedTile.orientationCount == 5 {
+                println("image is oriented")
+                tappedTile.orientationCount = 1
+            }
+            
+        }
+        
+        
+    }
     
     func tileTapped(sender: UIGestureRecognizer) {
+
         // Grab the tag of the tile that was tapped and use it to find the correct tile
         var tag = sender.view!.tag
         var tappedTile = self.tileArray[tag / 10][tag % 10]
@@ -162,7 +193,10 @@ class TileAreaView: UIView {
             self.addSubview(self.highlightedView)
             self.sendSubviewToBack(self.highlightedView)
             
-//            
+
+            
+            // TODO: ALTERNATIVE TO THE BLACK OUTLINE
+            // COULD GROW THE TILE SLIGHTLY TO INDICATE THAT IT WAS TAPPED
 //            var oldtileFrame = tappedTile.imageView.frame
 //            var centerpoint = tappedTile.imageView.center
 //            var biggerTileFrame = CGRectMake(oldtileFrame.origin.x, oldtileFrame.origin.y, oldtileFrame.width * 1.1, oldtileFrame.height * 1.1)
@@ -182,6 +216,7 @@ class TileAreaView: UIView {
             var tile1 = self.tileArray[tag / 10][tag % 10]
             self.firstTile = tile1
             self.firstTileSelectedBool = false
+
         } else {
             // Remove the temporary highlighting
             self.highlightedView.removeFromSuperview()
