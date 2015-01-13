@@ -90,6 +90,9 @@
 		2C7F087D1A5E129E0083F668 /* Todo list in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F087C1A5E129E0083F668 /* Todo list */; };
 		2CE1D5711A64EBD900F98FEE /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D56F1A64EBD900F98FEE /* cameraIcon.png */; };
 		2CE1D5721A64EBD900F98FEE /* gridIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D5701A64EBD900F98FEE /* gridIcon.png */; };
+		2CE1D5751A65C29200F98FEE /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1D5741A65C29200F98FEE /* InfoScreen.swift */; };
+		2CE1D5781A65C71600F98FEE /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D5761A65C71600F98FEE /* checkedBox.png */; };
+		2CE1D5791A65C71600F98FEE /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D5771A65C71600F98FEE /* uncheckedBox.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -178,6 +181,9 @@
 		2C7F087C1A5E129E0083F668 /* Todo list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Todo list"; path = "ShiftingTiles/Todo list"; sourceTree = SOURCE_ROOT; };
 		2CE1D56F1A64EBD900F98FEE /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = SOURCE_ROOT; };
 		2CE1D5701A64EBD900F98FEE /* gridIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridIcon.png; sourceTree = SOURCE_ROOT; };
+		2CE1D5741A65C29200F98FEE /* InfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreen.swift; sourceTree = SOURCE_ROOT; };
+		2CE1D5761A65C71600F98FEE /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = SOURCE_ROOT; };
+		2CE1D5771A65C71600F98FEE /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,7 @@
 				2C7F087C1A5E129E0083F668 /* Todo list */,
 				2C30EF4A19B7C1F000675799 /* images */,
 				2CD422B31A453D4100B08420 /* Main Screen */,
+				2CE1D5731A65C26700F98FEE /* InfoScreen */,
 				2CD422B41A453D6000B08420 /* Game Screen */,
 				2CD0EDC61A5CDA0F005C8477 /* Stats */,
 				2CD422B51A453D8600B08420 /* Model */,
@@ -278,8 +285,8 @@
 		2CD0EDC61A5CDA0F005C8477 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				2C7F08641A5DF0810083F668 /* Stats.swift */,
 				2C7F08651A5DF0810083F668 /* StatsScreen.swift */,
+				2C7F08641A5DF0810083F668 /* Stats.swift */,
 				2C7F08621A5DF0810083F668 /* StatCell.swift */,
 				2C7F08631A5DF0810083F668 /* StatCell.xib */,
 			);
@@ -289,6 +296,8 @@
 		2CD299FF1A47B6490048FDD8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CE1D5761A65C71600F98FEE /* checkedBox.png */,
+				2CE1D5771A65C71600F98FEE /* uncheckedBox.png */,
 				2CE1D56F1A64EBD900F98FEE /* cameraIcon.png */,
 				2CE1D5701A64EBD900F98FEE /* gridIcon.png */,
 				2C7F08431A5DF0420083F668 /* downTriangle.png */,
@@ -368,6 +377,14 @@
 				2C6F89A41A4BB80300311891 /* Small versions */,
 			);
 			name = "Puzzle Images";
+			sourceTree = "<group>";
+		};
+		2CE1D5731A65C26700F98FEE /* InfoScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2CE1D5741A65C29200F98FEE /* InfoScreen.swift */,
+			);
+			name = InfoScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,6 +475,7 @@
 				2C7F084E1A5DF0420083F668 /* galleryIcon.png in Resources */,
 				2C7F080A1A5DEF860083F668 /* 14.jpeg in Resources */,
 				2C7F084D1A5DF0420083F668 /* downTriangle.png in Resources */,
+				2CE1D5791A65C71600F98FEE /* uncheckedBox.png in Resources */,
 				2C7F08541A5DF0420083F668 /* rightTriangle.png in Resources */,
 				2C7F083F1A5DEFFE0083F668 /* 25small.jpeg in Resources */,
 				2C7F08301A5DEFFE0083F668 /* 10small.jpeg in Resources */,
@@ -490,6 +508,7 @@
 				2C7F08511A5DF0420083F668 /* leftArrow.png in Resources */,
 				2C7F083B1A5DEFFE0083F668 /* 21small.jpeg in Resources */,
 				2C7F07FC1A5DEF860083F668 /* augs.png in Resources */,
+				2CE1D5781A65C71600F98FEE /* checkedBox.png in Resources */,
 				2C7F07FA1A5DEF860083F668 /* 21.jpeg in Resources */,
 				2C7F08401A5DEFFE0083F668 /* 26small.jpeg in Resources */,
 				2C7F08321A5DEFFE0083F668 /* 12small.jpeg in Resources */,
@@ -521,6 +540,7 @@
 				2C7F08661A5DF0810083F668 /* StatCell.swift in Sources */,
 				2C7F08701A5DF0980083F668 /* PuzzleSolvedProtocol.swift in Sources */,
 				2C7F08611A5DF0730083F668 /* TileAreaView.swift in Sources */,
+				2CE1D5751A65C29200F98FEE /* InfoScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

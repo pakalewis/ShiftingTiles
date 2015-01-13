@@ -11,6 +11,8 @@ import UIKit
 
 class TileAreaView: UIView {
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+
     // MARK: VARS
     // Enables this class to notify the GameScreen when the puzzle is solved
     var delegate : PuzzleSolvedProtocol?
@@ -42,9 +44,13 @@ class TileAreaView: UIView {
     func initialize() {
         self.createTileArray()
         self.layoutTilesWithMargin(2)
-        self.shuffleImages()
-        self.rotateTiles()
 
+        if userDefaults.boolForKey("shufflesOn") {
+            self.shuffleImages()
+        }
+        if userDefaults.boolForKey("rotationsOn") {
+            self.rotateTiles()
+        }
     }
     
     
