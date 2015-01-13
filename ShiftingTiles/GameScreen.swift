@@ -191,7 +191,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
                     self.view.layoutIfNeeded()
-                    
+
                     }) { (finished) -> Void in
                         // Calling this again to resize all the tiles to take up the full TileArea
                         self.tileArea.layoutTilesWithMargin(0.0)
@@ -201,14 +201,18 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
 
     
+    
+    // MARK: BUTTONS
     // These two funcs toggle the image on and off
     @IBAction func showOriginal(sender: AnyObject) {
         self.originalImageView.alpha = 1
     }
     
+    
     @IBAction func stopShowingOriginal(sender: AnyObject) {
         self.originalImageView.alpha = 0
     }
+    
     
     // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(sender: AnyObject) {
@@ -229,20 +233,24 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     @IBAction func solveButtonPressed(sender: AnyObject) {
 
         var solveAlert = UIAlertController(title: "This will auto-solve the puzzle", message: "Are you sure you want to do this?", preferredStyle: UIAlertControllerStyle.Alert)
         let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
             
-            // TODO: How to handle these buttons?
+            // TODO: Better way to handle these buttons?
             self.hintButton.userInteractionEnabled = false
             self.hintButton.alpha = 0.0
             self.solveButton.userInteractionEnabled = false
             self.solveButton.alpha = 0.0
             self.showOriginalButton.userInteractionEnabled = false
             self.showOriginalButton.alpha = 0
-            self.solvePuzzle()
+
+            self.tileArea.layoutTilesWithMargin(0.0)
+            self.tileArea.orientAllTiles()
+            self.puzzleIsSolved()
         }
 
         solveAlert.addAction(yesAction)
@@ -250,27 +258,5 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.presentViewController(solveAlert, animated: true, completion: nil)
     }
     
-    // Fix this
-    func solvePuzzle() {
-        self.tileArea.findTilesToSwap()
-        if self.tileArea.firstTile != nil && self.tileArea.secondTile != nil {
-            self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, duration: 0.1, completionClosure: { () -> () in
-                if !self.tileArea.checkIfSolved() {
-                    self.solvePuzzle()
-                }
-            })
-        } else {
-            self.tileArea.findFirstUnorientedTile()
-            if self.tileArea.firstUnorientedTile != nil {
-                self.tileArea.rotateTile(self.tileArea.firstUnorientedTile!, duration: 0.1, completionClosure: { () -> () in
-                    if !self.tileArea.checkIfSolved() {
-                        self.solvePuzzle()
-                    } else {
-                        self.puzzleIsSolved()
-                    }
-                })
-            }
-        }
-    }
     
 }

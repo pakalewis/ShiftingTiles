@@ -6,7 +6,6 @@
 - add draggability to tiles. tap and drag to move that tile around. wherever the tap is let go, grab that tile and swap
 
 
-- add parameter of time duration to the swapping and rotating funcs so that the auto-solve is faster
 
 
 

@@ -11,6 +11,7 @@ import UIKit
 
 class TileAreaView: UIView {
     
+    // MARK: VARS
     // Enables this class to notify the GameScreen when the puzzle is solved
     var delegate : PuzzleSolvedProtocol?
     
@@ -37,6 +38,7 @@ class TileAreaView: UIView {
     var firstUnorientedTile: Tile?
     
     
+    // MARK: SETUP
     func initialize() {
         self.createTileArray()
         self.layoutTilesWithMargin(2)
@@ -44,7 +46,6 @@ class TileAreaView: UIView {
         self.rotateTiles()
 
     }
-    
     
     
     // The doubleIndex property helps monitor the tile's current coordinate. This gets swapped in swapTile()
@@ -62,27 +63,26 @@ class TileAreaView: UIView {
             for index2 in 0..<self.tilesPerRow { // get the tiles in each row
                 
                 // Store the 2D array index as a tag on the view
-                // This will help with determining the correct tap gesture
+                // This will help with determining which tile was tapped
                 var doubleIndex = DoubleIndex(index1: index1, index2: index2)
                 
                 // Make a new tile with that doubleIndex
                 var tile = Tile(doubleIndex: doubleIndex)
                 tile.imageView.userInteractionEnabled = true;
                 tile.imageView.tag = tile.doubleIndex.concatenateToInt()
-
+                
+                // Set the tile's frame
                 var totalWidth = self.frame.width
                 var tileFrame = CGRectMake(totalWidth / 2, totalWidth / 2, 0, 0)
                 tile.imageView.frame = tileFrame
 
-                //Add gesture recognizers
+                // Add gesture recognizers
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
                 tile.imageView.addGestureRecognizer(tapGesture)
-
                 // TODO: Make this a double tap instead?? I ran into lots of problems...
                 let longPressGesture = UILongPressGestureRecognizer(target: self, action: "tileLongPressed:")
                 longPressGesture.minimumPressDuration = 0.25
                 tile.imageView.addGestureRecognizer(longPressGesture)
-
                 
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
@@ -91,7 +91,6 @@ class TileAreaView: UIView {
                 var tileCGImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, imageFrame)
                 var tileUIImage = UIImage(CGImage: tileCGImage)
                 tile.imageSection = tileUIImage!
-                
                 
                 // Add the imageview to the tile area
                 tile.imageView.image = tile.imageSection
@@ -105,7 +104,6 @@ class TileAreaView: UIView {
             self.tileArray.append(rowArray)
         }
     }
-    
     
     
     func layoutTilesWithMargin(margin:CGFloat) {
@@ -134,9 +132,10 @@ class TileAreaView: UIView {
             }
         }
     }
+
     
     
- 
+    // MARK: SHUFFLING / SWAPPING
     func shuffleImages() {
 
         // Swap random tiles a bunch of times
@@ -160,6 +159,85 @@ class TileAreaView: UIView {
         }
     }
     
+    
+    // Swap the images and tags when the second tile is tapped
+    func swapTiles(tile1: Tile, tile2: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
+        
+        if tile1.imageView.tag == tile2.imageView.tag {
+            // tiles are the same so do nothing
+            return
+        } else {
+            
+            // Swap doubleindex
+            var tempDoubleIndex = tile1.doubleIndex
+            tile1.doubleIndex = tile2.doubleIndex
+            tile2.doubleIndex = tempDoubleIndex
+            
+            UIView.animateWithDuration(duration, animations: { () -> Void in
+                
+                // Swap frames
+                var firstFrame = tile1.imageView.frame
+                tile1.imageView.frame = tile2.imageView.frame
+                tile2.imageView.frame = firstFrame
+                
+                }, completion: { (finished) -> Void in
+                    completionClosure()
+            })
+        }
+    }
+    
+    
+    func swapLines(line1: Int, line2: Int) {
+        
+        var tileLine1 = [Tile]()
+        var tileLine2 = [Tile]()
+        
+        // Create arrau of Tiles in line1
+        if (line1 - 100) < 0 { // line 1 is a column
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: index, index2: line1)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tileLine1.append(tile)
+            }
+        } else { // line1 is a row
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: line1 - 100, index2: index)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tileLine1.append(tile)
+            }
+        }
+        
+        // Create array of Tiles in line2
+        if (line2 - 100) < 0 { // line2 is a column
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: index, index2: line2)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tileLine2.append(tile)
+            }
+        } else { // line2 is a row
+            for index in 0..<self.tilesPerRow {
+                var coordinate = DoubleIndex(index1: line2 - 100, index2: index)
+                var tile = self.findTileAtCoordinate(coordinate)
+                tileLine2.append(tile)
+            }
+        }
+
+        // swap the tiles in the lines
+        for counter in 0..<tileLine1.count {
+            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], duration: 0.3, completionClosure: { () -> () in
+                
+                if counter == tileLine1.count - 1 {
+                    if self.checkIfSolved() {
+                        // Notify GameScreen
+                        self.delegate!.puzzleIsSolved()
+                    }
+                }
+            })
+        }
+    }
+    
+
+    // MARK: ROTATIONS
     func rotateTiles() {
         // Rotate random tiles a bunch of times
         for index in 0...self.tilesPerRow * 10 {
@@ -168,18 +246,80 @@ class TileAreaView: UIView {
             
             var tileToRotate = self.tileArray[randomInt1][randomInt2]
             
-            self.rotateTile(tileToRotate, duration: 0.3, completionClosure: { () -> () in
+            self.rotateTile(tileToRotate, duration: 0.6, completionClosure: { () -> () in
             })
         }
-        
-        // Ensure that the puzzle is shuffled
-//        if self.checkIfSolved() {
-//            self.rotateTiles()
-//        }
-        
     }
-   
     
+    
+    func rotateTile(tile: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
+        // Animation calculations
+        let rotation = CGFloat(M_PI) * (tile.orientationCount / 2)
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            
+            tile.imageView.transform = CGAffineTransformMakeRotation(rotation)
+            tile.orientationCount++
+            if tile.orientationCount == 5 {
+                println("image is oriented")
+                tile.orientationCount = 1
+            }
+            
+            }, completion: { (finished) -> Void in
+                completionClosure()
+        })
+    }
+    
+    
+    func orientAllTiles() {
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                
+                // Iterate through the array to find the first spot with an unoriented tile
+                var doubleIndex = DoubleIndex(index1: index1, index2: index2)
+                var currentTile = self.findTileAtCoordinate(doubleIndex)
+                
+                while currentTile.orientationCount != 1 {
+                    self.rotateTile(currentTile, duration: 1.0, completionClosure: { () -> () in
+                    })
+                }
+            }
+        }
+    }
+    
+        
+    func wiggleTile(tileToWiggle : Tile) {
+        // Animation calculations
+        let fullRotation = CGFloat(M_PI * 2) / 30
+        let duration = 0.7
+        let relativeDuration = duration / 6
+        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
+        UIView.animateKeyframesWithDuration(duration, delay: 0.0, options: nil, animations: {
+            
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(1/6, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -2 * fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(2/6, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, 2 * fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(3/6, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -2 * fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(4/6, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, 2 * fullRotation)
+            })
+            UIView.addKeyframeWithRelativeStartTime(5/6, relativeDuration: relativeDuration, animations: {
+                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
+            })
+            
+        }, completion: nil)
+    }
+        
+    
+    
+    // MARK: INTERACTIONS
     func tileTapped(sender: UIGestureRecognizer) {
 
         // Grab the tag of the tile that was tapped and use it to find the correct tile
@@ -262,119 +402,19 @@ class TileAreaView: UIView {
     }
 
 
-    func rotateTile(tile: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
-        // Animation calculations
-        let rotation = CGFloat(M_PI) * (tile.orientationCount / 2)
-        UIView.animateWithDuration(duration, animations: { () -> Void in
-            
-            tile.imageView.transform = CGAffineTransformMakeRotation(rotation)
-            tile.orientationCount++
-            if tile.orientationCount == 5 {
-                println("image is oriented")
-                tile.orientationCount = 1
-            }
-
-        }, completion: { (finished) -> Void in
-                
-                completionClosure()
-        })
-    }
-
     
-    // Swap the images and tags when the second tile is tapped
-    func swapTiles(tile1: Tile, tile2: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
-        
-        if tile1.imageView.tag == tile2.imageView.tag {
-            // tiles are the same so do nothing
-            return
-        } else {
-            
-            // Swap doubleindex
-            var tempDoubleIndex = tile1.doubleIndex
-            tile1.doubleIndex = tile2.doubleIndex
-            tile2.doubleIndex = tempDoubleIndex
-
-            UIView.animateWithDuration(duration, animations: { () -> Void in
-                
-                // Swap frames
-                var firstFrame = tile1.imageView.frame
-                tile1.imageView.frame = tile2.imageView.frame
-                tile2.imageView.frame = firstFrame
-
-                }, completion: { (finished) -> Void in
-                completionClosure()
-            })
-        }
-    }
-    
-    
-    
-    func swapLines(line1: Int, line2: Int) {
-
-        var tileLine1 = [Tile]()
-        var tileLine2 = [Tile]()
-
-        // Create arrau of Tiles in line1
-        if (line1 - 100) < 0 { // line 1 is a column
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: index, index2: line1)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine1.append(tile)
-            }
-        } else { // line1 is a row
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: line1 - 100, index2: index)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine1.append(tile)
-            }
-        }
-        
-        
-        // Create arrau of Tiles in line2
-        if (line2 - 100) < 0 { // line2 is a column
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: index, index2: line2)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine2.append(tile)
-            }
-        } else { // line2 is a row
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: line2 - 100, index2: index)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine2.append(tile)
-            }
-        }
-
-        
-        // swap the tiles in the lines
-        for counter in 0..<tileLine1.count {
-            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], duration: 0.3, completionClosure: { () -> () in
-
-                if counter == tileLine1.count - 1 {
-                    if self.checkIfSolved() {
-                        // Notify GameScreen
-                        self.delegate!.puzzleIsSolved()
-                    }
-                }
-            })
-        }
-    }
-    
-    
-    
-    
-//    // checks to see if the image pieces are in the correct order
+    // MARK: TILE EXAMINATION
+    // Checks to see if the image pieces are in the correct order and if the orientations are correct
     func checkIfSolved() -> Bool {
-        
         
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 var tileToCheck = self.tileArray[index1][index2]
-
+                
                 if (tileToCheck.doubleIndex.rowIndex != index1
                     || tileToCheck.doubleIndex.columnIndex != index2
                     || tileToCheck.orientationCount != 1) {
-                    return false
+                        return false
                 }
             }
         }
@@ -421,42 +461,8 @@ class TileAreaView: UIView {
                 }
             }
         }
-        
     }
 
-    func wiggleTile(tileToWiggle : Tile) {
-        // Animation calculations
-        let fullRotation = CGFloat(M_PI * 2) / 72
-        let duration = 0.7
-        let relativeDuration = duration / 6
-        let options = UIViewKeyframeAnimationOptions.CalculationModeLinear
-        UIView.animateKeyframesWithDuration(duration, delay: 0.0, options: nil, animations: {
-            
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
-            })
-            UIView.addKeyframeWithRelativeStartTime(1/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
-            })
-            UIView.addKeyframeWithRelativeStartTime(2/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
-            })
-            UIView.addKeyframeWithRelativeStartTime(3/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
-            })
-            UIView.addKeyframeWithRelativeStartTime(4/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, fullRotation)
-            })
-            UIView.addKeyframeWithRelativeStartTime(5/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.imageView.transform = CGAffineTransformRotate(tileToWiggle.imageView.transform, -fullRotation)
-            })
-
-            }, completion: {finished in
-                
-        })
-        
-    }
-    
     
     func findTileAtCoordinate(coordinate: DoubleIndex) -> Tile {
         var tile = self.tileArray[0][0]
@@ -470,7 +476,6 @@ class TileAreaView: UIView {
         }
         return tile
     }
-
     
     
     func findTileWithTag(tag: Int) -> Tile {
