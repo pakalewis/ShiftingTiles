@@ -78,7 +78,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.drawGrid?.removeFromSuperview()
+        self.drawGrid?.alpha = 0
     }
     
     
@@ -141,18 +141,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
     }
 
-    func scrollTapped(recognizer: UITapGestureRecognizer) {
-        
-//        self.scrollViewLeftConstraint.constant = 1000
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            self.view.layoutIfNeeded()
-//        })
-        
-    }
 
     
     @IBAction func cameraButtonPressed(sender: AnyObject) {
-        var pickPhotoMenu = UIAlertController(title: "Choose a photo from your library or take one with the camera", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        var pickPhotoMenu = UIAlertController(title: "Choose a photo:", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         let libraryAction = UIAlertAction(title: "Library", style: UIAlertActionStyle.Default) { (handler) -> Void in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -185,11 +177,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func gridButtonPressed(sender: AnyObject) {
-        
-        if self.drawGrid?.alpha == 0 {
-            self.drawGrid?.alpha = 1
+        if self.drawGrid == nil {
+            self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
+            self.drawGrid?.numRows = self.tilesPerRow
+            self.drawGrid?.backgroundColor = UIColor.clearColor()
+            self.view.addSubview(self.drawGrid!)
         } else {
-            self.drawGrid?.alpha = 0
+            if self.drawGrid?.alpha == 0 {
+                self.drawGrid?.alpha = 1
+            } else {
+                self.drawGrid?.alpha = 0
+            }
         }
     }
     

@@ -27,6 +27,8 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         self.statsTable.dataSource = self
         self.statsTable.delegate = self
         
+        var dismissTap = UITapGestureRecognizer(target: self, action: "dismissStatsScreen:")
+        self.view.addGestureRecognizer(dismissTap)
         
         self.totalSolvesLabel.text = "Total:  \(self.stats.fetchTotalSolves())"
         
@@ -58,7 +60,8 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         return self.statsTable.frame.height / 9
     }
     
-    @IBAction func backToMainScreen(sender: AnyObject) {
+    
+    func dismissStatsScreen(sender: UIGestureRecognizer) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
