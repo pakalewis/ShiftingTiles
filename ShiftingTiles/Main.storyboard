@@ -395,10 +395,38 @@
                                     <action selector="dismissInfo:" destination="1dN-5o-wR8" eventType="touchUpInside" id="dlP-WJ-6yQ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h45-0D-imF" userLabel="colorPalette1">
+                                <rect key="frame" x="75" y="386" width="90" height="90"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Jl-2f-99r" userLabel="light1">
+                                        <rect key="frame" x="2" y="2" width="43" height="86"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P32-Qo-LSb" userLabel="dark1">
+                                        <rect key="frame" x="45" y="2" width="43" height="86"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h45-0D-imF" secondAttribute="height" multiplier="1:1" id="F3f-PP-McH"/>
+                                    <constraint firstItem="3Jl-2f-99r" firstAttribute="leading" secondItem="h45-0D-imF" secondAttribute="leading" constant="2" id="K13-Ho-HPh"/>
+                                    <constraint firstItem="3Jl-2f-99r" firstAttribute="top" secondItem="h45-0D-imF" secondAttribute="top" constant="2" id="KJw-Zt-9Qs"/>
+                                    <constraint firstAttribute="bottom" secondItem="P32-Qo-LSb" secondAttribute="bottom" constant="2" id="LTc-7f-70q"/>
+                                    <constraint firstItem="3Jl-2f-99r" firstAttribute="width" secondItem="P32-Qo-LSb" secondAttribute="width" id="QQx-op-4Wf"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Jl-2f-99r" secondAttribute="bottom" constant="2" id="QT1-Fj-D9i"/>
+                                    <constraint firstAttribute="trailing" secondItem="P32-Qo-LSb" secondAttribute="trailing" constant="2" id="WQB-V0-rM5"/>
+                                    <constraint firstItem="P32-Qo-LSb" firstAttribute="leading" secondItem="3Jl-2f-99r" secondAttribute="trailing" id="bdZ-Uq-oQR"/>
+                                    <constraint firstItem="P32-Qo-LSb" firstAttribute="top" secondItem="h45-0D-imF" secondAttribute="top" constant="2" id="jqN-2I-rcM"/>
+                                    <constraint firstItem="3Jl-2f-99r" firstAttribute="height" secondItem="P32-Qo-LSb" secondAttribute="height" id="vC4-et-5YW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="KXs-mG-hyE" secondAttribute="centerX" id="5Va-zt-x2l"/>
+                            <constraint firstItem="h45-0D-imF" firstAttribute="top" secondItem="b4R-8Z-gEW" secondAttribute="bottom" constant="20" id="6Vf-3i-yg4"/>
+                            <constraint firstItem="h45-0D-imF" firstAttribute="leading" secondItem="b4R-8Z-gEW" secondAttribute="leading" id="9NK-Un-ORU"/>
                             <constraint firstItem="b4R-8Z-gEW" firstAttribute="top" secondItem="KXs-mG-hyE" secondAttribute="bottom" constant="40" id="Ifw-OA-oUu"/>
                             <constraint firstAttribute="centerX" secondItem="eXT-vh-s4k" secondAttribute="centerX" id="K31-as-gJ2"/>
                             <constraint firstAttribute="centerX" secondItem="b4R-8Z-gEW" secondAttribute="centerX" id="QZb-tk-fVh"/>
@@ -410,9 +438,13 @@
                             <constraint firstItem="KXs-mG-hyE" firstAttribute="width" secondItem="qSI-lF-wQe" secondAttribute="width" multiplier="0.75" id="nBC-2o-oIf"/>
                             <constraint firstItem="KXs-mG-hyE" firstAttribute="top" secondItem="eXT-vh-s4k" secondAttribute="bottom" constant="40" id="scn-tb-hfX"/>
                             <constraint firstItem="b4R-8Z-gEW" firstAttribute="height" secondItem="KXs-mG-hyE" secondAttribute="height" id="xgu-wK-Xky"/>
+                            <constraint firstItem="h45-0D-imF" firstAttribute="height" secondItem="b4R-8Z-gEW" secondAttribute="height" id="zoU-3t-5pd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="colorPalette1" destination="h45-0D-imF" id="kWD-Ew-jht"/>
+                        <outlet property="darkColor1" destination="P32-Qo-LSb" id="bOB-O4-Owf"/>
+                        <outlet property="lightColor1" destination="3Jl-2f-99r" id="I31-Uv-eb8"/>
                         <outlet property="rotationImage" destination="hiq-83-85h" id="fCb-al-gc6"/>
                         <outlet property="rotations" destination="b4R-8Z-gEW" id="MFW-gD-mep"/>
                         <outlet property="shuffle" destination="KXs-mG-hyE" id="j3C-d1-Og3"/>

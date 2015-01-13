@@ -12,6 +12,11 @@ class InfoScreen: UIViewController {
 
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
+    var light1: Int = 0xE8CF76
+    var dark1: Int = 0x383F70
+    var light2: Int = 0x84A174
+    var dark2: Int = 0x1A3C3D
+
     
     
     @IBOutlet weak var shuffleImage: UIImageView!
@@ -20,6 +25,10 @@ class InfoScreen: UIViewController {
     @IBOutlet weak var shuffle: UIView!
     @IBOutlet weak var rotations: UIView!
 
+    
+    @IBOutlet weak var colorPalette1: UIView!
+    @IBOutlet weak var lightColor1: UIView!
+    @IBOutlet weak var darkColor1: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +41,11 @@ class InfoScreen: UIViewController {
         
         var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
         self.rotations.addGestureRecognizer(rotationTap)
+        
+        var colorPalette1Tap = UITapGestureRecognizer(target: self, action: "colorPalette1Selected:")
+        self.colorPalette1.addGestureRecognizer(colorPalette1Tap)
 
+        // Set up the check images based on previous defaults
         if userDefaults.boolForKey("shufflesOn") {
             self.shuffleImage.image = UIImage(named: "checkedBox")
         } else {
@@ -46,7 +59,8 @@ class InfoScreen: UIViewController {
         }
         
         
-        
+        self.lightColor1.backgroundColor = UIColor(hex: light1, alpha: 1)
+        self.darkColor1.backgroundColor = UIColor(hex: dark1, alpha: 1)
     }
 
     func shuffleTapped(sender: UIGestureRecognizer) {
@@ -70,6 +84,13 @@ class InfoScreen: UIViewController {
             self.userDefaults.setBool(true, forKey: "rotationsOn")
             self.rotationImage.image = UIImage(named: "checkedBox")
         }
+    }
+    
+
+    func colorPalette1Selected(sender: UIGestureRecognizer) {
+        self.view.backgroundColor = UIColor(hex: light1, alpha: 1)
+//        self.lightColor1.backgroundColor = UIColor(hex: light1, alpha: 1)
+//        self.darkColor1.backgroundColor = UIColor(hex: dark1, alpha: 1)
     }
     
     

@@ -93,6 +93,8 @@
 		2CE1D5751A65C29200F98FEE /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1D5741A65C29200F98FEE /* InfoScreen.swift */; };
 		2CE1D5781A65C71600F98FEE /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D5761A65C71600F98FEE /* checkedBox.png */; };
 		2CE1D5791A65C71600F98FEE /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE1D5771A65C71600F98FEE /* uncheckedBox.png */; };
+		2CE1D57B1A65D89200F98FEE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1D57A1A65D89200F98FEE /* UIColorExtension.swift */; };
+		2CE1D57D1A65E3A100F98FEE /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1D57C1A65E3A100F98FEE /* ColorPalette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +186,8 @@
 		2CE1D5741A65C29200F98FEE /* InfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreen.swift; sourceTree = SOURCE_ROOT; };
 		2CE1D5761A65C71600F98FEE /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = SOURCE_ROOT; };
 		2CE1D5771A65C71600F98FEE /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = SOURCE_ROOT; };
+		2CE1D57A1A65D89200F98FEE /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
+		2CE1D57C1A65E3A100F98FEE /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +343,8 @@
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
 				2C7F086D1A5DF0980083F668 /* Tile.swift */,
+				2CE1D57A1A65D89200F98FEE /* UIColorExtension.swift */,
+				2CE1D57C1A65E3A100F98FEE /* ColorPalette.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 			files = (
 				2C7F08711A5DF0980083F668 /* Tile.swift in Sources */,
 				2C7F08601A5DF0730083F668 /* GameScreen.swift in Sources */,
+				2CE1D57B1A65D89200F98FEE /* UIColorExtension.swift in Sources */,
 				2C7F08681A5DF0810083F668 /* Stats.swift in Sources */,
 				2C7F08751A5DF0AA0083F668 /* AppDelegate.swift in Sources */,
 				2C7F086F1A5DF0980083F668 /* ImageGallery.swift in Sources */,
@@ -537,6 +544,7 @@
 				2C7F086E1A5DF0980083F668 /* DoubleIndex.swift in Sources */,
 				2C7F08691A5DF0810083F668 /* StatsScreen.swift in Sources */,
 				2C7F085A1A5DF05D0083F668 /* CollectionViewImageCell.swift in Sources */,
+				2CE1D57D1A65E3A100F98FEE /* ColorPalette.swift in Sources */,
 				2C7F08661A5DF0810083F668 /* StatCell.swift in Sources */,
 				2C7F08701A5DF0980083F668 /* PuzzleSolvedProtocol.swift in Sources */,
 				2C7F08611A5DF0730083F668 /* TileAreaView.swift in Sources */,
