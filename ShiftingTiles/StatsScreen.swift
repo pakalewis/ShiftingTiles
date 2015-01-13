@@ -28,7 +28,7 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         self.statsTable.delegate = self
         
         
-        self.totalSolvesLabel.text = "Total solves:  \(self.stats.fetchTotalSolves())"
+        self.totalSolvesLabel.text = "Total:  \(self.stats.fetchTotalSolves())"
         
         // Get the solve stats and store in local array
         self.solvesPerSize = self.stats.fetchSolvesPerSize()

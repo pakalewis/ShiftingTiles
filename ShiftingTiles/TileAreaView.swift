@@ -150,7 +150,7 @@ class TileAreaView: UIView {
             var tile2 = self.tileArray[randomInt3][randomInt4]
             
 
-            self.swapTiles(tile1, tile2: tile2, completionClosure: { () -> () in
+            self.swapTiles(tile1, tile2: tile2, duration: 0.2, completionClosure: { () -> () in
             })
         }
         
@@ -168,7 +168,7 @@ class TileAreaView: UIView {
             
             var tileToRotate = self.tileArray[randomInt1][randomInt2]
             
-            self.rotateTile(tileToRotate, completionClosure: { () -> () in
+            self.rotateTile(tileToRotate, duration: 0.3, completionClosure: { () -> () in
             })
         }
         
@@ -231,7 +231,7 @@ class TileAreaView: UIView {
             self.secondTile = tile2
             self.firstTileSelectedBool = true
 
-            self.swapTiles(self.firstTile!, tile2: self.secondTile!, completionClosure: { () -> () in
+            self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
                 // Swap the tiles and then check if the puzzle is solved
                 if self.checkIfSolved() {
                     // Notify GameScreen
@@ -250,7 +250,7 @@ class TileAreaView: UIView {
             // Grab the tag of the tile that was tapped and use it to find the correct tile
             var tag = sender.view!.tag
             var pressedTile = self.tileArray[tag / 10][tag % 10]
-            self.rotateTile(pressedTile, completionClosure: { () -> () in
+            self.rotateTile(pressedTile, duration: 0.3, completionClosure: { () -> () in
                 // Rotate the tile and then check if the puzzle is solved
                 if self.checkIfSolved() {
                     // Notify GameScreen
@@ -262,10 +262,10 @@ class TileAreaView: UIView {
     }
 
 
-    func rotateTile(tile: Tile, completionClosure: () ->()) {
+    func rotateTile(tile: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
         // Animation calculations
         let rotation = CGFloat(M_PI) * (tile.orientationCount / 2)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animateWithDuration(duration, animations: { () -> Void in
             
             tile.imageView.transform = CGAffineTransformMakeRotation(rotation)
             tile.orientationCount++
@@ -282,7 +282,7 @@ class TileAreaView: UIView {
 
     
     // Swap the images and tags when the second tile is tapped
-    func swapTiles(tile1: Tile, tile2: Tile, completionClosure: () ->()) {
+    func swapTiles(tile1: Tile, tile2: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
         
         if tile1.imageView.tag == tile2.imageView.tag {
             // tiles are the same so do nothing
@@ -294,7 +294,7 @@ class TileAreaView: UIView {
             tile1.doubleIndex = tile2.doubleIndex
             tile2.doubleIndex = tempDoubleIndex
 
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animateWithDuration(duration, animations: { () -> Void in
                 
                 // Swap frames
                 var firstFrame = tile1.imageView.frame
@@ -348,7 +348,7 @@ class TileAreaView: UIView {
         
         // swap the tiles in the lines
         for counter in 0..<tileLine1.count {
-            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], completionClosure: { () -> () in
+            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], duration: 0.3, completionClosure: { () -> () in
 
                 if counter == tileLine1.count - 1 {
                     if self.checkIfSolved() {

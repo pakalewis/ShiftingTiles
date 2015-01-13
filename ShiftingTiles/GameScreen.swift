@@ -250,11 +250,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.presentViewController(solveAlert, animated: true, completion: nil)
     }
     
-    
+    // Fix this
     func solvePuzzle() {
         self.tileArea.findTilesToSwap()
         if self.tileArea.firstTile != nil && self.tileArea.secondTile != nil {
-            self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, completionClosure: { () -> () in
+            self.tileArea.swapTiles(self.tileArea.firstTile!, tile2: self.tileArea.secondTile!, duration: 0.1, completionClosure: { () -> () in
                 if !self.tileArea.checkIfSolved() {
                     self.solvePuzzle()
                 }
@@ -262,7 +262,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         } else {
             self.tileArea.findFirstUnorientedTile()
             if self.tileArea.firstUnorientedTile != nil {
-                self.tileArea.rotateTile(self.tileArea.firstUnorientedTile!, completionClosure: { () -> () in
+                self.tileArea.rotateTile(self.tileArea.firstUnorientedTile!, duration: 0.1, completionClosure: { () -> () in
                     if !self.tileArea.checkIfSolved() {
                         self.solvePuzzle()
                     } else {
