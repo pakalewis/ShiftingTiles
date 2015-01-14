@@ -12,6 +12,7 @@ import UIKit
 
 class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
+    let colorPalette = ColorPalette()
 
     
     var imageToSolve = UIImage()
@@ -39,14 +40,31 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var hintButton: UIButton!
     @IBOutlet weak var solveButton: UIButton!
     @IBOutlet weak var showOriginalButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Apply color scheme
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
+        self.showOriginalButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        self.hintButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        self.solveButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        self.backButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+    }
+
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+
+        
         // Initialize tileArea
         self.tileArea.delegate = self
         self.tileArea.imageToSolve = self.imageToSolve
@@ -250,6 +268,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
             self.tileArea.layoutTilesWithMargin(0.0)
             self.tileArea.orientAllTiles()
+            self.tileArea.isPuzzleSolved = true
             self.puzzleIsSolved()
         }
 

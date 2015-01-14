@@ -17,6 +17,9 @@ class TileAreaView: UIView {
     // Enables this class to notify the GameScreen when the puzzle is solved
     var delegate : PuzzleSolvedProtocol?
     
+    // Set to true when puzzle is solved
+    var isPuzzleSolved = false
+    
     // Image that the user selected to solve
     var imageToSolve = UIImage()
 
@@ -168,7 +171,6 @@ class TileAreaView: UIView {
     
     // Swap the images and tags when the second tile is tapped
     func swapTiles(tile1: Tile, tile2: Tile, duration: NSTimeInterval, completionClosure: () ->()) {
-        
         if tile1.imageView.tag == tile2.imageView.tag {
             // tiles are the same so do nothing
             return
@@ -328,85 +330,86 @@ class TileAreaView: UIView {
     // MARK: INTERACTIONS
     func tileTapped(sender: UIGestureRecognizer) {
 
-        // Grab the tag of the tile that was tapped and use it to find the correct tile
-        var tag = sender.view!.tag
-        var tappedTile = self.tileArray[tag / 10][tag % 10]
-        
-        // Check if it is the first or second tile tapped
-        // Swap images and tags when
-        if self.firstTileSelectedBool {
-
-            // Add a subview behind the tapped tile to indicate that it was selected
-            var tileFrame = tappedTile.imageView.frame
-            var highlightedViewFrame = CGRectMake(tileFrame.origin.x - 2, tileFrame.origin.y - 2, tileFrame.width + 4, tileFrame.height + 4)
-            self.highlightedView = UIView(frame: highlightedViewFrame)
-            self.highlightedView.backgroundColor = UIColor.blackColor()
-            self.addSubview(self.highlightedView)
-            self.sendSubviewToBack(self.highlightedView)
-            
-
-            
-            // TODO: ALTERNATIVE TO THE BLACK OUTLINE
-            // COULD GROW THE TILE SLIGHTLY TO INDICATE THAT IT WAS TAPPED
-//            var oldtileFrame = tappedTile.imageView.frame
-//            var centerpoint = tappedTile.imageView.center
-//            var biggerTileFrame = CGRectMake(oldtileFrame.origin.x, oldtileFrame.origin.y, oldtileFrame.width * 1.1, oldtileFrame.height * 1.1)
-//            tappedTile.imageView.frame = biggerTileFrame
-//            tappedTile.imageView.center = centerpoint
-//            self.bringSubviewToFront(tappedTile.imageView)
-//            
-//            UIView.animateWithDuration(0.2, animations: { () -> Void in
-//                self.layoutIfNeeded()
-//            })
-//            
-
-            
-            
-            
-            // Store the first tapped tile for later use
-            var tile1 = self.tileArray[tag / 10][tag % 10]
-            self.firstTile = tile1
-            self.firstTileSelectedBool = false
-
-        } else {
-            // Remove the temporary highlighting
-            self.highlightedView.removeFromSuperview()
-            
-            // Store the second tapped tile for later use
-            var tile2 = self.tileArray[tag / 10][tag % 10]
-            self.secondTile = tile2
-            self.firstTileSelectedBool = true
-
-            self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
-                // Swap the tiles and then check if the puzzle is solved
-                if self.checkIfSolved() {
-                    // Notify GameScreen
-                    self.delegate!.puzzleIsSolved()
-                }
-            })
-        
-        }
-    }
-    
-    
-    func tileLongPressed(sender: UIGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizerState.Ended {
-            
+        if !self.isPuzzleSolved {
             // Grab the tag of the tile that was tapped and use it to find the correct tile
             var tag = sender.view!.tag
-            var pressedTile = self.tileArray[tag / 10][tag % 10]
-            self.rotateTile(pressedTile, duration: 0.3, completionClosure: { () -> () in
-                // Rotate the tile and then check if the puzzle is solved
-                if self.checkIfSolved() {
-                    // Notify GameScreen
-                    self.delegate!.puzzleIsSolved()
-                }
-            })
+            var tappedTile = self.tileArray[tag / 10][tag % 10]
             
+            // Check if it is the first or second tile tapped
+            // Swap images and tags when
+            if self.firstTileSelectedBool {
+
+                // Add a subview behind the tapped tile to indicate that it was selected
+                var tileFrame = tappedTile.imageView.frame
+                var highlightedViewFrame = CGRectMake(tileFrame.origin.x - 2, tileFrame.origin.y - 2, tileFrame.width + 4, tileFrame.height + 4)
+                self.highlightedView = UIView(frame: highlightedViewFrame)
+                self.highlightedView.backgroundColor = UIColor.blackColor()
+                self.addSubview(self.highlightedView)
+                self.sendSubviewToBack(self.highlightedView)
+                
+
+                
+                // TODO: ALTERNATIVE TO THE BLACK OUTLINE
+                // COULD GROW THE TILE SLIGHTLY TO INDICATE THAT IT WAS TAPPED
+    //            var oldtileFrame = tappedTile.imageView.frame
+    //            var centerpoint = tappedTile.imageView.center
+    //            var biggerTileFrame = CGRectMake(oldtileFrame.origin.x, oldtileFrame.origin.y, oldtileFrame.width * 1.1, oldtileFrame.height * 1.1)
+    //            tappedTile.imageView.frame = biggerTileFrame
+    //            tappedTile.imageView.center = centerpoint
+    //            self.bringSubviewToFront(tappedTile.imageView)
+    //            
+    //            UIView.animateWithDuration(0.2, animations: { () -> Void in
+    //                self.layoutIfNeeded()
+    //            })
+    //            
+
+                
+                
+                
+                // Store the first tapped tile for later use
+                var tile1 = self.tileArray[tag / 10][tag % 10]
+                self.firstTile = tile1
+                self.firstTileSelectedBool = false
+
+            } else {
+                // Remove the temporary highlighting
+                self.highlightedView.removeFromSuperview()
+                
+                // Store the second tapped tile for later use
+                var tile2 = self.tileArray[tag / 10][tag % 10]
+                self.secondTile = tile2
+                self.firstTileSelectedBool = true
+
+                self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
+                    // Swap the tiles and then check if the puzzle is solved
+                    if self.checkIfSolved() {
+                        // Notify GameScreen
+                        self.delegate!.puzzleIsSolved()
+                    }
+                })
+            
+            }
         }
     }
-
+    
+    func tileLongPressed(sender: UIGestureRecognizer) {
+        if !self.isPuzzleSolved {
+            if sender.state == UIGestureRecognizerState.Ended {
+                
+                // Grab the tag of the tile that was tapped and use it to find the correct tile
+                var tag = sender.view!.tag
+                var pressedTile = self.tileArray[tag / 10][tag % 10]
+                self.rotateTile(pressedTile, duration: 0.3, completionClosure: { () -> () in
+                    // Rotate the tile and then check if the puzzle is solved
+                    if self.checkIfSolved() {
+                        // Notify GameScreen
+                        self.delegate!.puzzleIsSolved()
+                    }
+                })
+                
+            }
+        }
+    }
 
     
     // MARK: TILE EXAMINATION
@@ -426,6 +429,7 @@ class TileAreaView: UIView {
         }
         
         // If it makes it through this loop then the puzzle is solved
+        self.isPuzzleSolved = true
         return true
     }
 

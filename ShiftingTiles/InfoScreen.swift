@@ -45,8 +45,11 @@ class InfoScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        // Set colors for this screen
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
         
+
         // Add tap gesturess
         var shuffleTap = UITapGestureRecognizer(target: self, action: "shuffleTapped:")
         self.shuffle.addGestureRecognizer(shuffleTap)
@@ -66,6 +69,7 @@ class InfoScreen: UIViewController {
         var colorPalette4Tap = UITapGestureRecognizer(target: self, action: "colorPalette4Selected:")
         self.colorPalette4.addGestureRecognizer(colorPalette4Tap)
         
+        
         // Set up the check images based on previous defaults
         if userDefaults.boolForKey("shufflesOn") {
             self.shuffleImage.image = UIImage(named: "checkedBox")
@@ -79,11 +83,8 @@ class InfoScreen: UIViewController {
             self.rotationImage.image = UIImage(named: "uncheckedBox")
         }
         
-        // Set colors
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
-
         
+        // Set light and dark colors for the palette options
         self.lightColor1.backgroundColor = self.colorPalette.lightColor1
         self.darkColor1.backgroundColor = self.colorPalette.darkColor1
         self.lightColor2.backgroundColor = self.colorPalette.lightColor2
@@ -94,6 +95,7 @@ class InfoScreen: UIViewController {
         self.darkColor4.backgroundColor = self.colorPalette.darkColor4
     }
 
+    
     func shuffleTapped(sender: UIGestureRecognizer) {
         var shufflesOn = userDefaults.boolForKey("shufflesOn")
         if shufflesOn {

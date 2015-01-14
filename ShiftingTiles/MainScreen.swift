@@ -18,10 +18,11 @@ import UIKit
 
 class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    let colorPalette = ColorPalette()
     
-    // CONSTRAINTS
     
     // VIEWS
+    @IBOutlet weak var shiftingTilesLabel: UILabel!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
@@ -35,10 +36,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var drawGrid : DrawGrid?
     let pickerData = ["2","3","4","5","6","7","8","9","10"]
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
+        
         
         
         // register the nibs for the two types of tableview cells
@@ -71,6 +75,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.drawGrid?.alpha = 0
+        
+        // Apply color scheme
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
+        
+
     }
     
     

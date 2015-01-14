@@ -211,6 +211,7 @@
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="imageCycler" destination="8Fb-MQ-XGx" id="1SL-Yo-YBE"/>
                         <outlet property="letsPlayButton" destination="7cw-uc-rQN" id="1z0-aQ-Nlr"/>
+                        <outlet property="shiftingTilesLabel" destination="6p4-o8-wZC" id="RNq-Wh-JLc"/>
                         <outlet property="tilesPerRowLabel" destination="zGq-2D-jDD" id="t3W-yK-ZE7"/>
                     </connections>
                 </viewController>
@@ -312,7 +313,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHq-bG-GQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1114" y="-906"/>
+            <point key="canvasLocation" x="1204" y="-806"/>
         </scene>
         <!--Info Screen-->
         <scene sceneID="B39-DU-tnj">
@@ -550,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="voL-pO-XgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="560" y="798"/>
+            <point key="canvasLocation" x="1212" y="806"/>
         </scene>
         <!--Game Screen-->
         <scene sceneID="V7S-q6-KNc">
@@ -673,6 +674,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="vI2-cd-d5v" id="nEZ-cM-QqL"/>
                         <outlet property="congratsMessage" destination="BUW-hI-3S5" id="9QG-8l-vOm"/>
                         <outlet property="hintButton" destination="9ig-wh-J89" id="PPQ-2z-rtZ"/>
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
@@ -687,7 +689,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336" y="153"/>
+            <point key="canvasLocation" x="1204" y="-23"/>
         </scene>
     </scenes>
     <resources>
