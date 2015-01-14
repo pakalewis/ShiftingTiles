@@ -12,15 +12,28 @@ import UIKit
 
 class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    let colorPalette = ColorPalette()
+
     var solvesPerSize = NSArray()
     let stats = Stats()
     
     // VIEWS
+    @IBOutlet weak var statsLabel: UILabel!
     @IBOutlet weak var statsTable: UITableView!
     @IBOutlet weak var totalSolvesLabel: UILabel!
     
     // BUTTONS
     @IBOutlet weak var dismissButton: UIButton!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Apply color scheme
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.statsLabel.textColor = self.colorPalette.fetchDarkColor()
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

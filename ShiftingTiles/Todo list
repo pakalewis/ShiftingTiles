@@ -1,15 +1,12 @@
 
 
-- add settings menu for users to choose rotations, shuffling, or combo. what other settings?
+- check on back button so user know progreess not saved
 
 
-
-- color schemes
 
 
 add user preferences
 nsuserdefaults to store:
-- grid or no grid
 - hints available?
 -
 

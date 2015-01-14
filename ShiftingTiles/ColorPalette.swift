@@ -13,7 +13,6 @@ class ColorPalette {
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    var colorSchemeInt = 1
     
     
     var lightColor1 = UIColor(hex: 0xE8CF76, alpha: 1)
@@ -22,16 +21,13 @@ class ColorPalette {
     var darkColor2 = UIColor(hex: 0x1A3C3D, alpha: 1)
     var lightColor3 = UIColor(hex: 0x73b9e6, alpha: 1)
     var darkColor3 = UIColor(hex: 0x2e4174, alpha: 1)
-    var lightColor4 = UIColor(hex: 0x84bd68, alpha: 1)
-    var darkColor4 = UIColor(hex: 0x857bb1, alpha: 1)
+    var lightColor4 = UIColor(hex: 0xffcc33, alpha: 1)
+    var darkColor4 = UIColor(hex: 0xcc6633, alpha: 1)
     
-//    init() {
-//        
-//    }
+
     
     func fetchLightColor() -> UIColor {
-        self.colorSchemeInt = userDefaults.integerForKey("colorPaletteInt")
-        switch colorSchemeInt {
+        switch userDefaults.integerForKey("colorPaletteInt") {
         case 1:
             return lightColor1
         case 2:
@@ -47,8 +43,7 @@ class ColorPalette {
 
 
     func fetchDarkColor() -> UIColor {
-        self.colorSchemeInt = userDefaults.integerForKey("colorPaletteInt")
-        switch colorSchemeInt {
+        switch userDefaults.integerForKey("colorPaletteInt") {
         case 1:
             return darkColor1
         case 2:

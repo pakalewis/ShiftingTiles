@@ -38,6 +38,19 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.drawGrid?.alpha = 0
+        
+        // Apply color scheme
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
+        
+        
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageCollection.delegate = self
@@ -70,17 +83,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         
         
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.drawGrid?.alpha = 0
-        
-        // Apply color scheme
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
-        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
-        
-
     }
     
     
