@@ -13,7 +13,7 @@ import UIKit
 class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     let colorPalette = ColorPalette()
-
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var imageToSolve = UIImage()
     var tilesPerRow = 3
@@ -53,10 +53,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Apply color scheme
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
-        self.showOriginalButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-        self.hintButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-        self.solveButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-        self.backButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
     }
 
     
@@ -248,6 +244,14 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
    
     
     @IBAction func backToMainScreen(sender: AnyObject) {
+        if userDefaults.integerForKey("totalSolves") < 3 {
+            var lossOfProgressAlert = UIAlertController(title: "Any progress on this puzzle will not be saved", message: "Are you sure you want to go back?", preferredStyle: UIAlertControllerStyle.Alert)
+            let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+            let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: nil)
+            lossOfProgressAlert.addAction(yesAction)
+            lossOfProgressAlert.addAction(noAction)
+            self.presentViewController(lossOfProgressAlert, animated: true, completion: nil)
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

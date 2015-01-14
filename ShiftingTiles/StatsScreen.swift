@@ -62,6 +62,8 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         cell.leftLabel.text = "\(indexPath.row + 2) x \(indexPath.row + 2)"
         cell.rightLabel.text = "\(self.solvesPerSize[indexPath.row])"
+        cell.backgroundColor = self.colorPalette.fetchLightColor()
+
         return cell
     }
     

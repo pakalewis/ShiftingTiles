@@ -98,6 +98,10 @@
 		2C7F08771A5DF0AA0083F668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F08741A5DF0AA0083F668 /* Main.storyboard */; };
 		2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F087A1A5DF1750083F668 /* MainScreen.swift */; };
 		2C7F087D1A5E129E0083F668 /* Todo list in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F087C1A5E129E0083F668 /* Todo list */; };
+		2CF7E40D1A6728F800E39B14 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40A1A6728F800E39B14 /* backIcon.png */; };
+		2CF7E40E1A6728F800E39B14 /* hintIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40B1A6728F800E39B14 /* hintIcon.png */; };
+		2CF7E40F1A6728F800E39B14 /* originalImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */; };
+		2CF7E4111A67331700E39B14 /* solveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E4101A67331700E39B14 /* solveIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -194,6 +198,10 @@
 		2C7F08781A5DF0B70083F668 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ShiftingTiles/Info.plist; sourceTree = SOURCE_ROOT; };
 		2C7F087A1A5DF1750083F668 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreen.swift; path = ShiftingTiles/MainScreen.swift; sourceTree = SOURCE_ROOT; };
 		2C7F087C1A5E129E0083F668 /* Todo list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Todo list"; path = "ShiftingTiles/Todo list"; sourceTree = SOURCE_ROOT; };
+		2CF7E40A1A6728F800E39B14 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backIcon.png; path = ShiftingTiles/backIcon.png; sourceTree = SOURCE_ROOT; };
+		2CF7E40B1A6728F800E39B14 /* hintIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hintIcon.png; path = ShiftingTiles/hintIcon.png; sourceTree = SOURCE_ROOT; };
+		2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = originalImageIcon.png; path = ShiftingTiles/originalImageIcon.png; sourceTree = SOURCE_ROOT; };
+		2CF7E4101A67331700E39B14 /* solveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solveIcon.png; path = ShiftingTiles/solveIcon.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +323,10 @@
 		2CD299FF1A47B6490048FDD8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CF7E4101A67331700E39B14 /* solveIcon.png */,
+				2CF7E40A1A6728F800E39B14 /* backIcon.png */,
+				2CF7E40B1A6728F800E39B14 /* hintIcon.png */,
+				2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */,
 				2C025E641A660D2700BEFB87 /* cameraIcon.png */,
 				2C025E661A660D2700BEFB87 /* gridIcon.png */,
 				2C5DCE961A66416400DEF22E /* statsIcon.png */,
@@ -489,6 +501,8 @@
 				2C7F08271A5DEFFE0083F668 /* 01small.jpeg in Resources */,
 				2C7F08351A5DEFFE0083F668 /* 15small.jpeg in Resources */,
 				2C7F08081A5DEF860083F668 /* 27.jpeg in Resources */,
+				2CF7E40F1A6728F800E39B14 /* originalImageIcon.png in Resources */,
+				2CF7E4111A67331700E39B14 /* solveIcon.png in Resources */,
 				2C7F080B1A5DEF860083F668 /* 02.jpeg in Resources */,
 				2C5DCE941A663EA900DEF22E /* decreaseIcon.png in Resources */,
 				2C7F08311A5DEFFE0083F668 /* 11small.jpeg in Resources */,
@@ -496,8 +510,10 @@
 				2C7F08361A5DEFFE0083F668 /* 16small.jpeg in Resources */,
 				2C7F082B1A5DEFFE0083F668 /* 05small.jpeg in Resources */,
 				2C7F087D1A5E129E0083F668 /* Todo list in Resources */,
+				2CF7E40D1A6728F800E39B14 /* backIcon.png in Resources */,
 				2C7F08291A5DEFFE0083F668 /* 03small.jpeg in Resources */,
 				2C5DCE951A663EA900DEF22E /* increaseIcon.png in Resources */,
+				2CF7E40E1A6728F800E39B14 /* hintIcon.png in Resources */,
 				2C7F080A1A5DEF860083F668 /* 14.jpeg in Resources */,
 				2C7F084D1A5DF0420083F668 /* downTriangle.png in Resources */,
 				2C025E631A660C8700BEFB87 /* uncheckedBox.png in Resources */,

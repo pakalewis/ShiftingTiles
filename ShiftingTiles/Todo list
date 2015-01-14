@@ -1,17 +1,12 @@
 
 
-- check on back button so user know progreess not saved
+
+- alert user if they uncheck both shuffle and rotate options
 
 
+- add languages to settings page
 
-
-add user preferences
-nsuserdefaults to store:
-- hints available?
--
-
-
-
+- fix image picker with brads fix
 
 
 
