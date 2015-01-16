@@ -33,7 +33,8 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
         
-        let startingViewController = UIViewController()
+        let startingViewController = UIViewController(nibName: "RulesScreen", bundle: NSBundle.mainBundle())
+
         startingViewController.view.backgroundColor = UIColor.redColor()
         let viewControllers: NSArray = [startingViewController]
         self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
