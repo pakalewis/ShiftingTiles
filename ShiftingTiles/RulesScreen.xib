@@ -6,67 +6,64 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen" customModule="ShiftingTiles" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="3mM-eG-6vu" id="BXN-sH-lmU"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="nDU-By-1oy" customClass="RulesScreen" customModule="ShiftingTiles" customModuleProvider="target">
-            <layoutGuides>
-                <viewControllerLayoutGuide type="top" id="ydR-6S-eeJ"/>
-                <viewControllerLayoutGuide type="bottom" id="EgA-aM-A1P"/>
-            </layoutGuides>
-            <view key="view" contentMode="scaleToFill" id="3mM-eG-6vu">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles is a visual puzzle game.\nThe goal is to rearrange the tiles to form the complete image." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-vh-MSu">
-                        <rect key="frame" x="75" y="99" width="450" height="41"/>
-                        <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambledExample.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
-                        <rect key="frame" x="20" y="180" width="240" height="240"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="height" multiplier="1:1" id="DJn-Yh-Gge"/>
-                        </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="15.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-zS-DhW">
-                        <rect key="frame" x="340" y="180" width="240" height="240"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="jJW-zS-DhW" secondAttribute="height" multiplier="1:1" id="R9t-Bg-7Dr"/>
-                        </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z62-53-j8p">
-                        <rect key="frame" x="280" y="280" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Z62-53-j8p" secondAttribute="height" multiplier="1:1" id="ii0-HK-PAo"/>
-                        </constraints>
-                    </imageView>
-                </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                <constraints>
-                    <constraint firstItem="BvP-LA-Sqd" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" constant="20" id="6sO-dF-JKb"/>
-                    <constraint firstItem="Z62-53-j8p" firstAttribute="leading" secondItem="BvP-LA-Sqd" secondAttribute="trailing" constant="20" id="CDl-nS-Oqy"/>
-                    <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="Cjf-Vk-3MR"/>
-                    <constraint firstItem="BvP-LA-Sqd" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.4" id="K2L-Qj-4hT"/>
-                    <constraint firstAttribute="centerX" secondItem="CqB-vh-MSu" secondAttribute="centerX" id="RYi-47-Edf"/>
-                    <constraint firstItem="BvP-LA-Sqd" firstAttribute="top" secondItem="CqB-vh-MSu" secondAttribute="bottom" constant="40" id="Tfb-Ve-UHA"/>
-                    <constraint firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="VT3-aU-78p"/>
-                    <constraint firstItem="CqB-vh-MSu" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.75" id="aFT-JC-EiB"/>
-                    <constraint firstItem="CqB-vh-MSu" firstAttribute="top" secondItem="ydR-6S-eeJ" secondAttribute="bottom" constant="50" id="dIq-fd-3ku"/>
-                    <constraint firstItem="jJW-zS-DhW" firstAttribute="leading" secondItem="Z62-53-j8p" secondAttribute="trailing" constant="20" id="dX2-P0-Ocw"/>
-                    <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="jJW-zS-DhW" secondAttribute="centerY" id="mzV-23-VQw"/>
-                    <constraint firstItem="jJW-zS-DhW" firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="width" id="wZw-id-TFN"/>
-                    <constraint firstAttribute="trailing" secondItem="jJW-zS-DhW" secondAttribute="trailing" constant="20" id="z7h-Rf-P65"/>
-                </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="dIq-fd-3ku"/>
-                    </mask>
-                </variation>
-            </view>
-            <point key="canvasLocation" x="338" y="344"/>
-        </viewController>
+        <view contentMode="scaleToFill" id="3mM-eG-6vu">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles is a visual puzzle game. The goal is to rearrange the tiles to form the complete image." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-vh-MSu">
+                    <rect key="frame" x="75" y="99" width="450" height="41"/>
+                    <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambledExample.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
+                    <rect key="frame" x="20" y="180" width="240" height="240"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="height" multiplier="1:1" id="DJn-Yh-Gge"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="15.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-zS-DhW">
+                    <rect key="frame" x="340" y="180" width="240" height="240"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jJW-zS-DhW" secondAttribute="height" multiplier="1:1" id="R9t-Bg-7Dr"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z62-53-j8p">
+                    <rect key="frame" x="280" y="280" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="DTi-nb-daG"/>
+                        <constraint firstAttribute="width" secondItem="Z62-53-j8p" secondAttribute="height" multiplier="1:1" id="ii0-HK-PAo"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BvP-LA-Sqd" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" constant="20" id="6sO-dF-JKb"/>
+                <constraint firstItem="Z62-53-j8p" firstAttribute="leading" secondItem="BvP-LA-Sqd" secondAttribute="trailing" constant="20" id="CDl-nS-Oqy"/>
+                <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="Cjf-Vk-3MR"/>
+                <constraint firstItem="BvP-LA-Sqd" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.4" id="K2L-Qj-4hT"/>
+                <constraint firstAttribute="centerX" secondItem="CqB-vh-MSu" secondAttribute="centerX" id="RYi-47-Edf"/>
+                <constraint firstItem="BvP-LA-Sqd" firstAttribute="top" secondItem="CqB-vh-MSu" secondAttribute="bottom" constant="40" id="Tfb-Ve-UHA"/>
+                <constraint firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="VT3-aU-78p"/>
+                <constraint firstItem="CqB-vh-MSu" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.75" id="aFT-JC-EiB"/>
+                <constraint firstItem="jJW-zS-DhW" firstAttribute="leading" secondItem="Z62-53-j8p" secondAttribute="trailing" constant="20" id="dX2-P0-Ocw"/>
+                <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="jJW-zS-DhW" secondAttribute="centerY" id="mzV-23-VQw"/>
+                <constraint firstItem="jJW-zS-DhW" firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="width" id="wZw-id-TFN"/>
+                <constraint firstAttribute="trailing" secondItem="jJW-zS-DhW" secondAttribute="trailing" constant="20" id="z7h-Rf-P65"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="K2L-Qj-4hT"/>
+                </mask>
+            </variation>
+        </view>
     </objects>
     <resources>
         <image name="15.jpeg" width="1000" height="1000"/>

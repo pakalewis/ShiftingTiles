@@ -10,8 +10,11 @@ import UIKit
 
 class RulesScreen: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
+
+
 }
