@@ -126,25 +126,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
-    // MARK: Button actions
-    @IBAction func infoButtonPressed(sender: AnyObject) {
-
-//        self.view.bringSubviewToFront(self.scrollView)
-//        self.scrollViewLeftConstraint.constant = 0
-//        
-//        //TODO: Why does the scroll view start somewhere in the middle of the text when it first appears?
-//        var scrollRect = self.scrollView.frame
-////        self.scrollView.scrollRectToVisible(CGRectMake(0, 0, scrollRect.width, scrollRect.height), animated: false)
-//        
-//        self.scrollView.setContentOffset(CGPointMake(0, self.scrollView.contentInset.top), animated: false)
-//        
-//        
-//        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//            self.view.layoutIfNeeded()
-//        })
-        
-    }
-
 
     
     @IBAction func cameraButtonPressed(sender: AnyObject) {

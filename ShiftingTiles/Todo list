@@ -3,13 +3,15 @@ Todo:
 - fix image picker with brads fix
 - rotation gesture instead of long tap?
 
+- how to do the outlets on the various nib files (example is the label on the first rules page - i want to be able to change the text color)
 
 - page control for the info rules page
 onboardpageviewcontroller (hacker missioin example)
 
 
 Questions
-- how can I format the text better on the info view
+
+- tapping an image from the collectionview add 4mb to the memory for each image. why??
 - Why does the photo library take so long to load the first time?
 - What is the best game design? Allow users to choose whether shuffles AND rotations are on/off?
 this leads to a problem when both are turned off....

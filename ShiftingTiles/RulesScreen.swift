@@ -10,10 +10,13 @@ import UIKit
 
 class RulesScreen: UIViewController {
 
-    
+    let colorPalette = ColorPalette()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.textLabel.textColor = self.colorPalette.fetchDarkColor()
+
     }
 
 
