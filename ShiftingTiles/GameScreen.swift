@@ -242,7 +242,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
     }
    
-    
+    // TODO: this if statement is using a wrong check. another counter for how many times this alert has been shown?
     @IBAction func backToMainScreen(sender: AnyObject) {
         if userDefaults.integerForKey("totalSolves") < 3 {
             var lossOfProgressAlert = UIAlertController(title: "Any progress on this puzzle will not be saved", message: "Are you sure you want to go back?", preferredStyle: UIAlertControllerStyle.Alert)
