@@ -42,6 +42,9 @@ class SettingsScreen: UIViewController {
     @IBOutlet weak var lightColor4: UIView!
     @IBOutlet weak var darkColor4: UIView!
     
+    @IBOutlet weak var colorPalette5: UIView!
+    @IBOutlet weak var lightColor5: UIView!
+    @IBOutlet weak var darkColor5: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +73,9 @@ class SettingsScreen: UIViewController {
         var colorPalette4Tap = UITapGestureRecognizer(target: self, action: "colorPalette4Selected:")
         self.colorPalette4.addGestureRecognizer(colorPalette4Tap)
         
+        var colorPalette5Tap = UITapGestureRecognizer(target: self, action: "colorPalette5Selected:")
+        self.colorPalette5.addGestureRecognizer(colorPalette5Tap)
+        
         
         // Set up the check images based on previous defaults
         if userDefaults.boolForKey("shufflesOn") {
@@ -94,6 +100,8 @@ class SettingsScreen: UIViewController {
         self.darkColor3.backgroundColor = self.colorPalette.darkColor3
         self.lightColor4.backgroundColor = self.colorPalette.lightColor4
         self.darkColor4.backgroundColor = self.colorPalette.darkColor4
+        self.lightColor5.backgroundColor = self.colorPalette.lightColor5
+        self.darkColor5.backgroundColor = self.colorPalette.darkColor5
     }
     
     
@@ -144,6 +152,12 @@ class SettingsScreen: UIViewController {
     
     func colorPalette4Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(4, forKey: "colorPaletteInt")
+        self.view.backgroundColor = ColorPalette().fetchLightColor()
+        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+    }
+    
+    func colorPalette5Selected(sender: UIGestureRecognizer) {
+        self.userDefaults.setInteger(5, forKey: "colorPaletteInt")
         self.view.backgroundColor = ColorPalette().fetchLightColor()
         self.settingLabel.textColor = ColorPalette().fetchDarkColor()
     }
