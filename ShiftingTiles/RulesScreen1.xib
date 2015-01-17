@@ -6,8 +6,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen" customModule="ShiftingTiles" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen1">
             <connections>
+                <outlet property="label1" destination="CqB-vh-MSu" id="8Hj-53-F8R"/>
+                <outlet property="label2" destination="a41-uS-iVF" id="qf8-2o-2QU"/>
+                <outlet property="label3" destination="jHO-dK-Tdo" id="4SJ-Dq-0Be"/>
                 <outlet property="view" destination="3mM-eG-6vu" id="BXN-sH-lmU"/>
             </connections>
         </placeholder>
@@ -16,10 +19,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solve the puzzle by rearranging the tiles to form the complete image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-vh-MSu">
-                    <rect key="frame" x="75" y="28" width="450" height="112"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solve the puzzle by rearranging the tiles to form the complete image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-vh-MSu">
+                    <rect key="frame" x="75" y="77" width="450" height="63"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="30"/>
+                    <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="25"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambledExample.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
@@ -41,18 +44,32 @@
                         <constraint firstAttribute="width" secondItem="Z62-53-j8p" secondAttribute="height" multiplier="1:1" id="ii0-HK-PAo"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap two tiles to swap their positions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a41-uS-iVF">
+                    <rect key="frame" x="163" y="460" width="275" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold a tile to rotate it 90°" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHO-dK-Tdo">
+                    <rect key="frame" x="173" y="521" width="255" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="BvP-LA-Sqd" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" constant="20" id="6sO-dF-JKb"/>
+                <constraint firstItem="a41-uS-iVF" firstAttribute="top" secondItem="BvP-LA-Sqd" secondAttribute="bottom" constant="40" id="BwO-ui-fYN"/>
                 <constraint firstItem="Z62-53-j8p" firstAttribute="leading" secondItem="BvP-LA-Sqd" secondAttribute="trailing" constant="20" id="CDl-nS-Oqy"/>
                 <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="Cjf-Vk-3MR"/>
                 <constraint firstItem="BvP-LA-Sqd" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.4" id="K2L-Qj-4hT"/>
                 <constraint firstAttribute="centerX" secondItem="CqB-vh-MSu" secondAttribute="centerX" id="RYi-47-Edf"/>
                 <constraint firstItem="BvP-LA-Sqd" firstAttribute="top" secondItem="CqB-vh-MSu" secondAttribute="bottom" constant="40" id="Tfb-Ve-UHA"/>
                 <constraint firstAttribute="centerY" secondItem="BvP-LA-Sqd" secondAttribute="centerY" id="VT3-aU-78p"/>
+                <constraint firstAttribute="centerX" secondItem="jHO-dK-Tdo" secondAttribute="centerX" id="Wqf-KV-QEs"/>
                 <constraint firstItem="CqB-vh-MSu" firstAttribute="width" secondItem="3mM-eG-6vu" secondAttribute="width" multiplier="0.75" id="aFT-JC-EiB"/>
+                <constraint firstAttribute="centerX" secondItem="a41-uS-iVF" secondAttribute="centerX" id="atN-Nk-pz1"/>
                 <constraint firstItem="jJW-zS-DhW" firstAttribute="leading" secondItem="Z62-53-j8p" secondAttribute="trailing" constant="20" id="dX2-P0-Ocw"/>
+                <constraint firstItem="jHO-dK-Tdo" firstAttribute="top" secondItem="a41-uS-iVF" secondAttribute="bottom" constant="40" id="gSX-ZB-f7i"/>
                 <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="jJW-zS-DhW" secondAttribute="centerY" id="mzV-23-VQw"/>
                 <constraint firstItem="jJW-zS-DhW" firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="width" id="wZw-id-TFN"/>
                 <constraint firstAttribute="trailing" secondItem="jJW-zS-DhW" secondAttribute="trailing" constant="20" id="z7h-Rf-P65"/>

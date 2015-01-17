@@ -1,12 +1,12 @@
 Todo:
 - add languages to settings page
+- sound effects
 - fix image picker with brads fix
 - rotation gesture instead of long tap?
 
-- how to do the outlets on the various nib files (example is the label on the first rules page - i want to be able to change the text color)
 
-- page control for the info rules page
-onboardpageviewcontroller (hacker missioin example)
+
+
 
 
 Questions

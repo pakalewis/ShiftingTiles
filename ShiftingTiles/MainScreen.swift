@@ -263,5 +263,4 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.drawGrid?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(self.drawGrid!)
     }
-
 }
