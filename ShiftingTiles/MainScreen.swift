@@ -27,7 +27,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCycler: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var gridButton: UIButton!
+    @IBOutlet weak var statsButton: UIButton!
+    @IBOutlet weak var decreaseButton: UIButton!
+    @IBOutlet weak var increaseButton: UIButton!
+    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var letsPlayButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     
     var imageArray = [UIImage]()
     var smallImageArray = [UIImage]()
@@ -41,13 +49,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.drawGrid?.alpha = 0
-        
-        // Apply color scheme
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
-        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
-        
-        
+        self.updateColors()
     }
 
     
@@ -55,7 +57,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         super.viewDidLoad()
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
-        
         
         
         // register the nibs for the two types of tableview cells
@@ -80,9 +81,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.borderWidth = 2
         self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
         self.letsPlayButton.sizeToFit()
-        
-        
-        
     }
     
     
@@ -247,6 +245,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.addSubview(self.drawGrid!)
    }
 
+    
     @IBAction func leftButtonPressed(sender: AnyObject) {
         
         self.tilesPerRow--
@@ -262,5 +261,22 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.drawGrid?.numRows = self.tilesPerRow
         self.drawGrid?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(self.drawGrid!)
+    }
+    
+    
+    func updateColors() {
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.gridButton.setImage(UIImage(named: "gridIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
+        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
     }
 }

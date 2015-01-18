@@ -99,6 +99,10 @@
                                             <segue destination="SIa-Ve-MQH" kind="show" id="gTg-CI-8H2"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-4N-X1O" userLabel="spacer3">
+                                        <rect key="frame" x="157" y="0.0" width="25" height="36"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duK-ww-PYt" userLabel="DecreaseButton">
                                         <rect key="frame" x="182" y="0.0" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -135,10 +139,6 @@
                                             <action selector="rightButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YFO-qA-K0y"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-4N-X1O" userLabel="spacer3">
-                                        <rect key="frame" x="157" y="0.0" width="25" height="36"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -276,10 +276,18 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
+                        <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
+                        <outlet property="gridButton" destination="ZWw-UU-QiW" id="5bb-6h-Kdq"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="imageCycler" destination="8Fb-MQ-XGx" id="1SL-Yo-YBE"/>
+                        <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
+                        <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>
                         <outlet property="letsPlayButton" destination="7cw-uc-rQN" id="1z0-aQ-Nlr"/>
+                        <outlet property="separatorView" destination="b4j-a2-3ko" id="Cm6-Ak-8kv"/>
+                        <outlet property="settingsButton" destination="VEQ-Ht-075" id="fWk-6Y-4c7"/>
                         <outlet property="shiftingTilesLabel" destination="6p4-o8-wZC" id="RNq-Wh-JLc"/>
+                        <outlet property="statsButton" destination="0ru-It-ZwP" id="Y9s-9A-2WN"/>
                         <outlet property="tilesPerRowLabel" destination="zGq-2D-jDD" id="t3W-yK-ZE7"/>
                     </connections>
                 </viewController>
@@ -756,18 +764,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-Xd-i17" userLabel="TopBank">
-                                <rect key="frame" x="44" y="-17" width="546" height="44"/>
+                                <rect key="frame" x="49" y="-13" width="541" height="43"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="ShiftingTiles" customModuleProvider="target">
-                                <rect key="frame" x="44" y="27" width="546" height="546"/>
+                                <rect key="frame" x="49" y="30" width="541" height="541"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="1:1" id="mCM-5H-gkw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-fP-WBe" userLabel="LeftBank">
-                                <rect key="frame" x="0.0" y="27" width="44" height="546"/>
+                                <rect key="frame" x="5" y="30" width="44" height="541"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="row-0Z-gkW" userLabel="Divider view">
@@ -894,7 +902,7 @@
                             <constraint firstItem="row-0Z-gkW" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="JeO-MP-mlk"/>
                             <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
                             <constraint firstItem="BUW-hI-3S5" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="RXj-yu-aOt"/>
-                            <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="Rvw-yQ-JFS"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="5" id="Rvw-yQ-JFS"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" id="TfL-um-7H6"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.1" id="VGk-xJ-8WX"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="top" secondItem="row-0Z-gkW" secondAttribute="bottom" id="ViO-Q7-gC8"/>
@@ -916,6 +924,7 @@
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
                         <outlet property="leftBankTopConstraint" destination="JGT-51-mtK" id="ha0-Wr-VIC"/>
+                        <outlet property="separatorView" destination="row-0Z-gkW" id="EKa-A3-WTc"/>
                         <outlet property="showOriginalButton" destination="kMV-Zu-rKc" id="kTH-D8-1RC"/>
                         <outlet property="solveButton" destination="rl5-9y-N59" id="i5a-Hc-2fL"/>
                         <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>

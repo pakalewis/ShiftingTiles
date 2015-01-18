@@ -53,11 +53,16 @@ class SettingsScreen: UIViewController {
     
     
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateColors()
+    }
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.updateColors()
 
         
         // Add tap gesturess
@@ -115,10 +120,10 @@ class SettingsScreen: UIViewController {
         var shufflesOn = userDefaults.boolForKey("shufflesOn")
         if shufflesOn {
             self.userDefaults.setBool(false, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
+            self.shuffleImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
         } else {
             self.userDefaults.setBool(true, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
+            self.shuffleImage.image = UIImage(named: "checkedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
         }
         self.userDefaults.synchronize()
         
@@ -129,10 +134,10 @@ class SettingsScreen: UIViewController {
         var rotationsOn = userDefaults.boolForKey("rotationsOn")
         if rotationsOn {
             self.userDefaults.setBool(false, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
+            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
         } else {
             self.userDefaults.setBool(true, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
+            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
         }
         self.userDefaults.synchronize()
     }
@@ -165,13 +170,14 @@ class SettingsScreen: UIViewController {
     
     
     func updateColors() {
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
-        self.rotateTilesLabel.textColor = ColorPalette().fetchDarkColor()
-        self.colorSchemeLabel.textColor = ColorPalette().fetchDarkColor()
-        self.shuffleImage.image = self.shuffleImage.image?.imageWithColor(ColorPalette().fetchDarkColor())
-        self.rotationImage.image = self.rotationImage.image?.imageWithColor(ColorPalette().fetchDarkColor())
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(ColorPalette().fetchDarkColor()), forState: UIControlState.Normal)
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.rotateTilesLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.shuffleImage.image = self.shuffleImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.rotationImage.image = self.rotationImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
     }
     
     @IBAction func dismissInfo(sender: AnyObject) {

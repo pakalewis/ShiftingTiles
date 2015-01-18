@@ -25,12 +25,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     
     // VIEWS
+    var originalImageView: UIImageView!
     @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
-    var originalImageView: UIImageView!
-    
+    @IBOutlet weak var separatorView: UIView!
+
     // CONSTRAINTS
     @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBankLeftConstraint: NSLayoutConstraint!
@@ -50,9 +51,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Apply color scheme
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
-        self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
+        self.updateColors()
     }
 
     
@@ -100,7 +99,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             var topBankGestureFrame = CGRectMake(topBankGesturePositionX, 0, topBankGestureHeight, topBankGestureHeight)
             var topGestureArea = UIImageView(frame: topBankGestureFrame)
-            topGestureArea.image = UIImage(named: "upTriangle")
+            topGestureArea.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             topGestureArea.userInteractionEnabled = true;
             var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             topGestureArea.tag = index
@@ -110,7 +109,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             var leftBankGestureFrame = CGRectMake(0, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureWidth)
             var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
-            leftGestureArea.image = UIImage(named: "leftTriangle")
+            leftGestureArea.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             leftGestureArea.userInteractionEnabled = true;
             var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             leftGestureArea.tag = index + 100
@@ -135,17 +134,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             // Flip the image on the button
             if (tappedButton.tag - 100) < 0 { // line 1 is a column
-                self.firstButton.image = UIImage(named: "downTriangle")
+                self.firstButton.image = UIImage(named: "downTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             } else { // line1 is a row
-                self.firstButton.image = UIImage(named: "rightTriangle")
+                self.firstButton.image = UIImage(named: "rightTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             }
             
-            // TODO: Is comparing images like this ok??
-//                if tappedButton.image == UIImage(named: "upTriangle") {
-//                    self.firstButton.image = UIImage(named: "downTriangle")
-//                } else {
-//                    self.firstButton.image = UIImage(named: "rightTriangle")
-//                }
         } else {
             // Flip the bool
             self.isFirstRowOrColumnTapped = false
@@ -155,9 +148,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             
             // Flip the image on the button back to normal
             if (self.firstButton.tag - 100) < 0 { // line 1 is a column
-                self.firstButton.image = UIImage(named: "upTriangle")
+                self.firstButton.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             } else { // line1 is a row
-                self.firstButton.image = UIImage(named: "leftTriangle")
+                self.firstButton.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             }
             
             // If two distinct lines were tapped, then swap
@@ -180,7 +173,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         stats.updateSolveStats(self.tilesPerRow)
         
         
-        // TODO: How to handle these buttons?
+        // Hide and disable buttons
         self.hintButton.userInteractionEnabled = false
         self.hintButton.alpha = 0
         self.solveButton.userInteractionEnabled = false
@@ -284,5 +277,18 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.presentViewController(solveAlert, animated: true, completion: nil)
     }
     
+ 
+    func updateColors() {
+        // Apply color scheme
+        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
+        self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+
+
+    }
     
 }
