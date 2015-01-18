@@ -16,7 +16,7 @@ class SettingsScreen: UIViewController {
     let colorPalette = ColorPalette()
     
     
-    
+    // Labels and buttons
     @IBOutlet weak var settingLabel: UILabel!
     
     @IBOutlet weak var shuffleImage: UIImageView!
@@ -24,8 +24,13 @@ class SettingsScreen: UIViewController {
     
     @IBOutlet weak var shuffle: UIView!
     @IBOutlet weak var rotations: UIView!
+
+    @IBOutlet weak var rotateTilesLabel: UILabel!
+    @IBOutlet weak var colorSchemeLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     
+    // Palettes
     @IBOutlet weak var colorPalette1: UIView!
     @IBOutlet weak var lightColor1: UIView!
     @IBOutlet weak var darkColor1: UIView!
@@ -46,13 +51,14 @@ class SettingsScreen: UIViewController {
     @IBOutlet weak var lightColor5: UIView!
     @IBOutlet weak var darkColor5: UIView!
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set colors for this screen
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
-        self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
-        
+        self.updateColors()
+
         
         // Add tap gesturess
         var shuffleTap = UITapGestureRecognizer(target: self, action: "shuffleTapped:")
@@ -109,10 +115,10 @@ class SettingsScreen: UIViewController {
         var shufflesOn = userDefaults.boolForKey("shufflesOn")
         if shufflesOn {
             self.userDefaults.setBool(false, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "uncheckedBox")
+            self.shuffleImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
         } else {
             self.userDefaults.setBool(true, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "checkedBox")
+            self.shuffleImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
         }
         self.userDefaults.synchronize()
         
@@ -123,10 +129,10 @@ class SettingsScreen: UIViewController {
         var rotationsOn = userDefaults.boolForKey("rotationsOn")
         if rotationsOn {
             self.userDefaults.setBool(false, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "uncheckedBox")
+            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
         } else {
             self.userDefaults.setBool(true, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "checkedBox")
+            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette().fetchDarkColor())
         }
         self.userDefaults.synchronize()
     }
@@ -134,34 +140,39 @@ class SettingsScreen: UIViewController {
     
     func colorPalette1Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(1, forKey: "colorPaletteInt")
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.updateColors()
     }
     
     func colorPalette2Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.updateColors()
     }
     
     func colorPalette3Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.updateColors()
     }
     
     func colorPalette4Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(4, forKey: "colorPaletteInt")
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.updateColors()
     }
     
     func colorPalette5Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(5, forKey: "colorPaletteInt")
-        self.view.backgroundColor = ColorPalette().fetchLightColor()
-        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.updateColors()
     }
     
+    
+    func updateColors() {
+        self.view.backgroundColor = ColorPalette().fetchLightColor()
+        self.settingLabel.textColor = ColorPalette().fetchDarkColor()
+        self.rotateTilesLabel.textColor = ColorPalette().fetchDarkColor()
+        self.colorSchemeLabel.textColor = ColorPalette().fetchDarkColor()
+        self.shuffleImage.image = self.shuffleImage.image?.imageWithColor(ColorPalette().fetchDarkColor())
+        self.rotationImage.image = self.rotationImage.image?.imageWithColor(ColorPalette().fetchDarkColor())
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(ColorPalette().fetchDarkColor()), forState: UIControlState.Normal)
+    }
     
     @IBAction func dismissInfo(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

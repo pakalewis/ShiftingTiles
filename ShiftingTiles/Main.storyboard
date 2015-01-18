@@ -709,11 +709,13 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="LBb-Ll-ymG" id="TNc-jJ-v1E"/>
                         <outlet property="colorPalette1" destination="h45-0D-imF" id="kWD-Ew-jht"/>
                         <outlet property="colorPalette2" destination="9ks-2D-5bM" id="k95-2f-AyL"/>
                         <outlet property="colorPalette3" destination="Ujq-Gf-SCT" id="gNN-TT-gOx"/>
                         <outlet property="colorPalette4" destination="ZS0-Ha-sC2" id="XE1-dk-btA"/>
                         <outlet property="colorPalette5" destination="aYc-Wd-p8T" id="zYX-lW-MxP"/>
+                        <outlet property="colorSchemeLabel" destination="Sf0-Cx-u40" id="dfc-b1-zKu"/>
                         <outlet property="darkColor1" destination="P32-Qo-LSb" id="bOB-O4-Owf"/>
                         <outlet property="darkColor2" destination="1ft-wO-aPq" id="LyW-JD-esU"/>
                         <outlet property="darkColor3" destination="vce-Db-ySh" id="0dB-kW-XlU"/>
@@ -724,6 +726,7 @@
                         <outlet property="lightColor3" destination="Cut-og-KES" id="tgd-ge-poB"/>
                         <outlet property="lightColor4" destination="WCR-7F-9Cc" id="D5g-FT-iF9"/>
                         <outlet property="lightColor5" destination="QiM-oj-ado" id="X2N-v2-XnY"/>
+                        <outlet property="rotateTilesLabel" destination="uXO-Pj-VjY" id="jjN-kS-sYv"/>
                         <outlet property="rotationImage" destination="hiq-83-85h" id="fCb-al-gc6"/>
                         <outlet property="rotations" destination="b4R-8Z-gEW" id="MFW-gD-mep"/>
                         <outlet property="settingLabel" destination="eXT-vh-s4k" id="ndh-la-QFh"/>

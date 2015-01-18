@@ -14,17 +14,25 @@ class ColorPalette {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     
-    
+    // Greens
     var lightColor1 = UIColor(hex: 0x84A174, alpha: 1)
     var darkColor1 = UIColor(hex: 0x1A3C3D, alpha: 1)
-    var lightColor2 = UIColor(hex: 0x73b9e6, alpha: 1)
-    var darkColor2 = UIColor(hex: 0x2e4174, alpha: 1)
-    var lightColor3 = UIColor(hex: 0xE8CF76, alpha: 1)
-    var darkColor3 = UIColor(hex: 0x383F70, alpha: 1)
-    var lightColor4 = UIColor(hex: 0xC4B357, alpha: 1)
-    var darkColor4 = UIColor(hex: 0xC80815, alpha: 1)
-    var lightColor5 = UIColor(hex: 0xff9900, alpha: 1)
-    var darkColor5 = UIColor(hex: 0x990000, alpha: 1)
+
+    // Yellow/Blue
+    var lightColor2 = UIColor(hex: 0xfee96c, alpha: 1)
+    var darkColor2 = UIColor(hex: 0x0093d0, alpha: 1)
+    
+    // Blues
+    var lightColor3 = UIColor(hex: 0x73b9e6, alpha: 1)
+    var darkColor3 = UIColor(hex: 0x2e4174, alpha: 1)
+    
+    // Gryffindor
+    var lightColor4 = UIColor(hex: 0xd3a625, alpha: 1)
+    var darkColor4 = UIColor(hex: 0x740001, alpha: 1)
+
+    // Pink/Purple
+    var lightColor5 = UIColor(hex: 0xc79dd7, alpha: 1)
+    var darkColor5 = UIColor(hex: 0x673888, alpha: 1)
     
     
     func fetchLightColor() -> UIColor {
