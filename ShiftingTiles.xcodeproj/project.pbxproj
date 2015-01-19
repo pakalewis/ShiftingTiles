@@ -19,7 +19,6 @@
 		2C5DCE941A663EA900DEF22E /* decreaseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE921A663EA900DEF22E /* decreaseIcon.png */; };
 		2C5DCE951A663EA900DEF22E /* increaseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE931A663EA900DEF22E /* increaseIcon.png */; };
 		2C5DCE971A66416400DEF22E /* statsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE961A66416400DEF22E /* statsIcon.png */; };
-		2C5DCF571A664A4200DEF22E /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DCF561A664A4200DEF22E /* SettingsScreen.swift */; };
 		2C7F07D51A5DEF500083F668 /* 01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F07D41A5DEF500083F668 /* 01.jpeg */; };
 		2C7F07F11A5DEF860083F668 /* 20.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F07D61A5DEF860083F668 /* 20.jpeg */; };
 		2C7F07F21A5DEF860083F668 /* 22.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F07D71A5DEF860083F668 /* 22.jpeg */; };
@@ -102,7 +101,9 @@
 		2C805D991A69AE94004FCF8B /* RulesScreen2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C805D971A69AE94004FCF8B /* RulesScreen2.xib */; };
 		2C805D9C1A69B0FD004FCF8B /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805D9A1A69B0FD004FCF8B /* Acknowledgements.swift */; };
 		2C805D9D1A69B0FD004FCF8B /* Acknowledgements.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C805D9B1A69B0FD004FCF8B /* Acknowledgements.xib */; };
-		2C805D9F1A6B7B90004FCF8B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805D9E1A6B7B90004FCF8B /* UIImageExtension.swift */; };
+		2C805DCF1A6BABF1004FCF8B /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DCE1A6BABF1004FCF8B /* SettingsScreen.swift */; };
+		2C805DD11A6BABFD004FCF8B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */; };
+		2C805DD41A6BACE8004FCF8B /* TapGestureSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */; };
 		2CF7E40D1A6728F800E39B14 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40A1A6728F800E39B14 /* backIcon.png */; };
 		2CF7E40E1A6728F800E39B14 /* hintIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40B1A6728F800E39B14 /* hintIcon.png */; };
 		2CF7E40F1A6728F800E39B14 /* originalImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */; };
@@ -126,7 +127,6 @@
 		2C5DCE921A663EA900DEF22E /* decreaseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = decreaseIcon.png; path = ShiftingTiles/decreaseIcon.png; sourceTree = SOURCE_ROOT; };
 		2C5DCE931A663EA900DEF22E /* increaseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = increaseIcon.png; path = ShiftingTiles/increaseIcon.png; sourceTree = SOURCE_ROOT; };
 		2C5DCE961A66416400DEF22E /* statsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statsIcon.png; path = ShiftingTiles/statsIcon.png; sourceTree = SOURCE_ROOT; };
-		2C5DCF561A664A4200DEF22E /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = SOURCE_ROOT; };
 		2C7F07D41A5DEF500083F668 /* 01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 01.jpeg; path = ShiftingTiles/01.jpeg; sourceTree = SOURCE_ROOT; };
 		2C7F07D61A5DEF860083F668 /* 20.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 20.jpeg; path = ShiftingTiles/20.jpeg; sourceTree = SOURCE_ROOT; };
 		2C7F07D71A5DEF860083F668 /* 22.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 22.jpeg; path = ShiftingTiles/22.jpeg; sourceTree = SOURCE_ROOT; };
@@ -210,7 +210,10 @@
 		2C805D971A69AE94004FCF8B /* RulesScreen2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RulesScreen2.xib; path = ShiftingTiles/RulesScreen2.xib; sourceTree = SOURCE_ROOT; };
 		2C805D9A1A69B0FD004FCF8B /* Acknowledgements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Acknowledgements.swift; path = ShiftingTiles/Acknowledgements.swift; sourceTree = SOURCE_ROOT; };
 		2C805D9B1A69B0FD004FCF8B /* Acknowledgements.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Acknowledgements.xib; path = ShiftingTiles/Acknowledgements.xib; sourceTree = SOURCE_ROOT; };
-		2C805D9E1A6B7B90004FCF8B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = SOURCE_ROOT; };
+		2C805DCE1A6BABF1004FCF8B /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsScreen.swift; path = ShiftingTiles/SettingsScreen.swift; sourceTree = SOURCE_ROOT; };
+		2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = ShiftingTiles/UIImageExtension.swift; sourceTree = SOURCE_ROOT; };
+		2C805DD21A6BAC6D004FCF8B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapGestureSubclass.swift; path = ShiftingTiles/TapGestureSubclass.swift; sourceTree = SOURCE_ROOT; };
 		2CF7E40A1A6728F800E39B14 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backIcon.png; path = ShiftingTiles/backIcon.png; sourceTree = SOURCE_ROOT; };
 		2CF7E40B1A6728F800E39B14 /* hintIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hintIcon.png; path = ShiftingTiles/hintIcon.png; sourceTree = SOURCE_ROOT; };
 		2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = originalImageIcon.png; path = ShiftingTiles/originalImageIcon.png; sourceTree = SOURCE_ROOT; };
@@ -257,7 +260,7 @@
 				2C5DCE981A66448E00DEF22E /* Settings Screen */,
 				2CE1D5731A65C26700F98FEE /* InfoScreen */,
 				2CD0EDC61A5CDA0F005C8477 /* Stats */,
-				2CD422B51A453D8600B08420 /* Model */,
+				2CD422B51A453D8600B08420 /* Misc */,
 				2C7F08741A5DF0AA0083F668 /* Main.storyboard */,
 				2C7F08721A5DF0AA0083F668 /* AppDelegate.swift */,
 				2C7F08731A5DF0AA0083F668 /* Images.xcassets */,
@@ -287,7 +290,7 @@
 		2C5DCE981A66448E00DEF22E /* Settings Screen */ = {
 			isa = PBXGroup;
 			children = (
-				2C5DCF561A664A4200DEF22E /* SettingsScreen.swift */,
+				2C805DCE1A6BABF1004FCF8B /* SettingsScreen.swift */,
 			);
 			name = "Settings Screen";
 			sourceTree = "<group>";
@@ -382,18 +385,20 @@
 			name = "Game Screen";
 			sourceTree = "<group>";
 		};
-		2CD422B51A453D8600B08420 /* Model */ = {
+		2CD422B51A453D8600B08420 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */,
 				2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */,
 				2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */,
 				2C7F086A1A5DF0980083F668 /* DoubleIndex.swift */,
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
 				2C7F086D1A5DF0980083F668 /* Tile.swift */,
-				2C805D9E1A6B7B90004FCF8B /* UIImageExtension.swift */,
+				2C805DD21A6BAC6D004FCF8B /* Bridging-Header.h */,
+				2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */,
 			);
-			name = Model;
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		2CD422BC1A455FB900B08420 /* Puzzle Images */ = {
@@ -597,8 +602,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C805D9C1A69B0FD004FCF8B /* Acknowledgements.swift in Sources */,
+				2C805DCF1A6BABF1004FCF8B /* SettingsScreen.swift in Sources */,
+				2C805DD11A6BABFD004FCF8B /* UIImageExtension.swift in Sources */,
 				2C7F08711A5DF0980083F668 /* Tile.swift in Sources */,
-				2C805D9F1A6B7B90004FCF8B /* UIImageExtension.swift in Sources */,
 				2C7F08601A5DF0730083F668 /* GameScreen.swift in Sources */,
 				2C7F08681A5DF0810083F668 /* Stats.swift in Sources */,
 				2C7F08751A5DF0AA0083F668 /* AppDelegate.swift in Sources */,
@@ -608,9 +614,9 @@
 				2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */,
 				2C7F085C1A5DF05D0083F668 /* DrawGrid.swift in Sources */,
 				2C7F086E1A5DF0980083F668 /* DoubleIndex.swift in Sources */,
+				2C805DD41A6BACE8004FCF8B /* TapGestureSubclass.swift in Sources */,
 				2C805D981A69AE94004FCF8B /* RulesScreen2.swift in Sources */,
 				2C7F08691A5DF0810083F668 /* StatsScreen.swift in Sources */,
-				2C5DCF571A664A4200DEF22E /* SettingsScreen.swift in Sources */,
 				2C025E6F1A660D4900BEFB87 /* UIColorExtension.swift in Sources */,
 				2C7F085A1A5DF05D0083F668 /* CollectionViewImageCell.swift in Sources */,
 				2C7F08661A5DF0810083F668 /* StatCell.swift in Sources */,

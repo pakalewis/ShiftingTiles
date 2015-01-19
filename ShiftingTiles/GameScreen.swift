@@ -26,6 +26,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     // VIEWS
     var originalImageView: UIImageView!
+    var borderView = UIView()
     @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
@@ -84,16 +85,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func initializeButtons() {
         
+        // Measuerments to make the frames
+        var topBankGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
+        var topBankGestureHeight = self.topBank.frame.height
+        var leftBankGestureWidth = self.leftBank.frame.width
+        var leftBankGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
+
         for index in 0..<self.tilesPerRow {
             
             // Measuerments to make the frames
-            var topBankGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
-            var topBankGestureHeight = self.topBank.frame.height
             var topBankGesturePositionX = (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2)
-            
-
-            var leftBankGestureWidth = self.leftBank.frame.width
-            var leftBankGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
             var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2)
             
             
@@ -123,6 +124,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     func bankTapped(sender: UIGestureRecognizer) {
 
         var tappedButton = sender.view as UIImageView
+        println("\(tappedButton.tag)")
+        
         
         if (!isFirstRowOrColumnTapped) {
             // Flip the bool
@@ -135,8 +138,28 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             // Flip the image on the button
             if (tappedButton.tag - 100) < 0 { // line 1 is a column
                 self.firstButton.image = UIImage(named: "downTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
+                
+                // Add border around the column
+                var tileWidth = self.tileArea.frame.width / CGFloat(self.tilesPerRow)
+                var xPos = tileWidth * CGFloat(tappedButton.tag) + self.tileArea.frame.origin.x
+                
+                var borderViewFrame = CGRectMake(xPos - 2, self.tileArea.frame.origin.y - 2, tileWidth + 4, self.tileArea.frame.height + 4)
+                self.borderView = UIView(frame: borderViewFrame)
+                self.borderView.layer.borderWidth = 4
+                self.borderView.layer.borderColor = UIColor.blackColor().CGColor
+                self.view.addSubview(self.borderView)
+
             } else { // line1 is a row
                 self.firstButton.image = UIImage(named: "rightTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
+
+                // Add border around the row
+                var tileWidth = self.tileArea.frame.width / CGFloat(self.tilesPerRow)
+                var yPos = tileWidth * CGFloat(tappedButton.tag - 100) + self.tileArea.frame.origin.y                
+                var borderViewFrame = CGRectMake(self.tileArea.frame.origin.x - 2, yPos - 2, self.tileArea.frame.width + 4, tileWidth + 4)
+                self.borderView = UIView(frame: borderViewFrame)
+                self.borderView.layer.borderWidth = 4
+                self.borderView.layer.borderColor = UIColor.blackColor().CGColor
+                self.view.addSubview(self.borderView)
             }
             
         } else {
@@ -145,6 +168,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
             // set the second tag
             self.secondRowOrColumnTapped = sender.view!.tag
+            
+            // Remove borderView
+            self.borderView.removeFromSuperview()
             
             // Flip the image on the button back to normal
             if (self.firstButton.tag - 100) < 0 { // line 1 is a column
@@ -208,7 +234,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
 
     
-    
     // MARK: BUTTONS
     // These two funcs toggle the image on and off
     @IBAction func showOriginal(sender: AnyObject) {
@@ -258,18 +283,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
             
-            // TODO: Better way to handle these buttons?
-            self.hintButton.userInteractionEnabled = false
-            self.hintButton.alpha = 0.0
-            self.solveButton.userInteractionEnabled = false
-            self.solveButton.alpha = 0.0
-            self.showOriginalButton.userInteractionEnabled = false
-            self.showOriginalButton.alpha = 0
-
+            self.puzzleIsSolved()
             self.tileArea.layoutTilesWithMargin(0.0)
             self.tileArea.orientAllTiles()
             self.tileArea.isPuzzleSolved = true
-            self.puzzleIsSolved()
         }
 
         solveAlert.addAction(yesAction)

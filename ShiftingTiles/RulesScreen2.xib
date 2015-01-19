@@ -19,23 +19,23 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="656"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSL-OZ-ISK" userLabel="Container">
-                    <rect key="frame" x="30" y="70" width="540" height="556"/>
+                    <rect key="frame" x="30" y="70" width="540" height="500"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDK-TI-bfi" userLabel="View1">
-                            <rect key="frame" x="54" y="-2" width="432" height="112"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KDK-TI-bfi" userLabel="View1">
+                            <rect key="frame" x="54" y="-2" width="432" height="101"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Am3-wP-oH2">
-                                    <rect key="frame" x="0.0" y="6" width="100" height="100"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cameraIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Am3-wP-oH2">
+                                    <rect key="frame" x="0.0" y="5" width="90" height="90"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Am3-wP-oH2" secondAttribute="height" multiplier="1:1" id="EuW-Rz-tLk"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICh-Ga-btF">
-                                    <rect key="frame" x="100" y="0.0" width="332" height="112"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICh-Ga-btF">
+                                    <rect key="frame" x="90" y="0.0" width="342" height="101"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -60,16 +60,16 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fd0-H5-HAF" userLabel="View3">
-                            <rect key="frame" x="54" y="222" width="432" height="112"/>
+                            <rect key="frame" x="54" y="200" width="432" height="100"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gridIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="jRa-p9-aAQ">
-                                    <rect key="frame" x="0.0" y="6" width="100" height="100"/>
+                                    <rect key="frame" x="0.0" y="5" width="90" height="90"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="jRa-p9-aAQ" secondAttribute="height" multiplier="1:1" id="nnL-BB-721"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nA-8H-CFK">
-                                    <rect key="frame" x="100" y="0.0" width="332" height="112"/>
+                                    <rect key="frame" x="90" y="0.0" width="342" height="100"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -93,17 +93,17 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-YS-0dp" userLabel="View4">
-                            <rect key="frame" x="54" y="334" width="432" height="112"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-YS-0dp" userLabel="View4">
+                            <rect key="frame" x="54" y="300" width="432" height="101"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ngU-1e-Vpl">
-                                    <rect key="frame" x="0.0" y="6" width="100" height="100"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="goIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ngU-1e-Vpl">
+                                    <rect key="frame" x="0.0" y="6" width="90" height="90"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ngU-1e-Vpl" secondAttribute="height" multiplier="1:1" id="SAo-cM-fWt"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy1-m6-ZhB">
-                                    <rect key="frame" x="100" y="0.0" width="332" height="112"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy1-m6-ZhB">
+                                    <rect key="frame" x="90" y="0.0" width="342" height="101"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -127,17 +127,17 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7K-Tq-BKn" userLabel="View5">
-                            <rect key="frame" x="54" y="446" width="432" height="112"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N7K-Tq-BKn" userLabel="View5">
+                            <rect key="frame" x="54" y="401" width="432" height="101"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="LM1-ih-Csc">
-                                    <rect key="frame" x="0.0" y="6" width="100" height="100"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="statsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="LM1-ih-Csc">
+                                    <rect key="frame" x="0.0" y="6" width="90" height="90"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="LM1-ih-Csc" secondAttribute="height" multiplier="1:1" id="Vsp-v9-5UR"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-xA-yyo">
-                                    <rect key="frame" x="100" y="0.0" width="332" height="112"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-xA-yyo">
+                                    <rect key="frame" x="90" y="0.0" width="342" height="101"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -161,17 +161,17 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0d-5m-yeb" userLabel="View2">
-                            <rect key="frame" x="54" y="110" width="432" height="112"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J0d-5m-yeb" userLabel="View2">
+                            <rect key="frame" x="54" y="99" width="432" height="101"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="increaseIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-Ev-Y8s">
-                                    <rect key="frame" x="0.0" y="6" width="100" height="100"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="increaseIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-Ev-Y8s">
+                                    <rect key="frame" x="0.0" y="5" width="90" height="90"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="9aE-Ev-Y8s" secondAttribute="height" multiplier="1:1" id="c7O-54-Wc9"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-gJ-DpK">
-                                    <rect key="frame" x="100" y="0.0" width="332" height="112"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-gJ-DpK">
+                                    <rect key="frame" x="90" y="0.0" width="342" height="101"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

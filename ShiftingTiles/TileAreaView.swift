@@ -86,12 +86,14 @@ class TileAreaView: UIView {
                 tile.imageView.frame = tileFrame
 
                 // Add gesture recognizers
+                let doubleTapGesture = UITapGestureRecognizer(target: self, action: "tileDoubleTapped:")
+                doubleTapGesture.numberOfTapsRequired = 2
+                tile.imageView.addGestureRecognizer(doubleTapGesture)
+                
                 let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
+                tapGesture.numberOfTapsRequired = 1
                 tile.imageView.addGestureRecognizer(tapGesture)
-                // TODO: Make this a double tap instead?? I ran into lots of problems...
-                let longPressGesture = UILongPressGestureRecognizer(target: self, action: "tileLongPressed:")
-                longPressGesture.minimumPressDuration = 0.25
-                tile.imageView.addGestureRecognizer(longPressGesture)
+                tapGesture.requireGestureRecognizerToFail(doubleTapGesture)
                 
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
@@ -195,6 +197,7 @@ class TileAreaView: UIView {
     }
     
     
+    
     func swapLines(line1: Int, line2: Int) {
         
         var tileLine1 = [Tile]()
@@ -268,7 +271,6 @@ class TileAreaView: UIView {
             tile.imageView.transform = CGAffineTransformMakeRotation(rotation)
             tile.orientationCount++
             if tile.orientationCount == 5 {
-                println("image is oriented")
                 tile.orientationCount = 1
             }
             
@@ -343,10 +345,10 @@ class TileAreaView: UIView {
                 var tileFrame = tappedTile.imageView.frame
                 var highlightedViewFrame = CGRectMake(tileFrame.origin.x - 2, tileFrame.origin.y - 2, tileFrame.width + 4, tileFrame.height + 4)
                 self.highlightedView = UIView(frame: highlightedViewFrame)
-                self.highlightedView.backgroundColor = UIColor.blackColor()
+                self.highlightedView.layer.borderWidth = 4
+                self.highlightedView.layer.borderColor = UIColor.blackColor().CGColor
                 self.addSubview(self.highlightedView)
                 self.sendSubviewToBack(self.highlightedView)
-                
 
                 
                 // TODO: ALTERNATIVE TO THE BLACK OUTLINE
@@ -372,6 +374,7 @@ class TileAreaView: UIView {
                 self.firstTileSelectedBool = false
 
             } else {
+                
                 // Remove the temporary highlighting
                 self.highlightedView.removeFromSuperview()
                 
@@ -392,7 +395,7 @@ class TileAreaView: UIView {
         }
     }
     
-    func tileLongPressed(sender: UIGestureRecognizer) {
+    func tileDoubleTapped(sender: UIGestureRecognizer) {
         if !self.isPuzzleSolved {
             if sender.state == UIGestureRecognizerState.Ended {
                 
@@ -406,7 +409,6 @@ class TileAreaView: UIView {
                         self.delegate!.puzzleIsSolved()
                     }
                 })
-                
             }
         }
     }
