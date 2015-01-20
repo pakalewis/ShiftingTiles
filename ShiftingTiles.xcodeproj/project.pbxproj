@@ -104,6 +104,7 @@
 		2C805DCF1A6BABF1004FCF8B /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DCE1A6BABF1004FCF8B /* SettingsScreen.swift */; };
 		2C805DD11A6BABFD004FCF8B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */; };
 		2C805DD41A6BACE8004FCF8B /* TapGestureSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */; };
+		2C805DDB1A6DBF27004FCF8B /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C805DDA1A6DBF27004FCF8B /* rightArrow.png */; };
 		2CF7E40D1A6728F800E39B14 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40A1A6728F800E39B14 /* backIcon.png */; };
 		2CF7E40E1A6728F800E39B14 /* hintIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40B1A6728F800E39B14 /* hintIcon.png */; };
 		2CF7E40F1A6728F800E39B14 /* originalImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */; };
@@ -212,8 +213,9 @@
 		2C805D9B1A69B0FD004FCF8B /* Acknowledgements.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Acknowledgements.xib; path = ShiftingTiles/Acknowledgements.xib; sourceTree = SOURCE_ROOT; };
 		2C805DCE1A6BABF1004FCF8B /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsScreen.swift; path = ShiftingTiles/SettingsScreen.swift; sourceTree = SOURCE_ROOT; };
 		2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = ShiftingTiles/UIImageExtension.swift; sourceTree = SOURCE_ROOT; };
-		2C805DD21A6BAC6D004FCF8B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapGestureSubclass.swift; path = ShiftingTiles/TapGestureSubclass.swift; sourceTree = SOURCE_ROOT; };
+		2C805DDA1A6DBF27004FCF8B /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rightArrow.png; path = ShiftingTiles/rightArrow.png; sourceTree = SOURCE_ROOT; };
+		2C805DDC1A6DBF35004FCF8B /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "ShiftingTiles/Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		2CF7E40A1A6728F800E39B14 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backIcon.png; path = ShiftingTiles/backIcon.png; sourceTree = SOURCE_ROOT; };
 		2CF7E40B1A6728F800E39B14 /* hintIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hintIcon.png; path = ShiftingTiles/hintIcon.png; sourceTree = SOURCE_ROOT; };
 		2CF7E40C1A6728F800E39B14 /* originalImageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = originalImageIcon.png; path = ShiftingTiles/originalImageIcon.png; sourceTree = SOURCE_ROOT; };
@@ -343,6 +345,7 @@
 		2CD299FF1A47B6490048FDD8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2C805DDA1A6DBF27004FCF8B /* rightArrow.png */,
 				2CF7E4101A67331700E39B14 /* solveIcon.png */,
 				2CF7E40A1A6728F800E39B14 /* backIcon.png */,
 				2CF7E40B1A6728F800E39B14 /* hintIcon.png */,
@@ -395,8 +398,8 @@
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
 				2C7F086D1A5DF0980083F668 /* Tile.swift */,
-				2C805DD21A6BAC6D004FCF8B /* Bridging-Header.h */,
 				2C805DD31A6BACE8004FCF8B /* TapGestureSubclass.swift */,
+				2C805DDC1A6DBF35004FCF8B /* Bridging-Header.h */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				2C7F085B1A5DF05D0083F668 /* CollectionViewImageCell.xib in Resources */,
 				2C7F07FB1A5DEF860083F668 /* 18.jpeg in Resources */,
 				2C7F08371A5DEFFE0083F668 /* 17small.jpeg in Resources */,
+				2C805DDB1A6DBF27004FCF8B /* rightArrow.png in Resources */,
 				2C5DCE8D1A663BA600DEF22E /* settingsIcon.png in Resources */,
 				2C7F07F41A5DEF860083F668 /* 15.jpeg in Resources */,
 				2C7F08391A5DEFFE0083F668 /* 19small.jpeg in Resources */,

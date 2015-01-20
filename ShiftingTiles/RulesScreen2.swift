@@ -12,7 +12,12 @@ class RulesScreen2: UIViewController {
     
     let colorPalette = ColorPalette()
 
-    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var image4: UIImageView!
+    @IBOutlet weak var image5: UIImageView!
+
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -22,12 +27,27 @@ class RulesScreen2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.topLabel.text = "How To Play"
-        self.label1.text = "Choose from over 50 available images. Alternatively, tap the camera icon to take a photo or select one from your photos library."
-        self.label2.text = "Choose the difficulty level from 2 to 10."
-        self.label3.text = "Toggle the grid on and off to see a preview of the size of the tiles. This does not have any affect on the puzzle."
+        self.image1.image = self.image1.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.image2.image = self.image2.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.image3.image = self.image3.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.image4.image = self.image4.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.image4.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.image4.layer.borderWidth = 2
+        self.image4.layer.cornerRadius = self.image4.frame.width * 0.25
+        self.image5.image = self.image5.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        
+        self.label1.textColor = self.colorPalette.fetchDarkColor()
+        self.label2.textColor = self.colorPalette.fetchDarkColor()
+        self.label3.textColor = self.colorPalette.fetchDarkColor()
+        self.label4.textColor = self.colorPalette.fetchDarkColor()
+        self.label5.textColor = self.colorPalette.fetchDarkColor()
+        
+        
+        self.label1.text = "Take a photo or select one from your photos library."
+        self.label2.text = "Choose the difficulty level."
+        self.label3.text = "Toggle the grid to preview of the size of the tiles."
         self.label4.text = "Start the puzzle!"
-        self.label5.text = "View statistics "
+        self.label5.text = "View statistics."
 
     }
 }
