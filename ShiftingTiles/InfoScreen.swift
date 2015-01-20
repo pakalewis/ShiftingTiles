@@ -66,28 +66,26 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     func setupVCArray() {
         let page2 = RulesScreen2(nibName: "RulesScreen2", bundle: NSBundle.mainBundle())
-//        let page3 = RulesScreen2(nibName: "RulesScreen2", bundle: NSBundle.mainBundle())
-//        let page4 = RulesScreen2(nibName: "RulesScreen2", bundle: NSBundle.mainBundle())
-        let page5 = Acknowledgements(nibName: "Acknowledgements", bundle: NSBundle.mainBundle())
+        let page3 = RulesScreen3(nibName: "RulesScreen3", bundle: NSBundle.mainBundle())
+        let page4 = Acknowledgements(nibName: "Acknowledgements", bundle: NSBundle.mainBundle())
     
         self.viewControllers.append(page2)
-//        self.viewControllers.append(page3)
-//        self.viewControllers.append(page4)
-        self.viewControllers.append(page5)
+        self.viewControllers.append(page3)
+        self.viewControllers.append(page4)
     }
     
     
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-//        if viewController.isKindOfClass(RulesScreen1) {
-//            return nil
-//        }
         if viewController.isKindOfClass(RulesScreen2) {
             return self.viewControllers[0]
         }
-        if viewController.isKindOfClass(Acknowledgements) {
+        if viewController.isKindOfClass(RulesScreen3) {
             return self.viewControllers[1]
+        }
+        if viewController.isKindOfClass(Acknowledgements) {
+            return self.viewControllers[2]
         }
         return nil
     }
@@ -101,9 +99,9 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         if viewController.isKindOfClass(RulesScreen2) {
             return self.viewControllers[2]
         }
-//        if viewController.isKindOfClass(Acknowledgements) {
-//            return nil
-//        }
+        if viewController.isKindOfClass(RulesScreen3) {
+            return self.viewControllers[3]
+        }
         return nil
     }
     
@@ -113,7 +111,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     // MARK: - Page Indicator
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return 3
+        return 4
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {

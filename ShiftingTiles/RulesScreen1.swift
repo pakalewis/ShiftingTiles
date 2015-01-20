@@ -15,6 +15,7 @@ class RulesScreen1: UIViewController {
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
+    @IBOutlet weak var label4: UILabel!
     
     
     override func viewDidLoad() {
@@ -22,11 +23,13 @@ class RulesScreen1: UIViewController {
         
         self.label1.text = "Solve the puzzle by rearranging the tiles to form the complete image."
         self.label2.text = "Tap a tile to select it.\nTap a second tile to swap their positions."
-        self.label3.text = "Double tap a tile to rotate it 90°."
+        self.label3.text = "For an extra challenge, turn on Rotations in the settings menu."
+        self.label4.text = "Double tap a tile to rotate it 90°."
         
         self.label1.textColor = self.colorPalette.fetchDarkColor()
         self.label2.textColor = self.colorPalette.fetchDarkColor()
         self.label3.textColor = self.colorPalette.fetchDarkColor()
+        self.label4.textColor = self.colorPalette.fetchDarkColor()
 
     }
 
