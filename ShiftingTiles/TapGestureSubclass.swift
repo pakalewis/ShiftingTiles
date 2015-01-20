@@ -32,9 +32,10 @@ class TapGestureSubclass: UITapGestureRecognizer {
     
     
     
-        let offset = 0.2
+        let offset = 0.1
+        println("\(Int64(offset * Double(NSEC_PER_SEC)))")
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(offset * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-            if self.state != UIGestureRecognizerState.Began {
+            if self.state != UIGestureRecognizerState.Ended {
                 self.state = UIGestureRecognizerState.Failed
             }
         

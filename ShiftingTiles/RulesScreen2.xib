@@ -131,7 +131,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7K-Tq-BKn" userLabel="View5">
                     <rect key="frame" x="20" y="484" width="575" height="111"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="LM1-ih-Csc">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="LM1-ih-Csc">
                             <rect key="frame" x="0.0" y="28" width="55" height="55"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="LM1-ih-Csc" secondAttribute="height" multiplier="1:1" id="Vsp-v9-5UR"/>
@@ -165,7 +165,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-YS-0dp" userLabel="View4">
                     <rect key="frame" x="20" y="368" width="575" height="111"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ngU-1e-Vpl">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ngU-1e-Vpl">
                             <rect key="frame" x="0.0" y="28" width="55" height="55"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="ngU-1e-Vpl" secondAttribute="height" multiplier="1:1" id="SAo-cM-fWt"/>

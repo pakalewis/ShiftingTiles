@@ -262,18 +262,23 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
    
     // TODO: this if statement is using a wrong check. another counter for how many times this alert has been shown?
     @IBAction func backToMainScreen(sender: AnyObject) {
-        if userDefaults.integerForKey("totalSolves") < 3 {
-            var lossOfProgressAlert = UIAlertController(title: "Any progress on this puzzle will not be saved", message: "Are you sure you want to go back?", preferredStyle: UIAlertControllerStyle.Alert)
-            let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
-            let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: { (ok) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })
-            lossOfProgressAlert.addAction(yesAction)
-            lossOfProgressAlert.addAction(noAction)
-            self.presentViewController(lossOfProgressAlert, animated: true, completion: nil)
-        } else {
+        
+        if self.tileArea.isPuzzleSolved {
             self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        } else {
+            if userDefaults.integerForKey("totalPlays") < 3 {
+                var lossOfProgressAlert = UIAlertController(title: "Any progress on this puzzle will not be saved", message: "Are you sure you want to go back?", preferredStyle: UIAlertControllerStyle.Alert)
+                let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+                let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: { (ok) -> Void in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+                lossOfProgressAlert.addAction(yesAction)
+                lossOfProgressAlert.addAction(noAction)
+                self.presentViewController(lossOfProgressAlert, animated: true, completion: nil)
+            } else {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }        
     }
     
     

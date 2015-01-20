@@ -19,7 +19,8 @@ import UIKit
 class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let colorPalette = ColorPalette()
-    
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+
     
     // VIEWS
     @IBOutlet weak var shiftingTilesLabel: UILabel!
@@ -89,7 +90,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
             gameScreen.imageToSolve = self.imageToSolve
-            gameScreen.tilesPerRow = self.tilesPerRow            
+            gameScreen.tilesPerRow = self.tilesPerRow
+            
+            var totalPlays = self.userDefaults.integerForKey("totalPlays")
+            totalPlays++
+            self.userDefaults.setInteger(totalPlays, forKey: "totalPlays")
+
         }
     }
     

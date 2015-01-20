@@ -90,7 +90,7 @@ class TileAreaView: UIView {
                 doubleTapGesture.numberOfTapsRequired = 2
                 tile.imageView.addGestureRecognizer(doubleTapGesture)
                 
-                let tapGesture = UITapGestureRecognizer(target: self, action: "tileTapped:")
+                let tapGesture = TapGestureSubclass(target: self, action: "tileTapped:")
                 tapGesture.numberOfTapsRequired = 1
                 tile.imageView.addGestureRecognizer(tapGesture)
                 tapGesture.requireGestureRecognizerToFail(doubleTapGesture)
@@ -397,7 +397,7 @@ class TileAreaView: UIView {
     
     func tileDoubleTapped(sender: UIGestureRecognizer) {
         if !self.isPuzzleSolved {
-            if sender.state == UIGestureRecognizerState.Ended {
+            if userDefaults.boolForKey("rotationsOn") {
                 
                 // Grab the tag of the tile that was tapped and use it to find the correct tile
                 var tag = sender.view!.tag

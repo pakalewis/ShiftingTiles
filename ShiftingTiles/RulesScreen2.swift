@@ -46,8 +46,8 @@ class RulesScreen2: UIViewController {
         self.label1.text = "Take a photo or select one from your photos library."
         self.label2.text = "Choose the difficulty level."
         self.label3.text = "Toggle the grid to preview the size of the tiles."
-        self.label4.text = "Start the puzzle!"
-        self.label5.text = "View statistics."
+        self.label4.text = "View statistics."
+        self.label5.text = "Start the puzzle!"
 
     }
 }
