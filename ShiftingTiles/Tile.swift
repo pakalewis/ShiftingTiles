@@ -14,6 +14,7 @@ class Tile {
     var imageView = UIImageView()
     var doubleIndex : DoubleIndex!
     var orientationCount : CGFloat = 1
+    var originalFrame: CGRect?
     
     init(doubleIndex: DoubleIndex) {
         self.doubleIndex = doubleIndex

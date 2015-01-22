@@ -45,6 +45,10 @@ class TileAreaView: UIView {
     
     // MARK: SETUP
     func initialize() {
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        self.addGestureRecognizer(panGesture)
+        
         self.createTileArray()
         self.layoutTilesWithMargin(2)
 
@@ -56,6 +60,8 @@ class TileAreaView: UIView {
         }
     }
     
+    
+
     
     // The doubleIndex property helps monitor the tile's current coordinate. This gets swapped in swapTile()
     // The tag property on the Tile's imageView does not change. It is a way to determine where that tile should be positioned
@@ -85,15 +91,11 @@ class TileAreaView: UIView {
                 var tileFrame = CGRectMake(totalWidth / 2, totalWidth / 2, 0, 0)
                 tile.imageView.frame = tileFrame
 
-                // Add gesture recognizers
+                // Add gesture recognizer for rotations
                 let doubleTapGesture = UITapGestureRecognizer(target: self, action: "tileDoubleTapped:")
                 doubleTapGesture.numberOfTapsRequired = 2
                 tile.imageView.addGestureRecognizer(doubleTapGesture)
                 
-                let tapGesture = TapGestureSubclass(target: self, action: "tileTapped:")
-                tapGesture.numberOfTapsRequired = 1
-                tile.imageView.addGestureRecognizer(tapGesture)
-                tapGesture.requireGestureRecognizerToFail(doubleTapGesture)
                 
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
@@ -115,6 +117,7 @@ class TileAreaView: UIView {
             self.tileArray.append(rowArray)
         }
     }
+    
     
     
     func layoutTilesWithMargin(margin:CGFloat) {
@@ -158,7 +161,8 @@ class TileAreaView: UIView {
 
             var tile1 = self.tileArray[randomInt1][randomInt2]
             var tile2 = self.tileArray[randomInt3][randomInt4]
-            
+            tile1.originalFrame = tile1.imageView.frame
+            tile2.originalFrame = tile2.imageView.frame
 
             self.swapTiles(tile1, tile2: tile2, duration: 0.2, completionClosure: { () -> () in
             })
@@ -186,9 +190,11 @@ class TileAreaView: UIView {
             UIView.animateWithDuration(duration, animations: { () -> Void in
                 
                 // Swap frames
-                var firstFrame = tile1.imageView.frame
-                tile1.imageView.frame = tile2.imageView.frame
-                tile2.imageView.frame = firstFrame
+                tile1.imageView.frame = tile2.originalFrame!
+                tile2.imageView.frame = tile1.originalFrame!
+                tile1.originalFrame = tile1.imageView.frame
+                tile2.originalFrame = tile2.imageView.frame
+                
                 
                 }, completion: { (finished) -> Void in
                     completionClosure()
@@ -330,70 +336,56 @@ class TileAreaView: UIView {
     
     
     // MARK: INTERACTIONS
-    func tileTapped(sender: UIGestureRecognizer) {
-
-        if !self.isPuzzleSolved {
-            // Grab the tag of the tile that was tapped and use it to find the correct tile
-            var tag = sender.view!.tag
-            var tappedTile = self.tileArray[tag / 10][tag % 10]
-            
-            // Check if it is the first or second tile tapped
-            // Swap images and tags when
-            if self.firstTileSelectedBool {
-
-                // Add a subview behind the tapped tile to indicate that it was selected
-                var tileFrame = tappedTile.imageView.frame
-                var highlightedViewFrame = CGRectMake(tileFrame.origin.x - 2, tileFrame.origin.y - 2, tileFrame.width + 4, tileFrame.height + 4)
-                self.highlightedView = UIView(frame: highlightedViewFrame)
-                self.highlightedView.layer.borderWidth = 4
-                self.highlightedView.layer.borderColor = UIColor.blackColor().CGColor
-                self.addSubview(self.highlightedView)
-                self.sendSubviewToBack(self.highlightedView)
-
-                
-                // TODO: ALTERNATIVE TO THE BLACK OUTLINE
-                // COULD GROW THE TILE SLIGHTLY TO INDICATE THAT IT WAS TAPPED
-    //            var oldtileFrame = tappedTile.imageView.frame
-    //            var centerpoint = tappedTile.imageView.center
-    //            var biggerTileFrame = CGRectMake(oldtileFrame.origin.x, oldtileFrame.origin.y, oldtileFrame.width * 1.1, oldtileFrame.height * 1.1)
-    //            tappedTile.imageView.frame = biggerTileFrame
-    //            tappedTile.imageView.center = centerpoint
-    //            self.bringSubviewToFront(tappedTile.imageView)
-    //            
-    //            UIView.animateWithDuration(0.2, animations: { () -> Void in
-    //                self.layoutIfNeeded()
-    //            })
-    //            
-
-                
-                
-                
-                // Store the first tapped tile for later use
-                var tile1 = self.tileArray[tag / 10][tag % 10]
-                self.firstTile = tile1
-                self.firstTileSelectedBool = false
-
-            } else {
-                
-                // Remove the temporary highlighting
-                self.highlightedView.removeFromSuperview()
-                
-                // Store the second tapped tile for later use
-                var tile2 = self.tileArray[tag / 10][tag % 10]
-                self.secondTile = tile2
-                self.firstTileSelectedBool = true
-
-                self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
-                    // Swap the tiles and then check if the puzzle is solved
-                    if self.checkIfSolved() {
-                        // Notify GameScreen
-                        self.delegate!.puzzleIsSolved()
-                    }
-                })
-            
+    func handlePan(gesture:UIPanGestureRecognizer) {
+        var startingPoint :CGPoint = gesture.locationInView(self)
+        
+        switch gesture.state {
+        case .Began:
+            self.firstTileSelectedBool = false
+            if self.findFirstTileWithPoint(startingPoint) {
+                self.bringSubviewToFront(self.firstTile!.imageView)
+                self.firstTile!.originalFrame = self.firstTile!.imageView.frame
             }
+        case .Changed:
+            if self.firstTile != nil {
+                
+                let translation = gesture.translationInView(self)
+                self.firstTile!.imageView.center.x = self.firstTile!.imageView.center.x + translation.x
+                self.firstTile!.imageView.center.y = self.firstTile!.imageView.center.y + translation.y
+                gesture.setTranslation(CGPointZero, inView: self)
+                
+            }
+            
+        case .Ended:
+            if self.firstTile != nil {
+                var endingPoint :CGPoint = gesture.locationInView(self)
+                if self.findSecondTileWithPoint(endingPoint) {
+                    self.secondTile!.originalFrame = self.secondTile!.imageView.frame
+                    self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
+                        // Swap the tiles and then check if the puzzle is solved
+                        if self.checkIfSolved() {
+                            // Notify GameScreen
+                            self.delegate!.puzzleIsSolved()
+                        }
+                    })
+                } else {
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        
+                        self.firstTile!.imageView.frame = self.firstTile!.originalFrame!
+                        
+                    })
+                }
+            }
+            
+        case .Possible:
+            println("possible")
+        case .Cancelled:
+            println("cancelled")
+        case .Failed:
+            println("failed")
         }
     }
+
     
     func tileDoubleTapped(sender: UIGestureRecognizer) {
         if !self.isPuzzleSolved {
@@ -503,6 +495,40 @@ class TileAreaView: UIView {
         }
         return tile
     }
+
+
+
+    func findFirstTileWithPoint(point: CGPoint) -> Bool {
+        var currentTile = self.tileArray[0][0]
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                currentTile = self.tileArray[index1][index2]
+                if CGRectContainsPoint(currentTile.imageView.frame, point) {
+                    self.firstTile = currentTile
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    func findSecondTileWithPoint(point: CGPoint) -> Bool {
+        var currentTile = self.tileArray[0][0]
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                currentTile = self.tileArray[index1][index2]
+                if CGRectContainsPoint(currentTile.imageView.frame, point) {
+                    if currentTile.imageView != self.firstTile!.imageView {
+                        self.secondTile = currentTile
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+
 
 }
 
