@@ -19,10 +19,8 @@ class SettingsScreen: UIViewController {
     // Labels and buttons
     @IBOutlet weak var settingLabel: UILabel!
     
-    @IBOutlet weak var shuffleImage: UIImageView!
     @IBOutlet weak var rotationImage: UIImageView!
     
-    @IBOutlet weak var shuffle: UIView!
     @IBOutlet weak var rotations: UIView!
 
     @IBOutlet weak var rotateTilesLabel: UILabel!
@@ -66,9 +64,6 @@ class SettingsScreen: UIViewController {
 
         
         // Add tap gesturess
-        var shuffleTap = UITapGestureRecognizer(target: self, action: "shuffleTapped:")
-        self.shuffle.addGestureRecognizer(shuffleTap)
-        
         var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
         self.rotations.addGestureRecognizer(rotationTap)
         
@@ -89,12 +84,6 @@ class SettingsScreen: UIViewController {
         
         
         // Set up the check images based on previous defaults
-        if userDefaults.boolForKey("shufflesOn") {
-            self.shuffleImage.image = UIImage(named: "checkedBox")
-        } else {
-            self.shuffleImage.image = UIImage(named: "uncheckedBox")
-        }
-        
         if userDefaults.boolForKey("rotationsOn") {
             self.rotationImage.image = UIImage(named: "checkedBox")
         } else {
@@ -116,18 +105,6 @@ class SettingsScreen: UIViewController {
     }
     
     
-    func shuffleTapped(sender: UIGestureRecognizer) {
-        var shufflesOn = userDefaults.boolForKey("shufflesOn")
-        if shufflesOn {
-            self.userDefaults.setBool(false, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
-        } else {
-            self.userDefaults.setBool(true, forKey: "shufflesOn")
-            self.shuffleImage.image = UIImage(named: "checkedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
-        }
-        self.userDefaults.synchronize()
-        
-    }
     
     
     func rotationTapped(sender: UIGestureRecognizer) {
@@ -173,10 +150,8 @@ class SettingsScreen: UIViewController {
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
         self.rotateTilesLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.shuffleImage.image = self.shuffleImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.rotationImage.image = self.rotationImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        
+        self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()        
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
     }
     

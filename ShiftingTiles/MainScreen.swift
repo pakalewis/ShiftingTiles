@@ -148,12 +148,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 imagePicker.allowsEditing = true
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
                 
-                // TODO: try this
+                // TODO: tried this and it didn't work
 //                let blackVC = UIViewController()
 //                blackVC.view.backgroundColor = UIColor.blackColor()
 //                self.presentViewController(blackVC, animated: true, completion: nil)
-                // present blackVC and on that new VC do the imagePicker stuff (four lines above and the two required methods below
-                // then devise a way to send the picked photo backwards
+
+                // This should present blackVC and on that new VC do the imagePicker stuff (four lines above and the two required methods below
+
                 
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             } else {
