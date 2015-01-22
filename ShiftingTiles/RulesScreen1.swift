@@ -22,7 +22,7 @@ class RulesScreen1: UIViewController {
         super.viewDidLoad()
         
         self.label1.text = "Solve the puzzle by rearranging the tiles to form the complete image."
-        self.label2.text = "Tap a tile to select it.\nTap a second tile to swap their positions."
+        self.label2.text = "Press and drag a tile on top of another tile to swap their positions."
         self.label3.text = "For an extra challenge, turn on Rotations in the settings menu."
         self.label4.text = "Double tap a tile to rotate it 90°."
         

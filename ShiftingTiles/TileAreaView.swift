@@ -36,7 +36,6 @@ class TileAreaView: UIView {
     var highlightedView = UIView()
     
     // Vars for the tiles to be swapped
-    var firstTileSelectedBool = true
     var firstTile : Tile?
     var secondTile : Tile?
 
@@ -341,7 +340,6 @@ class TileAreaView: UIView {
         
         switch gesture.state {
         case .Began:
-            self.firstTileSelectedBool = false
             if self.findFirstTileWithPoint(startingPoint) {
                 self.bringSubviewToFront(self.firstTile!.imageView)
                 self.firstTile!.originalFrame = self.firstTile!.imageView.frame
