@@ -31,9 +31,9 @@ class RulesScreen2: UIViewController {
         self.image2.image = self.image2.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image3.image = self.image3.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image4.image = self.image4.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        self.image4.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.image4.layer.borderWidth = 2
-        self.image4.layer.cornerRadius = self.image4.frame.width * 0.25
+        self.image5.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.image5.layer.borderWidth = 2
+        self.image5.layer.cornerRadius = self.image4.frame.width * 0.25
         self.image5.image = self.image5.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         
         self.label1.textColor = self.colorPalette.fetchDarkColor()

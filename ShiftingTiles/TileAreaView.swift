@@ -50,10 +50,7 @@ class TileAreaView: UIView {
         
         self.createTileArray()
         self.layoutTilesWithMargin(2)
-
-        if userDefaults.boolForKey("shufflesOn") {
-            self.shuffleImages()
-        }
+        self.shuffleImages()
         if userDefaults.boolForKey("rotationsOn") {
             self.rotateTiles()
         }

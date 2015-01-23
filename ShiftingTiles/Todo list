@@ -2,9 +2,12 @@ Todo:
 - add languages to settings page
 - sound effects
 - fix image picker
+- make email look like a button
+- rotations label is cut off on iphone
+- make sure you can't drag once the puzzle is solved'
 
 
-
+- make pressing the back button 3 times the check for displaying the loss of progress alert (will not save status)
 
 
 
