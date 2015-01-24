@@ -211,12 +211,14 @@ class TileAreaView: UIView {
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: index, index2: identifier)
                 var tile = self.findTileAtCoordinate(coordinate)
+                tile.originalFrame = tile.imageView.frame
                 tileLine.append(tile)
             }
         } else { // Is a row
             for index in 0..<self.tilesPerRow {
                 var coordinate = DoubleIndex(index1: identifier - 100, index2: index)
                 var tile = self.findTileAtCoordinate(coordinate)
+                tile.originalFrame = tile.imageView.frame
                 tileLine.append(tile)
             }
         }

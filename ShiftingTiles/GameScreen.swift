@@ -17,9 +17,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     var imageToSolve = UIImage()
     var tilesPerRow = 3
-    var firstRowOrColumnTapped = -1
-    var secondRowOrColumnTapped = -1
-    var isFirstRowOrColumnTapped = false
     
     var topButtons = [UIImageView]()
     var leftButtons = [UIImageView]()
@@ -32,7 +29,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     // VIEWS
     var originalImageView: UIImageView!
-    var borderView = UIView()
     @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
@@ -40,8 +36,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var separatorView: UIView!
 
     // CONSTRAINTS
-    @IBOutlet weak var leftBankTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topBankLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
     
     // BUTTONS
@@ -64,13 +58,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-//        self.topBank.
-        
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
-        self.view.addGestureRecognizer(panGesture)
-
         
         // Initialize tileArea
         self.tileArea.delegate = self
@@ -79,7 +66,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
         
-        // Initialize row/column gestures
+        // Add pan gesture which allows moving rows/columns
+        let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
+        self.view.addGestureRecognizer(panGesture)
+        
+        // Initialize row/column buttons
         self.initializeButtons()
         
         congratsMessage.text = "Keep going..."
@@ -272,28 +263,24 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         for index in 0..<self.tilesPerRow {
             
             // Measuerments to make the frames
-            var topBankGesturePositionX = (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2) + self.tileArea.frame.origin.x
-            var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2) + self.tileArea.frame.origin.y
+//            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2)
+//            var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2) + self.tileArea.frame.origin.y
+            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 4)
+            var leftBankGesturePositionY = self.tileArea.frame.origin.y + (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 4)
             
             
-            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, self.topBank.frame.origin.y, topBankGestureHeight, topBankGestureHeight)
+            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, self.topBank.frame.origin.y, topBankGestureWidth / 2, topBankGestureHeight)
             var topGestureArea = UIImageView(frame: topBankGestureFrame)
             topGestureArea.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            topGestureArea.userInteractionEnabled = true;
-            var topGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             topGestureArea.tag = index
-//            topGestureArea.addGestureRecognizer(topGesture)
             self.view.addSubview(topGestureArea)
             self.topButtons.append(topGestureArea)
 
             
-            var leftBankGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureWidth)
+            var leftBankGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight / 2)
             var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
             leftGestureArea.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            leftGestureArea.userInteractionEnabled = true;
-            var leftGesture = UITapGestureRecognizer(target: self, action: "bankTapped:")
             leftGestureArea.tag = index + 100
-//            leftGestureArea.addGestureRecognizer(leftGesture)
             self.view.addSubview(leftGestureArea)
             self.leftButtons.append(leftGestureArea)
 
@@ -301,71 +288,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
  
 
-    
-//    func bankTapped(sender: UIGestureRecognizer) {
-//
-//        var tappedButton = sender.view as UIImageView
-//        println("\(tappedButton.tag)")
-//        
-//        
-//        if (!isFirstRowOrColumnTapped) {
-//            // Flip the bool
-//            self.isFirstRowOrColumnTapped = true
-//
-//            // Store tag of the first line button
-//            self.firstRowOrColumnTapped = tappedButton.tag
-//            self.firstButton = tappedButton
-//            
-//            // Flip the image on the button
-//            if (tappedButton.tag - 100) < 0 { // line 1 is a column
-//                self.firstButton.image = UIImage(named: "downTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-//                
-//                // Add border around the column
-//                var tileWidth = self.tileArea.frame.width / CGFloat(self.tilesPerRow)
-//                var xPos = tileWidth * CGFloat(tappedButton.tag) + self.tileArea.frame.origin.x
-//                
-//                var borderViewFrame = CGRectMake(xPos - 2, self.tileArea.frame.origin.y - 2, tileWidth + 4, self.tileArea.frame.height + 4)
-//                self.borderView = UIView(frame: borderViewFrame)
-//                self.borderView.layer.borderWidth = 4
-//                self.borderView.layer.borderColor = UIColor.blackColor().CGColor
-//                self.view.addSubview(self.borderView)
-//
-//            } else { // line1 is a row
-//                self.firstButton.image = UIImage(named: "rightTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-//
-//                // Add border around the row
-//                var tileWidth = self.tileArea.frame.width / CGFloat(self.tilesPerRow)
-//                var yPos = tileWidth * CGFloat(tappedButton.tag - 100) + self.tileArea.frame.origin.y                
-//                var borderViewFrame = CGRectMake(self.tileArea.frame.origin.x - 2, yPos - 2, self.tileArea.frame.width + 4, tileWidth + 4)
-//                self.borderView = UIView(frame: borderViewFrame)
-//                self.borderView.layer.borderWidth = 4
-//                self.borderView.layer.borderColor = UIColor.blackColor().CGColor
-//                self.view.addSubview(self.borderView)
-//            }
-//            
-//        } else {
-//            // Flip the bool
-//            self.isFirstRowOrColumnTapped = false
-//
-//            // set the second tag
-//            self.secondRowOrColumnTapped = sender.view!.tag
-//            
-//            // Remove borderView
-//            self.borderView.removeFromSuperview()
-//            
-//            // Flip the image on the button back to normal
-//            if (self.firstButton.tag - 100) < 0 { // line 1 is a column
-//                self.firstButton.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-//            } else { // line1 is a row
-//                self.firstButton.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-//            }
-//            
-//            // If two distinct lines were tapped, then swap
-//            if self.firstRowOrColumnTapped != self.secondRowOrColumnTapped {
-//                self.tileArea.swapLines(self.firstRowOrColumnTapped, line2: self.secondRowOrColumnTapped)
-//            }
-//        }
-//    }
 
     
     
@@ -388,18 +310,18 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.showOriginalButton.userInteractionEnabled = false
         self.showOriginalButton.alpha = 0
         
-        // Slide off the banks of buttons
-        self.leftBankTopConstraint.constant = 1000
-        self.topBankLeftConstraint.constant = 1000
-        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.view.layoutIfNeeded()
+            // Slide off the banks of buttons
+            for button in self.topButtons {
+                button.center.x = button.center.x + 2000
+            }
+            for button in self.leftButtons {
+                button.center.y = button.center.y + 2000
+            }
+            
             
             }) { (finished) -> Void in
                 
-                // Bring tiles together
-                self.tileArea.layoutTilesWithMargin(0.0)
-
                 // Grow the tile area by sliding the left bank off screen to the left
                 self.leftBankMarginConstraint.constant = self.leftBankMarginConstraint.constant - self.leftBank.frame.width + 10
 

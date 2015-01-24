@@ -892,13 +892,11 @@
                         <outlet property="hintButton" destination="9ig-wh-J89" id="PPQ-2z-rtZ"/>
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
-                        <outlet property="leftBankTopConstraint" destination="JGT-51-mtK" id="ha0-Wr-VIC"/>
                         <outlet property="separatorView" destination="row-0Z-gkW" id="EKa-A3-WTc"/>
                         <outlet property="showOriginalButton" destination="kMV-Zu-rKc" id="kTH-D8-1RC"/>
                         <outlet property="solveButton" destination="rl5-9y-N59" id="i5a-Hc-2fL"/>
                         <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>
                         <outlet property="topBank" destination="p3Q-Xd-i17" id="WjI-q6-ZNF"/>
-                        <outlet property="topBankLeftConstraint" destination="28m-5T-c4D" id="0pT-MY-rf2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
