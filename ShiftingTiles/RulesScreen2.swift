@@ -27,6 +27,23 @@ class RulesScreen2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 15)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 15)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 15)
+            self.label4.font = UIFont(name: self.label4.font.fontName, size: 15)
+            self.label5.font = UIFont(name: self.label5.font.fontName, size: 15)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 30)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 30)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 30)
+            self.label4.font = UIFont(name: self.label4.font.fontName, size: 30)
+            self.label5.font = UIFont(name: self.label5.font.fontName, size: 30)
+        }
+        
         self.image1.image = self.image1.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image2.image = self.image2.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image3.image = self.image3.image?.imageWithColor(self.colorPalette.fetchDarkColor())
@@ -43,9 +60,9 @@ class RulesScreen2: UIViewController {
         self.label5.textColor = self.colorPalette.fetchDarkColor()
         
         
-        self.label1.text = "Take a photo or select one from your photos library."
-        self.label2.text = "Choose the difficulty level."
-        self.label3.text = "Toggle the grid to preview the size of the tiles."
+        self.label1.text = "Take a photo or select one\nfrom your photos library."
+        self.label2.text = "Choose the grid size."
+        self.label3.text = "Toggle the preview grid."
         self.label4.text = "View statistics."
         self.label5.text = "Start the puzzle!"
 

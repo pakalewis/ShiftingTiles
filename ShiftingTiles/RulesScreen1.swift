@@ -20,9 +20,23 @@ class RulesScreen1: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 15)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 15)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 15)
+            self.label4.font = UIFont(name: self.label4.font.fontName, size: 15)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 30)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 30)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 30)
+            self.label4.font = UIFont(name: self.label4.font.fontName, size: 30)
+        }
         
         self.label1.text = "Solve the puzzle by rearranging the tiles to form the complete image."
-        self.label2.text = "Press and drag a tile on top of another tile to swap their positions."
+        self.label2.text = "Drag a tile on top of another tile to swap their positions."
         self.label3.text = "For an extra challenge, turn on Rotations in the settings menu."
         self.label4.text = "Double tap a tile to rotate it 90°."
         

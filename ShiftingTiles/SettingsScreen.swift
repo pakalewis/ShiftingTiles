@@ -62,6 +62,15 @@ class SettingsScreen: UIViewController {
         super.viewDidLoad()
         
 
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 20)
+            self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 20)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 40)
+            self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 40)
+        }
         
         // Add tap gesturess
         var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")

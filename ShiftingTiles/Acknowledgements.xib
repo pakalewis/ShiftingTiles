@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Acknowledgements" customModule="ShiftingTiles" customModuleProvider="target">
@@ -18,26 +19,27 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SHm-66-Tp3">
-                    <rect key="frame" x="20" y="125" width="560" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="SHm-66-Tp3">
+                    <rect key="frame" x="20" y="195" width="560" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-yU-Zwk">
-                    <rect key="frame" x="268" y="185" width="65" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-yU-Zwk">
+                    <rect key="frame" x="20" y="255" width="560" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UZv-yf-C9T">
-                    <rect key="frame" x="20" y="285" width="560" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="UZv-yf-C9T">
+                    <rect key="frame" x="20" y="315" width="560" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orC-qq-ACs">
-                    <rect key="frame" x="206" y="335" width="189" height="34"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <rect key="frame" x="180" y="365" width="240" height="37"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <inset key="contentEdgeInsets" minX="7" minY="5" maxX="7" maxY="5"/>
                     <state key="normal" title="shiftingtiles@gmail.com">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -48,20 +50,33 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="UZv-yf-C9T" firstAttribute="top" secondItem="rhM-yU-Zwk" secondAttribute="bottom" constant="70" id="4FX-xP-5ka"/>
+                <constraint firstItem="UZv-yf-C9T" firstAttribute="top" secondItem="rhM-yU-Zwk" secondAttribute="bottom" constant="30" id="4FX-xP-5ka"/>
                 <constraint firstItem="rhM-yU-Zwk" firstAttribute="top" secondItem="SHm-66-Tp3" secondAttribute="bottom" constant="30" id="5AI-n9-zbW"/>
+                <constraint firstAttribute="centerY" secondItem="rhM-yU-Zwk" secondAttribute="centerY" constant="30" id="6hO-li-yt7"/>
                 <constraint firstAttribute="centerY" secondItem="UZv-yf-C9T" secondAttribute="centerY" id="Eh8-VN-2CW"/>
                 <constraint firstItem="SHm-66-Tp3" firstAttribute="height" secondItem="UZv-yf-C9T" secondAttribute="height" id="HSD-Ky-oT2"/>
                 <constraint firstItem="SHm-66-Tp3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="Iku-Se-wmT"/>
                 <constraint firstItem="rhM-yU-Zwk" firstAttribute="height" secondItem="SHm-66-Tp3" secondAttribute="height" id="My8-tD-0lB"/>
                 <constraint firstAttribute="trailing" secondItem="UZv-yf-C9T" secondAttribute="trailing" constant="20" id="UHg-In-p4O"/>
+                <constraint firstAttribute="trailing" secondItem="rhM-yU-Zwk" secondAttribute="trailing" constant="20" id="Xy9-oG-7IF"/>
                 <constraint firstAttribute="centerX" secondItem="orC-qq-ACs" secondAttribute="centerX" id="dcG-Pi-F90"/>
                 <constraint firstAttribute="trailing" secondItem="SHm-66-Tp3" secondAttribute="trailing" constant="20" id="gtt-uN-UFr"/>
+                <constraint firstItem="orC-qq-ACs" firstAttribute="width" secondItem="UZv-yf-C9T" secondAttribute="width" multiplier="0.4" id="h75-i7-9VG"/>
                 <constraint firstItem="UZv-yf-C9T" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="hWU-yL-Jh9"/>
                 <constraint firstItem="SHm-66-Tp3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="jB3-Pn-WmQ"/>
+                <constraint firstItem="rhM-yU-Zwk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="mWf-Xi-Sgl"/>
                 <constraint firstItem="orC-qq-ACs" firstAttribute="top" secondItem="UZv-yf-C9T" secondAttribute="bottom" constant="20" id="tAc-da-Yvp"/>
                 <constraint firstAttribute="centerX" secondItem="rhM-yU-Zwk" secondAttribute="centerX" id="x4C-Yy-Fea"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HSD-Ky-oT2"/>
+                    <exclude reference="Eh8-VN-2CW"/>
+                    <exclude reference="My8-tD-0lB"/>
+                    <exclude reference="x4C-Yy-Fea"/>
+                    <exclude reference="h75-i7-9VG"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

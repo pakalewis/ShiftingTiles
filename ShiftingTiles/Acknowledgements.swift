@@ -20,17 +20,33 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 15)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 15)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 15)
+            self.emailButton.titleLabel!.font = UIFont(name: self.label3.font.fontName, size: 15)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.label1.font = UIFont(name: self.label1.font.fontName, size: 30)
+            self.label2.font = UIFont(name: self.label2.font.fontName, size: 30)
+            self.label3.font = UIFont(name: self.label3.font.fontName, size: 30)
+            self.emailButton.titleLabel!.font = UIFont(name: self.label3.font.fontName, size: 30)
+        }
+        
+
+        
         self.label1.textColor = self.colorPalette.fetchDarkColor()
         self.label2.textColor = self.colorPalette.fetchDarkColor()
         self.label3.textColor = self.colorPalette.fetchDarkColor()
         self.emailButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.emailButton.layer.cornerRadius = 5
+        self.emailButton.layer.borderWidth = 1
+        self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
 
-        self.label1.adjustsFontSizeToFitWidth = true
-        self.label2.adjustsFontSizeToFitWidth = true
-        self.label3.adjustsFontSizeToFitWidth = true
         
-        self.label1.text = "Shifting Tiles is developed by\nParker Lewis"
-        self.label2.text = "Images provided by\nDale Arveson"
+        self.label1.text = "Shifting Tiles developed by:\nParker Lewis"
+        self.label2.text = "Images provided by:\nDale Arveson\nGreg Jaehnig\nKate Lewis\nGrant Wilson\nParker Lewis"
         self.label3.text = "Feedback, comments, questions can be sent here:"
 
     }

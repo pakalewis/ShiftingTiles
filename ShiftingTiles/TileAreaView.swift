@@ -49,7 +49,7 @@ class TileAreaView: UIView {
         self.addGestureRecognizer(panGesture)
         
         self.createTileArray()
-        self.layoutTilesWithMargin(2)
+        self.layoutTilesWithMargin(0)
         self.shuffleImages()
         if userDefaults.boolForKey("rotationsOn") {
             self.rotateTiles()
