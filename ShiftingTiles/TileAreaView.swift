@@ -335,49 +335,52 @@ class TileAreaView: UIView {
     func handlePan(gesture:UIPanGestureRecognizer) {
         var startingPoint :CGPoint = gesture.locationInView(self)
         
-        switch gesture.state {
-        case .Began:
-            if self.findFirstTileWithPoint(startingPoint) {
-                self.bringSubviewToFront(self.firstTile!.imageView)
-                self.firstTile!.originalFrame = self.firstTile!.imageView.frame
-            }
-        case .Changed:
-            if self.firstTile != nil {
-                
-                let translation = gesture.translationInView(self)
-                self.firstTile!.imageView.center.x = self.firstTile!.imageView.center.x + translation.x
-                self.firstTile!.imageView.center.y = self.firstTile!.imageView.center.y + translation.y
-                gesture.setTranslation(CGPointZero, inView: self)
-                
-            }
-            
-        case .Ended:
-            if self.firstTile != nil {
-                var endingPoint :CGPoint = gesture.locationInView(self)
-                if self.findSecondTileWithPoint(endingPoint) {
-                    self.secondTile!.originalFrame = self.secondTile!.imageView.frame
-                    self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
-                        // Swap the tiles and then check if the puzzle is solved
-                        if self.checkIfSolved() {
-                            // Notify GameScreen
-                            self.delegate!.puzzleIsSolved()
-                        }
-                    })
-                } else {
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        
-                        self.firstTile!.imageView.frame = self.firstTile!.originalFrame!
-                        
-                    })
+        if !self.isPuzzleSolved {
+            switch gesture.state {
+            case .Began:
+                if self.findFirstTileWithPoint(startingPoint) {
+                    self.bringSubviewToFront(self.firstTile!.imageView)
+                    self.firstTile!.originalFrame = self.firstTile!.imageView.frame
                 }
+            case .Changed:
+                if self.firstTile != nil {
+                    
+                    let translation = gesture.translationInView(self)
+                    self.firstTile!.imageView.center.x = self.firstTile!.imageView.center.x + translation.x
+                    self.firstTile!.imageView.center.y = self.firstTile!.imageView.center.y + translation.y
+                    gesture.setTranslation(CGPointZero, inView: self)
+                    
+                }
+                
+            case .Ended:
+                if self.firstTile != nil {
+                    var endingPoint :CGPoint = gesture.locationInView(self)
+                    if self.findSecondTileWithPoint(endingPoint) {
+                        self.secondTile!.originalFrame = self.secondTile!.imageView.frame
+                        self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
+                            // Swap the tiles and then check if the puzzle is solved
+                            if self.checkIfSolved() {
+                                // Notify GameScreen
+                                self.delegate!.puzzleIsSolved()
+                            }
+                        })
+                    } else {
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            
+                            self.firstTile!.imageView.frame = self.firstTile!.originalFrame!
+                            
+                        })
+                    }
+                }
+                
+            case .Possible:
+                println("possible")
+            case .Cancelled:
+                println("cancelled")
+            case .Failed:
+                println("failed")
             }
-            
-        case .Possible:
-            println("possible")
-        case .Cancelled:
-            println("cancelled")
-        case .Failed:
-            println("failed")
+
         }
     }
 
