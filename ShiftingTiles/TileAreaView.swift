@@ -351,7 +351,6 @@ class TileAreaView: UIView {
                     var endingPoint :CGPoint = gesture.locationInView(self)
                     if self.findSecondTileWithPoint(endingPoint) {
                         self.secondTile!.originalFrame = self.secondTile!.imageView.frame
-                        println("subviews of tile area \(self.subviews.count)")
                         self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
                             // Swap the tiles and then check if the puzzle is solved
                             if self.checkIfSolved() {

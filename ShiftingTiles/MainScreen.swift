@@ -67,7 +67,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.smallImageNameArray = imageGallery.smallImageNameArray
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.imageCycler.image = UIImage(named: self.imageNameArray[0])!
-        self.imageCycler.layer.borderColor = UIColor.blackColor().CGColor
+        self.imageCycler.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.imageCycler.layer.borderWidth = 2
 
 
@@ -96,10 +96,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             gameScreen.imageToSolve = self.imageToSolve
             gameScreen.tilesPerRow = self.tilesPerRow
             
-            var totalPlays = self.userDefaults.integerForKey("totalPlays")
-            totalPlays++
-            self.userDefaults.setInteger(totalPlays, forKey: "totalPlays")
-
         }
     }
     
@@ -235,9 +231,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow--
             return
         }
-        println("width = \(self.tilesPerRowLabel.frame.width)")
         self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
-        println("width = \(self.tilesPerRowLabel.frame.width)")
    }
 
     
@@ -248,11 +242,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow++
             return
         }
-        println("width = \(self.tilesPerRowLabel.frame.width)")
-
         self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
-        
-        println("width = \(self.tilesPerRowLabel.frame.width)")
     }
     
     
@@ -260,6 +250,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.imageCycler.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
