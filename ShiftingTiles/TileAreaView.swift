@@ -183,6 +183,8 @@ class TileAreaView: UIView {
             tile1.doubleIndex = tile2.doubleIndex
             tile2.doubleIndex = tempDoubleIndex
             
+            self.insertSubview(tile2.imageView, belowSubview: tile1.imageView)
+            
             UIView.animateWithDuration(duration, animations: { () -> Void in
                 
                 // Swap frames
@@ -200,46 +202,36 @@ class TileAreaView: UIView {
     
     
     
-    func swapLines(line1: Int, line2: Int) {
+    
+    func makeLineOfTiles(identifier: Int) -> [Tile] {
+        var tileLine = [Tile]()
         
-        var tileLine1 = [Tile]()
-        var tileLine2 = [Tile]()
-        
-        // Create arrau of Tiles in line1
-        if (line1 - 100) < 0 { // line 1 is a column
+        // Create array of Tiles
+        if (identifier - 100) < 0 { // Is a column
             for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: index, index2: line1)
+                var coordinate = DoubleIndex(index1: index, index2: identifier)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tileLine1.append(tile)
+                tileLine.append(tile)
             }
-        } else { // line1 is a row
+        } else { // Is a row
             for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: line1 - 100, index2: index)
+                var coordinate = DoubleIndex(index1: identifier - 100, index2: index)
                 var tile = self.findTileAtCoordinate(coordinate)
-                tileLine1.append(tile)
+                tileLine.append(tile)
             }
         }
+        return tileLine
+    }
+
+    
+    func swapLines(line1: [Tile], line2: [Tile]) {
         
-        // Create array of Tiles in line2
-        if (line2 - 100) < 0 { // line2 is a column
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: index, index2: line2)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine2.append(tile)
-            }
-        } else { // line2 is a row
-            for index in 0..<self.tilesPerRow {
-                var coordinate = DoubleIndex(index1: line2 - 100, index2: index)
-                var tile = self.findTileAtCoordinate(coordinate)
-                tileLine2.append(tile)
-            }
-        }
 
         // swap the tiles in the lines
-        for counter in 0..<tileLine1.count {
-            self.swapTiles(tileLine1[counter], tile2: tileLine2[counter], duration: 0.3, completionClosure: { () -> () in
+        for counter in 0..<line1.count {
+            self.swapTiles(line1[counter], tile2: line2[counter], duration: 0.3, completionClosure: { () -> () in
                 
-                if counter == tileLine1.count - 1 {
+                if counter == line1.count - 1 {
                     if self.checkIfSolved() {
                         // Notify GameScreen
                         self.delegate!.puzzleIsSolved()
@@ -357,6 +349,7 @@ class TileAreaView: UIView {
                     var endingPoint :CGPoint = gesture.locationInView(self)
                     if self.findSecondTileWithPoint(endingPoint) {
                         self.secondTile!.originalFrame = self.secondTile!.imageView.frame
+                        println("subviews of tile area \(self.subviews.count)")
                         self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
                             // Swap the tiles and then check if the puzzle is solved
                             if self.checkIfSolved() {

@@ -1,11 +1,11 @@
 Todo:
 - fix image picker
 - retake sample images for the rules page 1
-- rotations label is cut off on iphone
 
-- make sure you can't drag once the puzzle is solved'
+-standardize screen title sizes
+
 - make pressing the back button 3 times the check for displaying the loss of progress alert (will not save status)
-- try laying out the tiles with 0 margin. add thin border lines or have no space in between tiles
+
 - make sure that the starting settings/nsuserdefaults are correct
 
 
