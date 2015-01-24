@@ -81,7 +81,6 @@
 		2C7F08551A5DF0420083F668 /* upTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F084B1A5DF0420083F668 /* upTriangle.png */; };
 		2C7F085A1A5DF05D0083F668 /* CollectionViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */; };
 		2C7F085B1A5DF05D0083F668 /* CollectionViewImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */; };
-		2C7F085C1A5DF05D0083F668 /* DrawGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F08581A5DF05D0083F668 /* DrawGrid.swift */; };
 		2C7F08601A5DF0730083F668 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F085E1A5DF0730083F668 /* GameScreen.swift */; };
 		2C7F08611A5DF0730083F668 /* TileAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F085F1A5DF0730083F668 /* TileAreaView.swift */; };
 		2C7F08661A5DF0810083F668 /* StatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F08621A5DF0810083F668 /* StatCell.swift */; };
@@ -191,7 +190,6 @@
 		2C7F084B1A5DF0420083F668 /* upTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upTriangle.png; path = ShiftingTiles/upTriangle.png; sourceTree = SOURCE_ROOT; };
 		2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewImageCell.swift; path = ShiftingTiles/CollectionViewImageCell.swift; sourceTree = SOURCE_ROOT; };
 		2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewImageCell.xib; path = ShiftingTiles/CollectionViewImageCell.xib; sourceTree = SOURCE_ROOT; };
-		2C7F08581A5DF05D0083F668 /* DrawGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawGrid.swift; path = ShiftingTiles/DrawGrid.swift; sourceTree = SOURCE_ROOT; };
 		2C7F085E1A5DF0730083F668 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScreen.swift; path = ShiftingTiles/GameScreen.swift; sourceTree = SOURCE_ROOT; };
 		2C7F085F1A5DF0730083F668 /* TileAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TileAreaView.swift; path = ShiftingTiles/TileAreaView.swift; sourceTree = SOURCE_ROOT; };
 		2C7F08621A5DF0810083F668 /* StatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatCell.swift; path = ShiftingTiles/StatCell.swift; sourceTree = SOURCE_ROOT; };
@@ -375,7 +373,6 @@
 				2C7F087A1A5DF1750083F668 /* MainScreen.swift */,
 				2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */,
 				2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */,
-				2C7F08581A5DF05D0083F668 /* DrawGrid.swift */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -619,7 +616,6 @@
 				2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */,
 				2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */,
 				2C805DDF1A6E1E7E004FCF8B /* RulesScreen3.swift in Sources */,
-				2C7F085C1A5DF05D0083F668 /* DrawGrid.swift in Sources */,
 				2C7F086E1A5DF0980083F668 /* DoubleIndex.swift in Sources */,
 				2C805D981A69AE94004FCF8B /* RulesScreen2.swift in Sources */,
 				2C7F08691A5DF0810083F668 /* StatsScreen.swift in Sources */,

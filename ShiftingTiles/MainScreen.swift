@@ -29,7 +29,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     
     @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var gridButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
     @IBOutlet weak var increaseButton: UIButton!
@@ -42,7 +41,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
-    var drawGrid : DrawGrid?
     let pickerData = ["2","3","4","5","6","7","8","9","10"]
     
     
@@ -74,8 +72,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
 
         self.tilesPerRow = 3
-        self.tilesPerRowLabel.text = "3"
+        self.tilesPerRowLabel.text = "3x3"
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 15)
+        }
         
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 30)
+        }
         
         self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true        
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
@@ -177,20 +181,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
-    @IBAction func gridButtonPressed(sender: AnyObject) {
-        if self.drawGrid == nil {
-            self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-            self.drawGrid?.numRows = self.tilesPerRow
-            self.drawGrid?.backgroundColor = UIColor.clearColor()
-            self.view.addSubview(self.drawGrid!)
-        } else {
-            if self.drawGrid?.alpha == 0 {
-                self.drawGrid?.alpha = 1
-            } else {
-                self.drawGrid?.alpha = 0
-            }
-        }
-    }
     
   
     
@@ -245,14 +235,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow--
             return
         }
-
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow)"
-
-        self.drawGrid?.removeFromSuperview()
-        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-        self.drawGrid?.numRows = self.tilesPerRow
-        self.drawGrid?.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(self.drawGrid!)
+        println("width = \(self.tilesPerRowLabel.frame.width)")
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
+        println("width = \(self.tilesPerRowLabel.frame.width)")
    }
 
     
@@ -263,14 +248,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow++
             return
         }
+        println("width = \(self.tilesPerRowLabel.frame.width)")
+
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
         
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow)"
-        
-        self.drawGrid?.removeFromSuperview()
-        self.drawGrid = DrawGrid(frame: self.imageCycler.frame)
-        self.drawGrid?.numRows = self.tilesPerRow
-        self.drawGrid?.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(self.drawGrid!)
+        println("width = \(self.tilesPerRowLabel.frame.width)")
     }
     
     
@@ -279,7 +261,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.gridButton.setImage(UIImage(named: "gridIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)

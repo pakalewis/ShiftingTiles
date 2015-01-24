@@ -262,14 +262,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
         for index in 0..<self.tilesPerRow {
             
+            // USE THESE TO MAKE THE BUTTON IMAGEVIEW FRAME
             // Measuerments to make the frames
 //            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2)
 //            var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2) + self.tileArea.frame.origin.y
-            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 4)
-            var leftBankGesturePositionY = self.tileArea.frame.origin.y + (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 4)
+
+            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index))
+            var leftBankGesturePositionY = self.tileArea.frame.origin.y + (leftBankGestureHeight * CGFloat(index))
             
             
-            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, self.topBank.frame.origin.y, topBankGestureWidth / 2, topBankGestureHeight)
+            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, self.topBank.frame.origin.y, topBankGestureWidth, topBankGestureHeight)
             var topGestureArea = UIImageView(frame: topBankGestureFrame)
             topGestureArea.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             topGestureArea.tag = index
@@ -277,7 +279,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.topButtons.append(topGestureArea)
 
             
-            var leftBankGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight / 2)
+            var leftBankGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight)
             var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
             leftGestureArea.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
             leftGestureArea.tag = index + 100

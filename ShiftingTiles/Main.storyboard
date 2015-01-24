@@ -68,27 +68,11 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSc-wa-cZ6" userLabel="spacer1">
-                                        <rect key="frame" x="36" y="0.0" width="25" height="36"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWw-UU-QiW" userLabel="GridButton">
-                                        <rect key="frame" x="61" y="0.0" width="36" height="36"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="ZWw-UU-QiW" secondAttribute="height" multiplier="1:1" id="7tM-iH-mu0"/>
-                                        </constraints>
-                                        <state key="normal" image="gridIcon.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gridButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8mI-MF-IVc"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVq-g0-Afd" userLabel="spacer2">
-                                        <rect key="frame" x="97" y="0.0" width="24" height="36"/>
+                                        <rect key="frame" x="36" y="0.0" width="63" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ru-It-ZwP" userLabel="StatsButton">
-                                        <rect key="frame" x="121" y="0.0" width="36" height="36"/>
+                                        <rect key="frame" x="99" y="0.0" width="36" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0ru-It-ZwP" secondAttribute="height" multiplier="1:1" id="ICI-0T-9V1"/>
                                         </constraints>
@@ -99,12 +83,12 @@
                                             <segue destination="SIa-Ve-MQH" kind="show" id="gTg-CI-8H2"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-4N-X1O" userLabel="spacer3">
-                                        <rect key="frame" x="157" y="0.0" width="25" height="36"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-4N-X1O" userLabel="spacer2">
+                                        <rect key="frame" x="135" y="0.0" width="57" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duK-ww-PYt" userLabel="DecreaseButton">
-                                        <rect key="frame" x="182" y="0.0" width="36" height="36"/>
+                                        <rect key="frame" x="192" y="0.0" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duK-ww-PYt" secondAttribute="height" multiplier="1:1" id="EZ4-Wq-pkd"/>
@@ -117,7 +101,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD" userLabel="NumTilesLabel">
-                                        <rect key="frame" x="218" y="8" width="20" height="20"/>
+                                        <rect key="frame" x="228" y="8" width="10" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="Ela-L0-Wly"/>
@@ -125,6 +109,11 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Ela-L0-Wly"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gW-z2-Haf" userLabel="IncreaseButton">
                                         <rect key="frame" x="238" y="0.0" width="36" height="36"/>
@@ -145,39 +134,30 @@
                                     <constraint firstItem="duK-ww-PYt" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="0qB-EM-a2y"/>
                                     <constraint firstItem="zGq-2D-jDD" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="topMargin" id="3wv-LC-fGw"/>
                                     <constraint firstItem="eJp-mf-2KR" firstAttribute="leading" secondItem="k1r-w8-S7G" secondAttribute="leading" id="7HZ-BH-cmA"/>
-                                    <constraint firstAttribute="bottom" secondItem="JVq-g0-Afd" secondAttribute="bottom" id="7KP-2W-5kR"/>
-                                    <constraint firstItem="ZWw-UU-QiW" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="9Fa-2l-67n"/>
                                     <constraint firstItem="zGq-2D-jDD" firstAttribute="leading" secondItem="duK-ww-PYt" secondAttribute="trailing" id="Btp-I5-Fqf"/>
                                     <constraint firstAttribute="bottom" secondItem="RSc-wa-cZ6" secondAttribute="bottom" id="ChZ-NY-cBM"/>
                                     <constraint firstItem="RSc-wa-cZ6" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="Ctl-IC-Ee5"/>
+                                    <constraint firstItem="5Xz-4N-X1O" firstAttribute="width" secondItem="RSc-wa-cZ6" secondAttribute="width" multiplier="0.9" id="CxU-rV-Haq"/>
                                     <constraint firstAttribute="bottom" secondItem="0gW-z2-Haf" secondAttribute="bottom" id="DtF-xi-TUM"/>
                                     <constraint firstItem="zGq-2D-jDD" firstAttribute="leading" secondItem="5Xz-4N-X1O" secondAttribute="trailing" id="EEp-S9-rH6"/>
-                                    <constraint firstItem="JVq-g0-Afd" firstAttribute="width" secondItem="RSc-wa-cZ6" secondAttribute="width" id="Ei1-mB-Tgq"/>
                                     <constraint firstItem="RSc-wa-cZ6" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="trailing" id="GJ1-3B-jdh"/>
                                     <constraint firstItem="0gW-z2-Haf" firstAttribute="leading" secondItem="zGq-2D-jDD" secondAttribute="trailing" id="Jm1-dk-iTD"/>
                                     <constraint firstAttribute="bottom" secondItem="duK-ww-PYt" secondAttribute="bottom" id="Q0E-kL-ti7"/>
                                     <constraint firstItem="0gW-z2-Haf" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="QOu-x2-pGA"/>
                                     <constraint firstAttribute="bottom" secondItem="0ru-It-ZwP" secondAttribute="bottom" id="Qkh-LA-we2"/>
-                                    <constraint firstItem="ZWw-UU-QiW" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="trailing" constant="2" id="QzB-4D-NCf"/>
                                     <constraint firstItem="5Xz-4N-X1O" firstAttribute="leading" secondItem="0ru-It-ZwP" secondAttribute="trailing" id="RCg-jT-r51"/>
                                     <constraint firstAttribute="bottom" secondItem="eJp-mf-2KR" secondAttribute="bottom" id="ToR-Xg-mam"/>
-                                    <constraint firstItem="ZWw-UU-QiW" firstAttribute="leading" secondItem="RSc-wa-cZ6" secondAttribute="trailing" id="VKp-KF-R6A"/>
-                                    <constraint firstItem="JVq-g0-Afd" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="Xo9-UC-bmU"/>
                                     <constraint firstAttribute="trailing" secondItem="0gW-z2-Haf" secondAttribute="trailing" id="YmP-1M-Vui"/>
-                                    <constraint firstItem="JVq-g0-Afd" firstAttribute="width" secondItem="5Xz-4N-X1O" secondAttribute="width" id="b55-5Y-Ycm"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZWw-UU-QiW" secondAttribute="bottom" id="bNm-tT-Pjz"/>
                                     <constraint firstAttribute="bottom" secondItem="5Xz-4N-X1O" secondAttribute="bottom" id="eEy-PO-ZFg"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="zGq-2D-jDD" secondAttribute="bottom" id="eXB-zt-5C3"/>
-                                    <constraint firstItem="0ru-It-ZwP" firstAttribute="leading" secondItem="JVq-g0-Afd" secondAttribute="trailing" id="pVn-Sx-gTp"/>
                                     <constraint firstItem="eJp-mf-2KR" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="wFX-y0-72N"/>
                                     <constraint firstItem="5Xz-4N-X1O" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="wc2-fB-cQM"/>
                                     <constraint firstItem="duK-ww-PYt" firstAttribute="leading" secondItem="5Xz-4N-X1O" secondAttribute="trailing" id="wmy-aV-24f"/>
                                     <constraint firstItem="0ru-It-ZwP" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="xBI-9x-x2W"/>
-                                    <constraint firstItem="JVq-g0-Afd" firstAttribute="leading" secondItem="ZWw-UU-QiW" secondAttribute="trailing" id="zBG-pa-CFq"/>
+                                    <constraint firstItem="0ru-It-ZwP" firstAttribute="leading" secondItem="RSc-wa-cZ6" secondAttribute="trailing" id="xIu-Fg-G7T"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="QzB-4D-NCf"/>
                                         <exclude reference="EEp-S9-rH6"/>
                                     </mask>
                                 </variation>
@@ -278,7 +258,6 @@
                     <connections>
                         <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
-                        <outlet property="gridButton" destination="ZWw-UU-QiW" id="5bb-6h-Kdq"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="imageCycler" destination="8Fb-MQ-XGx" id="1SL-Yo-YBE"/>
                         <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
@@ -909,7 +888,6 @@
         <image name="cameraIcon.png" width="512" height="512"/>
         <image name="decreaseIcon.png" width="512" height="512"/>
         <image name="goIcon.png" width="800" height="800"/>
-        <image name="gridIcon.png" width="512" height="512"/>
         <image name="hintIcon.png" width="512" height="512"/>
         <image name="increaseIcon.png" width="512" height="512"/>
         <image name="infoIcon.png" width="512" height="512"/>
