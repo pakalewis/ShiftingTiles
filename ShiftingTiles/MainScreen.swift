@@ -38,8 +38,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var letsPlayButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     
-    var imageArray = [UIImage]()
-    var smallImageArray = [UIImage]()
+    var imageNameArray = [String]()
+    var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
     var drawGrid : DrawGrid?
@@ -65,10 +65,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
         var imageGallery = ImageGallery()
-        self.imageArray = imageGallery.imageArray
-        self.smallImageArray = imageGallery.smallImageArray
-        self.imageToSolve = imageArray[0]
-        self.imageCycler.image = imageArray[0]
+        self.imageNameArray = imageGallery.imageNameArray
+        self.smallImageNameArray = imageGallery.smallImageNameArray
+        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
+        self.imageCycler.image = UIImage(named: self.imageNameArray[0])!
         self.imageCycler.layer.borderColor = UIColor.blackColor().CGColor
         self.imageCycler.layer.borderWidth = 2
 
@@ -104,7 +104,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     //MARK: COLLECTION VIEW
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.imageArray.count
+        return self.imageNameArray.count
     }
     
     
@@ -117,15 +117,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.imageView.image = self.smallImageArray[indexPath.row]
+        cell.imageView.image = UIImage(named: self.smallImageNameArray[indexPath.row])!
         return cell
     }
     
     
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.imageToSolve = imageArray[indexPath.row]
-        self.imageCycler.image = imageArray[indexPath.row]
+        self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
+        self.imageCycler.image = UIImage(named: self.imageNameArray[indexPath.row])!
     }
     
     
@@ -146,6 +146,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.allowsEditing = true
+                imagePicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
                 
                 // TODO: tried this and it didn't work
@@ -154,9 +155,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 //                self.presentViewController(blackVC, animated: true, completion: nil)
 
                 // This should present blackVC and on that new VC do the imagePicker stuff (four lines above and the two required methods below
-
-                
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                    
+                    
+                })
             } else {
                 var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)

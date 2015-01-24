@@ -349,20 +349,20 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GvL-XL-dAu">
-                                <rect key="frame" x="90" y="165" width="420" height="366"/>
+                                <rect key="frame" x="90" y="165" width="420" height="356"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fw4-uH-uPH" userLabel="BottomBorder">
-                                <rect key="frame" x="132" y="531" width="336" height="3"/>
+                                <rect key="frame" x="132" y="521" width="336" height="3"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="vjZ-6B-VdV"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EN-VZ-KcI" userLabel="TotalSolvesLabel">
-                                <rect key="frame" x="262" y="539" width="76" height="36"/>
+                                <rect key="frame" x="262" y="534" width="76" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -382,7 +382,7 @@
                             <constraint firstItem="wbx-f1-dqn" firstAttribute="leading" secondItem="GvL-XL-dAu" secondAttribute="leading" id="Lk5-B8-oeW"/>
                             <constraint firstItem="wbx-f1-dqn" firstAttribute="top" secondItem="XBo-ic-9DY" secondAttribute="top" id="Rdh-uS-Bxg"/>
                             <constraint firstItem="GvL-XL-dAu" firstAttribute="width" secondItem="bWY-gq-TWZ" secondAttribute="width" multiplier="0.7" id="S5V-gN-t5v"/>
-                            <constraint firstItem="1EN-VZ-KcI" firstAttribute="top" secondItem="fw4-uH-uPH" secondAttribute="bottom" constant="5" id="TTZ-qC-wPc"/>
+                            <constraint firstItem="1EN-VZ-KcI" firstAttribute="top" secondItem="fw4-uH-uPH" secondAttribute="bottom" constant="10" id="TTZ-qC-wPc"/>
                             <constraint firstItem="fw4-uH-uPH" firstAttribute="leading" secondItem="GvL-XL-dAu" secondAttribute="trailing" constant="-417" id="aay-Vx-am1"/>
                             <constraint firstAttribute="centerX" secondItem="GvL-XL-dAu" secondAttribute="centerX" id="cm1-PJ-GYX"/>
                             <constraint firstItem="XBo-ic-9DY" firstAttribute="leading" secondItem="wbx-f1-dqn" secondAttribute="trailing" id="e3h-Mf-D1b"/>
@@ -390,7 +390,7 @@
                             <constraint firstItem="Epx-JQ-dVq" firstAttribute="top" secondItem="wbx-f1-dqn" secondAttribute="bottom" id="isV-7u-PY3"/>
                             <constraint firstItem="wbx-f1-dqn" firstAttribute="width" secondItem="GvL-XL-dAu" secondAttribute="width" multiplier="0.5" id="jK2-d6-Asm"/>
                             <constraint firstItem="GvL-XL-dAu" firstAttribute="top" secondItem="Epx-JQ-dVq" secondAttribute="bottom" id="ouj-z5-70i"/>
-                            <constraint firstItem="OJC-s3-onp" firstAttribute="top" secondItem="1EN-VZ-KcI" secondAttribute="bottom" constant="25" id="pqQ-x0-W1U"/>
+                            <constraint firstItem="OJC-s3-onp" firstAttribute="top" secondItem="1EN-VZ-KcI" secondAttribute="bottom" constant="30" id="pqQ-x0-W1U"/>
                             <constraint firstItem="GvL-XL-dAu" firstAttribute="centerX" secondItem="Epx-JQ-dVq" secondAttribute="centerX" id="tKc-UU-oeM"/>
                         </constraints>
                         <variation key="default">
