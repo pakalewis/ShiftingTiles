@@ -325,7 +325,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             }) { (finished) -> Void in
                 
                 // Grow the tile area by sliding the left bank off screen to the left
-                self.leftBankMarginConstraint.constant = self.leftBankMarginConstraint.constant - self.leftBank.frame.width + 10
+                self.leftBankMarginConstraint.constant =  -self.leftBank.frame.width + 10
 
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
                     self.view.layoutIfNeeded()
@@ -333,7 +333,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                     }) { (finished) -> Void in
                         // Calling this again to resize all the tiles to take up the full TileArea
                         self.tileArea.layoutTilesWithMargin(0.0)
-
                 }
         }
     }

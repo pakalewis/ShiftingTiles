@@ -1,22 +1,18 @@
-Todo:
-- fix image picker
+TODO:
 - retake sample images for the rules page 1
 - reorder the MainScreen buttons so that the grid size 5x5 is in the middle and that the increase/decrease buttons do not move when going from 9 to 10x
-
 -standardize screen title sizes
-
 - make sure that the starting settings/nsuserdefaults are correct
 
 
 
-Questions
-
+QUESTIONS:
 - tapping an image from the collectionview add 4mb to the memory for each image. why??
 - Why does the photo library take so long to load the first time?
 
 
 
-LATER
+LATER:
 - add ability to flip/rotate entire game board
 - add languages to settings page
 - sound effects

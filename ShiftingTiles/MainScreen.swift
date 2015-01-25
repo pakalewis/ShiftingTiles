@@ -188,7 +188,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
         var bounds = self.mainImageView.bounds
         self.previewLayer!.bounds = CGRectMake(bounds.origin.x + 2, bounds.origin.y + 2, bounds.width - 4, bounds.height - 4)
-        self.previewLayer!.videoGravity = AVLayerVideoGravityResize
+        self.previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
         self.previewLayer!.position = CGPointMake(CGRectGetMidX(bounds) + self.mainImageView.frame.origin.x, CGRectGetMidY(bounds) + self.mainImageView.frame.origin.y)
         self.view.layer.addSublayer(self.previewLayer)
         
@@ -229,19 +229,51 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 break;
             }
         }
+        
 
-//        if videoConnection!.supportsVideoOrientation {
-//            videoConnection!.videoOrientation = AVCaptureVideoOrientation.Portrait
-//        }
+        // This might not be necessary
+        var newOrientation: AVCaptureVideoOrientation
+        switch UIDevice.currentDevice().orientation {
+        case .PortraitUpsideDown:
+            newOrientation = .PortraitUpsideDown;
+            break;
+        case .LandscapeLeft:
+            newOrientation = .LandscapeRight;
+            break;
+        case .LandscapeRight:
+            newOrientation = .LandscapeLeft;
+            break;
+        default:
+            newOrientation = .Portrait;
+        }
+        videoConnection!.videoOrientation = newOrientation
+        
+        
+        
+        
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
                 var data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 var capturedImage = UIImage(data: data)
-                var rotatedImage = UIImage(CGImage: capturedImage!.CGImage, scale: CGFloat(1.0), orientation: UIImageOrientation.Down)
+                
+                // Rotates the image if its imageOrientation property is not Up
+                if !(capturedImage!.imageOrientation == UIImageOrientation.Up) {
+                    UIGraphicsBeginImageContextWithOptions(capturedImage!.size, false, capturedImage!.scale)
+                    capturedImage!.drawInRect(CGRect(origin: CGPointZero, size: capturedImage!.size))
+                    var properImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+                    
+                    // Now crop to square
+                    var squareRect = CGRectMake(0, (properImage.size.height / 2) - (properImage.size.width / 2), properImage.size.width, properImage.size.width)
+                    var croppedCGImage = CGImageCreateWithImageInRect(properImage.CGImage, squareRect)
+                    var croppedUIImage = UIImage(CGImage: croppedCGImage)
 
-                self.imageToSolve = rotatedImage!
-                self.mainImageView.image = rotatedImage!
+                    capturedImage = croppedUIImage
+                    UIGraphicsEndImageContext()
+                }
+                
+                self.imageToSolve = capturedImage!
+                self.mainImageView.image = capturedImage!
                 self.previewLayer?.removeFromSuperlayer()
 
             })

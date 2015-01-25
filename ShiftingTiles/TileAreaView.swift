@@ -236,6 +236,7 @@ class TileAreaView: UIView {
                 if counter == line1.count - 1 {
                     if self.checkIfSolved() {
                         // Notify GameScreen
+                        self.isPuzzleSolved = true
                         self.delegate!.puzzleIsSolved()
                     }
                 }
@@ -355,6 +356,7 @@ class TileAreaView: UIView {
                             // Swap the tiles and then check if the puzzle is solved
                             if self.checkIfSolved() {
                                 // Notify GameScreen
+                                self.isPuzzleSolved = true
                                 self.delegate!.puzzleIsSolved()
                             }
                         })
@@ -390,6 +392,7 @@ class TileAreaView: UIView {
                     // Rotate the tile and then check if the puzzle is solved
                     if self.checkIfSolved() {
                         // Notify GameScreen
+                        self.isPuzzleSolved = true
                         self.delegate!.puzzleIsSolved()
                     }
                 })
@@ -414,8 +417,6 @@ class TileAreaView: UIView {
             }
         }
         
-        // If it makes it through this loop then the puzzle is solved
-        self.isPuzzleSolved = true
         return true
     }
 
