@@ -39,6 +39,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
+    @IBOutlet weak var imageCapturingButtonArea: UIView!
     
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
@@ -48,7 +49,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var letsPlayButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var captureImageButton: UIButton!
     
+    @IBOutlet weak var imageCapturingAreaLeftConstraint: NSLayoutConstraint!
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
@@ -163,6 +166,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     self.view.layer.addSublayer(self.previewLayer)
                     self.captureSession!.startRunning()
                 }
+                var screenWidth = UIScreen.mainScreen().applicationFrame.width
+                self.imageCapturingAreaLeftConstraint.constant =  -screenWidth
+                
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                })
             } else {
                 var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -212,6 +221,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func captureImage(sender: AnyObject) {
+        self.imageCapturingAreaLeftConstraint.constant =  0
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
 
         var videoConnection : AVCaptureConnection?
         for connection in self.stillImageOutput.connections {
@@ -350,6 +364,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     func updateColors() {
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.imageCapturingButtonArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
@@ -362,5 +377,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
     }
 }

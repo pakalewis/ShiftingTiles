@@ -3,7 +3,7 @@ TODO:
 - reorder the MainScreen buttons so that the grid size 5x5 is in the middle and that the increase/decrease buttons do not move when going from 9 to 10x
 -standardize screen title sizes
 - make sure that the starting settings/nsuserdefaults are correct
-
+- add rule about dragging entire row/column
 
 
 QUESTIONS:

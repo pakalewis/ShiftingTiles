@@ -14,6 +14,7 @@
 		2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6A1A660D3600BEFB87 /* InfoScreen.swift */; };
 		2C025E6E1A660D4900BEFB87 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */; };
 		2C025E6F1A660D4900BEFB87 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */; };
+		2C033C8E1A74F1520021F5A2 /* targetIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C033C8D1A74F1520021F5A2 /* targetIcon.png */; };
 		2C5DCE8D1A663BA600DEF22E /* settingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE8C1A663BA600DEF22E /* settingsIcon.png */; };
 		2C5DCE911A663D5F00DEF22E /* infoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE901A663D5F00DEF22E /* infoIcon.png */; };
 		2C5DCE941A663EA900DEF22E /* decreaseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DCE921A663EA900DEF22E /* decreaseIcon.png */; };
@@ -122,6 +123,7 @@
 		2C025E6A1A660D3600BEFB87 /* InfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoScreen.swift; path = ShiftingTiles/InfoScreen.swift; sourceTree = SOURCE_ROOT; };
 		2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPalette.swift; path = ShiftingTiles/ColorPalette.swift; sourceTree = SOURCE_ROOT; };
 		2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = ShiftingTiles/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
+		2C033C8D1A74F1520021F5A2 /* targetIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = targetIcon.png; path = ShiftingTiles/targetIcon.png; sourceTree = SOURCE_ROOT; };
 		2C30EF1D19B7C17500675799 /* ShiftingTiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftingTiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5DCE8C1A663BA600DEF22E /* settingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsIcon.png; path = ShiftingTiles/settingsIcon.png; sourceTree = SOURCE_ROOT; };
 		2C5DCE901A663D5F00DEF22E /* infoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = infoIcon.png; path = ShiftingTiles/infoIcon.png; sourceTree = SOURCE_ROOT; };
@@ -344,6 +346,7 @@
 		2CD299FF1A47B6490048FDD8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2C033C8D1A74F1520021F5A2 /* targetIcon.png */,
 				2C805DDA1A6DBF27004FCF8B /* rightArrow.png */,
 				2CF7E4101A67331700E39B14 /* solveIcon.png */,
 				2CF7E40A1A6728F800E39B14 /* backIcon.png */,
@@ -557,6 +560,7 @@
 				2C7F08551A5DF0420083F668 /* upTriangle.png in Resources */,
 				2C7F07F71A5DEF860083F668 /* 07.jpeg in Resources */,
 				2C7F083E1A5DEFFE0083F668 /* 24small.jpeg in Resources */,
+				2C033C8E1A74F1520021F5A2 /* targetIcon.png in Resources */,
 				2C7F07D51A5DEF500083F668 /* 01.jpeg in Resources */,
 				2C7F082E1A5DEFFE0083F668 /* 08small.jpeg in Resources */,
 				2C7F082A1A5DEFFE0083F668 /* 04small.jpeg in Resources */,
