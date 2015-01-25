@@ -222,9 +222,19 @@
                                     <constraint firstAttribute="centerY" secondItem="VEQ-Ht-075" secondAttribute="centerY" id="wJQ-Es-aHv"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYD-MI-iZr">
+                                <rect key="frame" x="549" y="310" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="captureImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWe-Lx-lVt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="QYD-MI-iZr" firstAttribute="centerY" secondItem="8Fb-MQ-XGx" secondAttribute="centerY" constant="9" id="06y-eL-ZOh"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.8" id="10e-N6-uLI"/>
                             <constraint firstItem="b4j-a2-3ko" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="bottom" constant="5" id="1V9-6d-8C9"/>
                             <constraint firstAttribute="trailing" secondItem="yWk-eH-8xd" secondAttribute="trailing" id="2KA-sF-j9z"/>
@@ -232,7 +242,10 @@
                             <constraint firstItem="b4j-a2-3ko" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7F1-sb-c36"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="top" secondItem="6p4-o8-wZC" secondAttribute="bottom" constant="10" id="8LJ-ag-RRi"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="AnY-VO-fYu"/>
+                            <constraint firstAttribute="centerY" secondItem="QYD-MI-iZr" secondAttribute="centerY" id="GIy-HM-1cB"/>
+                            <constraint firstAttribute="centerX" secondItem="QYD-MI-iZr" secondAttribute="centerX" constant="-212" id="JFD-pJ-Hi9"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
+                            <constraint firstAttribute="trailing" secondItem="QYD-MI-iZr" secondAttribute="trailing" constant="5" id="KRQ-RZ-OTm"/>
                             <constraint firstAttribute="centerX" secondItem="k1r-w8-S7G" secondAttribute="centerX" id="R38-Tr-Puh"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="leading" secondItem="k1r-w8-S7G" secondAttribute="leading" id="SIg-BO-0Ap"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
@@ -242,6 +255,7 @@
                             <constraint firstAttribute="centerX" secondItem="8Fb-MQ-XGx" secondAttribute="centerX" id="jRO-vF-DoX"/>
                             <constraint firstAttribute="centerX" secondItem="dsY-VR-BwX" secondAttribute="centerX" id="kk5-fh-9dq"/>
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.85" id="maf-fz-9tM"/>
+                            <constraint firstItem="QYD-MI-iZr" firstAttribute="leading" secondItem="8Fb-MQ-XGx" secondAttribute="trailing" constant="5" id="nS2-nr-h9g"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pHL-K9-YsL"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="top" secondItem="b4j-a2-3ko" secondAttribute="bottom" constant="5" id="pN8-LC-zdZ"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="pva-aL-Vap"/>
@@ -252,6 +266,9 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="SIg-BO-0Ap"/>
+                                <exclude reference="GIy-HM-1cB"/>
+                                <exclude reference="JFD-pJ-Hi9"/>
+                                <exclude reference="nS2-nr-h9g"/>
                             </mask>
                         </variation>
                     </view>
@@ -259,10 +276,10 @@
                         <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
-                        <outlet property="imageCycler" destination="8Fb-MQ-XGx" id="1SL-Yo-YBE"/>
                         <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
                         <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>
                         <outlet property="letsPlayButton" destination="7cw-uc-rQN" id="1z0-aQ-Nlr"/>
+                        <outlet property="mainImageView" destination="8Fb-MQ-XGx" id="Yno-Jj-FY7"/>
                         <outlet property="separatorView" destination="b4j-a2-3ko" id="Cm6-Ak-8kv"/>
                         <outlet property="settingsButton" destination="VEQ-Ht-075" id="fWk-6Y-4c7"/>
                         <outlet property="shiftingTilesLabel" destination="6p4-o8-wZC" id="RNq-Wh-JLc"/>

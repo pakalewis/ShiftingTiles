@@ -15,6 +15,11 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import CoreMedia
+import CoreVideo
+import ImageIO
+import QuartzCore
 
 class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -22,10 +27,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
     
+    // AVFoundation
+    var captureSession : AVCaptureSession?
+    var previewLayer : AVCaptureVideoPreviewLayer?
+    var captureDevice : AVCaptureDevice?
+    var stillImageOutput = AVCaptureStillImageOutput()
+
+    
     // VIEWS
     @IBOutlet weak var shiftingTilesLabel: UILabel!
     @IBOutlet weak var imageCollection: UICollectionView!
-    @IBOutlet weak var imageCycler: UIImageView!
+    @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     
     @IBOutlet weak var cameraButton: UIButton!
@@ -58,6 +70,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.dataSource = self
         
         
+        
         // register the nibs for the two types of tableview cells
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
@@ -66,9 +79,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageNameArray = imageGallery.imageNameArray
         self.smallImageNameArray = imageGallery.smallImageNameArray
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
-        self.imageCycler.image = UIImage(named: self.imageNameArray[0])!
-        self.imageCycler.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.imageCycler.layer.borderWidth = 2
+        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.mainImageView.layer.borderWidth = 2
 
 
         self.tilesPerRow = 3
@@ -87,6 +100,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
         self.letsPlayButton.sizeToFit()
     }
+    
     
     
     // Segue to game screen
@@ -125,13 +139,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
-        self.imageCycler.image = UIImage(named: self.imageNameArray[indexPath.row])!
+        self.mainImageView.image = UIImage(named: self.imageNameArray[indexPath.row])!
     }
     
     
     
 
-    
+    // MARK: Image funcs
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         var pickPhotoMenu = UIAlertController(title: "Choose a photo:", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         let libraryAction = UIAlertAction(title: "Library", style: UIAlertActionStyle.Default) { (handler) -> Void in
@@ -143,23 +157,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (handler) -> Void in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.allowsEditing = true
-                imagePicker.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-                
-                // TODO: tried this and it didn't work
-//                let blackVC = UIViewController()
-//                blackVC.view.backgroundColor = UIColor.blackColor()
-//                self.presentViewController(blackVC, animated: true, completion: nil)
-
-                // This should present blackVC and on that new VC do the imagePicker stuff (four lines above and the two required methods below
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    self.presentViewController(imagePicker, animated: true, completion: nil)
-                    
-                    
-                })
+                if self.captureSession == nil {
+                    self.setupAVFoundation()
+                } else {
+                    self.view.layer.addSublayer(self.previewLayer)
+                    self.captureSession!.startRunning()
+                }
             } else {
                 var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -176,11 +179,78 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
+    func setupAVFoundation() {
+        // Capture Session
+        self.captureSession = AVCaptureSession()
+        self.captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
+        
+        // Preview layer
+        self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
+        var bounds = self.mainImageView.bounds
+        self.previewLayer!.bounds = CGRectMake(bounds.origin.x + 2, bounds.origin.y + 2, bounds.width - 4, bounds.height - 4)
+        self.previewLayer!.videoGravity = AVLayerVideoGravityResize
+        self.previewLayer!.position = CGPointMake(CGRectGetMidX(bounds) + self.mainImageView.frame.origin.x, CGRectGetMidY(bounds) + self.mainImageView.frame.origin.y)
+        self.view.layer.addSublayer(self.previewLayer)
+        
+        // Capture Device
+        self.captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        var err : NSError? = nil
+        var input = AVCaptureDeviceInput.deviceInputWithDevice(self.captureDevice, error: &err) as AVCaptureDeviceInput!
+        if err != nil {
+            println("error: \(err?.localizedDescription)")
+        }
+        self.captureSession!.addInput(input)
+
     
+        var outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
+        self.stillImageOutput.outputSettings = outputSettings
+        self.captureSession!.addOutput(self.stillImageOutput)
     
+        self.captureSession!.startRunning()
+    }
   
     
-    // MARK: ImagePicker
+    
+    @IBAction func captureImage(sender: AnyObject) {
+
+        var videoConnection : AVCaptureConnection?
+        for connection in self.stillImageOutput.connections {
+            if let cameraConnection = connection as? AVCaptureConnection {
+                for port in cameraConnection.inputPorts {
+                    if let videoPort = port as? AVCaptureInputPort {
+                        if videoPort.mediaType == AVMediaTypeVideo {
+                            videoConnection = cameraConnection
+                            break;
+                        }
+                    }
+                }
+            }
+            if videoConnection != nil {
+                break;
+            }
+        }
+
+//        if videoConnection!.supportsVideoOrientation {
+//            videoConnection!.videoOrientation = AVCaptureVideoOrientation.Portrait
+//        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
+                var data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
+                var capturedImage = UIImage(data: data)
+                var rotatedImage = UIImage(CGImage: capturedImage!.CGImage, scale: CGFloat(1.0), orientation: UIImageOrientation.Down)
+
+                self.imageToSolve = rotatedImage!
+                self.mainImageView.image = rotatedImage!
+                self.previewLayer?.removeFromSuperlayer()
+
+            })
+
+            self.captureSession!.stopRunning()
+        }
+    }
+    
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
         
@@ -200,7 +270,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         var croppedUIImage = UIImage(CGImage: croppedCGImage)
         
         self.imageToSolve = croppedUIImage!
-        self.imageCycler.image = croppedUIImage!
+        self.mainImageView.image = croppedUIImage!
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -222,7 +292,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
-    // MARK: Custom Stepper
+    // MARK: Other funcs
     
     @IBAction func rightButtonPressed(sender: AnyObject) {
 
@@ -250,7 +320,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.imageCycler.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)

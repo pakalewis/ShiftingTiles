@@ -1,6 +1,7 @@
 Todo:
 - fix image picker
 - retake sample images for the rules page 1
+- reorder the MainScreen buttons so that the grid size 5x5 is in the middle and that the increase/decrease buttons do not move when going from 9 to 10x
 
 -standardize screen title sizes
 
