@@ -31,7 +31,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var captureSession : AVCaptureSession?
     var previewLayer : AVCaptureVideoPreviewLayer?
     var captureDevice : AVCaptureDevice?
-    var stillImageOutput = AVCaptureStillImageOutput()
+    var stillImageOutput : AVCaptureStillImageOutput?
 
     
     // VIEWS
@@ -56,23 +56,21 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
     var tilesPerRow = 3
-    let pickerData = ["2","3","4","5","6","7","8","9","10"]
     
     
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
-        
-        
         
         // register the nibs for the two types of tableview cells
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
@@ -88,20 +86,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
 
         self.tilesPerRow = 3
-        self.tilesPerRowLabel.text = "3x3"
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 15)
-        }
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 30)
-        }
-        
-        self.letsPlayButton.titleLabel?.adjustsFontSizeToFitWidth = true        
-        self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
-        self.letsPlayButton.layer.borderWidth = 2
-        self.letsPlayButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.letsPlayButton.sizeToFit()
+        self.tilesPerRowLabel.text = "3 x 3"
     }
     
     
@@ -212,7 +197,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     
         var outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
-        self.stillImageOutput.outputSettings = outputSettings
+        self.stillImageOutput = AVCaptureStillImageOutput()
+        self.stillImageOutput!.outputSettings = outputSettings
         self.captureSession!.addOutput(self.stillImageOutput)
     
         self.captureSession!.startRunning()
@@ -228,7 +214,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         })
 
         var videoConnection : AVCaptureConnection?
-        for connection in self.stillImageOutput.connections {
+        for connection in self.stillImageOutput!.connections {
             if let cameraConnection = connection as? AVCaptureConnection {
                 for port in cameraConnection.inputPorts {
                     if let videoPort = port as? AVCaptureInputPort {
@@ -267,7 +253,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
+            self.stillImageOutput!.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
                 var data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 var capturedImage = UIImage(data: data)
                 
@@ -326,20 +312,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
-
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        println("MEMORY WARNING")
-    }
-    
     
     
     
     // MARK: Other funcs
-    
     @IBAction func rightButtonPressed(sender: AnyObject) {
 
         self.tilesPerRow++
@@ -362,12 +338,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     
-    func updateColors() {
+    func updateColorsAndFonts() {
+        // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.imageCapturingButtonArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        
+        // Icons
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -376,7 +355,26 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
+        self.letsPlayButton.layer.borderWidth = 2
         self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+ 
+        // Fonts
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.shiftingTilesLabel.font = UIFont(name: self.shiftingTilesLabel.font.fontName, size: 40)
+            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 15)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.shiftingTilesLabel.font = UIFont(name: self.shiftingTilesLabel.font.fontName, size: 70)
+            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 30)
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        println("MEMORY WARNING")
     }
 }

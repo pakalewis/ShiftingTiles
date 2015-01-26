@@ -52,7 +52,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
 
     
@@ -81,7 +81,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.originalImageView.image = self.imageToSolve
         self.originalImageView.alpha = 0
         self.view.addSubview(originalImageView)
-        
     }
     
     
@@ -348,8 +347,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBAction func stopShowingOriginal(sender: AnyObject) {
         self.originalImageView.alpha = 0
     }
-    
-    
+
+
     // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(sender: AnyObject) {
         self.tileArea.findTilesToSwap()
@@ -408,8 +407,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
  
-    func updateColors() {
-        // Apply color scheme
+    func updateColorsAndFonts() {
+        // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
@@ -418,6 +417,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
 
+        // Fonts
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.congratsMessage.font = UIFont(name: self.congratsMessage.font.fontName, size: 30)
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.congratsMessage.font = UIFont(name: self.congratsMessage.font.fontName, size: 60)
+        }
 
     }
     
