@@ -1,10 +1,9 @@
 TODO:
 - retake sample images for the rules page 1
 
+- fix show original image bug (stays alpha 1 if touch up inside fails)
 - cancel button for image capture
 - check on all devices in simulator
-
-- fix show original image bug (stays alpha 1 if touch up inside fails)
 
 
 QUESTIONS:

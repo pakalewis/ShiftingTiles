@@ -210,10 +210,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ha-Eg-1xQ" userLabel="ImageCapturingButtonArea">
-                                <rect key="frame" x="600" y="470" width="600" height="130"/>
+                                <rect key="frame" x="0.0" y="470" width="600" height="400"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYD-MI-iZr">
-                                        <rect key="frame" x="248" y="13" width="104" height="104"/>
+                                        <rect key="frame" x="255" y="200" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="QYD-MI-iZr" secondAttribute="height" multiplier="1:1" id="vGc-BR-Ztu"/>
                                         </constraints>
@@ -227,9 +227,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="QYD-MI-iZr" secondAttribute="centerY" id="WXJ-xa-ied"/>
+                                    <constraint firstAttribute="height" constant="400" id="PT6-sX-rB8"/>
+                                    <constraint firstItem="QYD-MI-iZr" firstAttribute="top" secondItem="8Ha-Eg-1xQ" secondAttribute="top" constant="200" id="QdG-iU-xbK"/>
                                     <constraint firstAttribute="centerX" secondItem="QYD-MI-iZr" secondAttribute="centerX" id="cDe-kX-ADn"/>
-                                    <constraint firstItem="QYD-MI-iZr" firstAttribute="height" secondItem="8Ha-Eg-1xQ" secondAttribute="height" multiplier="0.8" id="xbU-UB-diR"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -241,9 +241,8 @@
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="10" id="4bd-Db-4gU"/>
                             <constraint firstItem="b4j-a2-3ko" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7F1-sb-c36"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="top" secondItem="6p4-o8-wZC" secondAttribute="bottom" constant="10" id="8LJ-ag-RRi"/>
-                            <constraint firstAttribute="bottom" secondItem="8Ha-Eg-1xQ" secondAttribute="bottom" id="8bs-eb-r2S"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="AnY-VO-fYu"/>
-                            <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="leading" secondItem="yWk-eH-8xd" secondAttribute="trailing" id="F3H-5c-vFH"/>
+                            <constraint firstItem="QYD-MI-iZr" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="G8X-aC-RXO"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
                             <constraint firstAttribute="centerX" secondItem="k1r-w8-S7G" secondAttribute="centerX" id="R38-Tr-Puh"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
@@ -260,15 +259,16 @@
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="pva-aL-Vap"/>
                             <constraint firstAttribute="trailing" secondItem="b4j-a2-3ko" secondAttribute="trailing" id="tJk-Yn-izi"/>
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.06" id="uuh-KJ-2cd"/>
+                            <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vjx-C3-lRZ"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="ymP-Zs-m3Q"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
+                        <outlet property="captureButtonTopConstraint" destination="QdG-iU-xbK" id="DYk-zU-VgA"/>
                         <outlet property="captureImageButton" destination="QYD-MI-iZr" id="Mh5-Vp-UcV"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
-                        <outlet property="imageCapturingAreaLeftConstraint" destination="F3H-5c-vFH" id="Ao0-vE-WMt"/>
-                        <outlet property="imageCapturingButtonArea" destination="8Ha-Eg-1xQ" id="fOC-Q2-NbJ"/>
+                        <outlet property="imageCapturingAreaTopConstraint" destination="arZ-9z-5ZQ" id="iqr-Wp-Sw5"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
                         <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>

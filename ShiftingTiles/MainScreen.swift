@@ -51,7 +51,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var captureImageButton: UIButton!
     
-    @IBOutlet weak var imageCapturingAreaLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var captureButtonTopConstraint: NSLayoutConstraint!
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
@@ -62,6 +62,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.sendSubviewToBack(self.imageCapturingButtonArea)
+        self.imageCapturingButtonArea.alpha = 0
         self.updateColorsAndFonts()
     }
 
@@ -151,10 +153,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     self.view.layer.addSublayer(self.previewLayer)
                     self.captureSession!.startRunning()
                 }
-                var screenWidth = UIScreen.mainScreen().applicationFrame.width
-                self.imageCapturingAreaLeftConstraint.constant =  -screenWidth
-                
+
+                // Display the capture button and block out other controls
+                self.view.bringSubviewToFront(self.imageCapturingButtonArea)
+                self.imageCapturingButtonArea.alpha = 1
+
+                self.captureButtonTopConstraint.constant = 10
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.view.bringSubviewToFront(self.imageCapturingButtonArea)
                     self.view.layoutIfNeeded()
                 })
             } else {
@@ -207,11 +213,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func captureImage(sender: AnyObject) {
-        self.imageCapturingAreaLeftConstraint.constant =  0
-        
+        self.captureButtonTopConstraint.constant = 200
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.view.layoutIfNeeded()
-        })
+        }) { (closure) -> Void in
+            self.imageCapturingButtonArea.alpha = 0
+            self.view.sendSubviewToBack(self.imageCapturingButtonArea)
+        }
 
         var videoConnection : AVCaptureConnection?
         for connection in self.stillImageOutput!.connections {
