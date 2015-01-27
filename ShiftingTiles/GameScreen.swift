@@ -18,6 +18,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     var imageToSolve = UIImage()
     var tilesPerRow = 3
+    var messages : [String]!
     
     var topButtons = [UIImageView]()
     var leftButtons = [UIImageView]()
@@ -51,6 +52,21 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messages = [ "WAY TO GO!",
+            "CONGRATS!",
+            "SUPER!",
+            "AWESOME!",
+            "GREAT JOB!",
+            "WELL DONE!",
+            "GOOD FOR YOU!",
+            "YOU DID IT!",
+            "FINISHED!",
+            "TAKE A BOW!",
+            "NICE GOING!",
+            "THAT'S GOLD!",
+            "EXCELLENT!",
+            "PERFECT!",
+            "RIGHT ON!" ]
     }
     
     
@@ -360,8 +376,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     func puzzleIsSolved() {
         
         // Display congrats message
-        // TODO: what else can i do? fireworks?
-        congratsMessage.text = "WAY TO GO!"
+        var randomInt = Int(arc4random_uniform(UInt32(self.messages.count)))
+        self.congratsMessage.text = self.messages[randomInt]
         
         // Update stats
         let stats = Stats()
