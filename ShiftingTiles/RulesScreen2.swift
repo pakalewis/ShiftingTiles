@@ -54,7 +54,7 @@ class RulesScreen2: UIViewController {
         self.label5.textColor = self.colorPalette.fetchDarkColor()
         
         
-        self.label1.text = "Take a photo or select one from the gallery."
+        self.label1.text = "Take a photo or select one from your gallery."
         self.label2.text = "Choose the grid size."
         self.label4.text = "View statistics."
         self.label5.text = "Start the puzzle!"

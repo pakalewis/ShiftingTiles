@@ -871,8 +871,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="showOriginal:" destination="EGT-XM-OAO" eventType="touchDown" id="dMi-F6-IdD"/>
-                                            <action selector="stopShowingOriginal:" destination="EGT-XM-OAO" eventType="touchUpInside" id="y6i-Xj-ZRA"/>
+                                            <action selector="showOriginalPressed:" destination="EGT-XM-OAO" eventType="touchUpInside" id="f3B-Ep-daP"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFs-OE-9GP" userLabel="spacer2">

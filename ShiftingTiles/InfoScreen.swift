@@ -119,16 +119,6 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
 
     
-    
-    
-    
-    
-    
-    
-    //        self.infoText.text = "The objective of the game is to form the original image by shifting the tiles around until they are in the proper order. Tap one tile and then another to swap their positions. The black arrows on the top and left of the tiles allow entire rows and columns to swap postions.\n\nThe HINT button shows the first incorrect tile and the correct tile which it should be swapped with.\n\nThe SOLVE button will auto-solve the puzzle by swapping tiles until complete.\n\nUse the Show Original button to remind yourself what the original image looks like.\n\nImages were culled from unsplash.com and from Dale Arveson: phalconphotography.smugmug.com\n\nFeedback, questions, comments are welcome: pakalewis@gmail.com\n\nThe source code can be viewed here: github.com/pakalewis/shiftingtiles\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest\n\ntest"
-    //
-    
-    
     func dismissInfoScreen(sender: UIGestureRecognizer) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
