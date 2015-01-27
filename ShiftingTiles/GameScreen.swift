@@ -65,6 +65,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
+        self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.tileArea.layer.borderWidth = 2
+        
         
         // Add pan gesture which allows moving rows/columns
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
@@ -331,7 +334,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
                     }) { (finished) -> Void in
                         // Calling this again to resize all the tiles to take up the full TileArea
-                        self.tileArea.layoutTilesWithMargin(0.0)
+                        self.tileArea.layoutTiles()
                 }
         }
     }
@@ -396,7 +399,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
             
             self.puzzleIsSolved()
-            self.tileArea.layoutTilesWithMargin(0.0)
+            self.tileArea.layoutTiles()
             self.tileArea.orientAllTiles()
             self.tileArea.isPuzzleSolved = true
         }

@@ -48,8 +48,10 @@ class TileAreaView: UIView {
         let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
         self.addGestureRecognizer(panGesture)
         
+        self.clipsToBounds = true
+        
         self.createTileArray()
-        self.layoutTilesWithMargin(0)
+        self.layoutTiles()
         self.shuffleImages()
         if userDefaults.boolForKey("rotationsOn") {
             self.rotateTiles()
@@ -83,7 +85,7 @@ class TileAreaView: UIView {
                 tile.imageView.tag = tile.doubleIndex.concatenateToInt()
                 
                 // Set the tile's frame
-                var totalWidth = self.frame.width
+                var totalWidth = self.frame.width - 4
                 var tileFrame = CGRectMake(totalWidth / 2, totalWidth / 2, 0, 0)
                 tile.imageView.frame = tileFrame
 
@@ -96,7 +98,7 @@ class TileAreaView: UIView {
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
                 var imagePositionX:CGFloat = CGFloat(index2) * (imageWidth)
-                var imageFrame = CGRectMake(imagePositionX, imagePositionY, imageWidth, imageWidth)
+                var imageFrame = CGRectMake(imagePositionX + 2, imagePositionY + 2, imageWidth, imageWidth)
                 var tileCGImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, imageFrame)
                 var tileUIImage = UIImage(CGImage: tileCGImage)
                 tile.imageSection = tileUIImage!
@@ -116,21 +118,20 @@ class TileAreaView: UIView {
     
     
     
-    func layoutTilesWithMargin(margin:CGFloat) {
+    func layoutTiles() {
 
         // Tile measuerments
-        var totalWidth = self.frame.width
-        var totalMargin = CGFloat(margin * CGFloat(self.tilesPerRow - 1))
-        var tileWidth:CGFloat  = (totalWidth - totalMargin) / CGFloat(self.tilesPerRow)
+        var tileWidth:CGFloat  = (self.frame.width - 4) / CGFloat(self.tilesPerRow)
+        var tileHeight:CGFloat  = (self.frame.height - 4) / CGFloat(self.tilesPerRow)
         
         for index1 in 0..<self.tilesPerRow { // go down the rows
-            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileWidth + margin)
+            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileHeight) + 2
             
             for index2 in 0..<self.tilesPerRow { // get the tiles in each row
-                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth + margin)
+                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth) + 2
                 
                 // set the boundaries of the tile
-                var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileWidth)
+                var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileHeight)
                 
                 // TODO: play around with this animation more
                 // Update and animate the tile's frame
