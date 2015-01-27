@@ -112,11 +112,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         congratsMessage.text = ""
         
-        
         self.originalImageView = UIImageView(frame: self.tileArea.frame)
         self.originalImageView.image = self.imageToSolve
+        self.originalImageView.layer.borderWidth = 2
+        self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.originalImageView.alpha = 0
         self.view.addSubview(originalImageView)
+        self.view.sendSubviewToBack(originalImageView)
     }
     
     
