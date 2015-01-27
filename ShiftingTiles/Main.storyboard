@@ -268,7 +268,7 @@
                         <outlet property="captureButtonTopConstraint" destination="QdG-iU-xbK" id="DYk-zU-VgA"/>
                         <outlet property="captureImageButton" destination="QYD-MI-iZr" id="Mh5-Vp-UcV"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
-                        <outlet property="imageCapturingAreaTopConstraint" destination="arZ-9z-5ZQ" id="iqr-Wp-Sw5"/>
+                        <outlet property="imageCapturingButtonArea" destination="8Ha-Eg-1xQ" id="6C2-SV-2GP"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
                         <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>
