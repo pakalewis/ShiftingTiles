@@ -376,8 +376,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     func puzzleIsSolved() {
         
         // Display congrats message
-        var randomInt = Int(arc4random_uniform(UInt32(self.messages.count)))
-        self.congratsMessage.text = self.messages[randomInt]
+        if userDefaults.boolForKey("congratsOn") {
+            var randomInt = Int(arc4random_uniform(UInt32(self.messages.count)))
+            self.congratsMessage.text = self.messages[randomInt]
+        }
+
         
         // Update stats
         let stats = Stats()

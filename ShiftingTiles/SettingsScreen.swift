@@ -19,11 +19,16 @@ class SettingsScreen: UIViewController {
     // Labels and buttons
     @IBOutlet weak var settingLabel: UILabel!
     
-    @IBOutlet weak var rotationImage: UIImageView!
     
-    @IBOutlet weak var rotations: UIView!
+    @IBOutlet weak var rotationContainer: UIView!
+    @IBOutlet weak var rotationImage: UIImageView!
+    @IBOutlet weak var rotationLabel: UILabel!
 
-    @IBOutlet weak var rotateTilesLabel: UILabel!
+    @IBOutlet weak var congratsContainer: UIView!
+    @IBOutlet weak var congratsImage: UIImageView!
+    @IBOutlet weak var congratsLabel: UILabel!
+
+    
     @IBOutlet weak var colorSchemeLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
@@ -64,19 +69,24 @@ class SettingsScreen: UIViewController {
 
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 40)
-            self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 20)
+            self.rotationLabel.font = UIFont(name: self.rotationLabel.font.fontName, size: 20)
+            self.congratsLabel.font = UIFont(name: self.congratsLabel.font.fontName, size: 20)
             self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 20)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 70)
-            self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 40)
+            self.rotationLabel.font = UIFont(name: self.rotationLabel.font.fontName, size: 40)
+            self.congratsLabel.font = UIFont(name: self.congratsLabel.font.fontName, size: 40)
             self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 40)
         }
         
         // Add tap gesturess
         var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
-        self.rotations.addGestureRecognizer(rotationTap)
+        self.rotationContainer.addGestureRecognizer(rotationTap)
+        
+        var congratsTap = UITapGestureRecognizer(target: self, action: "congratsTapped:")
+        self.congratsContainer.addGestureRecognizer(congratsTap)
         
         var colorPalette1Tap = UITapGestureRecognizer(target: self, action: "colorPalette1Selected:")
         self.colorPalette1.addGestureRecognizer(colorPalette1Tap)
@@ -99,6 +109,11 @@ class SettingsScreen: UIViewController {
             self.rotationImage.image = UIImage(named: "checkedBox")
         } else {
             self.rotationImage.image = UIImage(named: "uncheckedBox")
+        }
+        if userDefaults.boolForKey("congratsOn") {
+            self.congratsImage.image = UIImage(named: "checkedBox")
+        } else {
+            self.congratsImage.image = UIImage(named: "uncheckedBox")
         }
         
         
@@ -126,6 +141,19 @@ class SettingsScreen: UIViewController {
         } else {
             self.userDefaults.setBool(true, forKey: "rotationsOn")
             self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
+        }
+        self.userDefaults.synchronize()
+    }
+    
+    
+    func congratsTapped(sender: UIGestureRecognizer) {
+        var congratsOn = userDefaults.boolForKey("congratsOn")
+        if congratsOn {
+            self.userDefaults.setBool(false, forKey: "congratsOn")
+            self.congratsImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
+        } else {
+            self.userDefaults.setBool(true, forKey: "congratsOn")
+            self.congratsImage.image = UIImage(named: "checkedBox")?.imageWithColor(self.colorPalette.fetchDarkColor())
         }
         self.userDefaults.synchronize()
     }
@@ -160,9 +188,11 @@ class SettingsScreen: UIViewController {
     func updateColors() {
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.rotateTilesLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.rotationLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.congratsLabel.textColor = self.colorPalette.fetchDarkColor()
         self.rotationImage.image = self.rotationImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()        
+        self.congratsImage.image = self.congratsImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
     }
     
