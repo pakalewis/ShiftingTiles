@@ -210,10 +210,29 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ha-Eg-1xQ" userLabel="ImageCapturingButtonArea">
-                                <rect key="frame" x="0.0" y="470" width="600" height="400"/>
+                                <rect key="frame" x="0.0" y="717" width="600" height="400"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYD-MI-iZr">
-                                        <rect key="frame" x="255" y="200" width="90" height="90"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRs-R8-nBM" userLabel="fakeborder">
+                                        <rect key="frame" x="-30" y="0.0" width="660" height="3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="5nt-Lw-Scn"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUI-df-ri1" userLabel="cancelButton">
+                                        <rect key="frame" x="20" y="67" width="36" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="VUI-df-ri1" secondAttribute="height" multiplier="1:1" id="ZIs-ZX-NsM"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="backIcon.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelImageCaptureMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qDB-IO-ZjR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYD-MI-iZr" userLabel="captureButton">
+                                        <rect key="frame" x="255" y="13" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="QYD-MI-iZr" secondAttribute="height" multiplier="1:1" id="vGc-BR-Ztu"/>
                                         </constraints>
@@ -227,9 +246,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="QYD-MI-iZr" firstAttribute="top" secondItem="qRs-R8-nBM" secondAttribute="bottom" constant="10" id="3fG-So-i6A"/>
+                                    <constraint firstItem="QYD-MI-iZr" firstAttribute="bottom" secondItem="VUI-df-ri1" secondAttribute="bottom" id="O9A-E4-Nom"/>
                                     <constraint firstAttribute="height" constant="400" id="PT6-sX-rB8"/>
-                                    <constraint firstItem="QYD-MI-iZr" firstAttribute="top" secondItem="8Ha-Eg-1xQ" secondAttribute="top" constant="200" id="QdG-iU-xbK"/>
                                     <constraint firstAttribute="centerX" secondItem="QYD-MI-iZr" secondAttribute="centerX" id="cDe-kX-ADn"/>
+                                    <constraint firstItem="qRs-R8-nBM" firstAttribute="top" secondItem="8Ha-Eg-1xQ" secondAttribute="top" id="jmU-09-Z8s"/>
+                                    <constraint firstItem="qRs-R8-nBM" firstAttribute="width" secondItem="8Ha-Eg-1xQ" secondAttribute="width" multiplier="1.1" id="lX3-vd-G3v"/>
+                                    <constraint firstItem="VUI-df-ri1" firstAttribute="leading" secondItem="8Ha-Eg-1xQ" secondAttribute="leading" constant="20" id="sfe-FW-gzh"/>
+                                    <constraint firstItem="VUI-df-ri1" firstAttribute="width" secondItem="QYD-MI-iZr" secondAttribute="width" multiplier="0.4" id="vvu-b6-z9c"/>
+                                    <constraint firstAttribute="centerX" secondItem="qRs-R8-nBM" secondAttribute="centerX" id="ye4-X9-25W"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -247,7 +272,7 @@
                             <constraint firstAttribute="centerX" secondItem="k1r-w8-S7G" secondAttribute="centerX" id="R38-Tr-Puh"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
                             <constraint firstItem="8Fb-MQ-XGx" firstAttribute="top" secondItem="dsY-VR-BwX" secondAttribute="bottom" constant="5" id="UbL-fU-UBx"/>
-                            <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="3" id="arZ-9z-5ZQ"/>
+                            <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="250" id="arZ-9z-5ZQ"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fDy-LK-ouq"/>
                             <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fdh-6W-6Xr"/>
                             <constraint firstAttribute="bottom" secondItem="yWk-eH-8xd" secondAttribute="bottom" constant="5" id="hZx-Oj-brm"/>
@@ -265,10 +290,12 @@
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
-                        <outlet property="captureButtonTopConstraint" destination="QdG-iU-xbK" id="DYk-zU-VgA"/>
+                        <outlet property="cancelButton" destination="VUI-df-ri1" id="4KC-XH-Jbj"/>
                         <outlet property="captureImageButton" destination="QYD-MI-iZr" id="Mh5-Vp-UcV"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
+                        <outlet property="imageCapturingAreaTopConstraint" destination="arZ-9z-5ZQ" id="nBm-ed-9rm"/>
                         <outlet property="imageCapturingButtonArea" destination="8Ha-Eg-1xQ" id="6C2-SV-2GP"/>
+                        <outlet property="imageCapturingButtonAreaFakeBorder" destination="qRs-R8-nBM" id="UMC-an-9fb"/>
                         <outlet property="imageCollection" destination="dsY-VR-BwX" id="cIt-qy-ynp"/>
                         <outlet property="increaseButton" destination="0gW-z2-Haf" id="TNW-3j-uod"/>
                         <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>
@@ -460,7 +487,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAm-Oj-lMx" userLabel="Congrats">
                                 <rect key="frame" x="45" y="238" width="510" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congrats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="IE3-Im-BS1" userLabel="Congratslabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Messages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="IE3-Im-BS1" userLabel="Congratslabel">
                                         <rect key="frame" x="0.0" y="1" width="420" height="90"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

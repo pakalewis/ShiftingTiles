@@ -40,7 +40,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     @IBOutlet weak var imageCapturingButtonArea: UIView!
-    
+    @IBOutlet weak var imageCapturingButtonAreaFakeBorder: UIView!
+
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -50,8 +51,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var letsPlayButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var captureImageButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
-    @IBOutlet weak var captureButtonTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageCapturingAreaTopConstraint: NSLayoutConstraint!
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve = UIImage()
@@ -158,9 +160,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.view.bringSubviewToFront(self.imageCapturingButtonArea)
                 self.imageCapturingButtonArea.alpha = 1
 
-                self.captureButtonTopConstraint.constant = 10
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    self.view.bringSubviewToFront(self.imageCapturingButtonArea)
+                self.imageCapturingAreaTopConstraint.constant = 5
+                UIView.animateWithDuration(0.8, animations: { () -> Void in
                     self.view.layoutIfNeeded()
                 })
             } else {
@@ -211,10 +212,22 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
   
     
+    @IBAction func cancelImageCaptureMode(sender: AnyObject) {
+        self.captureSession!.stopRunning()
+        self.previewLayer?.removeFromSuperlayer()
+
+        self.imageCapturingAreaTopConstraint.constant = 300
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            }) { (closure) -> Void in
+                self.imageCapturingButtonArea.alpha = 0
+                self.view.sendSubviewToBack(self.imageCapturingButtonArea)
+        }
+    }
     
     @IBAction func captureImage(sender: AnyObject) {
-        self.captureButtonTopConstraint.constant = 200
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        self.imageCapturingAreaTopConstraint.constant = 300
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.view.layoutIfNeeded()
         }) { (closure) -> Void in
             self.imageCapturingButtonArea.alpha = 0
@@ -366,7 +379,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
         self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.imageCapturingButtonAreaFakeBorder.backgroundColor = self.colorPalette.fetchDarkColor()
         self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.cancelButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
  
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {

@@ -138,7 +138,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             var topGestureFrame = CGRectMake(topGesturePositionX, self.topBank.frame.origin.y, topGestureWidth, topGestureHeight * 0.9)
             var topGestureArea = UIImageView(frame: topGestureFrame)
             
-            topGestureArea.image = UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            topGestureArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
             topGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
             topGestureArea.tag = index
             self.view.addSubview(topGestureArea)
@@ -147,7 +147,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             // LeftGestureArea
             var leftGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftGesturePositionY, leftGestureWidth * 0.9, leftGestureHeight)
             var leftGestureArea = UIImageView(frame: leftGestureFrame)
-            leftGestureArea.image = UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            leftGestureArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
             leftGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
             leftGestureArea.tag = index + 100
             self.view.addSubview(leftGestureArea)

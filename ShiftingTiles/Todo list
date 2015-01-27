@@ -2,9 +2,7 @@ TODO:
 - retake sample images for the rules page 1
 
 - fix show original image bug (stays alpha 1 if touch up inside fails)
-- cancel button for image capture
 - check on all devices in simulator
-- use sqaure icon for lines
 
 potential
 make show original image button a simple on off. could display a spotlight view emanating from the button toward the overlay image above. would need to disable the lines
