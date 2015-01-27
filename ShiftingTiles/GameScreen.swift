@@ -12,6 +12,7 @@ import UIKit
 
 class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
+    // MARK: VARS
     let colorPalette = ColorPalette()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
@@ -27,7 +28,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var firstLineOfTiles: [Tile]?
     var secondLineOfTiles: [Tile]?
     
-    // VIEWS
+    // MARK: VIEWS
     var originalImageView: UIImageView!
     @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
@@ -35,15 +36,17 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var leftBank: UIView!
     @IBOutlet weak var separatorView: UIView!
 
-    // CONSTRAINTS
+    // MARK: CONSTRAINTS
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
     
-    // BUTTONS
+    // MARK: BUTTONS
     @IBOutlet weak var hintButton: UIButton!
     @IBOutlet weak var solveButton: UIButton!
     @IBOutlet weak var showOriginalButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
+    
+    // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -51,7 +54,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.updateColorsAndFonts()
     }
 
@@ -65,16 +68,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
-        self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.tileArea.layer.borderWidth = 2
         
-        
-        // Add pan gesture which allows moving rows/columns
+
+        // Add row/column gestures
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
         self.view.addGestureRecognizer(panGesture)
-        
-        // Initialize row/column buttons
-        self.initializeButtons()
+        self.initializeRowColumnGestures()
         
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
@@ -87,136 +87,109 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
     
-    func findButtonWithPoint(point: CGPoint) -> Bool {
-        var currentButton = self.topButtons[0]
-        for index in 0..<self.tilesPerRow {
-            currentButton = self.topButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                self.firstButton = currentButton
-                return true
-            }
-            
-        }
-        
-        for index in 0..<self.tilesPerRow {
-            currentButton = self.leftButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                self.firstButton = currentButton
-                return true
-            }
-            
-        }
-        
-        return false
-    }
-
-    func findSecondButtonWithPoint(point: CGPoint) -> Bool {
-        var currentButton = self.topButtons[0]
-        for index in 0..<self.tilesPerRow {
-            currentButton = self.topButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                if currentButton != self.firstButton {
-                    self.secondButton = currentButton
-                    return true
-                }
-            }
-            
-        }
-        
-        for index in 0..<self.tilesPerRow {
-            currentButton = self.leftButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                if currentButton != self.firstButton {
-                    self.secondButton = currentButton
-                    return true
-                }
-            }
-            
-        }
-        
-        return false
-    }
-
     
     
+    // MARK: Gestures to move rows and columns
+    func initializeRowColumnGestures() {
+        
+        // Measuerments to make the frames
+        var topGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
+        var topGestureHeight = self.topBank.frame.height
+        var leftGestureWidth = self.leftBank.frame.width
+        var leftGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
+        
+        for index in 0..<self.tilesPerRow {
+            var topGesturePositionX = self.topBank.frame.origin.x + (topGestureWidth * CGFloat(index))
+            var leftGesturePositionY = self.leftBank.frame.origin.y + (leftGestureHeight * CGFloat(index))
+            
+            // TopGestureArea
+            var topGestureFrame = CGRectMake(topGesturePositionX, self.topBank.frame.origin.y, topGestureWidth, topGestureHeight * 0.9)
+            var topGestureArea = UIImageView(frame: topGestureFrame)
+            
+            topGestureArea.image = UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            topGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
+            topGestureArea.tag = index
+            self.view.addSubview(topGestureArea)
+            self.topButtons.append(topGestureArea)
+            
+            // LeftGestureArea
+            var leftGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftGesturePositionY, leftGestureWidth * 0.9, leftGestureHeight)
+            var leftGestureArea = UIImageView(frame: leftGestureFrame)
+            leftGestureArea.image = UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            leftGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
+            leftGestureArea.tag = index + 100
+            self.view.addSubview(leftGestureArea)
+            self.leftButtons.append(leftGestureArea)
+        }
+    }
+
     
     func handleLinePan(gesture:UIPanGestureRecognizer) {
         var startingPoint :CGPoint = gesture.locationInView(self.view)
         
-            switch gesture.state {
-            case .Began:
-                if self.findButtonWithPoint(startingPoint) {
-                    self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.firstButton!.tag)
-                    for tile in self.firstLineOfTiles! {
-                        self.tileArea.bringSubviewToFront(tile.imageView)
-                        tile.originalFrame = tile.imageView.frame
-                    }
-                    self.view.bringSubviewToFront(self.firstButton!)
-                    self.firstButtonOriginalFrame = self.firstButton!.frame
+        switch gesture.state {
+        case .Began:
+            if self.findButtonWithPoint(startingPoint) {
+                self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.firstButton!.tag)
+                for tile in self.firstLineOfTiles! {
+                    self.tileArea.bringSubviewToFront(tile.imageView)
+                    tile.originalFrame = tile.imageView.frame
                 }
-            case .Changed:
-                if self.firstButton != nil {
-                    
-                    let translation = gesture.translationInView(self.view)
-
-                        if (self.firstButton!.tag - 100) < 0 { // line 1 is a column
-                            for tile in self.firstLineOfTiles! {
-                                tile.imageView.center.x = tile.imageView.center.x + translation.x
-                            }
-                            self.firstButton!.center.x = self.firstButton!.center.x + translation.x
-                        } else { // line 1 is a Row
-                            for tile in self.firstLineOfTiles! {
-                                tile.imageView.center.y = tile.imageView.center.y + translation.y
-                            }
-                            self.firstButton!.center.y = self.firstButton!.center.y + translation.y
+                self.view.bringSubviewToFront(self.firstButton!)
+                self.firstButtonOriginalFrame = self.firstButton!.frame
+            }
+        case .Changed:
+            if self.firstButton != nil {
+                
+                let translation = gesture.translationInView(self.view)
+                
+                if (self.firstButton!.tag - 100) < 0 { // line 1 is a column
+                    if CGRectGetMinX(self.firstButton!.frame) + translation.x > CGRectGetMinX(self.tileArea.frame) && CGRectGetMaxX(self.firstButton!.frame) + translation.x < CGRectGetMaxX(self.tileArea.frame) {
+                        for tile in self.firstLineOfTiles! {
+                            tile.imageView.center.x = tile.imageView.center.x + translation.x
                         }
-
-                    gesture.setTranslation(CGPointZero, inView: self.view)
-                    
+                        self.firstButton!.center.x = self.firstButton!.center.x + translation.x
+                    }
+                } else { // line 1 is a Row
+                    if CGRectGetMinY(self.firstButton!.frame) + translation.y > CGRectGetMinY(self.tileArea.frame) && CGRectGetMaxY(self.firstButton!.frame) + translation.y < CGRectGetMaxY(self.tileArea.frame) {
+                        for tile in self.firstLineOfTiles! {
+                            tile.imageView.center.y = tile.imageView.center.y + translation.y
+                        }
+                        self.firstButton!.center.y = self.firstButton!.center.y + translation.y
+                    }
                 }
                 
-            case .Ended:
-                if self.firstButton != nil {
-                    var endingPoint :CGPoint = gesture.locationInView(self.view)
-                    // Check if the release is on another button
-                    if self.findSecondButtonWithPoint(endingPoint) {
-                        // Check if they are both rows or both columns
-                        if abs(self.firstButton!.tag - self.secondButton!.tag) < 11 {
+                gesture.setTranslation(CGPointZero, inView: self.view)
+                
+            }
+            
+        case .Ended:
+            if self.firstButton != nil {
+                var endingPoint :CGPoint = gesture.locationInView(self.view)
+                // Check if the release is on another button
+                if self.findButtonWithPoint(endingPoint) {
+                    // Check if they are both rows or both columns
+                    if abs(self.firstButton!.tag - self.secondButton!.tag) < 11 {
+                        
+                        // Swap the lines of tiles
+                        self.secondLineOfTiles = self.tileArea.makeLineOfTiles(self.secondButton!.tag)
+                        self.tileArea.swapLines(self.firstLineOfTiles!, line2: self.secondLineOfTiles!)
+                        
+                        // Swap the buttons
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            self.firstButton!.frame = self.secondButton!.frame
+                            self.secondButton!.frame = self.firstButtonOriginalFrame!
                             
-                            // Swap the lines of tiles
-                            self.secondLineOfTiles = self.tileArea.makeLineOfTiles(self.secondButton!.tag)
-                            self.tileArea.swapLines(self.firstLineOfTiles!, line2: self.secondLineOfTiles!)
-                            
-                            // Swap the buttons
-                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                self.firstButton!.frame = self.secondButton!.frame
-                                self.secondButton!.frame = self.firstButtonOriginalFrame!
-                                
-                            })
-                            // Swap the tags of the buttons
-                            var tempTag = self.firstButton!.tag
-                            self.firstButton!.tag = self.secondButton!.tag
-                            self.secondButton!.tag = tempTag
-                            self.firstButtonOriginalFrame = nil
-                            self.secondButtonOriginalFrame = nil
-                            self.firstButton = nil
-                            self.secondButton = nil
-
-                        } else { // Send the button and line of tiles back to where they started
-                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                
-                                for tile in self.firstLineOfTiles! {
-                                    tile.imageView.frame = tile.originalFrame!
-                                }
-                                
-                                
-                                self.firstButton!.frame = self.firstButtonOriginalFrame!
-                                self.firstButtonOriginalFrame = nil
-                                self.secondButtonOriginalFrame = nil
-                                self.firstButton = nil
-                                self.secondButton = nil
-                            })
-                        }
+                        })
+                        // Swap the tags of the buttons
+                        var tempTag = self.firstButton!.tag
+                        self.firstButton!.tag = self.secondButton!.tag
+                        self.secondButton!.tag = tempTag
+                        self.firstButtonOriginalFrame = nil
+                        self.secondButtonOriginalFrame = nil
+                        self.firstButton = nil
+                        self.secondButton = nil
+                        
                     } else { // Send the button and line of tiles back to where they started
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             
@@ -232,112 +205,68 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                             self.secondButton = nil
                         })
                     }
+                } else { // Send the button and line of tiles back to where they started
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        
+                        for tile in self.firstLineOfTiles! {
+                            tile.imageView.frame = tile.originalFrame!
+                        }
+                        
+                        
+                        self.firstButton!.frame = self.firstButtonOriginalFrame!
+                        self.firstButtonOriginalFrame = nil
+                        self.secondButtonOriginalFrame = nil
+                        self.firstButton = nil
+                        self.secondButton = nil
+                    })
                 }
-                
-            case .Possible:
-                println("possible")
-            case .Cancelled:
-                println("cancelled")
-            case .Failed:
-                println("failed")
             }
             
+        case .Possible:
+            println("possible")
+        case .Cancelled:
+            println("cancelled")
+        case .Failed:
+            println("failed")
+        }
     }
-
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    func initializeButtons() {
-        
-        // Measuerments to make the frames
-        var topBankGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
-        var topBankGestureHeight = self.topBank.frame.height
-        var leftBankGestureWidth = self.leftBank.frame.width
-        var leftBankGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
-
+    func findButtonWithPoint(point: CGPoint) -> Bool {
+        var currentButton = self.topButtons[0]
         for index in 0..<self.tilesPerRow {
-            
-            // USE THESE TO MAKE THE BUTTON IMAGEVIEW FRAME
-            // Measuerments to make the frames
-//            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index)) + (topBankGestureWidth / 2) - (topBankGestureHeight / 2)
-//            var leftBankGesturePositionY = (leftBankGestureHeight * CGFloat(index)) + (leftBankGestureHeight / 2) - (leftBankGestureWidth / 2) + self.tileArea.frame.origin.y
-
-            var topBankGesturePositionX = self.tileArea.frame.origin.x + (topBankGestureWidth * CGFloat(index))
-            var leftBankGesturePositionY = self.tileArea.frame.origin.y + (leftBankGestureHeight * CGFloat(index))
-            
-            
-            var topBankGestureFrame = CGRectMake(topBankGesturePositionX, self.topBank.frame.origin.y, topBankGestureWidth, topBankGestureHeight)
-            var topGestureArea = UIImageView(frame: topBankGestureFrame)
-            topGestureArea.image = UIImage(named: "upTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            topGestureArea.tag = index
-            self.view.addSubview(topGestureArea)
-            self.topButtons.append(topGestureArea)
-
-            
-            var leftBankGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftBankGesturePositionY, leftBankGestureWidth, leftBankGestureHeight)
-            var leftGestureArea = UIImageView(frame: leftBankGestureFrame)
-            leftGestureArea.image = UIImage(named: "leftTriangle")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            leftGestureArea.tag = index + 100
-            self.view.addSubview(leftGestureArea)
-            self.leftButtons.append(leftGestureArea)
-
-        }
-    }
- 
-
-
-    
-    
-    func puzzleIsSolved() {
-        
-        // Display congrats message
-        // TODO: what else can i do? fireworks?
-        congratsMessage.text = "CONGRATULATIONS!"
-        
-        // Update stats
-        let stats = Stats()
-        stats.updateSolveStats(self.tilesPerRow)
-        
-        
-        // Hide and disable buttons
-        self.hintButton.userInteractionEnabled = false
-        self.hintButton.alpha = 0
-        self.solveButton.userInteractionEnabled = false
-        self.solveButton.alpha = 0
-        self.showOriginalButton.userInteractionEnabled = false
-        self.showOriginalButton.alpha = 0
-        
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            // Slide off the banks of buttons
-            for button in self.topButtons {
-                button.center.x = button.center.x + 2000
-            }
-            for button in self.leftButtons {
-                button.center.y = button.center.y + 2000
-            }
-            
-            
-            }) { (finished) -> Void in
-                
-                // Grow the tile area by sliding the left bank off screen to the left
-                self.leftBankMarginConstraint.constant =  -self.leftBank.frame.width + 10
-
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-
-                    }) { (finished) -> Void in
-                        // Calling this again to resize all the tiles to take up the full TileArea
-                        self.tileArea.layoutTiles()
+            currentButton = self.topButtons[index]
+            if CGRectContainsPoint(currentButton.frame, point) {
+                if self.firstButton == nil {
+                    self.firstButton = currentButton
+                    return true
+                } else {
+                    if self.firstButton != currentButton {
+                        self.secondButton = currentButton
+                        return true
+                    }
                 }
+            }
         }
+        
+        for index in 0..<self.tilesPerRow {
+            currentButton = self.leftButtons[index]
+            if CGRectContainsPoint(currentButton.frame, point) {
+                if self.firstButton == nil {
+                    self.firstButton = currentButton
+                    return true
+                } else {
+                    if self.firstButton != currentButton {
+                        self.secondButton = currentButton
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
+
+    
 
     
     // MARK: BUTTONS
@@ -410,10 +339,58 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
  
+    
+    // MARK: Other funcs
+    func puzzleIsSolved() {
+        
+        // Display congrats message
+        // TODO: what else can i do? fireworks?
+        congratsMessage.text = "CONGRATULATIONS!"
+        
+        // Update stats
+        let stats = Stats()
+        stats.updateSolveStats(self.tilesPerRow)
+        
+        
+        // Hide and disable buttons
+        self.hintButton.userInteractionEnabled = false
+        self.hintButton.alpha = 0
+        self.solveButton.userInteractionEnabled = false
+        self.solveButton.alpha = 0
+        self.showOriginalButton.userInteractionEnabled = false
+        self.showOriginalButton.alpha = 0
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            // Slide off the banks of buttons
+            for button in self.topButtons {
+                button.center.x = button.center.x + 2000
+            }
+            for button in self.leftButtons {
+                button.center.y = button.center.y + 2000
+            }
+            
+            
+            }) { (finished) -> Void in
+                
+                // Grow the tile area by sliding the left bank off screen to the left
+                self.leftBankMarginConstraint.constant =  -self.leftBank.frame.width + 10
+                
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    
+                    }) { (finished) -> Void in
+                        // Calling this again to resize all the tiles to take up the full TileArea
+                        self.tileArea.layoutTiles()
+                }
+        }
+    }
+
+    
     func updateColorsAndFonts() {
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
+        self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)

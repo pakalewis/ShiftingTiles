@@ -41,7 +41,7 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         self.label3.textColor = self.colorPalette.fetchDarkColor()
         self.emailButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.emailButton.layer.cornerRadius = 5
-        self.emailButton.layer.borderWidth = 1
+        self.emailButton.layer.borderWidth = 2
         self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
 
         
