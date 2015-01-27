@@ -721,12 +721,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5" userLabel="CongratsLabel">
-                                <rect key="frame" x="0.0" y="20" width="600" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkX-qZ-gbP" userLabel="TopContainer">
+                                <rect key="frame" x="0.0" y="20" width="600" height="7"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5" userLabel="CongratsLabel">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="30"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="30"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="BUW-hI-3S5" secondAttribute="centerY" id="by2-HY-fOD"/>
+                                    <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="nRV-6w-GOe"/>
+                                </constraints>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-Xd-i17" userLabel="TopBank">
                                 <rect key="frame" x="45" y="-13" width="546" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -863,15 +872,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="AkX-qZ-gbP" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="1qp-he-h8V"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="leading" secondItem="oHF-Bx-sTb" secondAttribute="leading" id="28m-5T-c4D"/>
                             <constraint firstAttribute="trailing" secondItem="pF4-g2-NMF" secondAttribute="trailing" id="71y-bu-D2D"/>
-                            <constraint firstItem="BUW-hI-3S5" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.08" id="9RJ-Oa-tlW"/>
                             <constraint firstAttribute="centerY" secondItem="oHF-Bx-sTb" secondAttribute="centerY" id="AFc-qY-qSm"/>
                             <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="9" id="D9f-ij-C6o"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="top" secondItem="AkX-qZ-gbP" secondAttribute="bottom" id="EEc-iz-qgw"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="top" id="JGT-51-mtK"/>
                             <constraint firstItem="row-0Z-gkW" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="JeO-MP-mlk"/>
-                            <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
-                            <constraint firstItem="BUW-hI-3S5" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="RXj-yu-aOt"/>
+                            <constraint firstItem="AkX-qZ-gbP" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" id="M9L-va-kPl"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="5" id="Rvw-yQ-JFS"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" id="TfL-um-7H6"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.1" id="VGk-xJ-8WX"/>
@@ -881,9 +890,8 @@
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" id="ZbR-z9-EDp"/>
                             <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="pF4-g2-NMF" secondAttribute="bottom" id="a1G-Kp-rcM"/>
                             <constraint firstAttribute="trailing" secondItem="row-0Z-gkW" secondAttribute="trailing" id="elv-Ec-ydJ"/>
-                            <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" id="v1k-6D-viG"/>
+                            <constraint firstItem="AkX-qZ-gbP" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" id="ngy-7K-Q4j"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="vRM-0X-Ywz"/>
-                            <constraint firstAttribute="trailing" secondItem="BUW-hI-3S5" secondAttribute="trailing" id="yXN-DT-85A"/>
                         </constraints>
                     </view>
                     <connections>

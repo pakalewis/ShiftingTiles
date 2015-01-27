@@ -331,7 +331,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow--
             return
         }
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow) x \(self.tilesPerRow)"
    }
 
     
@@ -342,7 +342,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.tilesPerRow++
             return
         }
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow)x\(self.tilesPerRow)"
+        self.tilesPerRowLabel.text = "\(self.tilesPerRow) x \(self.tilesPerRow)"
     }
     
     

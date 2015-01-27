@@ -82,14 +82,18 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
-
+        println("tile area frame = \(self.tileArea.frame)")
+        var screenscale = UIScreen.mainScreen().scale
+        var pixels = self.tileArea.frame.width * screenscale
+        println("width in pixels: \(pixels)")
+        
+        
         // Add row/column gestures
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
         self.view.addGestureRecognizer(panGesture)
         self.initializeRowColumnGestures()
         
-        congratsMessage.text = "Keep going..."
-        congratsMessage.layer.cornerRadius = 50
+        congratsMessage.text = ""
         
         
         self.originalImageView = UIImageView(frame: self.tileArea.frame)
