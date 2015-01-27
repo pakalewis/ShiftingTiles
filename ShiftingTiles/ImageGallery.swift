@@ -17,7 +17,7 @@ class ImageGallery {
     init() {
         
 
-        self.imageNameArray = [
+        var imageFileNames = [
             "01.jpeg",
             "02.jpeg",
             "03.jpeg",
@@ -43,40 +43,43 @@ class ImageGallery {
             "23.jpeg",
             "24.jpeg",
             "25.jpeg" ]
-        
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        imageFileNames = self.shuffle(imageFileNames)
+        self.imageNameArray = imageFileNames
 
     
-        self.smallImageNameArray = [
-            "01small.jpeg",
-            "02small.jpeg",
-            "03small.jpeg",
-            "04small.jpeg",
-            "05small.jpeg",
-            "06small.jpeg",
-            "07small.jpeg",
-            "08small.jpeg",
-            "09small.jpeg",
-            "10small.jpeg",
-            "11small.jpeg",
-            "12small.jpeg",
-            "13small.jpeg",
-            "14small.jpeg",
-            "15small.jpeg",
-            "16small.jpeg",
-            "17small.jpeg",
-            "18small.jpeg",
-            "19small.jpeg",
-            "20small.jpeg",
-            "21small.jpeg",
-            "22small.jpeg",
-            "23small.jpeg",
-            "24small.jpeg",
-            "25small.jpeg" ]
-        
-
+        var alteredNames = [String]()
+        for imageName in self.imageNameArray {
+            let newName = imageName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            alteredNames.append(newName)
+            
+        }
+        self.smallImageNameArray = alteredNames
     
     }
     
+    func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
+        let count = countElements(list)
+        for i in 0..<(count - 1) {
+            let j = Int(arc4random_uniform(UInt32(count - i))) + i
+            swap(&list[i], &list[j])
+        }
+        return list
+    }
     
 }
 

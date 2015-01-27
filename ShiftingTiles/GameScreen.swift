@@ -82,7 +82,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
-        println("tile area frame = \(self.tileArea.frame)")
 
         // Add row/column gestures
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
