@@ -19,7 +19,11 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     // VIEWS
     @IBOutlet weak var statsLabel: UILabel!
+    @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var topBorder: UIView!
     @IBOutlet weak var statsTable: UITableView!
+    @IBOutlet weak var bottomBorder: UIView!
     @IBOutlet weak var totalSolvesLabel: UILabel!
     
     // BUTTONS
@@ -29,9 +33,28 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Apply color scheme
+        // Apply color scheme and font
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.topBorder.backgroundColor = self.colorPalette.fetchDarkColor()
+        self.bottomBorder.backgroundColor = self.colorPalette.fetchDarkColor()
         self.statsLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.leftLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.rightLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.totalSolvesLabel.textColor = self.colorPalette.fetchDarkColor()
+
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.statsLabel.font = UIFont(name: self.statsLabel.font.fontName, size: 35)
+            self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 25)
+            self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 25)
+            self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 25)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.statsLabel.font = UIFont(name: self.statsLabel.font.fontName, size: 70)
+            self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 50)
+            self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 50)
+            self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 50)
+        }
     }
 
     
@@ -60,9 +83,21 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         let cell = self.statsTable.dequeueReusableCellWithIdentifier("STAT_CELL", forIndexPath: indexPath) as StatCell
         
+        cell.backgroundColor = self.colorPalette.fetchLightColor()
         cell.leftLabel.text = "\(indexPath.row + 2) x \(indexPath.row + 2)"
         cell.rightLabel.text = "\(self.solvesPerSize[indexPath.row])"
-        cell.backgroundColor = self.colorPalette.fetchLightColor()
+        cell.leftLabel.textColor = self.colorPalette.fetchDarkColor()
+        cell.rightLabel.textColor = self.colorPalette.fetchDarkColor()
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            cell.leftLabel.font = UIFont(name: cell.leftLabel.font.fontName, size: 15)
+            cell.rightLabel.font = UIFont(name: cell.rightLabel.font.fontName, size: 15)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            cell.leftLabel.font = UIFont(name: cell.leftLabel.font.fontName, size: 30)
+            cell.rightLabel.font = UIFont(name: cell.rightLabel.font.fontName, size: 30)
+        }
+
 
         return cell
     }

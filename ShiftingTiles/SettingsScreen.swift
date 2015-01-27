@@ -63,11 +63,13 @@ class SettingsScreen: UIViewController {
         
 
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 40)
             self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 20)
             self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 20)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 70)
             self.rotateTilesLabel.font = UIFont(name: self.rotateTilesLabel.font.fontName, size: 40)
             self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 40)
         }

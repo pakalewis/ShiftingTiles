@@ -38,6 +38,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     // MARK: CONSTRAINTS
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBankHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftBankWidthConstraint: NSLayoutConstraint!
     
     // MARK: BUTTONS
     @IBOutlet weak var hintButton: UIButton!
@@ -55,6 +57,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.leftBankWidthConstraint.constant = 30
+            self.topBankHeightConstraint.constant = 30
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.leftBankWidthConstraint.constant = 50
+            self.topBankHeightConstraint.constant = 50
+        }
+
+        
         self.updateColorsAndFonts()
     }
 
@@ -70,6 +82,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
+        println("tile area frame = \(self.tileArea.frame)")
 
         // Add row/column gestures
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
@@ -345,7 +358,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         // Display congrats message
         // TODO: what else can i do? fireworks?
-        congratsMessage.text = "CONGRATULATIONS!"
+        congratsMessage.text = "WAY TO GO!"
         
         // Update stats
         let stats = Stats()

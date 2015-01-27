@@ -391,8 +391,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomBorder" destination="fw4-uH-uPH" id="50N-Aa-eGT"/>
+                        <outlet property="leftLabel" destination="wbx-f1-dqn" id="6wG-9O-IU2"/>
+                        <outlet property="rightLabel" destination="XBo-ic-9DY" id="rBM-nf-m6e"/>
                         <outlet property="statsLabel" destination="IjM-VQ-WwD" id="Ll6-vJ-lz8"/>
                         <outlet property="statsTable" destination="GvL-XL-dAu" id="2hd-eg-zR5"/>
+                        <outlet property="topBorder" destination="Epx-JQ-dVq" id="KKZ-jw-lPo"/>
                         <outlet property="totalSolvesLabel" destination="1EN-VZ-KcI" id="xMT-ZS-Rzz"/>
                     </connections>
                 </viewController>
@@ -718,21 +722,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5" userLabel="CongratsLabel">
-                                <rect key="frame" x="0.0" y="20" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3Q-Xd-i17" userLabel="TopBank">
-                                <rect key="frame" x="49" y="-66" width="541" height="43"/>
+                                <rect key="frame" x="45" y="-13" width="546" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="GH7-E4-ZbJ"/>
+                                </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-fP-WBe" userLabel="LeftBank">
-                                <rect key="frame" x="5" y="-23" width="44" height="541"/>
+                                <rect key="frame" x="5" y="27" width="40" height="546"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="czg-yu-bvU"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="ShiftingTiles" customModuleProvider="target">
-                                <rect key="frame" x="49" y="-23" width="541" height="541"/>
+                                <rect key="frame" x="45" y="27" width="546" height="546"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="1:1" id="mCM-5H-gkw"/>
@@ -855,9 +865,9 @@
                         <constraints>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="leading" secondItem="oHF-Bx-sTb" secondAttribute="leading" id="28m-5T-c4D"/>
                             <constraint firstAttribute="trailing" secondItem="pF4-g2-NMF" secondAttribute="trailing" id="71y-bu-D2D"/>
-                            <constraint firstItem="5tw-fP-WBe" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" multiplier="0.08" id="8jP-00-8LI"/>
-                            <constraint firstItem="BUW-hI-3S5" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.1" id="9RJ-Oa-tlW"/>
-                            <constraint firstItem="Qhz-G0-bft" firstAttribute="bottom" secondItem="BUW-hI-3S5" secondAttribute="top" constant="25" id="FlS-Np-K87"/>
+                            <constraint firstItem="BUW-hI-3S5" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.08" id="9RJ-Oa-tlW"/>
+                            <constraint firstAttribute="centerY" secondItem="oHF-Bx-sTb" secondAttribute="centerY" id="AFc-qY-qSm"/>
+                            <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="9" id="D9f-ij-C6o"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="top" id="JGT-51-mtK"/>
                             <constraint firstItem="row-0Z-gkW" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="JeO-MP-mlk"/>
                             <constraint firstAttribute="centerX" secondItem="BUW-hI-3S5" secondAttribute="centerX" id="KY3-gm-i9K"/>
@@ -867,22 +877,14 @@
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.1" id="VGk-xJ-8WX"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="top" secondItem="row-0Z-gkW" secondAttribute="bottom" id="ViO-Q7-gC8"/>
                             <constraint firstItem="oHF-Bx-sTb" firstAttribute="top" secondItem="p3Q-Xd-i17" secondAttribute="bottom" id="WXG-gr-QTf"/>
-                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="5tw-fP-WBe" secondAttribute="trailing" id="XhI-ch-6NF"/>
+                            <constraint firstItem="5tw-fP-WBe" firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="leading" id="XhI-ch-6NF"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" id="ZbR-z9-EDp"/>
                             <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="pF4-g2-NMF" secondAttribute="bottom" id="a1G-Kp-rcM"/>
                             <constraint firstAttribute="trailing" secondItem="row-0Z-gkW" secondAttribute="trailing" id="elv-Ec-ydJ"/>
-                            <constraint firstAttribute="trailing" secondItem="oHF-Bx-sTb" secondAttribute="trailing" constant="10" id="gJs-KM-oDB"/>
-                            <constraint firstItem="row-0Z-gkW" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="20" id="iDI-kH-24z"/>
-                            <constraint firstItem="p3Q-Xd-i17" firstAttribute="height" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="0.08" id="lTt-0z-cu4"/>
                             <constraint firstItem="BUW-hI-3S5" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" id="v1k-6D-viG"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="vRM-0X-Ywz"/>
                             <constraint firstAttribute="trailing" secondItem="BUW-hI-3S5" secondAttribute="trailing" id="yXN-DT-85A"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FlS-Np-K87"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="vI2-cd-d5v" id="nEZ-cM-QqL"/>
@@ -890,11 +892,13 @@
                         <outlet property="hintButton" destination="9ig-wh-J89" id="PPQ-2z-rtZ"/>
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
+                        <outlet property="leftBankWidthConstraint" destination="czg-yu-bvU" id="zVn-Eg-M6U"/>
                         <outlet property="separatorView" destination="row-0Z-gkW" id="EKa-A3-WTc"/>
                         <outlet property="showOriginalButton" destination="kMV-Zu-rKc" id="kTH-D8-1RC"/>
                         <outlet property="solveButton" destination="rl5-9y-N59" id="i5a-Hc-2fL"/>
                         <outlet property="tileArea" destination="oHF-Bx-sTb" id="TJK-9d-gHp"/>
                         <outlet property="topBank" destination="p3Q-Xd-i17" id="WjI-q6-ZNF"/>
+                        <outlet property="topBankHeightConstraint" destination="GH7-E4-ZbJ" id="kBZ-Yw-Ijp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIg-Ne-QI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
