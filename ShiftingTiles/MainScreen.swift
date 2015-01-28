@@ -80,11 +80,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
+        // Choose which size of images to use based on device
         var imageGallery = ImageGallery()
-        self.imageNameArray = imageGallery.imageNameArray
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.imageNameArray = imageGallery.mediumImageNameArray
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.imageNameArray = imageGallery.largeImageNameArray
+        }
         self.smallImageNameArray = imageGallery.smallImageNameArray
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.mainImageView.layer.borderWidth = 2
 

@@ -11,7 +11,8 @@ import UIKit
 
 class ImageGallery {
     
-    var imageNameArray : [String]!
+    var largeImageNameArray : [String]!
+    var mediumImageNameArray : [String]!
     var smallImageNameArray : [String]!
     
     init() {
@@ -74,17 +75,26 @@ class ImageGallery {
         imageFileNames = self.shuffle(imageFileNames)
         imageFileNames = self.shuffle(imageFileNames)
         imageFileNames = self.shuffle(imageFileNames)
-        self.imageNameArray = imageFileNames
 
     
-        var alteredNames = [String]()
-        for imageName in self.imageNameArray {
-            let newName = imageName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            alteredNames.append(newName)
+        var smallAlteredNames = [String]()
+        var mediumAlteredNames = [String]()
+        var largeAlteredNames = [String]()
+        for imageFileName in imageFileNames {
             
+            let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            smallAlteredNames.append(smallName)
+
+            let mediumName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "medium.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            mediumAlteredNames.append(mediumName)
+
+            let largeName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "large.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            largeAlteredNames.append(largeName)
+
         }
-        self.smallImageNameArray = alteredNames
-    
+        self.smallImageNameArray = smallAlteredNames
+        self.mediumImageNameArray = mediumAlteredNames
+        self.largeImageNameArray = largeAlteredNames
     }
     
     func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {

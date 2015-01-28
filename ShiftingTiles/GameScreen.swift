@@ -361,9 +361,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     @IBAction func backToMainScreen(sender: AnyObject) {
-        var totalPlays = self.userDefaults.integerForKey("backButtonPressed")
-        totalPlays++
-        self.userDefaults.setInteger(totalPlays, forKey: "backButtonPressed")
+        var numTimesBackButtonPressed = self.userDefaults.integerForKey("backButtonPressed")
+        numTimesBackButtonPressed++
+        self.userDefaults.setInteger(numTimesBackButtonPressed, forKey: "backButtonPressed")
         
 
         if self.tileArea.isPuzzleSolved {
