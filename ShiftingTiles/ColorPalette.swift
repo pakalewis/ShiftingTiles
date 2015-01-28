@@ -17,18 +17,10 @@ class ColorPalette {
     // Greens
     var lightColor1 = UIColor(hex: 0x2f9000, alpha: 1)
     var darkColor1 = UIColor(hex: 0x083500, alpha: 1)
-//    var lightColor1 = UIColor(hex: 0x84A174, alpha: 1)
-//    var darkColor1 = UIColor(hex: 0x1A3C3D, alpha: 1)
 
     // Yellow/Blue
-//    var lightColor2 = UIColor(hex: 0xf9ec48, alpha: 1)
-//    var darkColor2 = UIColor(hex: 0x0c1d9a, alpha: 1)
-//    var lightColor2 = UIColor(hex: 0xfee96c, alpha: 1)
-//    var darkColor2 = UIColor(hex: 0x0093d0, alpha: 1)
-    //    var lightColor2 = UIColor(hex: 0xf0e047, alpha: 1)
-    //    var darkColor2 = UIColor(hex: 0x0b50a9, alpha: 1)
-        var lightColor2 = UIColor(hex: 0xffda00, alpha: 1)
-        var darkColor2 = UIColor(hex: 0x00387a, alpha: 1)
+    var lightColor2 = UIColor(hex: 0xf9ec48, alpha: 1)
+    var darkColor2 = UIColor(hex: 0x0c1d9a, alpha: 1)
     
     // Blues
     var lightColor3 = UIColor(hex: 0x73b9e6, alpha: 1)

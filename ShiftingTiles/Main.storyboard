@@ -77,7 +77,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duK-ww-PYt" secondAttribute="height" multiplier="1:1" id="EZ4-Wq-pkd"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="decreaseIcon.png">
+                                        <state key="normal" image="decreaseIcon.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -97,7 +97,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0gW-z2-Haf" secondAttribute="height" multiplier="1:1" id="ewN-aM-a8T"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="increaseIcon.png">
+                                        <state key="normal" image="increaseIcon.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -987,18 +987,18 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backIcon.png" width="512" height="512"/>
-        <image name="cameraIcon.png" width="512" height="512"/>
-        <image name="decreaseIcon.png" width="512" height="512"/>
-        <image name="goIcon.png" width="800" height="800"/>
-        <image name="hintIcon.png" width="512" height="512"/>
-        <image name="increaseIcon.png" width="512" height="512"/>
-        <image name="infoIcon.png" width="512" height="512"/>
-        <image name="originalImageIcon.png" width="512" height="512"/>
-        <image name="settingsIcon.png" width="512" height="512"/>
-        <image name="solveIcon.png" width="512" height="512"/>
-        <image name="statsIcon.png" width="512" height="512"/>
-        <image name="targetIcon.png" width="512" height="512"/>
-        <image name="uncheckedBox.png" width="512" height="512"/>
+        <image name="backIcon.png" width="120" height="120"/>
+        <image name="cameraIcon.png" width="120" height="120"/>
+        <image name="decreaseIcon.png" width="120" height="120"/>
+        <image name="goIcon.png" width="120" height="120"/>
+        <image name="hintIcon.png" width="120" height="120"/>
+        <image name="increaseIcon.png" width="120" height="120"/>
+        <image name="infoIcon.png" width="120" height="120"/>
+        <image name="originalImageIcon.png" width="120" height="120"/>
+        <image name="settingsIcon.png" width="120" height="120"/>
+        <image name="solveIcon.png" width="120" height="120"/>
+        <image name="statsIcon.png" width="120" height="120"/>
+        <image name="targetIcon.png" width="120" height="120"/>
+        <image name="uncheckedBox.png" width="120" height="120"/>
     </resources>
 </document>
