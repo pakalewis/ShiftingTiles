@@ -68,11 +68,11 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSc-wa-cZ6" userLabel="spacer1">
-                                        <rect key="frame" x="36" y="0.0" width="36" height="36"/>
+                                        <rect key="frame" x="36" y="0.0" width="32" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duK-ww-PYt" userLabel="DecreaseButton">
-                                        <rect key="frame" x="72" y="0.0" width="36" height="36"/>
+                                        <rect key="frame" x="68" y="0.0" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duK-ww-PYt" secondAttribute="height" multiplier="1:1" id="EZ4-Wq-pkd"/>
@@ -85,14 +85,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3x3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGq-2D-jDD" userLabel="NumTilesLabel">
-                                        <rect key="frame" x="108" y="8" width="53" height="20"/>
+                                        <rect key="frame" x="104" y="8" width="61" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gW-z2-Haf" userLabel="IncreaseButton">
-                                        <rect key="frame" x="161" y="0.0" width="36" height="36"/>
+                                        <rect key="frame" x="165" y="0.0" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0gW-z2-Haf" secondAttribute="height" multiplier="1:1" id="ewN-aM-a8T"/>
@@ -105,7 +105,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-4N-X1O" userLabel="spacer2">
-                                        <rect key="frame" x="197" y="0.0" width="33" height="36"/>
+                                        <rect key="frame" x="201" y="0.0" width="29" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ru-It-ZwP" userLabel="StatsButton">
@@ -134,7 +134,7 @@
                                     <constraint firstItem="5Xz-4N-X1O" firstAttribute="width" secondItem="RSc-wa-cZ6" secondAttribute="width" multiplier="0.9" id="CxU-rV-Haq"/>
                                     <constraint firstAttribute="bottom" secondItem="0gW-z2-Haf" secondAttribute="bottom" id="DtF-xi-TUM"/>
                                     <constraint firstItem="RSc-wa-cZ6" firstAttribute="leading" secondItem="eJp-mf-2KR" secondAttribute="trailing" id="GJ1-3B-jdh"/>
-                                    <constraint firstItem="zGq-2D-jDD" firstAttribute="width" secondItem="k1r-w8-S7G" secondAttribute="width" multiplier="0.2" id="JPe-py-xOI"/>
+                                    <constraint firstItem="zGq-2D-jDD" firstAttribute="width" secondItem="k1r-w8-S7G" secondAttribute="width" multiplier="0.23" id="JPe-py-xOI"/>
                                     <constraint firstItem="0gW-z2-Haf" firstAttribute="leading" secondItem="zGq-2D-jDD" secondAttribute="trailing" id="Jm1-dk-iTD"/>
                                     <constraint firstAttribute="bottom" secondItem="duK-ww-PYt" secondAttribute="bottom" id="Q0E-kL-ti7"/>
                                     <constraint firstItem="0gW-z2-Haf" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="top" id="QOu-x2-pGA"/>
@@ -797,7 +797,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkX-qZ-gbP" userLabel="TopContainer">
                                 <rect key="frame" x="0.0" y="20" width="600" height="7"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5" userLabel="CongratsLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-hI-3S5" userLabel="CongratsLabel">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="30"/>
                                         <nil key="highlightedColor"/>
