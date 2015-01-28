@@ -67,6 +67,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             "THAT'S GOLD!",
             "EXCELLENT!",
             "PERFECT!",
+            "VERY COOL!",
+            "GROOVY!",
             "RIGHT ON!" ]
     }
     

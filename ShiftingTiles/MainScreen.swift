@@ -80,7 +80,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if(!self.userDefaults.boolForKey("firstlaunch1.0")){
             self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
             self.userDefaults.setBool(true, forKey: "congratsOn")
-            self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
+            self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
             self.userDefaults.synchronize()
         }
         

@@ -17,13 +17,6 @@ class Stats {
     
     func updateSolveStats(tilePerRow: Int) {
         
-        // TODO: do I need to do an if let
-        // seems like it pulls out a zero if there is nothing stored
-//        if let totalSolves = self.userDefaults.objectForKey("totalSolves") as? Int {
-//            println("THIS WORKED \(totalSolves)")
-//        }
-
-        
         // Update total solves
         var totalSolves = userDefaults.integerForKey("totalSolves")
         totalSolves++

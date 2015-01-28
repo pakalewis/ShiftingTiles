@@ -20,14 +20,14 @@
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     </variation>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="10" y="91" width="460" height="139"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                    <rect key="frame" x="15" y="51" width="450" height="139"/>
                     <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="110"/>
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Parker Lewis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-gH-gqZ">
-                    <rect key="frame" x="79" y="230" width="322" height="176"/>
+                    <rect key="frame" x="83" y="190" width="315" height="176"/>
                     <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="139"/>
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -37,13 +37,13 @@
             <constraints>
                 <constraint firstItem="oA7-gH-gqZ" firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="1mT-e7-m2I"/>
                 <constraint firstItem="oA7-gH-gqZ" firstAttribute="width" secondItem="kId-c2-rCX" secondAttribute="width" multiplier="0.7" id="K5C-nj-7iN"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" id="Kid-kn-2rF"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/4" id="Kid-kn-2rF"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstItem="oA7-gH-gqZ" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" id="Q27-b1-z3W"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="aAI-ba-XqO"/>
-                <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" constant="10" id="w1O-Xk-l12"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="aAI-ba-XqO"/>
+                <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" constant="15" id="w1O-Xk-l12"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
