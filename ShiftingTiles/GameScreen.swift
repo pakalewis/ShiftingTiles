@@ -99,10 +99,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
-        println("tile area frame = \(self.tileArea.frame)")
-        var screenscale = UIScreen.mainScreen().scale
-        var pixels = self.tileArea.frame.width * screenscale
-        println("width in pixels: \(pixels)")
         
         
         // Add row/column gestures

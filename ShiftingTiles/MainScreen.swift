@@ -76,6 +76,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
+        // first time
+        if(!self.userDefaults.boolForKey("firstlaunch1.0")){
+            self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
+            self.userDefaults.setBool(true, forKey: "congratsOn")
+            self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
+            self.userDefaults.synchronize()
+        }
+        
+
         self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
         
         // register the nibs for the two types of tableview cells

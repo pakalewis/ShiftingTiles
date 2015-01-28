@@ -8,11 +8,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen1">
             <connections>
+                <outlet property="arrowImage" destination="Z62-53-j8p" id="7mZ-h8-NBq"/>
                 <outlet property="label1" destination="CqB-vh-MSu" id="esS-AH-EJR"/>
                 <outlet property="label2" destination="QjZ-IG-lji" id="8Fq-DL-IuN"/>
                 <outlet property="label2a" destination="wUT-D9-EZ9" id="SKn-7M-8YG"/>
                 <outlet property="label3" destination="a41-uS-iVF" id="fLD-oG-j01"/>
                 <outlet property="label4" destination="jHO-dK-Tdo" id="I9x-4f-PVO"/>
+                <outlet property="scrambledImage" destination="BvP-LA-Sqd" id="T4g-OS-Mh9"/>
+                <outlet property="solvedImage" destination="jJW-zS-DhW" id="Bbe-Ym-Tcl"/>
                 <outlet property="view" destination="3mM-eG-6vu" id="BXN-sH-lmU"/>
             </connections>
         </placeholder>
@@ -39,13 +42,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambledExample.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambled-sample.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
                     <rect key="frame" x="15" y="199" width="262" height="262"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="height" multiplier="1:1" id="DJn-Yh-Gge"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="15.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-zS-DhW">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40medium.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-zS-DhW">
                     <rect key="frame" x="323" y="199" width="262" height="262"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jJW-zS-DhW" secondAttribute="height" multiplier="1:1" id="R9t-Bg-7Dr"/>
@@ -104,8 +107,8 @@
         </view>
     </objects>
     <resources>
-        <image name="15.jpeg" width="1000" height="1000"/>
+        <image name="40medium.jpg" width="480" height="480"/>
         <image name="rightArrow.png" width="512" height="434"/>
-        <image name="scrambledExample.png" width="557" height="557"/>
+        <image name="scrambled-sample.png" width="549" height="550"/>
     </resources>
 </document>

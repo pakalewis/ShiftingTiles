@@ -18,7 +18,10 @@ class RulesScreen1: UIViewController {
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var label4: UILabel!
     
-    
+    @IBOutlet weak var scrambledImage: UIImageView!
+    @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var solvedImage: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,6 +53,15 @@ class RulesScreen1: UIViewController {
         self.label3.textColor = self.colorPalette.fetchDarkColor()
         self.label4.textColor = self.colorPalette.fetchDarkColor()
 
+        
+        self.scrambledImage.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.scrambledImage.layer.borderWidth = 2
+        self.solvedImage.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.solvedImage.layer.borderWidth = 2
+        
+        self.arrowImage.image = self.arrowImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+
+        
     }
 
 
