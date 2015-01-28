@@ -15,3 +15,16 @@ LATER:
 - add ability to flip/rotate entire game board
 - add languages to settings page
 - sound effects
+
+
+
+
+- enable for iOS 7. see these posts about the errors that pop up when switching the build settings.  (Target -> Build Settings -> iOS Deployment Target ->  iOS 8.0)
+- would need to change the UIAlertViews
+
+
+automatic preferred max layout width -->
+http://stackoverflow.com/questions/25398312/automatic-preferred-max-layout-width-is-not-available-on-ios-versions-prior-to-8
+
+Cannot find an outgoing row head for incoming head UIButton -->
+http://stackoverflow.com/questions/17688370/autolayout-removefromsuperview-removeconstraints-throws-exception-and-crashes

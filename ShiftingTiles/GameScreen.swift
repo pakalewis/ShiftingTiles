@@ -358,7 +358,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
     }
    
-    // TODO: this if statement is using a wrong check. another counter for how many times this alert has been shown?
+
+    
     @IBAction func backToMainScreen(sender: AnyObject) {
         var totalPlays = self.userDefaults.integerForKey("backButtonPressed")
         totalPlays++
