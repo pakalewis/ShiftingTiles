@@ -67,8 +67,9 @@ class TileAreaView: UIView {
         var arrayIndexConcatenation = 0
         
         // Image measurements
-        var imageWidth:CGFloat = CGFloat(self.imageToSolve.size.width / CGFloat(self.tilesPerRow))
-
+        var CGIWdith : CGFloat = CGFloat(CGImageGetWidth(self.imageToSolve.CGImage))
+        var imageWidth : CGFloat = CGFloat(CGIWdith / CGFloat(self.tilesPerRow))
+        
         for index1 in 0..<self.tilesPerRow { // go down the rows
             // Make the row array of Tiles
             var rowArray = [Tile]()
