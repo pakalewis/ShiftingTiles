@@ -2,9 +2,6 @@ TODO:
 - retake sample images for the rules page 1
 - check on all devices in simulator
 - update readme
-10 x 10 gets cut on 5s
-adjustfontsizetowidthj
-
 
 QUESTIONS:
 - tapping an image from the collectionview add 4mb to the memory for each image. why??
@@ -18,6 +15,7 @@ LATER:
 - add languages to settings page
 - sound effects
 
+- potential crash when turning off access to camera in the device's settings app
 
 
 

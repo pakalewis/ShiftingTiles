@@ -76,6 +76,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
+        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
+        
         // register the nibs for the two types of tableview cells
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
@@ -155,23 +157,45 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (handler) -> Void in
+            
+            // Check if device has a camera
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-                if self.captureSession == nil {
-                    self.setupAVFoundation()
-                } else {
-                    self.view.layer.addSublayer(self.previewLayer)
-                    self.captureSession!.startRunning()
+                
+                // Check authorization status
+                let status = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+                if status == AVAuthorizationStatus.Authorized {
+                    if self.captureSession == nil {
+                        self.setupAVFoundation()
+                    } else {
+                        self.view.layer.addSublayer(self.previewLayer)
+                        self.captureSession!.startRunning()
+                    }
+                    
+                    // Display the capture button and block out other controls
+                    self.view.bringSubviewToFront(self.imageCapturingButtonArea)
+                    self.imageCapturingButtonArea.alpha = 1
+                    
+                    self.imageCapturingAreaTopConstraint.constant = 5
+                    UIView.animateWithDuration(0.8, animations: { () -> Void in
+                        self.view.layoutIfNeeded()
+                    })
                 }
-
-                // Display the capture button and block out other controls
-                self.view.bringSubviewToFront(self.imageCapturingButtonArea)
-                self.imageCapturingButtonArea.alpha = 1
-
-                self.imageCapturingAreaTopConstraint.constant = 5
-                UIView.animateWithDuration(0.8, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                })
-            } else {
+                if status == AVAuthorizationStatus.Denied {
+                    var noAccessAlert = UIAlertController(title: "Camera access denied", message: "Allow camera access by going to the Settings app on this device.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                    noAccessAlert.addAction(okAction)
+                    self.presentViewController(noAccessAlert, animated: true, completion: nil)
+                }
+                if status == AVAuthorizationStatus.NotDetermined {
+                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (granted) -> Void in
+                        if granted {
+                            println("Granted access to camera")
+                        } else {
+                            println("Access to camera denied")
+                        }
+                    })
+                }
+            } else { // No camera on device
                 var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
                 noCameraAlert.addAction(okAction)
