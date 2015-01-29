@@ -14,6 +14,13 @@ Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
 • Suitable for all ages.
 
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-1.png)
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-2.png)
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3.png)
+__________________________________________________________________________________________
 
 Development Features:
 - Written in Swift
@@ -29,9 +36,9 @@ Development Features:
 
 
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-1)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-1.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-2)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-2.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3.png)
 __________________________________________________________________________________________
