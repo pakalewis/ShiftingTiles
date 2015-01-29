@@ -1,16 +1,37 @@
-This app is a visual puzzle game. The user selects a picture which is then sliced into smaller squares and scrambled up. The goal is to form the original picture by continuously swapping tiles.
+Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
-**** These gifs are from a rough version of the game. I am still polishing **** __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/gif1.gif)
-__________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/gif2.gif)
-__________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/gif3.gif)
-__________________________________________________________________________________________
+• Choose from a nice variety of high quality images. Alternatively, you can select a photo from your gallery or take a picture with the camera.
+
+• You choose the difficulty level. The grid sizes range from 2x2 to 10x10. 
+
+• Drag a tile on top of another tile to swap their positions. You can even swap entire rows or columns!
+
+• For an extra challenge, turn on Rotations in the settings menu. Double tap a tile to rotate it 90°.
+
+• Hints are available if you get stuck.
+
+• Choose your favorite color scheme from 5 available options.
+
+• Suitable for all ages.
 
 
-Features:
-- Variety of pictures to solve
-- Hint button indicates the first incorrect tile and the corresponding correct tile
-- Solve button available to auto-solve the puzzle
-- Animations when a puzzle is solved
+Development Features:
+- Written in Swift
+- AVFoundation used to capture images via the device's camera
+- UIPageViewController used to present a series of rules pages
+- Custom UICollectionViewCell and accomanying .xib
+- UIImage extension to apply a UIColor to an image
+- UIColor extension to generate a UIColor from a hex triplet
+- 2D array to organize the tiles
+- UIPanGestureRecognizer and UITapGestureRecognizer to handle tile movements
+- UIView animations when moving and displaying tiles
+- NSUserDefaults used to keep track of solve data and settings preferences
+
+
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-1)
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-2)
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3)
+__________________________________________________________________________________________
