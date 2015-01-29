@@ -108,7 +108,7 @@
     </objects>
     <resources>
         <image name="40medium.jpg" width="480" height="480"/>
-        <image name="rightArrow.png" width="512" height="434"/>
+        <image name="rightArrow.png" width="120" height="101"/>
         <image name="scrambled-sample.png" width="549" height="550"/>
     </resources>
 </document>

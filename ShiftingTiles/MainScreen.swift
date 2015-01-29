@@ -7,11 +7,6 @@
 //
 
 
-// ideas for more features:
-// allow user to choose picture from camera or photo library
-// enable hint button that will highlight the first piece out of position
-// fix how the picture gets cut into pieces (some of the edges are not quite right)
-
 
 import Foundation
 import UIKit
