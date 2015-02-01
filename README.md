@@ -2,7 +2,7 @@ Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
 • Choose from a nice variety of high quality images. Alternatively, you can select a photo from your gallery or take a picture with the camera.
 
-• You choose the difficulty level. The grid sizes range from 2x2 to 10x10. 
+• You select the difficulty level. The grid sizes range from 2x2 to 10x10. 
 
 • Drag a tile on top of another tile to swap their positions. You can even swap entire rows or columns!
 
