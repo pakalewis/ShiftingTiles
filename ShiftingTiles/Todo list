@@ -1,6 +1,8 @@
 TODO:
-- check on all devices in simulator
 - update readme
+- calculate exact sizes for frames etc. and adjust fonts appropriately
+- better app icon
+- figure out best way to include pictures. subcategories? maximum that the app can be bundled with?
 
 QUESTIONS:
 - tapping an image from the collectionview add 4mb to the memory for each image. why??
