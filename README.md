@@ -27,7 +27,7 @@ Development Features:
 - Written in Swift
 - AVFoundation used to capture images via the device's camera
 - UIPageViewController used to present a series of rules pages
-- Custom UICollectionViewCell and accomanying .xib
+- Custom UICollectionViewCell and accompanying .xib
 - UIImage extension to apply a UIColor to an image
 - UIColor extension to generate a UIColor from a hex triplet
 - 2D array to organize the tiles
