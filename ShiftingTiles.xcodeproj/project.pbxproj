@@ -174,6 +174,7 @@
 		2CC635891A7866CA0079BB1D /* 38small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2CC635611A7866CA0079BB1D /* 38small.jpg */; };
 		2CC6358A1A7866CA0079BB1D /* 39small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2CC635621A7866CA0079BB1D /* 39small.jpg */; };
 		2CC6358B1A7866CA0079BB1D /* 40small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2CC635631A7866CA0079BB1D /* 40small.jpg */; };
+		2CD02D2D1A8AF62F00160E75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD02D2C1A8AF62F00160E75 /* Localizable.strings */; };
 		2CF7E4131A68EF4700E39B14 /* RulesScreen1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7E4121A68EF4700E39B14 /* RulesScreen1.xib */; };
 		2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */; };
 /* End PBXBuildFile section */
@@ -348,6 +349,7 @@
 		2CC635611A7866CA0079BB1D /* 38small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 38small.jpg; path = ShiftingTiles/images/Thumbs/38small.jpg; sourceTree = SOURCE_ROOT; };
 		2CC635621A7866CA0079BB1D /* 39small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 39small.jpg; path = ShiftingTiles/images/Thumbs/39small.jpg; sourceTree = SOURCE_ROOT; };
 		2CC635631A7866CA0079BB1D /* 40small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 40small.jpg; path = ShiftingTiles/images/Thumbs/40small.jpg; sourceTree = SOURCE_ROOT; };
+		2CD02D2C1A8AF62F00160E75 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ShiftingTiles/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		2CF7E4121A68EF4700E39B14 /* RulesScreen1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RulesScreen1.xib; path = ShiftingTiles/RulesScreen1.xib; sourceTree = SOURCE_ROOT; };
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -366,7 +368,7 @@
 		2C30EF1419B7C17500675799 = {
 			isa = PBXGroup;
 			children = (
-				2C30EF1F19B7C17500675799 /* TileGame */,
+				2C30EF1F19B7C17500675799 /* Files */,
 				2C30EF1E19B7C17500675799 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -379,7 +381,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2C30EF1F19B7C17500675799 /* TileGame */ = {
+		2C30EF1F19B7C17500675799 /* Files */ = {
 			isa = PBXGroup;
 			children = (
 				2C7F087C1A5E129E0083F668 /* Todo list */,
@@ -396,6 +398,7 @@
 				2C7F08731A5DF0AA0083F668 /* Images.xcassets */,
 				2C30EF2019B7C17500675799 /* Supporting Files */,
 			);
+			name = Files;
 			path = TileGame;
 			sourceTree = "<group>";
 		};
@@ -630,6 +633,7 @@
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
 				2C7F086D1A5DF0980083F668 /* Tile.swift */,
+				2CD02D2C1A8AF62F00160E75 /* Localizable.strings */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -818,6 +822,7 @@
 				2CC635681A7866CA0079BB1D /* 05small.jpg in Resources */,
 				2C90A16D1A7909F100447AE4 /* uncheckedBox.png in Resources */,
 				2C90A0D51A78CA1E00447AE4 /* 12medium.jpg in Resources */,
+				2CD02D2D1A8AF62F00160E75 /* Localizable.strings in Resources */,
 				2CF7E4131A68EF4700E39B14 /* RulesScreen1.xib in Resources */,
 				2CC635731A7866CA0079BB1D /* 16small.jpg in Resources */,
 				2C90A11E1A78CA3000447AE4 /* 05large.jpg in Resources */,
