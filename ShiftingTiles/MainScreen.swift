@@ -104,6 +104,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         self.tilesPerRow = 3
         self.tilesPerRowLabel.text = "3 x 3"
+//        self.shiftingTilesLabel.text = NSLocalizedString("MAIN_TITLE", comment: "")
+
     }
     
     

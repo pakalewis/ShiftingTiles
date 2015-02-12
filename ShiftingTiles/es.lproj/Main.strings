@@ -1,0 +1,36 @@
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "1EN-VZ-KcI"; */
+"1EN-VZ-KcI.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Shifting Tiles"; ObjectID = "6p4-o8-wZC"; */
+"6p4-o8-wZC.text" = "SPANISH Tiles";
+
+/* Class = "IBUILabel"; text = "Show Messages"; ObjectID = "IE3-Im-BS1"; */
+"IE3-Im-BS1.text" = "Show Messages";
+
+/* Class = "IBUILabel"; text = "Statistics"; ObjectID = "IjM-VQ-WwD"; */
+"IjM-VQ-WwD.text" = "Statistics";
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "QYD-MI-iZr"; */
+"QYD-MI-iZr.normalTitle" = "Button";
+
+/* Class = "IBUILabel"; text = "Color Scheme"; ObjectID = "Sf0-Cx-u40"; */
+"Sf0-Cx-u40.text" = "Color Scheme";
+
+/* Class = "IBUILabel"; text = "Rotate Tiles"; ObjectID = "T3z-YA-fK6"; */
+"T3z-YA-fK6.text" = "Rotate Tiles";
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "VUI-df-ri1"; */
+"VUI-df-ri1.normalTitle" = "Button";
+
+/* Class = "IBUILabel"; text = "Solves"; ObjectID = "XBo-ic-9DY"; */
+"XBo-ic-9DY.text" = "Solves";
+
+/* Class = "IBUILabel"; text = "Settings"; ObjectID = "eXT-vh-s4k"; */
+"eXT-vh-s4k.text" = "Settings";
+
+/* Class = "IBUILabel"; text = "Size"; ObjectID = "wbx-f1-dqn"; */
+"wbx-f1-dqn.text" = "Size";
+
+/* Class = "IBUILabel"; text = "3x3"; ObjectID = "zGq-2D-jDD"; */
+"zGq-2D-jDD.text" = "3x3";

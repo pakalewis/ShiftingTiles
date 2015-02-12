@@ -196,9 +196,9 @@
         </view>
     </objects>
     <resources>
-        <image name="cameraIcon.png" width="512" height="512"/>
-        <image name="goIcon.png" width="800" height="800"/>
-        <image name="increaseIcon.png" width="512" height="512"/>
-        <image name="statsIcon.png" width="512" height="512"/>
+        <image name="cameraIcon.png" width="120" height="120"/>
+        <image name="goIcon.png" width="120" height="120"/>
+        <image name="increaseIcon.png" width="120" height="120"/>
+        <image name="statsIcon.png" width="120" height="120"/>
     </resources>
 </document>

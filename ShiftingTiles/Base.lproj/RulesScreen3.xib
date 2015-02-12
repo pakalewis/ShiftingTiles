@@ -144,8 +144,8 @@
         </view>
     </objects>
     <resources>
-        <image name="hintIcon.png" width="512" height="512"/>
-        <image name="originalImageIcon.png" width="512" height="512"/>
-        <image name="solveIcon.png" width="512" height="512"/>
+        <image name="hintIcon.png" width="120" height="120"/>
+        <image name="originalImageIcon.png" width="120" height="120"/>
+        <image name="solveIcon.png" width="120" height="120"/>
     </resources>
 </document>
