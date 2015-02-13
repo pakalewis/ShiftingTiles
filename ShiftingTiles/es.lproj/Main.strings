@@ -3,7 +3,7 @@
 "1EN-VZ-KcI.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Shifting Tiles"; ObjectID = "6p4-o8-wZC"; */
-"6p4-o8-wZC.text" = "SPANISH Tiles";
+"6p4-o8-wZC.text" = "SPANISH101 Tiles";
 
 /* Class = "IBUILabel"; text = "Show Messages"; ObjectID = "IE3-Im-BS1"; */
 "IE3-Im-BS1.text" = "Show Messages";
@@ -27,10 +27,10 @@
 "XBo-ic-9DY.text" = "Solves";
 
 /* Class = "IBUILabel"; text = "Settings"; ObjectID = "eXT-vh-s4k"; */
-"eXT-vh-s4k.text" = "Settings";
+"eXT-vh-s4k.text" = "Ajustes";
 
 /* Class = "IBUILabel"; text = "Size"; ObjectID = "wbx-f1-dqn"; */
-"wbx-f1-dqn.text" = "Size";
+"wbx-f1-dqn.text" = "Tamaño";
 
 /* Class = "IBUILabel"; text = "3x3"; ObjectID = "zGq-2D-jDD"; */
 "zGq-2D-jDD.text" = "3x3";
