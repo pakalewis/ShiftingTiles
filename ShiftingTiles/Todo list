@@ -1,4 +1,6 @@
 TODO:
+
+- bug when toggling the original image? extra frame/border appears and the x/back disappears
 - update readme
 - calculate exact sizes for frames etc. and adjust fonts appropriately
 - better app icon
