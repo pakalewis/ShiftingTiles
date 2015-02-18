@@ -51,7 +51,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCapturingAreaTopConstraint: NSLayoutConstraint!
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
-    var imageToSolve = UIImage()
+    var imageToSolve : UIImage?
     var tilesPerRow = 3
     
     
@@ -114,7 +114,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
-            gameScreen.imageToSolve = self.imageToSolve
+            gameScreen.imageToSolve = self.imageToSolve!
             gameScreen.tilesPerRow = self.tilesPerRow
             
         }
@@ -145,6 +145,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // TODO: why does this cause memory issues?
+        self.imageToSolve = nil
         self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[indexPath.row])!
     }

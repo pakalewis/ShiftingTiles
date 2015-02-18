@@ -309,8 +309,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         if !self.originalIsBeingShown {
             self.originalIsBeingShown = true
+            self.tileArea.allowTileShifting = false
             self.view.bringSubviewToFront(self.originalImageView)
             self.originalImageView.alpha = 1
+
+            // Turn off and hide buttons
             self.backButton.imageView?.alpha = 0
             self.solveButton.imageView?.alpha = 0
             self.hintButton.imageView?.alpha = 0
@@ -325,19 +328,19 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.originalIsBeingShown = false
             self.originalImageView.alpha = 0
             self.view.sendSubviewToBack(self.originalImageView)
-            // Turn off and hide buttons
+
+            // Turn on and show buttons
             self.backButton.imageView?.alpha = 1
             self.solveButton.imageView?.alpha = 1
             self.hintButton.imageView?.alpha = 1
             self.backButton.userInteractionEnabled = true
             self.solveButton.userInteractionEnabled = true
             self.hintButton.userInteractionEnabled = true
-
-            
             for index in 0..<self.tilesPerRow {
                 self.topButtons[index].alpha = 1
                 self.leftButtons[index].alpha = 1
             }
+            self.tileArea.allowTileShifting = true
         }
     }
 

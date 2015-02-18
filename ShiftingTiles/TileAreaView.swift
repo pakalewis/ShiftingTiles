@@ -20,6 +20,9 @@ class TileAreaView: UIView {
     // Set to true when puzzle is solved
     var isPuzzleSolved = false
     
+    // Indicates whether tiles should be movable
+    var allowTileShifting = true;
+    
     // Image that the user selected to solve
     var imageToSolve = UIImage()
 
@@ -28,9 +31,6 @@ class TileAreaView: UIView {
 
     // Number of rows and columns in the puzzle
     var tilesPerRow = 3
-    
-    // Indicates whether tiles should be rotated during the initial setup
-    var includeRotations = true;
     
     // This is a temporary view that appears as a black border around the selected tile
     var highlightedView = UIView()
@@ -332,7 +332,7 @@ class TileAreaView: UIView {
     func handlePan(gesture:UIPanGestureRecognizer) {
         var startingPoint :CGPoint = gesture.locationInView(self)
         
-        if !self.isPuzzleSolved {
+        if !self.isPuzzleSolved && self.allowTileShifting {
             switch gesture.state {
             case .Began:
                 if self.findFirstTileWithPoint(startingPoint) {
@@ -384,7 +384,7 @@ class TileAreaView: UIView {
 
     
     func tileDoubleTapped(sender: UIGestureRecognizer) {
-        if !self.isPuzzleSolved {
+        if !self.isPuzzleSolved && self.allowTileShifting {
             if userDefaults.boolForKey("rotationsOn") {
                 
                 // Grab the tag of the tile that was tapped and use it to find the correct tile
