@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  ShiftingTiles
+
+  Created by Parker Lewis on 2/11/15.
+  Copyright (c) 2015 Parker Lewis. All rights reserved.
+*/
+
+
+
+// Stats Screen
+"TOTAL_SOLVES" = "Total";
+
+
+
+// Info Screens
+"Rules1_Part1" = "Rearrange the tiles to form the complete picture.";
+"Rules1_Part2" = "Drag a tile on top of another tile to swap their positions.";
+"Rules1_Part3" = "Swap entire rows and columns by dragging the outer squares.";
+"Rules1_Part4" = "For an extra challenge, turn on Rotations in the settings menu.";
+"Rules1_Part5" = "Double tap a tile to rotate it 90°.";
+
+
+"Rules2_Part1" = "Take a photo or select one from your gallery.";
+"Rules2_Part2" = "Choose the grid size.";
+"Rules2_Part3" = "View statistics.";
+"Rules2_Part4" = "Start the puzzle!";
+
+
+"Rules3_Part1" = "View the original image.";
+"Rules3_Part2" = "Get a hint and see which tiles should be swapped.\n\nIf all tiles are in the correct positions, see which tile should be rotated.";
+"Rules3_Part3" = "Stuck?\nAuto-solve the puzzle.";
+
+
+"Acknowledgements_Part1" = "Shifting Tiles developed by:";
+"Acknowledgements_Part2" = "Images provided by:";
+"Acknowledgements_Part3" = "Feedback, comments, questions can be sent here:";
+
+
+
+//Alerts
+"LossOfProgressAlert_Part1" = "Any progress on this puzzle will not be saved.";
+"LossOfProgressAlert_Part2" = "Are you sure you want to go back?";
+
+
+"NO" = "NO";
+"YES" = "YES";
+"OK" = "OK";
+"CANCEL" = "Cancel";
+"ERROR" = "Error";
+
+"SolveAlert_Part1" = "This will auto-solve the puzzle";
+"SolveAlert_Part2" = "Are you sure you want to do this?";
+
+
+"CameraButtonAlert_Part1" = "Choose a photo:";
+"CameraButtonAlert_Part2" = "Library";
+"CameraButtonAlert_Part3" = "Camera";
+
+
+"CameraAccessAlert_Part1" = "Camera access denied";
+"CameraAccessAlert_Part2" = "Allow camera access by going to the Settings app on this device.";
+
+"NoCameraAlert" = "No camera is available on this device";
+
+"EmailAlert" = "Check your e-mail configuration and try again.";
+
+
+// Messages
+"Message1" = "WAY TO GO!";
+"Message2" = "CONGRATS!";
+"Message3" = "SUPER!";
+"Message4" = "AWESOME!";
+"Message5" = "GREAT JOB!";
+"Message6" = "WELL DONE!";
+"Message7" = "GOOD FOR YOU!";
+"Message8" = "YOU DID IT!";
+"Message9" = "FINISHED!";
+"Message10" = "TAKE A BOW!";
+"Message11" = "NICE ONE!";
+"Message12" = "THAT'S GOLD!";
+"Message13" = "EXCELLENT!";
+"Message14" = "PERFECT!";
+"Message15" = "VERY COOL!";
+"Message16" = "GROOVY!";
+"Message17" = "RIGHT ON!";
+
+

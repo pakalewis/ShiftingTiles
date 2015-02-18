@@ -53,23 +53,22 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.messages = [ "WAY TO GO!",
-            "CONGRATS!",
-            "SUPER!",
-            "AWESOME!",
-            "GREAT JOB!",
-            "WELL DONE!",
-            "GOOD FOR YOU!",
-            "YOU DID IT!",
-            "FINISHED!",
-            "TAKE A BOW!",
-            "NICE GOING!",
-            "THAT'S GOLD!",
-            "EXCELLENT!",
-            "PERFECT!",
-            "VERY COOL!",
-            "GROOVY!",
-            "RIGHT ON!" ]
+        self.messages = [
+            NSLocalizedString("Message1", comment: ""),
+            NSLocalizedString("Message2", comment: ""),
+            NSLocalizedString("Message3", comment: ""),
+            NSLocalizedString("Message4", comment: ""),
+            NSLocalizedString("Message5", comment: ""),
+            NSLocalizedString("Message6", comment: ""),
+            NSLocalizedString("Message7", comment: ""),
+            NSLocalizedString("Message8", comment: ""),
+            NSLocalizedString("Message9", comment: ""),
+            NSLocalizedString("Message10", comment: ""),
+            NSLocalizedString("Message11", comment: ""),
+            NSLocalizedString("Message12", comment: ""),
+            NSLocalizedString("Message13", comment: ""),
+            NSLocalizedString("Message14", comment: ""),
+            NSLocalizedString("Message15", comment: "")]
     }
     
     
@@ -362,18 +361,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     @IBAction func backToMainScreen(sender: AnyObject) {
-        var numTimesBackButtonPressed = self.userDefaults.integerForKey("backButtonPressed")
-        numTimesBackButtonPressed++
-        self.userDefaults.setInteger(numTimesBackButtonPressed, forKey: "backButtonPressed")
-        
-
         if self.tileArea.isPuzzleSolved {
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            if userDefaults.integerForKey("backButtonPressed") < 4 {
-                var lossOfProgressAlert = UIAlertController(title: "Any progress on this puzzle will not be saved.", message: "Are you sure you want to go back?", preferredStyle: UIAlertControllerStyle.Alert)
-                let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
-                let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: { (ok) -> Void in
+            var numTimesBackButtonPressed = self.userDefaults.integerForKey("backButtonPressed")
+            numTimesBackButtonPressed++
+            self.userDefaults.setInteger(numTimesBackButtonPressed, forKey: "backButtonPressed")
+            if userDefaults.integerForKey("backButtonPressed") < 3 {
+                var lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+                let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.Default, handler: { (ok) -> Void in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
                 lossOfProgressAlert.addAction(yesAction)
@@ -384,13 +381,13 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             }
         }        
     }
-    
+
     
     @IBAction func solveButtonPressed(sender: AnyObject) {
 
-        var solveAlert = UIAlertController(title: "This will auto-solve the puzzle", message: "Are you sure you want to do this?", preferredStyle: UIAlertControllerStyle.Alert)
-        let noAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
-        let yesAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.Default) { (finished) -> Void in
+        var solveAlert = UIAlertController(title: NSLocalizedString("SolveAlert_Part1", comment: ""), message: NSLocalizedString("SolveAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+        let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.Default) { (finished) -> Void in
             
             self.puzzleIsSolved()
             self.tileArea.layoutTiles()

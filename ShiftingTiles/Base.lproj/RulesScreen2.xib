@@ -10,12 +10,12 @@
             <connections>
                 <outlet property="image1" destination="Am3-wP-oH2" id="C5Q-il-IXu"/>
                 <outlet property="image2" destination="9aE-Ev-Y8s" id="fQt-da-aEy"/>
-                <outlet property="image4" destination="ngU-1e-Vpl" id="bQ3-VK-Tmm"/>
-                <outlet property="image5" destination="LM1-ih-Csc" id="xcp-29-X7f"/>
+                <outlet property="image3" destination="ngU-1e-Vpl" id="t5Q-cT-0yf"/>
+                <outlet property="image4" destination="LM1-ih-Csc" id="8pZ-IJ-M6R"/>
                 <outlet property="label1" destination="ICh-Ga-btF" id="amH-PV-IBw"/>
                 <outlet property="label2" destination="qnG-gJ-DpK" id="RjJ-eL-6hJ"/>
-                <outlet property="label4" destination="Yy1-m6-ZhB" id="QeB-fa-gKv"/>
-                <outlet property="label5" destination="PpV-xA-yyo" id="vHJ-JT-Giq"/>
+                <outlet property="label3" destination="Yy1-m6-ZhB" id="CN7-No-Fcf"/>
+                <outlet property="label4" destination="PpV-xA-yyo" id="FQS-nu-0UG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -92,7 +92,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-YS-0dp" userLabel="View4">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-YS-0dp" userLabel="View3">
                     <rect key="frame" x="20" y="313" width="575" height="136"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ngU-1e-Vpl">
@@ -101,7 +101,7 @@
                                 <constraint firstAttribute="width" secondItem="ngU-1e-Vpl" secondAttribute="height" multiplier="1:1" id="SAo-cM-fWt"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yy1-m6-ZhB">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yy1-m6-ZhB" userLabel="Label3">
                             <rect key="frame" x="93" y="5" width="467" height="126"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -126,7 +126,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7K-Tq-BKn" userLabel="View5">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7K-Tq-BKn" userLabel="View4">
                     <rect key="frame" x="20" y="459" width="575" height="136"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="LM1-ih-Csc">
@@ -135,7 +135,7 @@
                                 <constraint firstAttribute="width" secondItem="LM1-ih-Csc" secondAttribute="height" multiplier="1:1" id="Vsp-v9-5UR"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-xA-yyo">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="PpV-xA-yyo" userLabel="Label4">
                             <rect key="frame" x="93" y="5" width="467" height="126"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="30"/>

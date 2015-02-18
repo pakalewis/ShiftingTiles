@@ -6,12 +6,83 @@
   Copyright (c) 2015 Parker Lewis. All rights reserved.
 */
 
+
+
+// Stats Screen
 "TOTAL_SOLVES" = "Suma";
 
+
+
+// Info Screens
 "Rules1_Part1" = "Reorganizar los azulejos para formar la imagen completa.";
 "Rules1_Part2" = "Arrastre una teja encima de otra ficha para intercambiar sus posiciones.";
 "Rules1_Part3" = "Intercambiar filas y columnas completas arrastrando los cuadros exteriores.";
 "Rules1_Part4" = "Para un desafío extra, encienda Rotaciones en el menú de configuración.";
 "Rules1_Part5" = "Doble toque en una baldosa para girar 90°.";
 
-//Rearrange the tiles to form the complete picture.
+
+"Rules2_Part1" = "Tome una foto o seleccione uno de la galería.";
+"Rules2_Part2" = "Elija el tamaño de la cuadrícula.";
+"Rules2_Part3" = "Ver las estadísticas.";
+"Rules2_Part4" = "Comience el rompecabezas!";
+
+
+"Rules3_Part1" = "Ver la imagen original.";
+"Rules3_Part2" = "Obtener una pista y ver lo que los azulejos deben ser intercambiados.\n\nSi todas las piezas están en las posiciones correctas, ver qué baldosas se deben rotar.";
+"Rules3_Part3" = "Pegado?\nAuto-resolver el rompecabezas.";
+
+
+"Acknowledgements_Part1" = "Azulejos de Cambio desarrollado por:";
+"Acknowledgements_Part2" = "Imágenes proporcionadas por:";
+"Acknowledgements_Part3" = "Opiniones, comentarios, preguntas puede ser enviado aquí:";
+
+
+
+// Alerts
+"LossOfProgressAlert_Part1" = "No se guardará ningún progreso en este rompecabezas.";
+"LossOfProgressAlert_Part2" = "¿Seguro que quieres volver?";
+
+
+"NO" = "NO";
+"YES" = "SÍ";
+"OK" = "OK";
+"CANCEL" = "Cancelar";
+"ERROR" = "Error";
+
+
+"SolveAlert_Part1" = "Esto auto-resolver el rompecabezas.";
+"SolveAlert_Part2" = "¿Seguro que quieres hacer esto?";
+
+
+"CameraButtonAlert_Part1" = "Elija una fotografía:";
+"CameraButtonAlert_Part2" = "Galería";
+"CameraButtonAlert_Part3" = "La cámara";
+
+
+"CameraAccessAlert_Part1" = "Acceso a la cámara negó.";
+"CameraAccessAlert_Part2" = "Permitir el acceso de la cámara por ir a la aplicación de configuración de este dispositivo.";
+
+"NoCameraAlert" = "Sin cámara está disponible en este dispositivo.";
+
+"EmailAlert" = "Compruebe la configuración del correo electrónico y vuelva a intentarlo.";
+
+
+// Messages
+"Message1" = "uno!";
+"Message2" = "dos!";
+"Message3" = "tres!";
+"Message4" = "quatro!";
+"Message5" = "cinco!";
+"Message6" = "seies!";
+"Message7" = "siete!";
+"Message8" = "ocho!";
+"Message9" = "nueve!";
+"Message10" = "diez!";
+"Message11" = "once!";
+"Message12" = "doce!";
+"Message13" = "trece!";
+"Message14" = "catorce!";
+"Message15" = "quince!";
+"Message16" = "diez y seis!";
+"Message17" = "diez y siete!";
+

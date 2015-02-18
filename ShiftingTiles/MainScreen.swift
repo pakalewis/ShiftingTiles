@@ -154,15 +154,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     // MARK: Image funcs
     @IBAction func cameraButtonPressed(sender: AnyObject) {
-        var pickPhotoMenu = UIAlertController(title: "Choose a photo:", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        let libraryAction = UIAlertAction(title: "Library", style: UIAlertActionStyle.Default) { (handler) -> Void in
+        var pickPhotoMenu = UIAlertController(title: NSLocalizedString("CameraButtonAlert_Part1", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let libraryAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part2", comment: ""), style: UIAlertActionStyle.Default) { (handler) -> Void in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
-        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (handler) -> Void in
+        let cameraAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part3", comment: ""), style: UIAlertActionStyle.Default) { (handler) -> Void in
             
             // Check if device has a camera
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
@@ -187,8 +187,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     })
                 }
                 if status == AVAuthorizationStatus.Denied {
-                    var noAccessAlert = UIAlertController(title: "Camera access denied", message: "Allow camera access by going to the Settings app on this device.", preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                    var noAccessAlert = UIAlertController(title: NSLocalizedString("CameraAccessAlert_Part1", comment: ""), message: NSLocalizedString("CameraAccessAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
                     noAccessAlert.addAction(okAction)
                     self.presentViewController(noAccessAlert, animated: true, completion: nil)
                 }
@@ -202,13 +202,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     })
                 }
             } else { // No camera on device
-                var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                var noCameraAlert = UIAlertController(title: "", message: NSLocalizedString("NoCameraAlert", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
                 noCameraAlert.addAction(okAction)
                 self.presentViewController(noCameraAlert, animated: true, completion: nil)
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
         pickPhotoMenu.addAction(libraryAction)
         pickPhotoMenu.addAction(cameraAction)
         pickPhotoMenu.addAction(cancelAction)

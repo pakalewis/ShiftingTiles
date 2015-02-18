@@ -45,10 +45,10 @@ class RulesScreen3: UIViewController {
         self.label2.textColor = self.colorPalette.fetchDarkColor()
         self.label3.textColor = self.colorPalette.fetchDarkColor()
         
-        
-        self.label1.text = "View the original image."
-        self.label2.text = "Get a hint and see which tiles should be swapped.\n\nIf all tiles are in the correct positions, see which tile should be rotated."
-        self.label3.text = "Stuck?\nAuto-solve the puzzle."
+        self.label1.text = NSLocalizedString("Rules3_Part1", comment: "")
+        self.label2.text = NSLocalizedString("Rules3_Part2", comment: "")
+        self.label3.text = NSLocalizedString("Rules3_Part3", comment: "")
+
 
     }
 }

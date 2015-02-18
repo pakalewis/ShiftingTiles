@@ -11,9 +11,9 @@
                 <outlet property="arrowImage" destination="Z62-53-j8p" id="7mZ-h8-NBq"/>
                 <outlet property="label1" destination="CqB-vh-MSu" id="esS-AH-EJR"/>
                 <outlet property="label2" destination="QjZ-IG-lji" id="8Fq-DL-IuN"/>
-                <outlet property="label2a" destination="wUT-D9-EZ9" id="SKn-7M-8YG"/>
-                <outlet property="label3" destination="a41-uS-iVF" id="fLD-oG-j01"/>
-                <outlet property="label4" destination="jHO-dK-Tdo" id="I9x-4f-PVO"/>
+                <outlet property="label3" destination="wUT-D9-EZ9" id="DIo-KJ-IBw"/>
+                <outlet property="label4" destination="a41-uS-iVF" id="DHh-oA-eqn"/>
+                <outlet property="label5" destination="jHO-dK-Tdo" id="Drc-w0-lap"/>
                 <outlet property="scrambledImage" destination="BvP-LA-Sqd" id="T4g-OS-Mh9"/>
                 <outlet property="solvedImage" destination="jJW-zS-DhW" id="Bbe-Ym-Tcl"/>
                 <outlet property="view" destination="3mM-eG-6vu" id="BXN-sH-lmU"/>
@@ -36,7 +36,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label2a" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="wUT-D9-EZ9">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="wUT-D9-EZ9" userLabel="label3">
                     <rect key="frame" x="75" y="166" width="450" height="18"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -60,12 +60,12 @@
                         <constraint firstAttribute="width" secondItem="Z62-53-j8p" secondAttribute="height" multiplier="512:434" id="ii0-HK-PAo"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a41-uS-iVF">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a41-uS-iVF" userLabel="label4">
                     <rect key="frame" x="75" y="481" width="450" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="jHO-dK-Tdo">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="jHO-dK-Tdo" userLabel="label5">
                     <rect key="frame" x="75" y="519" width="450" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>

@@ -44,11 +44,10 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         self.emailButton.layer.borderWidth = 2
         self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
 
-        
-        self.label1.text = "Shifting Tiles developed by:\nParker Lewis"
-        self.label2.text = "Images provided by:\nDale Arveson\nGreg Jaehnig\nKate Lewis\nGrant Wilson\nParker Lewis"
-        self.label3.text = "Feedback, comments, questions can be sent here:"
 
+        self.label1.text = NSLocalizedString("Acknowledgements_Part1", comment: "") + "\nParker Lewis"
+        self.label2.text = NSLocalizedString("Acknowledgements_Part2", comment: "") + "\nDale Arveson\nGreg Jaehnig\nKate Lewis\nGrant Wilson\nParker Lewis"
+        self.label3.text = NSLocalizedString("Acknowledgements_Part3", comment: "")
     }
     
     
@@ -61,8 +60,8 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
             mailComposeViewController.setSubject("Shifting Tiles feedback")
             self.presentViewController(mailComposeViewController, animated: true, completion: nil)
         } else {
-            let mailErrorAlert = UIAlertController(title: "Error", message: "Check your e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            let mailErrorAlert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("EmailAlert", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
             mailErrorAlert.addAction(okAction)
             self.presentViewController(mailErrorAlert, animated: true, completion: nil)
         }
