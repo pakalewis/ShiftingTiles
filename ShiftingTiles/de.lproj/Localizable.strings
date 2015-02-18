@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  ShiftingTiles
+
+  Created by Parker Lewis on 2/11/15.
+  Copyright (c) 2015 Parker Lewis. All rights reserved.
+*/
+
+
+
+// Stats Screen
+"TOTAL_SOLVES" = "Total";
+
+
+
+// Info Screens
+"Rules1_Part1" = "Ordnen Sie die Fliesen, um das Gesamtbild zu bilden.";
+"Rules1_Part2" = "Ziehen Sie einen Ziegel auf einer anderen Kachel, um ihre Positionen zu tauschen.";
+"Rules1_Part3" = "Tauschen Sie ganze Zeilen und Spalten durch Ziehen an den äußeren Plätzen.";
+"Rules1_Part4" = "Für eine zusätzliche Herausforderung, schalten Sie Rotationen im Einstellungsmenü.";
+"Rules1_Part5" = "Tippen Sie zweimal auf eine Kachel, um sie um 90° drehen.";
+
+
+"Rules2_Part1" = "Nehmen Sie ein Foto oder wählen Sie einen aus der Galerie.";
+"Rules2_Part2" = "Wählen Sie die Rastergröße.";
+"Rules2_Part3" = "Statistiken anzeigen.";
+"Rules2_Part4" = "Starten Sie das Puzzlespiel!";
+
+
+"Rules3_Part1" = "Sehen Sie das Originalbild.";
+"Rules3_Part2" = "Holen Sie sich einen Hinweis und sehen, welche Fliesen sollten ausgetauscht werden.\n\nWenn alle Fliesen sind in der richtigen Position, zu sehen, welche Fliesen gedreht werden sollte.";
+"Rules3_Part3" = "Stecken?\nAuto-das Rätsel zu lösen.";
+
+
+"Acknowledgements_Part1" = "Shifting Fliesen entwickelt von:";
+"Acknowledgements_Part2" = "Bilder bereitgestellt von:";
+"Acknowledgements_Part3" = "Feedback, Kommentare, Fragen können hier zu senden:";
+
+
+
+//Alerts
+"LossOfProgressAlert_Part1" = "Die Fortschritte auf diesem Puzzle werden nicht gespeichert.";
+"LossOfProgressAlert_Part2" = "Sind Sie sicher, Sie wollen zurück zu gehen?";
+
+
+"NO" = "NEIN";
+"YES" = "JA";
+"OK" = "OK";
+"CANCEL" = "Rückgängig Machen";
+"ERROR" = "Fehler";
+
+"SolveAlert_Part1" = "Dadurch wird automatisch das Rätsel zu lösen.";
+"SolveAlert_Part2" = "Sind Sie sicher, dass Sie dies tun wollen?";
+
+
+"CameraButtonAlert_Part1" = "Wählen Sie ein Foto aus:";
+"CameraButtonAlert_Part2" = "Galerie";
+"CameraButtonAlert_Part3" = "Kamera";
+
+
+"CameraAccessAlert_Part1" = "Kamera der Zugriff verweigert.";
+"CameraAccessAlert_Part2" = "Lassen Sie Zugriff auf die Kamera, indem Sie auf die Einstellungen-App auf dieses Gerät.";
+
+"NoCameraAlert" = "Keine Kamera ist auf diesem Gerät zur Verfügung";
+
+"EmailAlert" = "Überprüfen Sie Ihre E-Mail- Konfiguration und versuchen Sie es erneut.";
+
+
+// Messages
+"Message1" = "WAY TO GO!";
+"Message2" = "CONGRATS!";
+"Message3" = "SUPER!";
+"Message4" = "AWESOME!";
+"Message5" = "GREAT JOB!";
+"Message6" = "WELL DONE!";
+"Message7" = "GOOD FOR YOU!";
+"Message8" = "YOU DID IT!";
+"Message9" = "FINISHED!";
+"Message10" = "TAKE A BOW!";
+"Message11" = "NICE ONE!";
+"Message12" = "THAT'S GOLD!";
+"Message13" = "EXCELLENT!";
+"Message14" = "PERFECT!";
+"Message15" = "VERY COOL!";
+"Message16" = "GROOVY!";
+"Message17" = "RIGHT ON!";
+
+

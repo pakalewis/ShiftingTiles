@@ -1,0 +1,38 @@
+
+// MAIN SCREEN
+/* Class = "IBUILabel"; text = "Shifting Tiles"; ObjectID = "6p4-o8-wZC"; */
+"6p4-o8-wZC.text" = "Verschieben Fliesen";
+
+
+
+
+
+// SETTINGS SCREEN
+/* Class = "IBUILabel"; text = "Settings"; ObjectID = "eXT-vh-s4k"; */
+"eXT-vh-s4k.text" = "Einstellungen";
+
+/* Class = "IBUILabel"; text = "Show Messages"; ObjectID = "IE3-Im-BS1"; */
+"IE3-Im-BS1.text" = "Meldungen anzeigen";
+
+/* Class = "IBUILabel"; text = "Color Scheme"; ObjectID = "Sf0-Cx-u40"; */
+"Sf0-Cx-u40.text" = "Farbschema";
+
+/* Class = "IBUILabel"; text = "Rotate Tiles"; ObjectID = "T3z-YA-fK6"; */
+"T3z-YA-fK6.text" = "Drehen Fliesen";
+
+
+
+
+
+
+
+// STATS SCREEN
+/* Class = "IBUILabel"; text = "Statistics"; ObjectID = "IjM-VQ-WwD"; */
+"IjM-VQ-WwD.text" = "Statistik";
+
+/* Class = "IBUILabel"; text = "Size"; ObjectID = "wbx-f1-dqn"; */
+"wbx-f1-dqn.text" = "Größe";
+
+/* Class = "IBUILabel"; text = "Solves"; ObjectID = "XBo-ic-9DY"; */
+"XBo-ic-9DY.text" = "Löst";
+

@@ -354,6 +354,9 @@
 		2CD4DF6F1A8C43F1004BE933 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		2CD9749E1A8EB72E006AA16B /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2CD9749F1A943A28006AA16B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CD974A01A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		2CD974A11A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CD974A21A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -709,6 +712,7 @@
 			knownRegions = (
 				Base,
 				es,
+				de,
 			);
 			mainGroup = 2C30EF1419B7C17500675799;
 			productRefGroup = 2C30EF1E19B7C17500675799 /* Products */;
@@ -916,6 +920,7 @@
 			children = (
 				2CD4DF501A8C295A004BE933 /* Base */,
 				2CD4DF6F1A8C43F1004BE933 /* es */,
+				2CD974A01A946616006AA16B /* de */,
 			);
 			name = Main.storyboard;
 			path = ShiftingTiles;
@@ -926,6 +931,7 @@
 			children = (
 				2CD4DF531A8C2964004BE933 /* Base */,
 				2CD9749E1A8EB72E006AA16B /* es */,
+				2CD974A11A946616006AA16B /* de */,
 			);
 			name = LaunchScreen.xib;
 			path = ShiftingTiles;
@@ -972,6 +978,7 @@
 			children = (
 				2CD4DF6A1A8C3B38004BE933 /* es */,
 				2CD9749F1A943A28006AA16B /* Base */,
+				2CD974A21A946616006AA16B /* de */,
 			);
 			name = Localizable.strings;
 			path = ShiftingTiles;
