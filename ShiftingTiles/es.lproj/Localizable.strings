@@ -6,4 +6,12 @@
   Copyright (c) 2015 Parker Lewis. All rights reserved.
 */
 
-"MAIN_TITLE" = "SPANISH Tiles";
+"TOTAL_SOLVES" = "Suma";
+
+"Rules1_Part1" = "Reorganizar los azulejos para formar la imagen completa.";
+"Rules1_Part2" = "Arrastre una teja encima de otra ficha para intercambiar sus posiciones.";
+"Rules1_Part3" = "Intercambiar filas y columnas completas arrastrando los cuadros exteriores.";
+"Rules1_Part4" = "Para un desafío extra, encienda Rotaciones en el menú de configuración.";
+"Rules1_Part5" = "Doble toque en una baldosa para girar 90°.";
+
+//Rearrange the tiles to form the complete picture.

@@ -41,11 +41,18 @@ class RulesScreen1: UIViewController {
             self.label4.font = UIFont(name: self.label4.font.fontName, size: 30)
         }
         
-        self.label1.text = "Rearrange the tiles to form the complete picture."
-        self.label2.text = "Drag a tile on top of another tile to swap their positions."
-        self.label2a.text = "Swap entire rows and columns by dragging the outer squares."
-        self.label3.text = "For an extra challenge, turn on Rotations in the settings menu."
-        self.label4.text = "Double tap a tile to rotate it 90°."
+
+        self.label1.text = NSLocalizedString("Rules1_Part1", comment: "Rules1_Part1")
+        self.label2.text = NSLocalizedString("Rules1_Part2", comment: "Rules1_Part2")
+        self.label2a.text = NSLocalizedString("Rules1_Part3", comment: "Rules1_Part3")
+        self.label3.text = NSLocalizedString("Rules1_Part4", comment: "Rules1_Part4")
+        self.label4.text = NSLocalizedString("Rules1_Part5", comment: "Rules1_Part5")
+        
+//        "Rearrange the tiles to form the complete picture."
+//        self.label2.text = "Drag a tile on top of another tile to swap their positions."
+//        self.label2a.text = "Swap entire rows and columns by dragging the outer squares."
+//        self.label3.text = "For an extra challenge, turn on Rotations in the settings menu."
+//        self.label4.text = "Double tap a tile to rotate it 90°."
         
         self.label1.textColor = self.colorPalette.fetchDarkColor()
         self.label2.textColor = self.colorPalette.fetchDarkColor()

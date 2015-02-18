@@ -66,7 +66,7 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         var dismissTap = UITapGestureRecognizer(target: self, action: "dismissStatsScreen:")
         self.view.addGestureRecognizer(dismissTap)
         
-        self.totalSolvesLabel.text = "Total:  \(self.stats.fetchTotalSolves())"
+        self.totalSolvesLabel.text = NSLocalizedString("TOTAL_SOLVES", comment: "TOTAL_SOLVES") + ":  \(self.stats.fetchTotalSolves())"
         
         // Get the solve stats and store in local array
         self.solvesPerSize = self.stats.fetchSolvesPerSize()
