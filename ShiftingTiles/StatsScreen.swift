@@ -43,14 +43,14 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         self.totalSolvesLabel.textColor = self.colorPalette.fetchDarkColor()
 
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.statsLabel.font = UIFont(name: self.statsLabel.font.fontName, size: 35)
+            self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 35)
             self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 25)
             self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 25)
             self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 25)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.statsLabel.font = UIFont(name: self.statsLabel.font.fontName, size: 70)
+            self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 50)
             self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 50)
             self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 50)

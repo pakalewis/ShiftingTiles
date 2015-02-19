@@ -67,7 +67,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+ 
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
@@ -422,12 +422,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
  
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.shiftingTilesLabel.font = UIFont(name: self.shiftingTilesLabel.font.fontName, size: 40)
+            self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
             self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 15)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.shiftingTilesLabel.font = UIFont(name: self.shiftingTilesLabel.font.fontName, size: 70)
+            self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 30)
         }
     }
