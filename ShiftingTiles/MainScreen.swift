@@ -314,7 +314,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.stillImageOutput!.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
                 var data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 var capturedImage = UIImage(data: data)
-                
+                self.previewLayer?.removeFromSuperlayer()
+                self.captureSession!.stopRunning()
+
                 // Rotates the image if its imageOrientation property is not Up
                 if !(capturedImage!.imageOrientation == UIImageOrientation.Up) {
                     UIGraphicsBeginImageContextWithOptions(capturedImage!.size, false, capturedImage!.scale)
@@ -332,11 +334,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 
                 self.imageToSolve = capturedImage!
                 self.mainImageView.image = capturedImage!
-                self.previewLayer?.removeFromSuperlayer()
-
             })
-
-            self.captureSession!.stopRunning()
         }
     }
     
