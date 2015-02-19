@@ -44,16 +44,16 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 35)
-            self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 25)
-            self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 25)
-            self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 25)
+            self.leftLabel.font = UIFont(name: "OpenSans", size: 25)
+            self.rightLabel.font = UIFont(name: "OpenSans", size: 25)
+            self.totalSolvesLabel.font = UIFont(name: "OpenSans", size: 25)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
-            self.leftLabel.font = UIFont(name: self.leftLabel.font.fontName, size: 50)
-            self.rightLabel.font = UIFont(name: self.rightLabel.font.fontName, size: 50)
-            self.totalSolvesLabel.font = UIFont(name: self.totalSolvesLabel.font.fontName, size: 50)
+            self.leftLabel.font = UIFont(name: "OpenSans-Bold", size: 45)
+            self.rightLabel.font = UIFont(name: "OpenSans-Bold", size: 45)
+            self.totalSolvesLabel.font = UIFont(name: "OpenSans-Bold", size: 45)
         }
     }
 
@@ -89,13 +89,13 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         cell.leftLabel.textColor = self.colorPalette.fetchDarkColor()
         cell.rightLabel.textColor = self.colorPalette.fetchDarkColor()
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            cell.leftLabel.font = UIFont(name: cell.leftLabel.font.fontName, size: 15)
-            cell.rightLabel.font = UIFont(name: cell.rightLabel.font.fontName, size: 15)
+            cell.leftLabel.font = UIFont(name: "OpenSans", size: 15)
+            cell.rightLabel.font = UIFont(name: "OpenSans", size: 15)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            cell.leftLabel.font = UIFont(name: cell.leftLabel.font.fontName, size: 30)
-            cell.rightLabel.font = UIFont(name: cell.rightLabel.font.fontName, size: 30)
+            cell.leftLabel.font = UIFont(name: "OpenSans", size: 30)
+            cell.rightLabel.font = UIFont(name: "OpenSans", size: 30)
         }
 
 

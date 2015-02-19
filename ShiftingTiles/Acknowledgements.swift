@@ -21,17 +21,17 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         super.viewDidLoad()
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.label1.font = UIFont(name: self.label1.font.fontName, size: 15)
-            self.label2.font = UIFont(name: self.label2.font.fontName, size: 15)
-            self.label3.font = UIFont(name: self.label3.font.fontName, size: 15)
-            self.emailButton.titleLabel!.font = UIFont(name: self.label3.font.fontName, size: 15)
+            self.label1.font = UIFont(name: "OpenSans", size: 15)
+            self.label2.font = UIFont(name: "OpenSans", size: 15)
+            self.label3.font = UIFont(name: "OpenSans", size: 15)
+            self.emailButton.titleLabel!.font = UIFont(name: "OpenSans", size: 15)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.label1.font = UIFont(name: self.label1.font.fontName, size: 30)
-            self.label2.font = UIFont(name: self.label2.font.fontName, size: 30)
-            self.label3.font = UIFont(name: self.label3.font.fontName, size: 30)
-            self.emailButton.titleLabel!.font = UIFont(name: self.label3.font.fontName, size: 30)
+            self.label1.font = UIFont(name: "OpenSans", size: 30)
+            self.label2.font = UIFont(name: "OpenSans", size: 30)
+            self.label3.font = UIFont(name: "OpenSans", size: 30)
+            self.emailButton.titleLabel!.font = UIFont(name: "OpenSans", size: 30)
         }
         
 

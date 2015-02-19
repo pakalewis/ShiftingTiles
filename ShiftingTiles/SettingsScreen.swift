@@ -58,28 +58,13 @@ class SettingsScreen: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 40)
-            self.rotationLabel.font = UIFont(name: self.rotationLabel.font.fontName, size: 20)
-            self.congratsLabel.font = UIFont(name: self.congratsLabel.font.fontName, size: 20)
-            self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 20)
-        }
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.settingLabel.font = UIFont(name: self.settingLabel.font.fontName, size: 70)
-            self.rotationLabel.font = UIFont(name: self.rotationLabel.font.fontName, size: 40)
-            self.congratsLabel.font = UIFont(name: self.congratsLabel.font.fontName, size: 40)
-            self.colorSchemeLabel.font = UIFont(name: self.colorSchemeLabel.font.fontName, size: 40)
-        }
         
         // Add tap gesturess
         var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
@@ -161,31 +146,32 @@ class SettingsScreen: UIViewController {
     
     func colorPalette1Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(1, forKey: "colorPaletteInt")
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
     
     func colorPalette2Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
     
     func colorPalette3Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
     
     func colorPalette4Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(4, forKey: "colorPaletteInt")
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
     
     func colorPalette5Selected(sender: UIGestureRecognizer) {
         self.userDefaults.setInteger(5, forKey: "colorPaletteInt")
-        self.updateColors()
+        self.updateColorsAndFonts()
     }
     
     
-    func updateColors() {
+    func updateColorsAndFonts() {
+        // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.settingLabel.textColor = self.colorPalette.fetchDarkColor()
         self.rotationLabel.textColor = self.colorPalette.fetchDarkColor()
@@ -194,6 +180,21 @@ class SettingsScreen: UIViewController {
         self.congratsImage.image = self.congratsImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        
+        // Fonts
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
+            self.rotationLabel.font = UIFont(name: "OpenSans", size: 20)
+            self.congratsLabel.font = UIFont(name: "OpenSans", size: 20)
+            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 20)
+        }
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
+            self.rotationLabel.font = UIFont(name: "OpenSans", size: 40)
+            self.congratsLabel.font = UIFont(name: "OpenSans", size: 40)
+            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 40)
+        }
     }
     
     @IBAction func dismissInfo(sender: AnyObject) {

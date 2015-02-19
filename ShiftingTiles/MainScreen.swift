@@ -421,12 +421,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
-            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 15)
+            self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 15)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
-            self.tilesPerRowLabel.font = UIFont(name: self.tilesPerRowLabel.font.fontName, size: 30)
+            self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 30)
         }
     }
 

@@ -9,11 +9,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen1">
             <connections>
                 <outlet property="arrowImage" destination="Z62-53-j8p" id="7mZ-h8-NBq"/>
-                <outlet property="label1" destination="CqB-vh-MSu" id="esS-AH-EJR"/>
-                <outlet property="label2" destination="QjZ-IG-lji" id="8Fq-DL-IuN"/>
-                <outlet property="label3" destination="wUT-D9-EZ9" id="DIo-KJ-IBw"/>
-                <outlet property="label4" destination="a41-uS-iVF" id="DHh-oA-eqn"/>
-                <outlet property="label5" destination="jHO-dK-Tdo" id="Drc-w0-lap"/>
+                <outlet property="label1" destination="CqB-vh-MSu" id="4iu-RF-zeD"/>
+                <outlet property="label2" destination="QjZ-IG-lji" id="KG4-ic-WRa"/>
+                <outlet property="label3" destination="wUT-D9-EZ9" id="yhI-W1-Z1j"/>
+                <outlet property="label4" destination="a41-uS-iVF" id="xNq-kJ-peN"/>
+                <outlet property="label5" destination="jHO-dK-Tdo" id="BQa-IL-30J"/>
                 <outlet property="scrambledImage" destination="BvP-LA-Sqd" id="T4g-OS-Mh9"/>
                 <outlet property="solvedImage" destination="jJW-zS-DhW" id="Bbe-Ym-Tcl"/>
                 <outlet property="view" destination="3mM-eG-6vu" id="BXN-sH-lmU"/>
