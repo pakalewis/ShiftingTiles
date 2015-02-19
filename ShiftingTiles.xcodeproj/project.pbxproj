@@ -357,10 +357,8 @@
 		2CD4DF5F1A8C29A2004BE933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Acknowledgements.xib; sourceTree = "<group>"; };
 		2CD4DF6A1A8C3B38004BE933 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD4DF6F1A8C43F1004BE933 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
-		2CD9749E1A8EB72E006AA16B /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2CD9749F1A943A28006AA16B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD974A01A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		2CD974A11A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2CD974A21A946616006AA16B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD974B81A958902006AA16B /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "ShiftingTiles/Fonts/OpenSans-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		2CD974BA1A958902006AA16B /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "ShiftingTiles/Fonts/OpenSans-ExtraBold.ttf"; sourceTree = SOURCE_ROOT; };
@@ -958,8 +956,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2CD4DF531A8C2964004BE933 /* Base */,
-				2CD9749E1A8EB72E006AA16B /* es */,
-				2CD974A11A946616006AA16B /* de */,
 			);
 			name = LaunchScreen.xib;
 			path = ShiftingTiles;
