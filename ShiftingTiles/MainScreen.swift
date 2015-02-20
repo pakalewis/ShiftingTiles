@@ -317,7 +317,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 }
                 if status == AVAuthorizationStatus.Denied {
                     var noAccessAlert = UIAlertController(title: NSLocalizedString("CameraAccessAlert_Part1", comment: ""), message: NSLocalizedString("CameraAccessAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
+                        self.selectCategoryButton.userInteractionEnabled = true
+                    }
                     noAccessAlert.addAction(okAction)
                     self.presentViewController(noAccessAlert, animated: true, completion: nil)
                 }
@@ -332,7 +334,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 }
             } else { // No camera on device
                 var noCameraAlert = UIAlertController(title: "", message: NSLocalizedString("NoCameraAlert", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
+                    self.selectCategoryButton.userInteractionEnabled = true
+                }
                 noCameraAlert.addAction(okAction)
                 self.presentViewController(noCameraAlert, animated: true, completion: nil)
             }
