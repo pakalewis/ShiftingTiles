@@ -11,14 +11,24 @@ import UIKit
 
 class ImageGallery {
     
-    var largeImageNameArray : [String]!
-    var mediumImageNameArray : [String]!
-    var smallImageNameArray : [String]!
+    
+    var animalLargeImageName : [String]!
+    var animalMediumImageName : [String]!
+    var animalSmallImageName : [String]!
+
+    var natureLargeImageName : [String]!
+    var natureMediumImageName : [String]!
+    var natureSmallImageName : [String]!
+
+    var placesLargeImageName : [String]!
+    var placesMediumImageName : [String]!
+    var placesSmallImageName : [String]!
+
     
     init() {
         
-
-        var imageFileNames = [
+        // ANIMAL
+        var animalFileNames = [
             "01.jpg",
             "02.jpg",
             "03.jpg",
@@ -33,7 +43,44 @@ class ImageGallery {
             "12.jpg",
             "13.jpg",
             "14.jpg",
-            "15.jpg",
+            "15.jpg" ]
+
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+        animalFileNames = self.shuffle(animalFileNames)
+
+        
+        var animalAlteredNamesSmall = [String]()
+        var animalAlteredNamesMedium = [String]()
+        var animalAlteredNamesLarge = [String]()
+
+        for imageFileName in animalFileNames {
+            
+            let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            animalAlteredNamesSmall.append(smallName)
+            
+            let mediumName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "medium.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            animalAlteredNamesMedium.append(mediumName)
+            
+            let largeName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "large.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            animalAlteredNamesLarge.append(largeName)
+        }
+        self.animalSmallImageName = animalAlteredNamesSmall
+        self.animalMediumImageName = animalAlteredNamesMedium
+        self.animalLargeImageName = animalAlteredNamesLarge
+
+        
+        
+        
+        // NATURE
+        var natureFileNames = [
             "16.jpg",
             "17.jpg",
             "18.jpg",
@@ -48,7 +95,43 @@ class ImageGallery {
             "27.jpg",
             "28.jpg",
             "29.jpg",
-            "30.jpg",
+            "30.jpg" ]
+        
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+        natureFileNames = self.shuffle(natureFileNames)
+
+        var natureAlteredNamesSmall = [String]()
+        var natureAlteredNamesMedium = [String]()
+        var natureAlteredNamesLarge = [String]()
+        
+        for imageFileName in animalFileNames {
+            
+            let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            natureAlteredNamesSmall.append(smallName)
+            
+            let mediumName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "medium.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            natureAlteredNamesMedium.append(mediumName)
+            
+            let largeName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "large.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            natureAlteredNamesLarge.append(largeName)
+        }
+        self.natureSmallImageName = natureAlteredNamesSmall
+        self.natureMediumImageName = natureAlteredNamesMedium
+        self.natureLargeImageName = natureAlteredNamesLarge
+
+        
+        
+        
+        // PLACES
+        var placesFileNames = [
             "31.jpg",
             "32.jpg",
             "33.jpg",
@@ -59,43 +142,45 @@ class ImageGallery {
             "38.jpg",
             "39.jpg",
             "40.jpg" ]
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
-        imageFileNames = self.shuffle(imageFileNames)
+        
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
+        placesFileNames = self.shuffle(placesFileNames)
 
-    
-        var smallAlteredNames = [String]()
-        var mediumAlteredNames = [String]()
-        var largeAlteredNames = [String]()
-        for imageFileName in imageFileNames {
+        
+        var placesAlteredNamesSmall = [String]()
+        var placesAlteredNamesMedium = [String]()
+        var placesAlteredNamesLarge = [String]()
+        
+        for imageFileName in animalFileNames {
             
             let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            smallAlteredNames.append(smallName)
-
+            placesAlteredNamesSmall.append(smallName)
+            
             let mediumName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "medium.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            mediumAlteredNames.append(mediumName)
-
+            placesAlteredNamesMedium.append(mediumName)
+            
             let largeName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "large.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            largeAlteredNames.append(largeName)
-
+            placesAlteredNamesLarge.append(largeName)
+            
         }
-        self.smallImageNameArray = smallAlteredNames
-        self.mediumImageNameArray = mediumAlteredNames
-        self.largeImageNameArray = largeAlteredNames
+
+    
+        self.placesSmallImageName = placesAlteredNamesSmall
+        self.placesMediumImageName = placesAlteredNamesMedium
+        self.placesLargeImageName = placesAlteredNamesLarge
     }
+    
+    
+    
+    
     
     func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
         let count = countElements(list)

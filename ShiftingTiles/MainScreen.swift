@@ -37,6 +37,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCapturingButtonArea: UIView!
     @IBOutlet weak var imageCapturingButtonAreaFakeBorder: UIView!
 
+    
+    @IBOutlet weak var selectCategoryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -49,6 +51,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var imageCapturingAreaTopConstraint: NSLayoutConstraint!
+
+    // Vars
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve : UIImage?
@@ -89,12 +93,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // Choose which size of images to use based on device
         var imageGallery = ImageGallery()
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = imageGallery.mediumImageNameArray
+            self.imageNameArray = imageGallery.animalMediumImageName
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = imageGallery.largeImageNameArray
+            self.imageNameArray = imageGallery.animalLargeImageName
         }
-        self.smallImageNameArray = imageGallery.smallImageNameArray
+        self.smallImageNameArray = imageGallery.animalSmallImageName
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
 
@@ -121,6 +125,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     
     //MARK: COLLECTION VIEW
+    
+    @IBAction func selectCategoryButtonPressed(sender: AnyObject) {
+        println("pressed")
+    }
+    
+    
+    
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imageNameArray.count

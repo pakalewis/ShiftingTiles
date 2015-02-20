@@ -20,14 +20,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="15" y="53" width="450" height="135"/>
-                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="99"/>
+                    <rect key="frame" x="15" y="30" width="450" height="180"/>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="132"/>
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Parker Lewis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-gH-gqZ">
-                    <rect key="frame" x="82" y="188" width="315" height="143"/>
-                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="105"/>
+                    <rect key="frame" x="82" y="210" width="315" height="154"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="113"/>
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
