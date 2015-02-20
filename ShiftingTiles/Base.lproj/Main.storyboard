@@ -31,11 +31,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daC-ar-zOj" userLabel="SelectCategoryButton">
-                                <rect key="frame" x="144" y="90" width="60" height="60"/>
+                                <rect key="frame" x="144" y="102" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="daC-ar-zOj" secondAttribute="height" multiplier="1:1" id="5RK-4O-Wgz"/>
                                 </constraints>
-                                <state key="normal" image="targetIcon.png">
+                                <state key="normal" image="menuIcon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dsY-VR-BwX">
-                                <rect key="frame" x="214" y="90" width="242" height="60"/>
+                                <rect key="frame" x="190" y="90" width="266" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Cuw-V2-YLu">
                                     <size key="itemSize" width="42" height="42"/>
@@ -275,25 +275,30 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7t-Pu-ole" userLabel="Categories">
-                                <rect key="frame" x="144" y="155" width="120" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDH-O9-eqa">
-                                        <rect key="frame" x="33" y="0.0" width="55" height="59"/>
                                         <state key="normal" title="Animals">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="animalCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2pf-uG-tyX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvc-td-qyk">
-                                        <rect key="frame" x="37" y="59" width="46" height="59"/>
                                         <state key="normal" title="Nature">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="natureCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aJr-7x-9vn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBj-e8-WAQ">
-                                        <rect key="frame" x="37" y="118" width="46" height="59"/>
                                         <state key="normal" title="Places">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="placesCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j99-IY-SYp"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -302,9 +307,11 @@
                                     <constraint firstItem="iDH-O9-eqa" firstAttribute="height" secondItem="I7t-Pu-ole" secondAttribute="height" multiplier="0.33" id="92a-t4-5pA"/>
                                     <constraint firstItem="wvc-td-qyk" firstAttribute="centerX" secondItem="iDH-O9-eqa" secondAttribute="centerX" id="9wb-vt-Ied"/>
                                     <constraint firstItem="wvc-td-qyk" firstAttribute="top" secondItem="iDH-O9-eqa" secondAttribute="bottom" id="Bdj-aW-luL"/>
+                                    <constraint firstAttribute="trailing" secondItem="wvc-td-qyk" secondAttribute="trailing" id="MPO-Q3-Wqv"/>
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="centerX" secondItem="iDH-O9-eqa" secondAttribute="centerX" id="P7x-TJ-kkU"/>
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="height" secondItem="iDH-O9-eqa" secondAttribute="height" id="RqC-5T-Jdy"/>
-                                    <constraint firstAttribute="height" constant="180" id="WTa-xi-4qp"/>
+                                    <constraint firstAttribute="height" id="WTa-xi-4qp"/>
+                                    <constraint firstItem="wvc-td-qyk" firstAttribute="leading" secondItem="I7t-Pu-ole" secondAttribute="leading" id="gqf-gn-WdZ"/>
                                     <constraint firstItem="wvc-td-qyk" firstAttribute="height" secondItem="iDH-O9-eqa" secondAttribute="height" id="kGR-GB-hM8"/>
                                     <constraint firstItem="iDH-O9-eqa" firstAttribute="top" secondItem="I7t-Pu-ole" secondAttribute="top" id="oRb-QS-PWO"/>
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="top" secondItem="wvc-td-qyk" secondAttribute="bottom" id="zKX-IU-Egq"/>
@@ -316,13 +323,12 @@
                             <constraint firstItem="b4j-a2-3ko" firstAttribute="top" secondItem="k1r-w8-S7G" secondAttribute="bottom" constant="10" id="1V9-6d-8C9"/>
                             <constraint firstAttribute="trailing" secondItem="yWk-eH-8xd" secondAttribute="trailing" id="2KA-sF-j9z"/>
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="top" secondItem="8Fb-MQ-XGx" secondAttribute="bottom" constant="10" id="4bd-Db-4gU"/>
-                            <constraint firstItem="daC-ar-zOj" firstAttribute="top" secondItem="dsY-VR-BwX" secondAttribute="top" id="4tX-Hm-pJN"/>
                             <constraint firstItem="b4j-a2-3ko" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7F1-sb-c36"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="top" secondItem="6p4-o8-wZC" secondAttribute="bottom" constant="10" id="8LJ-ag-RRi"/>
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="leading" secondItem="daC-ar-zOj" secondAttribute="trailing" constant="10" id="ADm-Va-maH"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="AnY-VO-fYu"/>
                             <constraint firstItem="QYD-MI-iZr" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="G8X-aC-RXO"/>
-                            <constraint firstItem="I7t-Pu-ole" firstAttribute="width" secondItem="daC-ar-zOj" secondAttribute="width" multiplier="2" id="JHz-Ih-Zbg"/>
+                            <constraint firstItem="I7t-Pu-ole" firstAttribute="width" secondItem="daC-ar-zOj" secondAttribute="width" multiplier="2.5" id="JHz-Ih-Zbg"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
                             <constraint firstAttribute="centerX" secondItem="k1r-w8-S7G" secondAttribute="centerX" id="R38-Tr-Puh"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
@@ -336,7 +342,8 @@
                             <constraint firstItem="8Ha-Eg-1xQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fdh-6W-6Xr"/>
                             <constraint firstAttribute="bottom" secondItem="yWk-eH-8xd" secondAttribute="bottom" constant="5" id="hZx-Oj-brm"/>
                             <constraint firstAttribute="centerX" secondItem="8Fb-MQ-XGx" secondAttribute="centerX" id="jRO-vF-DoX"/>
-                            <constraint firstItem="daC-ar-zOj" firstAttribute="height" secondItem="dsY-VR-BwX" secondAttribute="height" id="lu0-V8-zBx"/>
+                            <constraint firstItem="daC-ar-zOj" firstAttribute="centerY" secondItem="dsY-VR-BwX" secondAttribute="centerY" id="jzE-Og-6V7"/>
+                            <constraint firstItem="daC-ar-zOj" firstAttribute="height" secondItem="dsY-VR-BwX" secondAttribute="height" multiplier="0.6" id="lu0-V8-zBx"/>
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.85" id="maf-fz-9tM"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pHL-K9-YsL"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="top" secondItem="b4j-a2-3ko" secondAttribute="bottom" constant="10" id="pN8-LC-zdZ"/>
@@ -353,6 +360,7 @@
                         <outlet property="cancelButton" destination="VUI-df-ri1" id="4KC-XH-Jbj"/>
                         <outlet property="captureImageButton" destination="QYD-MI-iZr" id="Mh5-Vp-UcV"/>
                         <outlet property="categoriesHeightConstraint" destination="WTa-xi-4qp" id="hjW-z2-3ya"/>
+                        <outlet property="categoryArea" destination="I7t-Pu-ole" id="FXc-Pd-4rn"/>
                         <outlet property="decreaseButton" destination="duK-ww-PYt" id="mrB-NN-O2U"/>
                         <outlet property="imageCapturingAreaTopConstraint" destination="arZ-9z-5ZQ" id="nBm-ed-9rm"/>
                         <outlet property="imageCapturingButtonArea" destination="8Ha-Eg-1xQ" id="6C2-SV-2GP"/>
@@ -1058,6 +1066,7 @@
         <image name="hintIcon.png" width="120" height="120"/>
         <image name="increaseIcon.png" width="120" height="120"/>
         <image name="infoIcon.png" width="120" height="120"/>
+        <image name="menuIcon.png" width="120" height="120"/>
         <image name="originalImageIcon.png" width="120" height="120"/>
         <image name="settingsIcon.png" width="120" height="120"/>
         <image name="solveIcon.png" width="120" height="120"/>

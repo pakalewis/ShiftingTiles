@@ -29,21 +29,21 @@ class ImageGallery {
         
         // ANIMAL
         var animalFileNames = [
-            "01.jpg",
             "02.jpg",
-            "03.jpg",
-            "04.jpg",
-            "05.jpg",
-            "06.jpg",
-            "07.jpg",
             "08.jpg",
             "09.jpg",
             "10.jpg",
-            "11.jpg",
-            "12.jpg",
-            "13.jpg",
-            "14.jpg",
-            "15.jpg" ]
+            "16.jpg",
+            "17.jpg",
+            "26.jpg",
+            "27.jpg",
+            "29.jpg",
+            "31.jpg",
+            "32.jpg",
+            "35.jpg",
+            "38.jpg",
+            "39.jpg",
+             ]
 
         animalFileNames = self.shuffle(animalFileNames)
         animalFileNames = self.shuffle(animalFileNames)
@@ -81,20 +81,22 @@ class ImageGallery {
         
         // NATURE
         var natureFileNames = [
-            "16.jpg",
-            "17.jpg",
+            "01.jpg",
+            "03.jpg",
+            "04.jpg",
+            "05.jpg",
+            "06.jpg",
+            "07.jpg",
+            "12.jpg",
+            "13.jpg",
+            "14.jpg",
+            "15.jpg",
             "18.jpg",
             "19.jpg",
-            "20.jpg",
-            "21.jpg",
             "22.jpg",
-            "23.jpg",
             "24.jpg",
             "25.jpg",
-            "26.jpg",
-            "27.jpg",
             "28.jpg",
-            "29.jpg",
             "30.jpg" ]
         
         natureFileNames = self.shuffle(natureFileNames)
@@ -112,7 +114,7 @@ class ImageGallery {
         var natureAlteredNamesMedium = [String]()
         var natureAlteredNamesLarge = [String]()
         
-        for imageFileName in animalFileNames {
+        for imageFileName in natureFileNames {
             
             let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
             natureAlteredNamesSmall.append(smallName)
@@ -132,15 +134,14 @@ class ImageGallery {
         
         // PLACES
         var placesFileNames = [
-            "31.jpg",
-            "32.jpg",
+            "11.jpg",
+            "20.jpg",
+            "21.jpg",
+            "23.jpg",
             "33.jpg",
             "34.jpg",
-            "35.jpg",
             "36.jpg",
             "37.jpg",
-            "38.jpg",
-            "39.jpg",
             "40.jpg" ]
         
         placesFileNames = self.shuffle(placesFileNames)
@@ -159,7 +160,7 @@ class ImageGallery {
         var placesAlteredNamesMedium = [String]()
         var placesAlteredNamesLarge = [String]()
         
-        for imageFileName in animalFileNames {
+        for imageFileName in placesFileNames {
             
             let smallName = imageFileName.stringByReplacingOccurrencesOfString(".j", withString: "small.j", options: NSStringCompareOptions.LiteralSearch, range: nil)
             placesAlteredNamesSmall.append(smallName)
@@ -176,6 +177,7 @@ class ImageGallery {
         self.placesSmallImageName = placesAlteredNamesSmall
         self.placesMediumImageName = placesAlteredNamesMedium
         self.placesLargeImageName = placesAlteredNamesLarge
+        
     }
     
     

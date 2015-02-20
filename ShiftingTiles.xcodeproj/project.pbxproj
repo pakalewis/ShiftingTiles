@@ -181,6 +181,7 @@
 		2CD974C71A958902006AA16B /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974BD1A958902006AA16B /* OpenSans-Light.ttf */; };
 		2CD974C91A958902006AA16B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974BF1A958902006AA16B /* OpenSans-Regular.ttf */; };
 		2CD974CA1A958902006AA16B /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974C01A958902006AA16B /* OpenSans-Semibold.ttf */; };
+		2CD974CD1A97AB4A006AA16B /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974CC1A97AB4A006AA16B /* menuIcon.png */; };
 		2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */; };
 /* End PBXBuildFile section */
 
@@ -365,6 +366,7 @@
 		2CD974BD1A958902006AA16B /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "ShiftingTiles/Fonts/OpenSans-Light.ttf"; sourceTree = SOURCE_ROOT; };
 		2CD974BF1A958902006AA16B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "ShiftingTiles/Fonts/OpenSans-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		2CD974C01A958902006AA16B /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "ShiftingTiles/Fonts/OpenSans-Semibold.ttf"; sourceTree = SOURCE_ROOT; };
+		2CD974CC1A97AB4A006AA16B /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = ShiftingTiles/Icons/menuIcon.png; sourceTree = SOURCE_ROOT; };
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -606,6 +608,7 @@
 				2C90A1521A7909F100447AE4 /* hintIcon.png */,
 				2C90A1531A7909F100447AE4 /* increaseIcon.png */,
 				2C90A1541A7909F100447AE4 /* infoIcon.png */,
+				2CD974CC1A97AB4A006AA16B /* menuIcon.png */,
 				2C90A1551A7909F100447AE4 /* originalImageIcon.png */,
 				2C90A1561A7909F100447AE4 /* rightArrow.png */,
 				2C90A1571A7909F100447AE4 /* roundedSquareIcon.png */,
@@ -892,6 +895,7 @@
 				2CC635691A7866CA0079BB1D /* 06small.jpg in Resources */,
 				2CC635771A7866CA0079BB1D /* 20small.jpg in Resources */,
 				2C90A0E01A78CA1E00447AE4 /* 23medium.jpg in Resources */,
+				2CD974CD1A97AB4A006AA16B /* menuIcon.png in Resources */,
 				2C90A1621A7909F100447AE4 /* gridIcon.png in Resources */,
 				2CC635751A7866CA0079BB1D /* 18small.jpg in Resources */,
 				2CD4DF5B1A8C299B004BE933 /* RulesScreen3.xib in Resources */,

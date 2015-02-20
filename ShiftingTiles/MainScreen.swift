@@ -38,6 +38,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCapturingButtonAreaFakeBorder: UIView!
 
     
+    @IBOutlet weak var categoryArea: UIView!
     @IBOutlet weak var selectCategoryButton: UIButton!
     @IBOutlet weak var animalsCategoryButton: UIButton!
     @IBOutlet weak var natureCategoryButton: UIButton!
@@ -59,6 +60,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var categoriesHeightConstraint: NSLayoutConstraint!
 
     // Vars
+    var imageGallery = ImageGallery()
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve : UIImage?
@@ -73,17 +75,19 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCapturingButtonArea.alpha = 0
         self.updateColorsAndFonts()
 
+        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.mainImageView.layer.borderWidth = 2
+        self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
+        self.letsPlayButton.layer.borderWidth = 2
+
+        self.categoryArea.layer.borderWidth = 2
+        self.natureCategoryButton.layer.borderWidth = 2
         self.animalsCategoryButton.userInteractionEnabled = false
         self.natureCategoryButton.userInteractionEnabled = false
         self.placesCategoryButton.userInteractionEnabled = false
         self.animalsCategoryButton.alpha = 0
         self.natureCategoryButton.alpha = 0
         self.placesCategoryButton.alpha = 0
-        self.categoriesHeightConstraint.constant = 0
-        UIView.animateWithDuration(0.0, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
-
     }
 
     
@@ -109,19 +113,16 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
         // Choose which size of images to use based on device
-        var imageGallery = ImageGallery()
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = imageGallery.animalMediumImageName
+            self.imageNameArray = self.imageGallery.animalMediumImageName
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = imageGallery.animalLargeImageName
+            self.imageNameArray = self.imageGallery.animalLargeImageName
         }
-        self.smallImageNameArray = imageGallery.animalSmallImageName
+        self.smallImageNameArray = self.imageGallery.animalSmallImageName
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
 
-        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.mainImageView.layer.borderWidth = 2
 
 
         self.tilesPerRow = 3
@@ -132,6 +133,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Segue to game screen
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if self.categoriesHeightConstraint.constant != 0 {
+            self.shrinkCategories()
+        }
+
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
             gameScreen.imageToSolve = self.imageToSolve!
@@ -145,37 +150,94 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     //MARK: COLLECTION VIEW
     
     @IBAction func selectCategoryButtonPressed(sender: AnyObject) {
-        
         if self.categoriesHeightConstraint.constant == 0 {
-            self.categoriesHeightConstraint.constant = 180
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.animalsCategoryButton.userInteractionEnabled = true
-                self.natureCategoryButton.userInteractionEnabled = true
-                self.placesCategoryButton.userInteractionEnabled = true
-                self.animalsCategoryButton.alpha = 1
-                self.natureCategoryButton.alpha = 1
-                self.placesCategoryButton.alpha = 1
-                
-                self.view.layoutIfNeeded()
-            })
+            self.expandCategories()
         } else {
-            self.categoriesHeightConstraint.constant = 0
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.animalsCategoryButton.userInteractionEnabled = false
-                self.natureCategoryButton.userInteractionEnabled = false
-                self.placesCategoryButton.userInteractionEnabled = false
-                self.animalsCategoryButton.alpha = 0
-                self.natureCategoryButton.alpha = 0
-                self.placesCategoryButton.alpha = 0
-
-                
-                self.view.layoutIfNeeded()
-            })
+            self.shrinkCategories()
         }
-
-
     }
     
+    
+    func expandCategories() {
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.categoriesHeightConstraint.constant = 120
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.categoriesHeightConstraint.constant = 180
+        }
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.animalsCategoryButton.userInteractionEnabled = true
+            self.natureCategoryButton.userInteractionEnabled = true
+            self.placesCategoryButton.userInteractionEnabled = true
+            self.animalsCategoryButton.alpha = 1
+            self.natureCategoryButton.alpha = 1
+            self.placesCategoryButton.alpha = 1
+            
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func shrinkCategories() {
+        self.categoriesHeightConstraint.constant = 0
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.animalsCategoryButton.userInteractionEnabled = false
+            self.natureCategoryButton.userInteractionEnabled = false
+            self.placesCategoryButton.userInteractionEnabled = false
+            self.animalsCategoryButton.alpha = 0
+            self.natureCategoryButton.alpha = 0
+            self.placesCategoryButton.alpha = 0
+            
+            
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    
+    @IBAction func animalCategoryPressed(sender: AnyObject) {
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.imageNameArray = self.imageGallery.animalMediumImageName
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.imageNameArray = self.imageGallery.animalLargeImageName
+        }
+        self.smallImageNameArray = self.imageGallery.animalSmallImageName
+        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
+        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        
+        self.shrinkCategories()
+        self.imageCollection.reloadData()
+    }
+    
+    @IBAction func natureCategoryPressed(sender: AnyObject) {
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.imageNameArray = self.imageGallery.natureMediumImageName
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.imageNameArray = self.imageGallery.natureLargeImageName
+        }
+        self.smallImageNameArray = self.imageGallery.natureSmallImageName
+        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
+        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        
+        self.shrinkCategories()
+        self.imageCollection.reloadData()
+    }
+    
+    @IBAction func placesCategoryPressed(sender: AnyObject) {
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.imageNameArray = self.imageGallery.placesMediumImageName
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.imageNameArray = self.imageGallery.placesLargeImageName
+        }
+        self.smallImageNameArray = self.imageGallery.placesSmallImageName
+        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
+        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        
+        self.shrinkCategories()
+        self.imageCollection.reloadData()
+    }
     
     
     // Number of cells = number of images
@@ -200,6 +262,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if self.categoriesHeightConstraint.constant != 0 {
+            self.shrinkCategories()
+        }
+
         // TODO: why does this cause memory issues?
         self.imageToSolve = nil
         self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
@@ -211,6 +278,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     // MARK: Image funcs
     @IBAction func cameraButtonPressed(sender: AnyObject) {
+        self.selectCategoryButton.userInteractionEnabled = false
+        if self.categoriesHeightConstraint.constant != 0 {
+            self.shrinkCategories()
+        }
+
         var pickPhotoMenu = UIAlertController(title: NSLocalizedString("CameraButtonAlert_Part1", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.Alert)
         let libraryAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part2", comment: ""), style: UIAlertActionStyle.Default) { (handler) -> Void in
             let imagePicker = UIImagePickerController()
@@ -265,7 +337,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.presentViewController(noCameraAlert, animated: true, completion: nil)
             }
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
+            self.selectCategoryButton.userInteractionEnabled = true
+        }
+
         pickPhotoMenu.addAction(libraryAction)
         pickPhotoMenu.addAction(cameraAction)
         pickPhotoMenu.addAction(cancelAction)
@@ -317,6 +392,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.imageCapturingButtonArea.alpha = 0
                 self.view.sendSubviewToBack(self.imageCapturingButtonArea)
         }
+        self.selectCategoryButton.userInteractionEnabled = true
     }
     
     @IBAction func captureImage(sender: AnyObject) {
@@ -393,6 +469,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.mainImageView.image = capturedImage!
             })
         }
+        self.selectCategoryButton.userInteractionEnabled = true
     }
     
     
@@ -417,12 +494,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageToSolve = croppedUIImage!
         self.mainImageView.image = croppedUIImage!
         picker.dismissViewControllerAnimated(true, completion: nil)
+        self.selectCategoryButton.userInteractionEnabled = true
     }
     
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
         //this gets fired when the users cancel out of the process
         picker.dismissViewControllerAnimated(true, completion: nil)
+        self.selectCategoryButton.userInteractionEnabled = true
     }
 
     
@@ -430,6 +509,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // MARK: Other funcs
     @IBAction func rightButtonPressed(sender: AnyObject) {
+        if self.categoriesHeightConstraint.constant != 0 {
+            self.shrinkCategories()
+        }
 
         self.tilesPerRow++
         if self.tilesPerRow > 10 {
@@ -441,7 +523,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     
     @IBAction func leftButtonPressed(sender: AnyObject) {
-        
+        if self.categoriesHeightConstraint.constant != 0 {
+            self.shrinkCategories()
+        }
+
         self.tilesPerRow--
         if self.tilesPerRow < 2 {
             self.tilesPerRow++
@@ -454,6 +539,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func updateColorsAndFonts() {
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.categoryArea.backgroundColor = self.colorPalette.fetchLightColor()
+        self.categoryArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.natureCategoryButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.imageCapturingButtonArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
@@ -463,6 +551,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.placesCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
         
         // Icons
+        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -471,8 +560,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
-        self.letsPlayButton.layer.borderWidth = 2
         self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.imageCapturingButtonAreaFakeBorder.backgroundColor = self.colorPalette.fetchDarkColor()
         self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
