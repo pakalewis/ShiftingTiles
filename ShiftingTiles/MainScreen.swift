@@ -39,6 +39,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     
     @IBOutlet weak var selectCategoryButton: UIButton!
+    @IBOutlet weak var animalsCategoryButton: UIButton!
+    @IBOutlet weak var natureCategoryButton: UIButton!
+    @IBOutlet weak var placesCategoryButton: UIButton!
+
+    
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -51,6 +56,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var imageCapturingAreaTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var categoriesHeightConstraint: NSLayoutConstraint!
 
     // Vars
     var imageNameArray = [String]()
@@ -66,6 +72,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.sendSubviewToBack(self.imageCapturingButtonArea)
         self.imageCapturingButtonArea.alpha = 0
         self.updateColorsAndFonts()
+
+        self.animalsCategoryButton.userInteractionEnabled = false
+        self.natureCategoryButton.userInteractionEnabled = false
+        self.placesCategoryButton.userInteractionEnabled = false
+        self.animalsCategoryButton.alpha = 0
+        self.natureCategoryButton.alpha = 0
+        self.placesCategoryButton.alpha = 0
+        self.categoriesHeightConstraint.constant = 0
+        UIView.animateWithDuration(0.0, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+
     }
 
     
@@ -127,7 +145,35 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     //MARK: COLLECTION VIEW
     
     @IBAction func selectCategoryButtonPressed(sender: AnyObject) {
-        println("pressed")
+        
+        if self.categoriesHeightConstraint.constant == 0 {
+            self.categoriesHeightConstraint.constant = 180
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.animalsCategoryButton.userInteractionEnabled = true
+                self.natureCategoryButton.userInteractionEnabled = true
+                self.placesCategoryButton.userInteractionEnabled = true
+                self.animalsCategoryButton.alpha = 1
+                self.natureCategoryButton.alpha = 1
+                self.placesCategoryButton.alpha = 1
+                
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            self.categoriesHeightConstraint.constant = 0
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.animalsCategoryButton.userInteractionEnabled = false
+                self.natureCategoryButton.userInteractionEnabled = false
+                self.placesCategoryButton.userInteractionEnabled = false
+                self.animalsCategoryButton.alpha = 0
+                self.natureCategoryButton.alpha = 0
+                self.placesCategoryButton.alpha = 0
+
+                
+                self.view.layoutIfNeeded()
+            })
+        }
+
+
     }
     
     
@@ -412,6 +458,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.animalsCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        self.natureCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        self.placesCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
         
         // Icons
         self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -433,11 +482,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 15)
+            self.animalsCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
+            self.natureCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
+            self.placesCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 30)
+            self.animalsCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
+            self.natureCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
+            self.placesCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
+
         }
     }
 
