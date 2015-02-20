@@ -151,7 +151,7 @@ class TileAreaView: UIView {
     func shuffleImages() {
 
         // Swap random tiles a bunch of times
-        for index in 0...self.tilesPerRow * 10 {
+        for index in 0...self.tilesPerRow * 20 {
             var randomInt1 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
             var randomInt2 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
             var randomInt3 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
