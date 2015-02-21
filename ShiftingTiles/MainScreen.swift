@@ -205,8 +205,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.imageNameArray = self.imageGallery.animalLargeImageName
         }
         self.smallImageNameArray = self.imageGallery.animalSmallImageName
-        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
-        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+
+        let toImage = UIImage(named: self.imageNameArray[0])!
+        self.imageToSolve = toImage
+        UIView.transitionWithView(self.mainImageView,
+            duration: 0.5,
+            options: .TransitionCrossDissolve,
+            animations: { self.mainImageView.image = toImage },
+            completion: nil)
         self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
         
         self.shrinkCategories()
@@ -221,8 +227,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.imageNameArray = self.imageGallery.natureLargeImageName
         }
         self.smallImageNameArray = self.imageGallery.natureSmallImageName
-        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
-        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+
+        let toImage = UIImage(named: self.imageNameArray[0])!
+        self.imageToSolve = toImage
+        UIView.transitionWithView(self.mainImageView,
+            duration: 0.5,
+            options: .TransitionCrossDissolve,
+            animations: { self.mainImageView.image = toImage },
+            completion: nil)
         self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
 
         
@@ -238,8 +250,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.imageNameArray = self.imageGallery.placesLargeImageName
         }
         self.smallImageNameArray = self.imageGallery.placesSmallImageName
-        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
-        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        
+        let toImage = UIImage(named: self.imageNameArray[0])!
+        self.imageToSolve = toImage
+        UIView.transitionWithView(self.mainImageView,
+            duration: 0.5,
+            options: .TransitionCrossDissolve,
+            animations: { self.mainImageView.image = toImage },
+            completion: nil)
         self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
 
         
@@ -276,9 +294,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
 
         // TODO: why does this cause memory issues?
-        self.imageToSolve = nil
-        self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
-        self.mainImageView.image = UIImage(named: self.imageNameArray[indexPath.row])!
+        let toImage = UIImage(named: self.imageNameArray[indexPath.row])!
+        self.imageToSolve = toImage
+        UIView.transitionWithView(self.mainImageView,
+            duration: 0.5,
+            options: .TransitionCrossDissolve,
+            animations: { self.mainImageView.image = toImage },
+            completion: nil)
         self.currentImageString = self.imageNameArray[indexPath.row].substringToIndex(advance(self.imageNameArray[indexPath.row].startIndex, 2))
 
     }
