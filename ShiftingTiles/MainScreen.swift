@@ -64,6 +64,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var imageNameArray = [String]()
     var smallImageNameArray = [String]()
     var imageToSolve : UIImage?
+    var currentImageString : String?
     var tilesPerRow = 3
     
     
@@ -120,11 +121,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.imageNameArray = self.imageGallery.animalLargeImageName
         }
         self.smallImageNameArray = self.imageGallery.animalSmallImageName
+
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
 
-
-
+        
         self.tilesPerRow = 3
         self.tilesPerRowLabel.text = "3 x 3"
     }
@@ -140,6 +142,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
             gameScreen.imageToSolve = self.imageToSolve!
+            gameScreen.imageFileString = self.currentImageString
             gameScreen.tilesPerRow = self.tilesPerRow
             
         }
@@ -204,6 +207,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.smallImageNameArray = self.imageGallery.animalSmallImageName
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
         
         self.shrinkCategories()
         self.imageCollection.reloadData()
@@ -219,6 +223,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.smallImageNameArray = self.imageGallery.natureSmallImageName
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
+
         
         self.shrinkCategories()
         self.imageCollection.reloadData()
@@ -234,6 +240,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.smallImageNameArray = self.imageGallery.placesSmallImageName
         self.imageToSolve = UIImage(named: self.imageNameArray[0])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
+        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
+
         
         self.shrinkCategories()
         self.imageCollection.reloadData()
@@ -271,6 +279,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageToSolve = nil
         self.imageToSolve = UIImage(named: self.imageNameArray[indexPath.row])!
         self.mainImageView.image = UIImage(named: self.imageNameArray[indexPath.row])!
+        self.currentImageString = self.imageNameArray[indexPath.row].substringToIndex(advance(self.imageNameArray[indexPath.row].startIndex, 2))
+
     }
     
     
@@ -471,6 +481,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 
                 self.imageToSolve = capturedImage!
                 self.mainImageView.image = capturedImage!
+                self.currentImageString = "00"
+
             })
         }
         self.selectCategoryButton.userInteractionEnabled = true
@@ -497,6 +509,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         self.imageToSolve = croppedUIImage!
         self.mainImageView.image = croppedUIImage!
+        self.currentImageString = "00"
+        
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.selectCategoryButton.userInteractionEnabled = true
     }

@@ -17,6 +17,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var imageToSolve = UIImage()
+    var imageFileString : String!
+    var imageCaptions: [String: String]!
     var tilesPerRow = 3
     var messages : [String]!
     var originalIsBeingShown = false
@@ -37,6 +39,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
     @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var imageTitleLabel: UILabel!
 
     // MARK: CONSTRAINTS
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
@@ -69,6 +72,62 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             NSLocalizedString("Message13", comment: ""),
             NSLocalizedString("Message14", comment: ""),
             NSLocalizedString("Message15", comment: "")]
+        
+        self.imageCaptions = [
+            "01" : "Tiger Mountain, WA — Greg Jaehnig",
+            "02" : "Great Blue Heron — Dale Arveson",
+            "03" : "Fish River Canyon, Namibia — Greg Jaehnig",
+            "04" : "Fish River Canyon, Namibia — Greg Jaehnig",
+            "05" : "Sunset, Namibia — Greg Jaehnig",
+            "06" : "Baobab tree — Greg Jaehnig",
+            "07" : "Oregon Coast — Dale Arveson",
+            "08" : "Etosha — Greg",
+            "09" : "Garden Cat — Parker Lewis",
+
+            "10" : "Walrus — Kate",
+            "11" : "Red Boat — Kate",
+            "12" : "Torres del Paine — Kate",
+            "13" : "Moss — Kate",
+            "14" : "Cannon Beach — Kate",
+            "15" : "Ice Sunset — Kate",
+            "16" : "Hummingbird — Kate",
+            "17" : "Auggie Frisbee — Kate",
+            "18" : "Canyon? — Kate",
+            "19" : "Deadvlei, Namibia — Greg",
+
+            "20" : "Kolmanskop — Greg",
+            "21" : "Rusty Reflection — Dale",
+            "22" : "Tulips — Dale",
+            "23" : "Grant Island — Grant",
+            "24" : "Mosquito Creek — Dale",
+            "25" : "Mt. Rainier — Dale",
+            "26" : "Sea bird — Kate",
+            "27" : "Blacktail Buck — Dale",
+            "28" : "Botswana — Greg",
+            "29" : "Polar Bear — Kate",
+
+            "30" : "Waterberg Plateau — Greg",
+            "31" : "Murphy — Kate",
+            "32" : "Prairie Dog — Dale",
+            "33" : "Lavender — Dale",
+            "34" : "Boat beach — Kate",
+            "35" : "Snowy Owl — Dale",
+            "36" : "Hands of Experience — Dale",
+            "37" : "Norway Pond — Dale",
+            "38" : "Blacktail Doe — Dale",
+            "39" : "Ondongi — Greg",
+            "40" : "Seattle Great Wheel — Kate",
+            "41" : "Heron — ",
+            "42" : "Heron — ",
+            "43" : "Heron — ",
+            "44" : "Heron — ",
+            "45" : "Heron — ",
+            "46" : "Heron — ",
+            "47" : "Heron — ",
+            "48" : "Heron — ",
+            "49" : "Heron — ",
+            "50" : "Heron — " ]
+        
     }
     
     
@@ -84,7 +143,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.topBankHeightConstraint.constant = 50
         }
 
-        
         self.updateColorsAndFonts()
     }
 
@@ -108,7 +166,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.initializeRowColumnGestures()
         
         congratsMessage.text = ""
-        
+        self.imageTitleLabel.text = self.imageCaptions[self.imageFileString]
+
         self.originalImageView = UIImageView(frame: self.tileArea.frame)
         self.originalImageView.image = self.imageToSolve
         self.originalImageView.layer.borderWidth = 2
@@ -455,6 +514,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
+        self.imageTitleLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -465,9 +525,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 35)
+            self.imageTitleLabel.font = UIFont(name: "OpenSans", size: 15)
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 60)
+            self.imageTitleLabel.font = UIFont(name: "OpenSans", size: 23)
         }
 
     }

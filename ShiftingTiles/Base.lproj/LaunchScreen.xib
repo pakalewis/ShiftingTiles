@@ -25,7 +25,7 @@
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Parker Lewis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-gH-gqZ">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Parker Lewis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-gH-gqZ">
                     <rect key="frame" x="82" y="210" width="315" height="154"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="113"/>
                     <color key="textColor" red="0.18039215689999999" green="0.25490196079999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
