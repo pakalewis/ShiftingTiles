@@ -97,7 +97,8 @@ class ImageGallery {
             "24.jpg",
             "25.jpg",
             "28.jpg",
-            "30.jpg" ]
+            "30.jpg",
+            "33.jpg" ]
         
         natureFileNames = self.shuffle(natureFileNames)
         natureFileNames = self.shuffle(natureFileNames)
@@ -138,7 +139,6 @@ class ImageGallery {
             "20.jpg",
             "21.jpg",
             "23.jpg",
-            "33.jpg",
             "34.jpg",
             "36.jpg",
             "37.jpg",
