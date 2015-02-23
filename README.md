@@ -1,6 +1,6 @@
 Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
-Available in the App Store: https://itunes.apple.com/us/app/shifting-tiles/id962290655?ls=1&mt=8
+Free to download from the App Store: https://itunes.apple.com/us/app/shifting-tiles/id962290655
 
 • Choose from a nice variety of high quality images. Alternatively, you can select a photo from your gallery or take a picture with the camera.
 
