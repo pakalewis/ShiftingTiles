@@ -55,6 +55,9 @@
 		2C5525BE1A9BBECE004334EC /* 53small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525AF1A9BBECE004334EC /* 53small.jpg */; };
 		2C5525BF1A9BBECE004334EC /* 54small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525B01A9BBECE004334EC /* 54small.jpg */; };
 		2C5525C01A9BBECE004334EC /* 55small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525B11A9BBECE004334EC /* 55small.jpg */; };
+		2C5525C21A9BC5FE004334EC /* 56large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525C11A9BC5FE004334EC /* 56large.jpg */; };
+		2C5525C41A9BC615004334EC /* 56medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525C31A9BC615004334EC /* 56medium.jpg */; };
+		2C5525C61A9BC62A004334EC /* 56small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525C51A9BC62A004334EC /* 56small.jpg */; };
 		2C7F085A1A5DF05D0083F668 /* CollectionViewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */; };
 		2C7F085B1A5DF05D0083F668 /* CollectionViewImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */; };
 		2C7F08601A5DF0730083F668 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F085E1A5DF0730083F668 /* GameScreen.swift */; };
@@ -280,6 +283,9 @@
 		2C5525AF1A9BBECE004334EC /* 53small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 53small.jpg; path = ShiftingTiles/images/Thumbs/53small.jpg; sourceTree = SOURCE_ROOT; };
 		2C5525B01A9BBECE004334EC /* 54small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 54small.jpg; path = ShiftingTiles/images/Thumbs/54small.jpg; sourceTree = SOURCE_ROOT; };
 		2C5525B11A9BBECE004334EC /* 55small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 55small.jpg; path = ShiftingTiles/images/Thumbs/55small.jpg; sourceTree = SOURCE_ROOT; };
+		2C5525C11A9BC5FE004334EC /* 56large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 56large.jpg; path = ShiftingTiles/images/Large/56large.jpg; sourceTree = SOURCE_ROOT; };
+		2C5525C31A9BC615004334EC /* 56medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 56medium.jpg; path = ShiftingTiles/images/Medium/56medium.jpg; sourceTree = SOURCE_ROOT; };
+		2C5525C51A9BC62A004334EC /* 56small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 56small.jpg; path = ShiftingTiles/images/Thumbs/56small.jpg; sourceTree = SOURCE_ROOT; };
 		2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewImageCell.swift; path = ShiftingTiles/CollectionViewImageCell.swift; sourceTree = SOURCE_ROOT; };
 		2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewImageCell.xib; path = ShiftingTiles/CollectionViewImageCell.xib; sourceTree = SOURCE_ROOT; };
 		2C7F085E1A5DF0730083F668 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScreen.swift; path = ShiftingTiles/GameScreen.swift; sourceTree = SOURCE_ROOT; };
@@ -592,6 +598,7 @@
 				2C5525AF1A9BBECE004334EC /* 53small.jpg */,
 				2C5525B01A9BBECE004334EC /* 54small.jpg */,
 				2C5525B11A9BBECE004334EC /* 55small.jpg */,
+				2C5525C51A9BC62A004334EC /* 56small.jpg */,
 			);
 			name = Thumbs;
 			sourceTree = "<group>";
@@ -654,6 +661,7 @@
 				2C5525911A9BBEA3004334EC /* 53medium.jpg */,
 				2C5525921A9BBEA3004334EC /* 54medium.jpg */,
 				2C5525931A9BBEA3004334EC /* 55medium.jpg */,
+				2C5525C31A9BC615004334EC /* 56medium.jpg */,
 			);
 			name = Medium;
 			sourceTree = "<group>";
@@ -716,6 +724,7 @@
 				2C5525731A9BBE7F004334EC /* 53large.jpg */,
 				2C5525741A9BBE7F004334EC /* 54large.jpg */,
 				2C5525751A9BBE7F004334EC /* 55large.jpg */,
+				2C5525C11A9BC5FE004334EC /* 56large.jpg */,
 			);
 			name = Large;
 			sourceTree = "<group>";
@@ -943,6 +952,7 @@
 				2C90A11A1A78CA3000447AE4 /* 01large.jpg in Resources */,
 				2CC635711A7866CA0079BB1D /* 14small.jpg in Resources */,
 				2CD4DF5E1A8C29A2004BE933 /* Acknowledgements.xib in Resources */,
+				2C5525C21A9BC5FE004334EC /* 56large.jpg in Resources */,
 				2CD974C71A958902006AA16B /* OpenSans-Light.ttf in Resources */,
 				2C90A11D1A78CA3000447AE4 /* 04large.jpg in Resources */,
 				2C90A13F1A78CA3000447AE4 /* 38large.jpg in Resources */,
@@ -982,6 +992,7 @@
 				2C90A1321A78CA3000447AE4 /* 25large.jpg in Resources */,
 				2C90A0E51A78CA1E00447AE4 /* 28medium.jpg in Resources */,
 				2C90A0E81A78CA1E00447AE4 /* 31medium.jpg in Resources */,
+				2C5525C61A9BC62A004334EC /* 56small.jpg in Resources */,
 				2C90A12F1A78CA3000447AE4 /* 22large.jpg in Resources */,
 				2C90A1211A78CA3000447AE4 /* 08large.jpg in Resources */,
 				2C7F087D1A5E129E0083F668 /* Todo list in Resources */,
@@ -1022,6 +1033,7 @@
 				2CD4DF551A8C2994004BE933 /* RulesScreen1.xib in Resources */,
 				2CC635731A7866CA0079BB1D /* 16small.jpg in Resources */,
 				2C90A11E1A78CA3000447AE4 /* 05large.jpg in Resources */,
+				2C5525C41A9BC615004334EC /* 56medium.jpg in Resources */,
 				2C5525B51A9BBECE004334EC /* 44small.jpg in Resources */,
 				2CC6357C1A7866CA0079BB1D /* 25small.jpg in Resources */,
 				2C5525B61A9BBECE004334EC /* 45small.jpg in Resources */,

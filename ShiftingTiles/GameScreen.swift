@@ -117,16 +117,22 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             "38" : "Blacktail Doe — Dale Arveson",
             "39" : "Ondongi — Greg Jaehnig",
             "40" : "Seattle Great Wheel — Kate Lewis",
-            "41" : "Heron — ",
-            "42" : "Heron — ",
-            "43" : "Heron — ",
-            "44" : "Heron — ",
-            "45" : "Heron — ",
-            "46" : "Heron — ",
-            "47" : "Heron — ",
-            "48" : "Heron — ",
-            "49" : "Heron — ",
-            "50" : "Heron — " ]
+            "41" : "Goat — Greg Jaehnig",
+            "42" : "Female Kudu — Greg Jaehnig",
+            "43" : "Male Kudu — Greg Jaehnig",
+            "44" : "Oryx — Greg Jaehnig",
+            "45" : "Conservation — ErikHG Photography",
+            "46" : "Harvest — ErikHG Photography",
+            "47" : "Elephants — Greg Jaehnig",
+            "48" : "Giraffe — Greg Jaehnig",
+            "49" : "Spider — Greg Jaehnig",
+            "50" : "Reel — ErikHG Photography",
+            "51" : "Backroad — ErikHG Photography",
+            "52" : "Companion — ErikHG Photography",
+            "53" : "Cobble — ErikHG Photography",
+            "54" : "Nærøyfjord — ErikHG Photography",
+            "55" : "Bog — ErikHG Photography",
+            "56" : "Olympic — ErikHG Photography" ]
         
     }
     

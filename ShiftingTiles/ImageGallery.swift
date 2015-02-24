@@ -43,7 +43,15 @@ class ImageGallery {
             "35.jpg",
             "38.jpg",
             "39.jpg",
-             ]
+            "41.jpg",
+            "42.jpg",
+            "43.jpg",
+            "44.jpg",
+            "45.jpg",
+            "46.jpg",
+            "47.jpg",
+            "48.jpg",
+            "49.jpg" ]
 
         animalFileNames = self.shuffle(animalFileNames)
         animalFileNames = self.shuffle(animalFileNames)
@@ -98,7 +106,8 @@ class ImageGallery {
             "25.jpg",
             "28.jpg",
             "30.jpg",
-            "33.jpg" ]
+            "33.jpg",
+            "56.jpg" ]
         
         natureFileNames = self.shuffle(natureFileNames)
         natureFileNames = self.shuffle(natureFileNames)
@@ -142,7 +151,13 @@ class ImageGallery {
             "34.jpg",
             "36.jpg",
             "37.jpg",
-            "40.jpg" ]
+            "40.jpg",
+            "50.jpg",
+            "51.jpg",
+            "52.jpg",
+            "53.jpg",
+            "54.jpg",
+            "55.jpg" ]
         
         placesFileNames = self.shuffle(placesFileNames)
         placesFileNames = self.shuffle(placesFileNames)
