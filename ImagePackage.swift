@@ -7,13 +7,16 @@
 //
 
 import Foundation
-
+import UIKit
 
 class ImagePackage {
+    
     
     var smallFileName : String!
     var mediumFileName : String!
     var largeFileName : String!
+    var image : UIImage?
+    
     var caption : String!
     var photographer : String!
     

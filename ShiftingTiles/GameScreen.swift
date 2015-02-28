@@ -17,7 +17,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var currentImagePackage : ImagePackage!
-    var imageToSolve : UIImage?
     var tilesPerRow = 3
     var messages : [String]!
     var originalIsBeingShown = false
@@ -97,14 +96,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         // Initialize tileArea
         self.tileArea.delegate = self
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageToSolve = UIImage(named: self.currentImagePackage!.mediumFileName!)
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageToSolve = UIImage(named: self.currentImagePackage!.largeFileName!)
-        }
-
-        self.tileArea.imageToSolve = self.imageToSolve!
+        self.tileArea.imageToSolve = self.currentImagePackage.image!
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
@@ -118,12 +110,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.initializeRowColumnGestures()
         
         congratsMessage.text = ""
-        self.imageTitleLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
+        if self.currentImagePackage.caption == "" {
+            self.imageTitleLabel.text = ""
+        } else {
+            self.imageTitleLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
+        }
 
 
         
         self.originalImageView = UIImageView(frame: self.tileArea.frame)
-        self.originalImageView.image = self.imageToSolve
+        self.originalImageView.image = self.currentImagePackage.image!
         self.originalImageView.layer.borderWidth = 2
         self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.originalImageView.alpha = 0
