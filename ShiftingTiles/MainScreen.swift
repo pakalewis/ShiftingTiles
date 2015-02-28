@@ -61,10 +61,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     // Vars
     var imageGallery = ImageGallery()
-    var imageNameArray = [String]()
-    var smallImageNameArray = [String]()
+    var imagePackageArray : [ImagePackage]?
+    var currentImagePackage : ImagePackage?
     var imageToSolve : UIImage?
-    var currentImageString : String?
     var tilesPerRow = 3
     
     
@@ -114,17 +113,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
         // Choose which size of images to use based on device
+        self.imagePackageArray = self.imageGallery.animalImagePackages
+        self.currentImagePackage = self.imagePackageArray![0]
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = self.imageGallery.animalMediumImageName
+            self.imageToSolve = UIImage(named: self.currentImagePackage!.mediumFileName!)
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = self.imageGallery.animalLargeImageName
+            self.imageToSolve = UIImage(named: self.currentImagePackage!.largeFileName!)
         }
-        self.smallImageNameArray = self.imageGallery.animalSmallImageName
-
-        self.imageToSolve = UIImage(named: self.imageNameArray[0])!
-        self.mainImageView.image = UIImage(named: self.imageNameArray[0])!
-        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
+        self.mainImageView.image = self.imageToSolve
 
         
         self.tilesPerRow = 3
@@ -141,8 +138,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
-            gameScreen.imageToSolve = self.imageToSolve!
-            gameScreen.imageFileString = self.currentImageString
+            gameScreen.currentImagePackage = self.currentImagePackage
             gameScreen.tilesPerRow = self.tilesPerRow
             
         }
@@ -198,67 +194,77 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func animalCategoryPressed(sender: AnyObject) {
+        self.imagePackageArray = self.imageGallery.animalImagePackages
+        self.currentImagePackage = self.imagePackageArray![0]
+
+        var toImageString = ""
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = self.imageGallery.animalMediumImageName
+            toImageString = self.currentImagePackage!.mediumFileName
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = self.imageGallery.animalLargeImageName
+            toImageString = self.currentImagePackage!.largeFileName
         }
-        self.smallImageNameArray = self.imageGallery.animalSmallImageName
 
-        let toImage = UIImage(named: self.imageNameArray[0])!
+        let toImage = UIImage(named: toImageString)
         self.imageToSolve = toImage
+        
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
             animations: { self.mainImageView.image = toImage },
             completion: nil)
-        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
         
         self.shrinkCategories()
         self.imageCollection.reloadData()
     }
     
+    
+    
     @IBAction func natureCategoryPressed(sender: AnyObject) {
+        self.imagePackageArray = self.imageGallery.natureImagePackages
+        self.currentImagePackage = self.imagePackageArray![0]
+
+        var toImageString = ""
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = self.imageGallery.natureMediumImageName
+            toImageString = self.currentImagePackage!.mediumFileName
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = self.imageGallery.natureLargeImageName
+            toImageString = self.currentImagePackage!.largeFileName
         }
-        self.smallImageNameArray = self.imageGallery.natureSmallImageName
 
-        let toImage = UIImage(named: self.imageNameArray[0])!
+        let toImage = UIImage(named: toImageString)
         self.imageToSolve = toImage
+
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
             animations: { self.mainImageView.image = toImage },
             completion: nil)
-        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
-
         
         self.shrinkCategories()
         self.imageCollection.reloadData()
     }
     
     @IBAction func placesCategoryPressed(sender: AnyObject) {
+        self.imagePackageArray = self.imageGallery.placesImagePackages
+        self.currentImagePackage = self.imagePackageArray![0]
+
+        var toImageString = ""
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.imageNameArray = self.imageGallery.placesMediumImageName
+            toImageString = self.currentImagePackage!.mediumFileName
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.imageNameArray = self.imageGallery.placesLargeImageName
+            toImageString = self.currentImagePackage!.largeFileName
         }
-        self.smallImageNameArray = self.imageGallery.placesSmallImageName
         
-        let toImage = UIImage(named: self.imageNameArray[0])!
+        let toImage = UIImage(named: toImageString)
         self.imageToSolve = toImage
+
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
             animations: { self.mainImageView.image = toImage },
             completion: nil)
-        self.currentImageString = self.imageNameArray[0].substringToIndex(advance(self.imageNameArray[0].startIndex, 2))
 
         
         self.shrinkCategories()
@@ -268,7 +274,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.imageNameArray.count
+        return self.imagePackageArray!.count
     }
     
     
@@ -281,7 +287,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.imageView.image = UIImage(named: self.smallImageNameArray[indexPath.row])!
+        cell.imageView.image = UIImage(named: self.imagePackageArray![indexPath.row].smallFileName)
         return cell
     }
     
@@ -294,14 +300,22 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
 
         // TODO: why does this cause memory issues?
-        let toImage = UIImage(named: self.imageNameArray[indexPath.row])!
+        self.currentImagePackage = self.imagePackageArray![indexPath.row]
+        var toImageString = ""
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            toImageString = self.currentImagePackage!.mediumFileName
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            toImageString = self.currentImagePackage!.largeFileName
+        }
+
+        let toImage = UIImage(named: toImageString)!
         self.imageToSolve = toImage
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
             animations: { self.mainImageView.image = toImage },
             completion: nil)
-        self.currentImageString = self.imageNameArray[indexPath.row].substringToIndex(advance(self.imageNameArray[indexPath.row].startIndex, 2))
 
     }
     
@@ -503,7 +517,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 
                 self.imageToSolve = capturedImage!
                 self.mainImageView.image = capturedImage!
-                self.currentImageString = "00"
 
             })
         }
@@ -531,7 +544,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         self.imageToSolve = croppedUIImage!
         self.mainImageView.image = croppedUIImage!
-        self.currentImageString = "00"
         
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.selectCategoryButton.userInteractionEnabled = true

@@ -16,9 +16,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     let colorPalette = ColorPalette()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    var imageToSolve = UIImage()
-    var imageFileString : String!
-    var imageCaptions: [String: String]!
+    var currentImagePackage : ImagePackage!
+    var imageToSolve : UIImage?
     var tilesPerRow = 3
     var messages : [String]!
     var originalIsBeingShown = false
@@ -73,66 +72,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             NSLocalizedString("Message14", comment: ""),
             NSLocalizedString("Message15", comment: "")]
         
-        self.imageCaptions = [
-            "01" : "Tiger Mountain, WA — Greg Jaehnig",
-            "02" : "Great Blue Heron — Dale Arveson",
-            "03" : "Fish River Canyon, Namibia — Greg Jaehnig",
-            "04" : "Fish River Canyon, Namibia — Greg Jaehnig",
-            "05" : "Sunset, Namibia — Greg Jaehnig",
-            "06" : "Baobab tree — Greg Jaehnig",
-            "07" : "Oregon Coast — Dale Arveson",
-            "08" : "Etosha — Greg Jaehnig",
-            "09" : "Garden Cat — Parker Lewis",
-
-            "10" : "Walrus — Kate Lewis",
-            "11" : "Red Boat — Kate Lewis",
-            "12" : "Torres del Paine — Kate Lewis",
-            "13" : "Moss — Kate Lewis",
-            "14" : "Cannon Beach — Kate Lewis",
-            "15" : "Ice Sunset — Kate Lewis",
-            "16" : "Hummingbird — Kate Lewis",
-            "17" : "Auggie Frisbee — Kate Lewis",
-            "18" : "Canyon? — Kate Lewis",
-            "19" : "Deadvlei, Namibia — Greg Jaehnig",
-
-            "20" : "Kolmanskop — Greg Jaehnig",
-            "21" : "Rusty Reflection — Dale Arveson",
-            "22" : "Tulips — Dale Arveson",
-            "23" : "Grant Island — Grant Wilson",
-            "24" : "Mosquito Creek — Dale Arveson",
-            "25" : "Mt. Rainier — Dale Arveson",
-            "26" : "Sea bird — Kate Lewis",
-            "27" : "Blacktail Buck — Dale Arveson",
-            "28" : "Botswana — Greg Jaehnig",
-            "29" : "Polar Bear — Kate Lewis",
-
-            "30" : "Waterberg Plateau — Greg Jaehnig",
-            "31" : "Murphy — Kate Lewis",
-            "32" : "Prairie Dog — Dale Arveson",
-            "33" : "Lavender — Dale Arveson",
-            "34" : "Boat beach — Kate Lewis",
-            "35" : "Snowy Owl — Dale Arveson",
-            "36" : "Hands of Experience — Dale Arveson",
-            "37" : "Norway Pond — Dale Arveson",
-            "38" : "Blacktail Doe — Dale Arveson",
-            "39" : "Ondongi — Greg Jaehnig",
-            "40" : "Seattle Great Wheel — Kate Lewis",
-            "41" : "Goat — Greg Jaehnig",
-            "42" : "Female Kudu — Greg Jaehnig",
-            "43" : "Male Kudu — Greg Jaehnig",
-            "44" : "Oryx — Greg Jaehnig",
-            "45" : "Conservation — ErikHG Photography",
-            "46" : "Harvest — ErikHG Photography",
-            "47" : "Elephants — Greg Jaehnig",
-            "48" : "Giraffe — Greg Jaehnig",
-            "49" : "Spider — Greg Jaehnig",
-            "50" : "Reel — ErikHG Photography",
-            "51" : "Backroad — ErikHG Photography",
-            "52" : "Companion — ErikHG Photography",
-            "53" : "Cobble — ErikHG Photography",
-            "54" : "Nærøyfjord — ErikHG Photography",
-            "55" : "Bog — ErikHG Photography",
-            "56" : "Olympic — ErikHG Photography" ]
         
     }
     
@@ -158,7 +97,14 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         // Initialize tileArea
         self.tileArea.delegate = self
-        self.tileArea.imageToSolve = self.imageToSolve
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.imageToSolve = UIImage(named: self.currentImagePackage!.mediumFileName!)
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.imageToSolve = UIImage(named: self.currentImagePackage!.largeFileName!)
+        }
+
+        self.tileArea.imageToSolve = self.imageToSolve!
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
@@ -172,8 +118,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.initializeRowColumnGestures()
         
         congratsMessage.text = ""
-        self.imageTitleLabel.text = self.imageCaptions[self.imageFileString]
+        self.imageTitleLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
 
+
+        
         self.originalImageView = UIImageView(frame: self.tileArea.frame)
         self.originalImageView.image = self.imageToSolve
         self.originalImageView.layer.borderWidth = 2
