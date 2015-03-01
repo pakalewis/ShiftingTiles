@@ -31,7 +31,4 @@ class ImagePackage {
     }
     
     
-//    func getDoubleIndex() -> DoubleIndex {
-//        return self.doubleIndex
-//    }
 }

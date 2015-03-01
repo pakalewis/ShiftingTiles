@@ -18,33 +18,36 @@ import QuartzCore
 
 class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // MARK: Misc vars
     let colorPalette = ColorPalette()
     let userDefaults = NSUserDefaults.standardUserDefaults()
+    var imageGallery = ImageGallery()
+    var imagePackageArray : [ImagePackage]?
+    var currentImagePackage : ImagePackage?
+    var tilesPerRow = 3
 
     
-    // AVFoundation
+    // MARK: AVFoundation vars
     var captureSession : AVCaptureSession?
     var previewLayer : AVCaptureVideoPreviewLayer?
     var captureDevice : AVCaptureDevice?
     var stillImageOutput : AVCaptureStillImageOutput?
 
     
-    // VIEWS
+    // MARK: VIEWS
     @IBOutlet weak var shiftingTilesLabel: UILabel!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
     @IBOutlet weak var imageCapturingButtonArea: UIView!
     @IBOutlet weak var imageCapturingButtonAreaFakeBorder: UIView!
-
-    
+    // Categories
     @IBOutlet weak var categoryArea: UIView!
     @IBOutlet weak var selectCategoryButton: UIButton!
     @IBOutlet weak var animalsCategoryButton: UIButton!
     @IBOutlet weak var natureCategoryButton: UIButton!
     @IBOutlet weak var placesCategoryButton: UIButton!
-
-    
+    // Other buttons
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
@@ -56,25 +59,21 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var captureImageButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
+    // MARK: Constraints
     @IBOutlet weak var imageCapturingAreaTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoriesHeightConstraint: NSLayoutConstraint!
 
-    // Vars
-    var imageGallery = ImageGallery()
-    var imagePackageArray : [ImagePackage]?
-    var currentImagePackage : ImagePackage?
-    var tilesPerRow = 3
     
     
     
-    
+    // MARK: Lifecycle methods
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Set up and style the views
         self.view.sendSubviewToBack(self.imageCapturingButtonArea)
         self.imageCapturingButtonArea.alpha = 0
-        self.updateColorsAndFonts()
 
-        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
@@ -87,6 +86,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.animalsCategoryButton.alpha = 0
         self.natureCategoryButton.alpha = 0
         self.placesCategoryButton.alpha = 0
+
+        self.updateColorsAndFonts()
     }
 
     
@@ -96,7 +97,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
-        // first time
+        // Set user defaults upon the first launch
         if(!self.userDefaults.boolForKey("firstlaunch1.0")){
             self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
             self.userDefaults.setBool(true, forKey: "congratsOn")
@@ -104,10 +105,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.userDefaults.synchronize()
         }
         
-
-        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
-        
-        // register the nibs for the two types of tableview cells
+        // Register the nib for the CollectionView cells
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
 
@@ -122,7 +120,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
         self.mainImageView.image = self.currentImagePackage?.image!
 
-        
+        // Tiles per row label
+        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
         self.tilesPerRow = 3
         self.tilesPerRowLabel.text = "3 x 3"
     }
@@ -139,14 +138,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             var gameScreen = segue.destinationViewController as GameScreen
             gameScreen.currentImagePackage = self.currentImagePackage
             gameScreen.tilesPerRow = self.tilesPerRow
-            
         }
     }
     
 
     
-    //MARK: COLLECTION VIEW
-    
+    //MARK: CATEGORIES
     @IBAction func selectCategoryButtonPressed(sender: AnyObject) {
         if self.categoriesHeightConstraint.constant == 0 {
             self.expandCategories()
@@ -176,6 +173,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         })
     }
     
+    
     func shrinkCategories() {
         self.categoriesHeightConstraint.constant = 0
         UIView.animateWithDuration(0.5, animations: { () -> Void in
@@ -186,80 +184,58 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.natureCategoryButton.alpha = 0
             self.placesCategoryButton.alpha = 0
             
-            
             self.view.layoutIfNeeded()
         })
     }
     
     
     @IBAction func animalCategoryPressed(sender: AnyObject) {
-        self.imagePackageArray = self.imageGallery.animalImagePackages
-        self.currentImagePackage = self.imagePackageArray![0]
-
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName)
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName)
-        }
-
-        
-        UIView.transitionWithView(self.mainImageView,
-            duration: 0.5,
-            options: .TransitionCrossDissolve,
-            animations: { self.mainImageView.image = self.currentImagePackage?.image },
-            completion: nil)
-        
-        self.shrinkCategories()
-        self.imageCollection.reloadData()
+        self.changeToCategory(1)
     }
-    
     
     
     @IBAction func natureCategoryPressed(sender: AnyObject) {
-        self.imagePackageArray = self.imageGallery.natureImagePackages
-        self.currentImagePackage = self.imagePackageArray![0]
-
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName)
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName)
-        }
-
-        UIView.transitionWithView(self.mainImageView,
-            duration: 0.5,
-            options: .TransitionCrossDissolve,
-            animations: { self.mainImageView.image = self.currentImagePackage?.image },
-            completion: nil)
-        
-        self.shrinkCategories()
-        self.imageCollection.reloadData()
+        self.changeToCategory(2)
     }
+    
     
     @IBAction func placesCategoryPressed(sender: AnyObject) {
-        self.imagePackageArray = self.imageGallery.placesImagePackages
+        self.changeToCategory(3)
+    }
+    
+    
+    func changeToCategory(category: Int) {
+        // Update the imagePackageArray
+        if category == 1 {
+            self.imagePackageArray = self.imageGallery.animalImagePackages
+        } else if category == 2 {
+            self.imagePackageArray = self.imageGallery.natureImagePackages
+        } else if category == 3 {
+            self.imagePackageArray = self.imageGallery.placesImagePackages
+        }
+        
+        // Update the currentImagePackage
         self.currentImagePackage = self.imagePackageArray![0]
-
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName)
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName)
         }
-
+        
+        //Update the mainImageView and the CollectionView
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
             animations: { self.mainImageView.image = self.currentImagePackage?.image },
             completion: nil)
-
-        
-        self.shrinkCategories()
         self.imageCollection.reloadData()
+        self.shrinkCategories()
     }
     
+
     
+    //MARK: COLLECTION VIEW
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imagePackageArray!.count
@@ -287,7 +263,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.shrinkCategories()
         }
 
-        // TODO: why does this cause memory issues?
         self.currentImagePackage = self.imagePackageArray![indexPath.row]
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
@@ -308,7 +283,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
 
-    // MARK: Image funcs
+    // MARK: Camera methods
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         self.selectCategoryButton.userInteractionEnabled = false
         if self.categoriesHeightConstraint.constant != 0 {
@@ -548,7 +523,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
-    // MARK: Other funcs
+    // MARK: Other methods
     @IBAction func rightButtonPressed(sender: AnyObject) {
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
