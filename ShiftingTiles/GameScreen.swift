@@ -37,7 +37,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     @IBOutlet weak var topBank: UIView!
     @IBOutlet weak var leftBank: UIView!
     @IBOutlet weak var separatorView: UIView!
-    @IBOutlet weak var imageTitleLabel: UILabel!
+    @IBOutlet weak var imageCaptionLabel: UILabel!
 
     // MARK: CONSTRAINTS
     @IBOutlet weak var leftBankMarginConstraint: NSLayoutConstraint!
@@ -111,9 +111,15 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         congratsMessage.text = ""
         if self.currentImagePackage.caption == "" {
-            self.imageTitleLabel.text = ""
+            self.imageCaptionLabel.text = ""
         } else {
-            self.imageTitleLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+                self.imageCaptionLabel.text = self.currentImagePackage.caption + "\n" + self.currentImagePackage.photographer
+            }
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+                self.imageCaptionLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
+            }
+
         }
 
 
@@ -464,7 +470,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
-        self.imageTitleLabel.textColor = self.colorPalette.fetchDarkColor()
+        self.imageCaptionLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -475,11 +481,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 35)
-            self.imageTitleLabel.font = UIFont(name: "OpenSans", size: 13)
+            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 13)
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 60)
-            self.imageTitleLabel.font = UIFont(name: "OpenSans", size: 23)
+            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 23)
         }
 
     }

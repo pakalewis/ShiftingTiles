@@ -311,9 +311,11 @@
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="centerX" secondItem="iDH-O9-eqa" secondAttribute="centerX" id="P7x-TJ-kkU"/>
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="height" secondItem="iDH-O9-eqa" secondAttribute="height" id="RqC-5T-Jdy"/>
                                     <constraint firstAttribute="height" id="WTa-xi-4qp"/>
+                                    <constraint firstItem="wvc-td-qyk" firstAttribute="width" secondItem="iDH-O9-eqa" secondAttribute="width" id="aGh-8z-8nW"/>
                                     <constraint firstItem="wvc-td-qyk" firstAttribute="leading" secondItem="I7t-Pu-ole" secondAttribute="leading" id="gqf-gn-WdZ"/>
                                     <constraint firstItem="wvc-td-qyk" firstAttribute="height" secondItem="iDH-O9-eqa" secondAttribute="height" id="kGR-GB-hM8"/>
                                     <constraint firstItem="iDH-O9-eqa" firstAttribute="top" secondItem="I7t-Pu-ole" secondAttribute="top" id="oRb-QS-PWO"/>
+                                    <constraint firstItem="wvc-td-qyk" firstAttribute="width" secondItem="JBj-e8-WAQ" secondAttribute="width" id="qSb-x4-pTe"/>
                                     <constraint firstItem="JBj-e8-WAQ" firstAttribute="top" secondItem="wvc-td-qyk" secondAttribute="bottom" id="zKX-IU-Egq"/>
                                 </constraints>
                             </view>
@@ -901,7 +903,7 @@
                                     <constraint firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="height" multiplier="1:1" id="mCM-5H-gkw"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM5-nS-GBE" userLabel="Image Caption">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM5-nS-GBE" userLabel="Image Caption">
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1049,7 +1051,7 @@
                         <outlet property="backButton" destination="vI2-cd-d5v" id="nEZ-cM-QqL"/>
                         <outlet property="congratsMessage" destination="BUW-hI-3S5" id="9QG-8l-vOm"/>
                         <outlet property="hintButton" destination="9ig-wh-J89" id="PPQ-2z-rtZ"/>
-                        <outlet property="imageTitleLabel" destination="WM5-nS-GBE" id="8kX-hl-tIz"/>
+                        <outlet property="imageCaptionLabel" destination="WM5-nS-GBE" id="BLM-81-XGe"/>
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
                         <outlet property="leftBankWidthConstraint" destination="czg-yu-bvU" id="zVn-Eg-M6U"/>
