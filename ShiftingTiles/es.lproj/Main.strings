@@ -9,7 +9,7 @@
 
 // SETTINGS SCREEN
 /* Class = "IBUILabel"; text = "Settings"; ObjectID = "eXT-vh-s4k"; */
-"eXT-vh-s4k.text" = "Ajustes";
+"eXT-vh-s4k.text" = "Configuraciónes";
 
 /* Class = "IBUILabel"; text = "Show Messages"; ObjectID = "IE3-Im-BS1"; */
 "IE3-Im-BS1.text" = "Mostrar mensajes";

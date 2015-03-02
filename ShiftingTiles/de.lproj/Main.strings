@@ -1,7 +1,7 @@
 
 // MAIN SCREEN
 /* Class = "IBUILabel"; text = "Shifting Tiles"; ObjectID = "6p4-o8-wZC"; */
-"6p4-o8-wZC.text" = "Verschieben Fliesen";
+"6p4-o8-wZC.text" = "Fliesen Verschieben";
 
 
 
@@ -28,7 +28,7 @@
 
 // STATS SCREEN
 /* Class = "IBUILabel"; text = "Statistics"; ObjectID = "IjM-VQ-WwD"; */
-"IjM-VQ-WwD.text" = "Statistik";
+"IjM-VQ-WwD.text" = "Statistiken";
 
 /* Class = "IBUILabel"; text = "Size"; ObjectID = "wbx-f1-dqn"; */
 "wbx-f1-dqn.text" = "Größe";

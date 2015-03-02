@@ -15,10 +15,10 @@
 
 // Info Screens
 "Rules1_Part1" = "Ordnen Sie die Fliesen, um das Gesamtbild zu bilden.";
-"Rules1_Part2" = "Ziehen Sie einen Ziegel auf einer anderen Kachel, um ihre Positionen zu tauschen.";
-"Rules1_Part3" = "Tauschen Sie ganze Zeilen und Spalten durch Ziehen an den äußeren Plätzen.";
-"Rules1_Part4" = "Für eine zusätzliche Herausforderung, schalten Sie Rotationen im Einstellungsmenü.";
-"Rules1_Part5" = "Tippen Sie zweimal auf eine Kachel, um sie um 90° drehen.";
+"Rules1_Part2" = "Ziehen Sie eine Fliese auf einer anderen, um ihre Positionen zu tauschen.";
+"Rules1_Part3" = "Tauschen Sie ganze Zeilen und Spalten durch ziehen an den äußeren Vierecken.";
+"Rules1_Part4" = "Für eine zusätzliche Herausforderung, einschalten Sie Rotationen im Einstellungsmenü.";
+"Rules1_Part5" = "Tippen Sie zweimal auf einer Fliese, um sie 90° drehen.";
 
 
 "Rules2_Part1" = "Nehmen Sie ein Foto oder wählen Sie einen aus der Galerie.";
@@ -29,12 +29,12 @@
 
 "Rules3_Part1" = "Sehen Sie das Originalbild.";
 "Rules3_Part2" = "Holen Sie sich einen Hinweis und sehen, welche Fliesen sollten ausgetauscht werden.\n\nWenn alle Fliesen sind in der richtigen Position, zu sehen, welche Fliesen gedreht werden sollte.";
-"Rules3_Part3" = "Stecken?\nAuto-das Rätsel zu lösen.";
+"Rules3_Part3" = "Stecken?\nAutolösen das Rätsel.";
 
 
-"Acknowledgements_Part1" = "Shifting Fliesen entwickelt von:";
+"Acknowledgements_Part1" = "Fliesen Verschieben entwickelt von:";
 "Acknowledgements_Part2" = "Bilder bereitgestellt von:";
-"Acknowledgements_Part3" = "Feedback, Kommentare, Fragen können hier zu senden:";
+"Acknowledgements_Part3" = "Rückmeldung, Kommentare, Fragen können hier zu senden:";
 
 
 
@@ -58,12 +58,12 @@
 "CameraButtonAlert_Part3" = "Kamera";
 
 
-"CameraAccessAlert_Part1" = "Kamera der Zugriff verweigert.";
+"CameraAccessAlert_Part1" = "Ser Zugriff zur verweigert.";
 "CameraAccessAlert_Part2" = "Lassen Sie Zugriff auf die Kamera, indem Sie auf die Einstellungen-App auf dieses Gerät.";
 
 "NoCameraAlert" = "Keine Kamera ist auf diesem Gerät zur Verfügung";
 
-"EmailAlert" = "Überprüfen Sie Ihre E-Mail- Konfiguration und versuchen Sie es erneut.";
+"EmailAlert" = "Überprüfen Sie Ihre E-Mail-Konfiguration und versuchen Sie es erneut.";
 
 
 // Messages

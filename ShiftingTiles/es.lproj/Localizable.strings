@@ -9,26 +9,26 @@
 
 
 // Stats Screen
-"TOTAL_SOLVES" = "Suma";
+"TOTAL_SOLVES" = "Total";
 
 
 
 // Info Screens
 "Rules1_Part1" = "Reorganizar los azulejos para formar la imagen completa.";
-"Rules1_Part2" = "Arrastre una teja encima de otra ficha para intercambiar sus posiciones.";
+"Rules1_Part2" = "Arrastre un azulejo encima de otro azulejo para intercambiar sus posiciones.";
 "Rules1_Part3" = "Intercambiar filas y columnas completas arrastrando los cuadros exteriores.";
 "Rules1_Part4" = "Para un desafío extra, encienda Rotaciones en el menú de configuración.";
-"Rules1_Part5" = "Doble toque en una baldosa para girar 90°.";
+"Rules1_Part5" = "Doble toque en un azulejo para girar 90°.";
 
 
-"Rules2_Part1" = "Tome una foto o seleccione uno de la galería.";
+"Rules2_Part1" = "Tome una foto o seleccione una de la galería.";
 "Rules2_Part2" = "Elija el tamaño de la cuadrícula.";
 "Rules2_Part3" = "Ver las estadísticas.";
 "Rules2_Part4" = "Comience el rompecabezas!";
 
 
 "Rules3_Part1" = "Ver la imagen original.";
-"Rules3_Part2" = "Obtener una pista y ver lo que los azulejos deben ser intercambiados.\n\nSi todas las piezas están en las posiciones correctas, ver qué baldosas se deben rotar.";
+"Rules3_Part2" = "Obtener una pista y ver cuales azulejos deben ser intercambiados.\n\nSi todas las piezas están en las posiciones correctas, ver qué azulejo se deben rotar.";
 "Rules3_Part3" = "Pegado?\nAuto-resolver el rompecabezas.";
 
 
@@ -39,7 +39,7 @@
 
 
 // Alerts
-"LossOfProgressAlert_Part1" = "No se guardará ningún progreso en este rompecabezas.";
+"LossOfProgressAlert_Part1" = "No se guardará ningún progreso en este rompecabezas";
 "LossOfProgressAlert_Part2" = "¿Seguro que quieres volver?";
 
 
@@ -50,19 +50,19 @@
 "ERROR" = "Error";
 
 
-"SolveAlert_Part1" = "Esto auto-resolver el rompecabezas.";
+"SolveAlert_Part1" = "Esto se auto-resuelve el rompecabezas.";
 "SolveAlert_Part2" = "¿Seguro que quieres hacer esto?";
 
 
-"CameraButtonAlert_Part1" = "Elija una fotografía:";
+"CameraButtonAlert_Part1" = "Elija una foto:";
 "CameraButtonAlert_Part2" = "Galería";
 "CameraButtonAlert_Part3" = "La cámara";
 
 
 "CameraAccessAlert_Part1" = "Acceso a la cámara negó.";
-"CameraAccessAlert_Part2" = "Permitir el acceso de la cámara por ir a la aplicación de configuración de este dispositivo.";
+"CameraAccessAlert_Part2" = "Permitir el acceso de la cámara por ir a la aplicación de configuración de este aparato.";
 
-"NoCameraAlert" = "Sin cámara está disponible en este dispositivo.";
+"NoCameraAlert" = "No hay cámara disponible en este aparato.";
 
 "EmailAlert" = "Compruebe la configuración del correo electrónico y vuelva a intentarlo.";
 
