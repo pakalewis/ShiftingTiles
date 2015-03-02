@@ -11,24 +11,31 @@ import UIKit
 
 class ImagePackage {
     
-    
-    var smallFileName : String!
-    var mediumFileName : String!
-    var largeFileName : String!
-    var image : UIImage?
-    
+    var baseFileName : String!
     var caption : String!
     var photographer : String!
+    var image : UIImage?
+    
     
     init(baseFileName: String, caption: String, photographer: String) {
         
-        self.smallFileName = baseFileName + "small.jpg"
-        self.mediumFileName = baseFileName + "medium.jpg"
-        self.largeFileName = baseFileName + "large.jpg"
-        
+        self.baseFileName = baseFileName
         self.caption = caption
         self.photographer = photographer
     }
     
     
+    
+    func getSmallFileName() -> String {
+        return self.baseFileName + "small.jpg"
+    }
+    
+    func getMediumFileName() -> String {
+        return self.baseFileName + "medium.jpg"
+    }
+
+    func getLargeFileName() -> String {
+        return self.baseFileName + "large.jpg"
+    }
+
 }

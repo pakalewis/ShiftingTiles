@@ -113,10 +113,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imagePackageArray = self.imageGallery.animalImagePackages
         self.currentImagePackage = self.imagePackageArray![0]
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName!)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName!)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
         }
         self.mainImageView.image = self.currentImagePackage?.image!
 
@@ -217,10 +217,10 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // Update the currentImagePackage
         self.currentImagePackage = self.imagePackageArray![0]
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
         }
         
         //Update the mainImageView and the CollectionView
@@ -251,7 +251,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.imageView.image = UIImage(named: self.imagePackageArray![indexPath.row].smallFileName)
+        cell.imageView.image = UIImage(named: self.imagePackageArray![indexPath.row].getSmallFileName())
         return cell
     }
     
@@ -262,16 +262,19 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
         }
-
+        
+        // Grab currentImagePackage
         self.currentImagePackage = self.imagePackageArray![indexPath.row]
         
+        // Set the correct size image
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.mediumFileName)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.largeFileName)
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
         }
-
+        
+        // Update mainImageView
         UIView.transitionWithView(self.mainImageView,
             duration: 0.5,
             options: .TransitionCrossDissolve,
@@ -405,6 +408,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
         self.selectCategoryButton.userInteractionEnabled = true
     }
+    
     
     @IBAction func captureImage(sender: AnyObject) {
         self.imageCapturingAreaTopConstraint.constant = 300
