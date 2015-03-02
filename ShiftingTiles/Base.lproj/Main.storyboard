@@ -896,6 +896,10 @@
                                     <constraint firstAttribute="width" constant="40" id="czg-yu-bvU"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8ea-MK-WbK" userLabel="OriginalImageView">
+                                <rect key="frame" x="45" y="20" width="546" height="546"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHF-Bx-sTb" customClass="TileAreaView" customModule="ShiftingTiles" customModuleProvider="target">
                                 <rect key="frame" x="45" y="20" width="546" height="546"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1024,6 +1028,7 @@
                         <constraints>
                             <constraint firstItem="AkX-qZ-gbP" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="1qp-he-h8V"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="leading" secondItem="oHF-Bx-sTb" secondAttribute="leading" id="28m-5T-c4D"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="top" secondItem="8ea-MK-WbK" secondAttribute="top" id="3Cm-J3-y1t"/>
                             <constraint firstAttribute="trailing" secondItem="pF4-g2-NMF" secondAttribute="trailing" id="71y-bu-D2D"/>
                             <constraint firstAttribute="centerY" secondItem="oHF-Bx-sTb" secondAttribute="centerY" constant="7" id="AFc-qY-qSm"/>
                             <constraint firstItem="WM5-nS-GBE" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" multiplier="0.9" id="AWL-ZL-PiB"/>
@@ -1032,8 +1037,10 @@
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="top" id="JGT-51-mtK"/>
                             <constraint firstItem="row-0Z-gkW" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="JeO-MP-mlk"/>
                             <constraint firstItem="AkX-qZ-gbP" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" id="M9L-va-kPl"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="height" secondItem="8ea-MK-WbK" secondAttribute="height" id="MJ9-Q1-Izq"/>
                             <constraint firstItem="5tw-fP-WBe" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="5" id="Rvw-yQ-JFS"/>
                             <constraint firstItem="p3Q-Xd-i17" firstAttribute="width" secondItem="oHF-Bx-sTb" secondAttribute="width" id="TfL-um-7H6"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="width" secondItem="8ea-MK-WbK" secondAttribute="width" id="Tff-uU-1gK"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="height" secondItem="a6F-6c-ZDX" secondAttribute="height" multiplier="0.1" id="VGk-xJ-8WX"/>
                             <constraint firstItem="WM5-nS-GBE" firstAttribute="top" secondItem="oHF-Bx-sTb" secondAttribute="bottom" constant="5" id="VgP-e1-9eb"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="top" secondItem="row-0Z-gkW" secondAttribute="bottom" id="ViO-Q7-gC8"/>
@@ -1043,6 +1050,7 @@
                             <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="pF4-g2-NMF" secondAttribute="bottom" id="a1G-Kp-rcM"/>
                             <constraint firstAttribute="trailing" secondItem="row-0Z-gkW" secondAttribute="trailing" id="elv-Ec-ydJ"/>
                             <constraint firstAttribute="centerX" secondItem="WM5-nS-GBE" secondAttribute="centerX" id="hQR-iL-Ejo"/>
+                            <constraint firstItem="oHF-Bx-sTb" firstAttribute="leading" secondItem="8ea-MK-WbK" secondAttribute="leading" id="hun-E5-HF1"/>
                             <constraint firstItem="AkX-qZ-gbP" firstAttribute="width" secondItem="a6F-6c-ZDX" secondAttribute="width" id="ngy-7K-Q4j"/>
                             <constraint firstItem="pF4-g2-NMF" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" id="vRM-0X-Ywz"/>
                         </constraints>
@@ -1055,6 +1063,7 @@
                         <outlet property="leftBank" destination="5tw-fP-WBe" id="Gv9-em-1qr"/>
                         <outlet property="leftBankMarginConstraint" destination="Rvw-yQ-JFS" id="LKD-Xv-dn6"/>
                         <outlet property="leftBankWidthConstraint" destination="czg-yu-bvU" id="zVn-Eg-M6U"/>
+                        <outlet property="originalImageView" destination="8ea-MK-WbK" id="60m-2s-wdX"/>
                         <outlet property="separatorView" destination="row-0Z-gkW" id="EKa-A3-WTc"/>
                         <outlet property="showOriginalButton" destination="kMV-Zu-rKc" id="kTH-D8-1RC"/>
                         <outlet property="solveButton" destination="rl5-9y-N59" id="i5a-Hc-2fL"/>

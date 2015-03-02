@@ -86,7 +86,7 @@ class TileAreaView: UIView {
                 tile.imageView.tag = tile.doubleIndex.concatenateToInt()
                 
                 // Set the tile's frame
-                var totalWidth = self.frame.width - 4
+                var totalWidth = self.frame.width
                 var tileFrame = CGRectMake(totalWidth / 2, totalWidth / 2, 0, 0)
                 tile.imageView.frame = tileFrame
 
@@ -99,7 +99,7 @@ class TileAreaView: UIView {
                 // Create the image for the Tile
                 var imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
                 var imagePositionX:CGFloat = CGFloat(index2) * (imageWidth)
-                var imageFrame = CGRectMake(imagePositionX + 2, imagePositionY + 2, imageWidth, imageWidth)
+                var imageFrame = CGRectMake(imagePositionX, imagePositionY, imageWidth, imageWidth)
                 var tileCGImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, imageFrame)
                 var tileUIImage = UIImage(CGImage: tileCGImage)
                 tile.imageSection = tileUIImage!
@@ -122,14 +122,14 @@ class TileAreaView: UIView {
     func layoutTiles() {
 
         // Tile measuerments
-        var tileWidth:CGFloat  = (self.frame.width - 4) / CGFloat(self.tilesPerRow)
-        var tileHeight:CGFloat  = (self.frame.height - 4) / CGFloat(self.tilesPerRow)
+        var tileWidth:CGFloat  = (self.frame.width) / CGFloat(self.tilesPerRow)
+        var tileHeight:CGFloat  = (self.frame.height) / CGFloat(self.tilesPerRow)
         
         for index1 in 0..<self.tilesPerRow { // go down the rows
-            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileHeight) + 2
+            var tileAreaPositionY:CGFloat = CGFloat(index1) * (tileHeight)
             
             for index2 in 0..<self.tilesPerRow { // get the tiles in each row
-                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth) + 2
+                var tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth)
                 
                 // set the boundaries of the tile
                 var tileFrame = CGRectMake(tileAreaPositionX, tileAreaPositionY, tileWidth, tileHeight)

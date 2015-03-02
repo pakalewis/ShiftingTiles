@@ -31,7 +31,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var secondLineOfTiles: [Tile]?
     
     // MARK: VIEWS
-    var originalImageView: UIImageView!
+    @IBOutlet weak var originalImageView: UIImageView!
     @IBOutlet weak var tileArea: TileAreaView!
     @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var topBank: UIView!
@@ -87,6 +87,12 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.topBankHeightConstraint.constant = 50
         }
 
+        
+        self.originalImageView.image = self.currentImagePackage.image!
+        self.originalImageView.layer.borderWidth = 2
+        self.originalImageView.alpha = 0
+        self.view.sendSubviewToBack(originalImageView)
+
         self.updateColorsAndFonts()
     }
 
@@ -102,13 +108,12 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
-        
-        
         // Add row/column gestures
         let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
         self.view.addGestureRecognizer(panGesture)
         self.initializeRowColumnGestures()
         
+        // Set text fields
         congratsMessage.text = ""
         if self.currentImagePackage.caption == "" {
             self.imageCaptionLabel.text = ""
@@ -119,18 +124,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
                 self.imageCaptionLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
             }
-
         }
-
-
-        
-        self.originalImageView = UIImageView(frame: self.tileArea.frame)
-        self.originalImageView.image = self.currentImagePackage.image!
-        self.originalImageView.layer.borderWidth = 2
-        self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.originalImageView.alpha = 0
-        self.view.addSubview(originalImageView)
-        self.view.sendSubviewToBack(originalImageView)
     }
     
     
@@ -472,6 +466,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
         self.imageCaptionLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
         self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
