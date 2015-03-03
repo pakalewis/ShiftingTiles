@@ -24,6 +24,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var imageGallery = ImageGallery()
     var imagePackageArray : [ImagePackage]?
     var currentImagePackage : ImagePackage?
+    var currentCategory = 1
     var tilesPerRow = 3
 
     
@@ -77,7 +78,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
-
+        
+        // Set up category buttons
+        self.animalsCategoryButton.setTitle(NSLocalizedString("ANIMALS", comment: ""), forState: .Normal)
+        self.natureCategoryButton.setTitle(NSLocalizedString("NATURE", comment: ""), forState: .Normal)
+        self.placesCategoryButton.setTitle(NSLocalizedString("PLACES", comment: ""), forState: .Normal)
         self.categoryArea.layer.borderWidth = 2
         self.natureCategoryButton.layer.borderWidth = 2
         self.animalsCategoryButton.userInteractionEnabled = false
@@ -205,31 +210,35 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     func changeToCategory(category: Int) {
-        // Update the imagePackageArray
-        if category == 1 {
-            self.imagePackageArray = self.imageGallery.animalImagePackages
-        } else if category == 2 {
-            self.imagePackageArray = self.imageGallery.natureImagePackages
-        } else if category == 3 {
-            self.imagePackageArray = self.imageGallery.placesImagePackages
+        // Check if it's necessary to change
+        if self.currentCategory != category {
+            // Update the imagePackageArray
+            self.currentCategory = category
+            if category == 1 {
+                self.imagePackageArray = self.imageGallery.animalImagePackages
+            } else if category == 2 {
+                self.imagePackageArray = self.imageGallery.natureImagePackages
+            } else if category == 3 {
+                self.imagePackageArray = self.imageGallery.placesImagePackages
+            }
+            
+            // Update the currentImagePackage
+            self.currentImagePackage = self.imagePackageArray![0]
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+                self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
+            }
+            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+                self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
+            }
+            
+            //Update the mainImageView and the CollectionView
+            UIView.transitionWithView(self.mainImageView,
+                duration: 0.5,
+                options: .TransitionCrossDissolve,
+                animations: { self.mainImageView.image = self.currentImagePackage?.image },
+                completion: nil)
+            self.imageCollection.reloadData()
         }
-        
-        // Update the currentImagePackage
-        self.currentImagePackage = self.imagePackageArray![0]
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
-        }
-        
-        //Update the mainImageView and the CollectionView
-        UIView.transitionWithView(self.mainImageView,
-            duration: 0.5,
-            options: .TransitionCrossDissolve,
-            animations: { self.mainImageView.image = self.currentImagePackage?.image },
-            completion: nil)
-        self.imageCollection.reloadData()
         self.shrinkCategories()
     }
     

@@ -8,6 +8,12 @@
 
 
 
+// Categories
+"ANIMALS" = "ANIMALES";
+"NATURE" = "NATURALEZA";
+"PLACES" = "LUGARES";
+
+
 // Stats Screen
 "TOTAL_SOLVES" = "Total";
 

@@ -330,7 +330,6 @@
                             <constraint firstItem="dsY-VR-BwX" firstAttribute="leading" secondItem="daC-ar-zOj" secondAttribute="trailing" constant="10" id="ADm-Va-maH"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="AnY-VO-fYu"/>
                             <constraint firstItem="QYD-MI-iZr" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="G8X-aC-RXO"/>
-                            <constraint firstItem="I7t-Pu-ole" firstAttribute="width" secondItem="daC-ar-zOj" secondAttribute="width" multiplier="2.5" id="JHz-Ih-Zbg"/>
                             <constraint firstItem="6p4-o8-wZC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KF1-Bp-dGM"/>
                             <constraint firstAttribute="centerX" secondItem="k1r-w8-S7G" secondAttribute="centerX" id="R38-Tr-Puh"/>
                             <constraint firstAttribute="trailing" secondItem="6p4-o8-wZC" secondAttribute="trailing" constant="20" id="SLm-tV-ALF"/>
@@ -345,6 +344,7 @@
                             <constraint firstAttribute="bottom" secondItem="yWk-eH-8xd" secondAttribute="bottom" constant="5" id="hZx-Oj-brm"/>
                             <constraint firstAttribute="centerX" secondItem="8Fb-MQ-XGx" secondAttribute="centerX" id="jRO-vF-DoX"/>
                             <constraint firstItem="daC-ar-zOj" firstAttribute="centerY" secondItem="dsY-VR-BwX" secondAttribute="centerY" id="jzE-Og-6V7"/>
+                            <constraint firstItem="I7t-Pu-ole" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.5" id="l35-nj-TiR"/>
                             <constraint firstItem="daC-ar-zOj" firstAttribute="height" secondItem="dsY-VR-BwX" secondAttribute="height" multiplier="0.6" id="lu0-V8-zBx"/>
                             <constraint firstItem="k1r-w8-S7G" firstAttribute="width" secondItem="8Fb-MQ-XGx" secondAttribute="width" multiplier="0.85" id="maf-fz-9tM"/>
                             <constraint firstItem="yWk-eH-8xd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pHL-K9-YsL"/>
