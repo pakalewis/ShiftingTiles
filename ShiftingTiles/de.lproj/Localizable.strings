@@ -67,22 +67,22 @@
 
 
 // Messages
-"Message1" = "WAY TO GO!";
-"Message2" = "CONGRATS!";
-"Message3" = "SUPER!";
-"Message4" = "AWESOME!";
-"Message5" = "GREAT JOB!";
-"Message6" = "WELL DONE!";
-"Message7" = "GOOD FOR YOU!";
-"Message8" = "YOU DID IT!";
-"Message9" = "FINISHED!";
-"Message10" = "TAKE A BOW!";
-"Message11" = "NICE ONE!";
-"Message12" = "THAT'S GOLD!";
-"Message13" = "EXCELLENT!";
-"Message14" = "PERFECT!";
-"Message15" = "VERY COOL!";
-"Message16" = "GROOVY!";
-"Message17" = "RIGHT ON!";
+"Message01" = "PRIMA!";
+"Message02" = "SUPER!";
+"Message03" = "KLASSE!";
+"Message04" = "AUSGEZEICHNET!";
+"Message05" = "SEHR GUT GEMACHT!";
+"Message06" = "COOL!";
+"Message07" = "TOLL!";
+"Message08" = "JAWOHL!";
+"Message09" = "GROßARTIG!";
+"Message10" = "HERVORRAGEND!";
+"Message11" = "DAS IST DER HAMMER!";
+"Message12" = "ERSTAUNLICH!";
+"Message13" = "WUNDERBAR!";
+"Message14" = "VOLL KRASS!";
+"Message15" = "HERZLICHEN GLÜCKWUNSCH!";
+"Message16" = "SCHÖN!";
+"Message17" = "UNGLAUBLICH!";
 
 

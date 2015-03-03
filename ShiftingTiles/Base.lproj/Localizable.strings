@@ -67,15 +67,15 @@
 
 
 // Messages
-"Message1" = "WAY TO GO!";
-"Message2" = "CONGRATS!";
-"Message3" = "SUPER!";
-"Message4" = "AWESOME!";
-"Message5" = "GREAT JOB!";
-"Message6" = "WELL DONE!";
-"Message7" = "GOOD FOR YOU!";
-"Message8" = "YOU DID IT!";
-"Message9" = "FINISHED!";
+"Message01" = "WAY TO GO!";
+"Message02" = "CONGRATS!";
+"Message03" = "SUPER!";
+"Message04" = "AWESOME!";
+"Message05" = "GREAT JOB!";
+"Message06" = "WELL DONE!";
+"Message07" = "GOOD FOR YOU!";
+"Message08" = "YOU DID IT!";
+"Message09" = "FINISHED!";
 "Message10" = "TAKE A BOW!";
 "Message11" = "NICE ONE!";
 "Message12" = "THAT'S GOLD!";

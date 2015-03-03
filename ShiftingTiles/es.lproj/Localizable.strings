@@ -68,21 +68,21 @@
 
 
 // Messages
-"Message1" = "uno!";
-"Message2" = "dos!";
-"Message3" = "tres!";
-"Message4" = "quatro!";
-"Message5" = "cinco!";
-"Message6" = "seies!";
-"Message7" = "siete!";
-"Message8" = "ocho!";
-"Message9" = "nueve!";
-"Message10" = "diez!";
-"Message11" = "once!";
-"Message12" = "doce!";
-"Message13" = "trece!";
-"Message14" = "catorce!";
-"Message15" = "quince!";
-"Message16" = "diez y seis!";
-"Message17" = "diez y siete!";
+"Message01" = "¡BRAVO!";
+"Message02" = "¡BIEN HECHO!";
+"Message03" = "¡FANÁTSTICO!";
+"Message04" = "¡BUEN TRABAJO!";
+"Message05" = "¡MUY BIEN!";
+"Message06" = "¡ASÍ SE HACE!";
+"Message07" = "¡ESTUPENDO!";
+"Message08" = "¡MARAVILLOSO!";
+"Message09" = "¡BUENÍSIMO!";
+"Message10" = "¡ESTUPENDO!";
+"Message11" = "¡EXTRAORDINARIO!";
+"Message12" = "¡MAGNÍFICO!";
+"Message13" = "¡ESPECTACULAR!";
+"Message14" = "¡PERFECTO!";
+"Message15" = "¡FABULOSO!";
+"Message16" = "¡EXCELENTE!";
+"Message17" = "¡FENOMINAL!";
 

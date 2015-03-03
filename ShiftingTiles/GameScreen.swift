@@ -55,21 +55,23 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messages = [
-            NSLocalizedString("Message1", comment: ""),
-            NSLocalizedString("Message2", comment: ""),
-            NSLocalizedString("Message3", comment: ""),
-            NSLocalizedString("Message4", comment: ""),
-            NSLocalizedString("Message5", comment: ""),
-            NSLocalizedString("Message6", comment: ""),
-            NSLocalizedString("Message7", comment: ""),
-            NSLocalizedString("Message8", comment: ""),
-            NSLocalizedString("Message9", comment: ""),
+            NSLocalizedString("Message01", comment: ""),
+            NSLocalizedString("Message02", comment: ""),
+            NSLocalizedString("Message03", comment: ""),
+            NSLocalizedString("Message04", comment: ""),
+            NSLocalizedString("Message05", comment: ""),
+            NSLocalizedString("Message06", comment: ""),
+            NSLocalizedString("Message07", comment: ""),
+            NSLocalizedString("Message08", comment: ""),
+            NSLocalizedString("Message09", comment: ""),
             NSLocalizedString("Message10", comment: ""),
             NSLocalizedString("Message11", comment: ""),
             NSLocalizedString("Message12", comment: ""),
             NSLocalizedString("Message13", comment: ""),
             NSLocalizedString("Message14", comment: ""),
-            NSLocalizedString("Message15", comment: "")]
+            NSLocalizedString("Message15", comment: ""),
+            NSLocalizedString("Message16", comment: ""),
+            NSLocalizedString("Message17", comment: "")]
         
         
     }
