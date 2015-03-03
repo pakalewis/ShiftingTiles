@@ -46,7 +46,7 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
 
 
         self.label1.text = NSLocalizedString("Acknowledgements_Part1", comment: "") + "\nParker Lewis"
-        self.label2.text = NSLocalizedString("Acknowledgements_Part2", comment: "") + "\nDale Arveson\nGreg Jaehnig\nKate Lewis\nGrant Wilson\nParker Lewis"
+        self.label2.text = NSLocalizedString("Acknowledgements_Part2", comment: "") + "\nDale Arveson\nGreg Jaehnig\nKate Lewis\nGrant Wilson\nErik Haugen-Goodman\nParker Lewis"
         self.label3.text = NSLocalizedString("Acknowledgements_Part3", comment: "")
     }
     

@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="SHm-66-Tp3">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="SHm-66-Tp3">
                     <rect key="frame" x="20" y="185" width="560" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -55,7 +55,7 @@
                 <constraint firstAttribute="centerY" secondItem="rhM-yU-Zwk" secondAttribute="centerY" constant="30" id="6hO-li-yt7"/>
                 <constraint firstAttribute="centerY" secondItem="UZv-yf-C9T" secondAttribute="centerY" id="Eh8-VN-2CW"/>
                 <constraint firstItem="SHm-66-Tp3" firstAttribute="height" secondItem="UZv-yf-C9T" secondAttribute="height" id="HSD-Ky-oT2"/>
-                <constraint firstItem="SHm-66-Tp3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="Iku-Se-wmT"/>
+                <constraint firstItem="SHm-66-Tp3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="Iku-Se-wmT"/>
                 <constraint firstItem="rhM-yU-Zwk" firstAttribute="height" secondItem="SHm-66-Tp3" secondAttribute="height" id="My8-tD-0lB"/>
                 <constraint firstAttribute="trailing" secondItem="UZv-yf-C9T" secondAttribute="trailing" constant="20" id="UHg-In-p4O"/>
                 <constraint firstAttribute="trailing" secondItem="rhM-yU-Zwk" secondAttribute="trailing" constant="20" id="Xy9-oG-7IF"/>

@@ -478,7 +478,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         // Fonts
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 35)
-            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 13)
+            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 15)
         }
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 60)
