@@ -25,26 +25,24 @@ class ImageGallery {
         let animal01 = ImagePackage(baseFileName: "02", caption: "Great Blue Heron", photographer: "Dale Arveson")
         let animal02 = ImagePackage(baseFileName: "08", caption: "Zebras, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
         let animal03 = ImagePackage(baseFileName: "09", caption: "Garden Cat", photographer: "Parker Lewis")
-        let animal04 = ImagePackage(baseFileName: "10", caption: "Walrus", photographer: "Kate Lewis")
-        let animal05 = ImagePackage(baseFileName: "16", caption: "Hummingbird", photographer: "Kate Lewis")
-        let animal06 = ImagePackage(baseFileName: "17", caption: "Frisbee Dog", photographer: "Kate Lewis")
-        let animal07 = ImagePackage(baseFileName: "26", caption: "Sea bird", photographer: "Kate Lewis")
-        let animal08 = ImagePackage(baseFileName: "27", caption: "Blacktail Buck", photographer: "Dale Arveson")
-        let animal09 = ImagePackage(baseFileName: "29", caption: "Polar Bear", photographer: "Kate Lewis")
-        let animal10 = ImagePackage(baseFileName: "31", caption: "Murph", photographer: "Kate Lewis")
-        let animal11 = ImagePackage(baseFileName: "32", caption: "Prairie Dog", photographer: "Dale Arveson")
-        let animal12 = ImagePackage(baseFileName: "35", caption: "Snowy Owl", photographer: "Dale Arveson")
-        let animal13 = ImagePackage(baseFileName: "38", caption: "Blacktail Doe", photographer: "Dale Arveson")
-        let animal14 = ImagePackage(baseFileName: "39", caption: "Donkey, South Africa", photographer: "Greg Jaehnig")
-        let animal15 = ImagePackage(baseFileName: "41", caption: "Goat, Okando, Namibia", photographer: "Greg Jaehnig")
-        let animal16 = ImagePackage(baseFileName: "42", caption: "Female Kudu, Otavi, Namibia", photographer: "Greg Jaehnig")
-        let animal17 = ImagePackage(baseFileName: "43", caption: "Male Kudu, Otavi, Namibia", photographer: "Greg Jaehnig")
-        let animal18 = ImagePackage(baseFileName: "44", caption: "Oryx, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
-        let animal19 = ImagePackage(baseFileName: "45", caption: "Conservation", photographer: "ErikHG Photography")
-        let animal20 = ImagePackage(baseFileName: "46", caption: "Harvest", photographer: "ErikHG Photography")
-        let animal21 = ImagePackage(baseFileName: "47", caption: "Elephants, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
-        let animal22 = ImagePackage(baseFileName: "48", caption: "Giraffe, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
-        let animal23 = ImagePackage(baseFileName: "49", caption: "White Lady Spider, Sossusvlei, Namibia", photographer: "Greg Jaehnig")
+        let animal04 = ImagePackage(baseFileName: "16", caption: "Anna’s Hummingbird, Northern California", photographer: "Kate Lewis")
+        let animal05 = ImagePackage(baseFileName: "17", caption: "Frisbee Dog", photographer: "Kate Lewis")
+        let animal06 = ImagePackage(baseFileName: "26", caption: "Black Legged Kittiwake, Chukchi Sea", photographer: "Kate Lewis")
+        let animal07 = ImagePackage(baseFileName: "27", caption: "Blacktail Buck", photographer: "Dale Arveson")
+        let animal08 = ImagePackage(baseFileName: "31", caption: "Bernal Heights, San Francisco", photographer: "Kate Lewis")
+        let animal09 = ImagePackage(baseFileName: "32", caption: "Prairie Dog", photographer: "Dale Arveson")
+        let animal10 = ImagePackage(baseFileName: "35", caption: "Snowy Owl", photographer: "Dale Arveson")
+        let animal11 = ImagePackage(baseFileName: "38", caption: "Blacktail Doe", photographer: "Dale Arveson")
+        let animal12 = ImagePackage(baseFileName: "39", caption: "Donkey, South Africa", photographer: "Greg Jaehnig")
+        let animal13 = ImagePackage(baseFileName: "41", caption: "Goat, Okando, Namibia", photographer: "Greg Jaehnig")
+        let animal14 = ImagePackage(baseFileName: "42", caption: "Female Kudu, Otavi, Namibia", photographer: "Greg Jaehnig")
+        let animal15 = ImagePackage(baseFileName: "43", caption: "Male Kudu, Otavi, Namibia", photographer: "Greg Jaehnig")
+        let animal16 = ImagePackage(baseFileName: "44", caption: "Oryx, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
+        let animal17 = ImagePackage(baseFileName: "45", caption: "Conservation", photographer: "ErikHG Photography")
+        let animal18 = ImagePackage(baseFileName: "46", caption: "Harvest", photographer: "ErikHG Photography")
+        let animal19 = ImagePackage(baseFileName: "47", caption: "Elephants, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
+        let animal20 = ImagePackage(baseFileName: "48", caption: "Giraffe, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
+        let animal21 = ImagePackage(baseFileName: "49", caption: "White Lady Spider, Sossusvlei, Namibia", photographer: "Greg Jaehnig")
 
         var animalPackagesArray = [
             animal01,
@@ -67,9 +65,7 @@ class ImageGallery {
             animal18,
             animal19,
             animal20,
-            animal21,
-            animal22,
-            animal23 ]
+            animal21 ]
         
 
         animalPackagesArray = self.shuffle(animalPackagesArray)
@@ -93,11 +89,11 @@ class ImageGallery {
         let nature04 = ImagePackage(baseFileName: "05", caption: "Sunrise, Otavi, Namibia", photographer: "Greg Jaehnig")
         let nature05 = ImagePackage(baseFileName: "06", caption: "Ruacana Falls, Namibia", photographer: "Greg Jaehnig")
         let nature06 = ImagePackage(baseFileName: "07", caption: "Oregon Coast", photographer: "Dale Arveson")
-        let nature07 = ImagePackage(baseFileName: "12", caption: "Torres del Paine", photographer: "Kate Lewis")
-        let nature08 = ImagePackage(baseFileName: "13", caption: "Moss", photographer: "Kate Lewis")
-        let nature09 = ImagePackage(baseFileName: "14", caption: "Cannon Beach", photographer: "Kate Lewis")
-        let nature10 = ImagePackage(baseFileName: "15", caption: "Ice Sunset", photographer: "Kate Lewis")
-        let nature11 = ImagePackage(baseFileName: "18", caption: "Canyon?", photographer: "Kate Lewis")
+        let nature07 = ImagePackage(baseFileName: "12", caption: "Torres del Paine, Chile", photographer: "Kate Lewis")
+        let nature08 = ImagePackage(baseFileName: "13", caption: "Olympic National Forest, Washington", photographer: "Kate Lewis")
+        let nature09 = ImagePackage(baseFileName: "14", caption: "Third Beach, Olympic National Park", photographer: "Kate Lewis")
+        let nature10 = ImagePackage(baseFileName: "15", caption: "Western Antarctica Peninsula", photographer: "Kate Lewis")
+        let nature11 = ImagePackage(baseFileName: "18", caption: "Grand Canyon National Park", photographer: "Kate Lewis")
         let nature12 = ImagePackage(baseFileName: "19", caption: "Deadvlei, Namibia", photographer: "Greg Jaehnig")
         let nature13 = ImagePackage(baseFileName: "22", caption: "Tulips", photographer: "Dale Arveson")
         let nature14 = ImagePackage(baseFileName: "24", caption: "Mosquito Creek", photographer: "Dale Arveson")
@@ -143,14 +139,14 @@ class ImageGallery {
         
         
         // PLACES
-        let place01 = ImagePackage(baseFileName: "11", caption: "Red Boat", photographer: "Kate Lewis")
+        let place01 = ImagePackage(baseFileName: "11", caption: "At Sea, Antarctica", photographer: "Kate Lewis")
         let place02 = ImagePackage(baseFileName: "20", caption: "Kolmanskop, Namibia", photographer: "Greg Jaehnig")
         let place03 = ImagePackage(baseFileName: "21", caption: "Rusty Reflection", photographer: "Dale Arveson")
         let place04 = ImagePackage(baseFileName: "23", caption: "Grant Island", photographer: "Grant Wilson")
-        let place05 = ImagePackage(baseFileName: "34", caption: "Boat beach", photographer: "Kate Lewis")
+        let place05 = ImagePackage(baseFileName: "34", caption: "Dominican Republic", photographer: "Kate Lewis")
         let place06 = ImagePackage(baseFileName: "36", caption: "Hands of Experience", photographer: "Dale Arveson")
         let place07 = ImagePackage(baseFileName: "37", caption: "Norway Pond", photographer: "Dale Arveson")
-        let place08 = ImagePackage(baseFileName: "40", caption: "Seattle Great Wheel", photographer: "Kate Lewis")
+        let place08 = ImagePackage(baseFileName: "40", caption: "London Eye, London, England", photographer: "Kate Lewis")
         let place09 = ImagePackage(baseFileName: "50", caption: "Reel", photographer: "ErikHG Photography")
         let place10 = ImagePackage(baseFileName: "51", caption: "Backroad", photographer: "ErikHG Photography")
         let place11 = ImagePackage(baseFileName: "52", caption: "Companion", photographer: "ErikHG Photography")
