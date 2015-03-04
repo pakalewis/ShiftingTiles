@@ -61,13 +61,13 @@
                     <rect key="frame" x="0.0" y="185" width="600" height="73"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UBl-0X-6Ot" userLabel="label3">
-                            <rect key="frame" x="30" y="28" width="465" height="18"/>
+                            <rect key="frame" x="30" y="28" width="477" height="18"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roundedSquareIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3DV-hN-RFc">
-                            <rect key="frame" x="515" y="9" width="55" height="55"/>
+                            <rect key="frame" x="527" y="15" width="43" height="43"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="3DV-hN-RFc" secondAttribute="height" multiplier="1:1" id="cWV-pW-KCO"/>
                             </constraints>
@@ -77,7 +77,7 @@
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="UBl-0X-6Ot" secondAttribute="centerY" id="d7V-bm-VS6"/>
                         <constraint firstItem="3DV-hN-RFc" firstAttribute="leading" secondItem="UBl-0X-6Ot" secondAttribute="trailing" constant="20" id="es1-ad-LtT"/>
-                        <constraint firstItem="3DV-hN-RFc" firstAttribute="height" secondItem="daN-N8-zZO" secondAttribute="height" multiplier="0.75" id="hjN-qr-3Vw"/>
+                        <constraint firstItem="3DV-hN-RFc" firstAttribute="height" secondItem="daN-N8-zZO" secondAttribute="height" multiplier="0.6" id="hjN-qr-3Vw"/>
                         <constraint firstAttribute="centerY" secondItem="3DV-hN-RFc" secondAttribute="centerY" id="pif-VI-o0M"/>
                     </constraints>
                 </view>
@@ -118,7 +118,6 @@
                 <constraint firstItem="jJW-zS-DhW" firstAttribute="leading" secondItem="Z62-53-j8p" secondAttribute="trailing" constant="10" id="dX2-P0-Ocw"/>
                 <constraint firstItem="daN-N8-zZO" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" id="jzq-Je-c6c"/>
                 <constraint firstItem="BvP-LA-Sqd" firstAttribute="bottom" secondItem="3mM-eG-6vu" secondAttribute="bottom" multiplier="0.9" id="lAZ-aZ-q54"/>
-                <constraint firstItem="WID-Yx-aM4" firstAttribute="top" secondItem="Mkh-XC-1nC" secondAttribute="bottom" id="mlw-Fj-W87"/>
                 <constraint firstItem="Z62-53-j8p" firstAttribute="centerY" secondItem="jJW-zS-DhW" secondAttribute="centerY" id="mzV-23-VQw"/>
                 <constraint firstItem="jJW-zS-DhW" firstAttribute="top" secondItem="daN-N8-zZO" secondAttribute="bottom" constant="20" id="oNw-sO-fY2"/>
                 <constraint firstItem="WID-Yx-aM4" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" id="pGc-q5-3lU"/>
@@ -127,11 +126,6 @@
                 <constraint firstAttribute="trailing" secondItem="WID-Yx-aM4" secondAttribute="trailing" id="wcj-Dj-Rbt"/>
                 <constraint firstAttribute="trailing" secondItem="jJW-zS-DhW" secondAttribute="trailing" constant="15" id="z7h-Rf-P65"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="mlw-Fj-W87"/>
-                </mask>
-            </variation>
         </view>
     </objects>
     <resources>
