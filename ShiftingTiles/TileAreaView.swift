@@ -36,6 +36,7 @@ class TileAreaView: UIView {
     var highlightedView = UIView()
     
     // Vars for the tiles to be swapped
+    var foundTileWithPoint : Tile?
     var firstTile : Tile?
     var secondTile : Tile?
 
@@ -52,7 +53,7 @@ class TileAreaView: UIView {
         
         self.createTileArray()
         self.layoutTiles()
-        self.shuffleImages()
+        self.shuffleTiles()
         if userDefaults.boolForKey("rotationsOn") {
             self.rotateTiles()
         }
@@ -148,7 +149,7 @@ class TileAreaView: UIView {
     
     
     // MARK: SHUFFLING / SWAPPING
-    func shuffleImages() {
+    func shuffleTiles() {
 
         // Swap random tiles a bunch of times
         for index in 0...self.tilesPerRow * 20 {
@@ -168,7 +169,7 @@ class TileAreaView: UIView {
         
         // Ensure that the puzzle is shuffled
         if self.checkIfSolved() {
-            self.shuffleImages()
+            self.shuffleTiles()
         }
     }
     
@@ -229,8 +230,6 @@ class TileAreaView: UIView {
 
     
     func swapLines(line1: [Tile], line2: [Tile]) {
-        
-
         // swap the tiles in the lines
         for counter in 0..<line1.count {
             self.swapTiles(line1[counter], tile2: line2[counter], duration: 0.3, completionClosure: { () -> () in
@@ -335,7 +334,8 @@ class TileAreaView: UIView {
         if !self.isPuzzleSolved && self.allowTileShifting {
             switch gesture.state {
             case .Began:
-                if self.findFirstTileWithPoint(startingPoint) {
+                if self.findTileWithPoint(startingPoint, searchingForFirst: true) {
+                    self.firstTile = self.foundTileWithPoint!
                     self.bringSubviewToFront(self.firstTile!.imageView)
                     self.firstTile!.originalFrame = self.firstTile!.imageView.frame
                 }
@@ -352,7 +352,8 @@ class TileAreaView: UIView {
             case .Ended:
                 if self.firstTile != nil {
                     var endingPoint :CGPoint = gesture.locationInView(self)
-                    if self.findSecondTileWithPoint(endingPoint) {
+                    if self.findTileWithPoint(endingPoint, searchingForFirst: false) {
+                        self.secondTile = self.foundTileWithPoint!
                         self.secondTile!.originalFrame = self.secondTile!.imageView.frame
                         self.swapTiles(self.firstTile!, tile2: self.secondTile!, duration: 0.3, completionClosure: { () -> () in
                             // Swap the tiles and then check if the puzzle is solved
@@ -493,37 +494,23 @@ class TileAreaView: UIView {
 
 
 
-    func findFirstTileWithPoint(point: CGPoint) -> Bool {
-        var currentTile = self.tileArray[0][0]
+    func findTileWithPoint(point: CGPoint, searchingForFirst : Bool) -> Bool {
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
-                currentTile = self.tileArray[index1][index2]
-                if CGRectContainsPoint(currentTile.imageView.frame, point) {
-                    self.firstTile = currentTile
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
-    func findSecondTileWithPoint(point: CGPoint) -> Bool {
-        var currentTile = self.tileArray[0][0]
-        for index1 in 0..<self.tilesPerRow {
-            for index2 in 0..<self.tilesPerRow {
-                currentTile = self.tileArray[index1][index2]
-                if CGRectContainsPoint(currentTile.imageView.frame, point) {
-                    if currentTile.imageView != self.firstTile!.imageView {
-                        self.secondTile = currentTile
+                self.foundTileWithPoint = self.tileArray[index1][index2]
+                if CGRectContainsPoint(self.foundTileWithPoint!.imageView.frame, point) {
+                    if searchingForFirst {
                         return true
+                    } else { // searching for second tile
+                        if self.foundTileWithPoint?.imageView.tag != self.firstTile?.imageView.tag {
+                            return true
+                        }
                     }
                 }
             }
         }
         return false
     }
-
-
 
 }
 

@@ -25,7 +25,7 @@ class ImageGallery {
         let animal01 = ImagePackage(baseFileName: "02", caption: "Great Blue Heron", photographer: "Dale Arveson")
         let animal02 = ImagePackage(baseFileName: "08", caption: "Zebras, Etosha National Park, Namibia", photographer: "Greg Jaehnig")
         let animal03 = ImagePackage(baseFileName: "09", caption: "Garden Cat", photographer: "Parker Lewis")
-        let animal04 = ImagePackage(baseFileName: "16", caption: "Anna’s Hummingbird, Northern California", photographer: "Kate Lewis")
+        let animal04 = ImagePackage(baseFileName: "16", caption: "Anna’s Hummingbird, California", photographer: "Kate Lewis")
         let animal05 = ImagePackage(baseFileName: "17", caption: "Frisbee Dog", photographer: "Kate Lewis")
         let animal06 = ImagePackage(baseFileName: "26", caption: "Black Legged Kittiwake, Chukchi Sea", photographer: "Kate Lewis")
         let animal07 = ImagePackage(baseFileName: "27", caption: "Blacktail Buck", photographer: "Dale Arveson")

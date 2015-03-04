@@ -1,3 +1,6 @@
+# ShiftingTiles
+ShiftingTiles: A Picture Puzzle Game
+
 Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
 Free to download from the App Store: https://itunes.apple.com/us/app/shifting-tiles/id962290655
