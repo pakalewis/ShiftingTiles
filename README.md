@@ -2,7 +2,9 @@ Shifting Tiles is a picture puzzle game. Solve the puzzle by shifting the tiles!
 
 Free to download from the App Store: https://itunes.apple.com/us/app/shifting-tiles/id962290655
 
-• Choose from a nice variety of high quality images. Alternatively, you can select a photo from your gallery or take a picture with the camera.
+• Choose from a nice variety of high quality images in three categories: Animals, Nature, and Places.
+
+• Alternatively, you can take a picture with the camera or select a photo from your gallery.
 
 • You select the difficulty level. The grid sizes range from 2x2 to 10x10.
 
@@ -11,6 +13,8 @@ Free to download from the App Store: https://itunes.apple.com/us/app/shifting-ti
 • For an extra challenge, turn on Rotations in the settings menu. Double tap a tile to rotate it 90°.
 
 • Hints are available if you get stuck.
+
+• View statistics on how many puzzles you solve.
 
 • Choose your favorite color scheme from 5 available options.
 
@@ -24,6 +28,8 @@ ________________________________________________________________________________
 ![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3.png)
 __________________________________________________________________________________________
 ![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-4.png)
+__________________________________________________________________________________________
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-5.png)
 __________________________________________________________________________________________
 
 Development Features:
