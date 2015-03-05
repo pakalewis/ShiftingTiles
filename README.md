@@ -21,15 +21,15 @@ Free to download from the App Store: https://itunes.apple.com/us/app/shifting-ti
 • Suitable for all ages.
 
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-1.png)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/Screenshots/screenshot-1.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-2.png)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/Screenshots/screenshot-2.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-3.png)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/Screenshots/screenshot-3.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-4.png)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/Screenshots/screenshot-4.png)
 __________________________________________________________________________________________
-![](https://github.com/pakalewis/ShiftingTiles/blob/master/screenshot-5.png)
+![](https://github.com/pakalewis/ShiftingTiles/blob/master/Screenshots/screenshot-5.png)
 __________________________________________________________________________________________
 
 Development Features:
