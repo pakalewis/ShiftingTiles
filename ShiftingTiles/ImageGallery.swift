@@ -11,18 +11,14 @@ import UIKit
 
 class ImageGallery {
     
-    
     var animalImagePackages : [ImagePackage]!
     var natureImagePackages : [ImagePackage]!
     var placesImagePackages : [ImagePackage]!
-    
-
 
     
     init() {
         
         // ANIMAL
-
         self.animalImagePackages = [
             ImagePackage(baseFileName: "02", caption: "Great Blue Heron", photographer: "Dale Arveson"),
             ImagePackage(baseFileName: "08", caption: "Zebras, Etosha National Park, Namibia", photographer: "Greg Jaehnig"),
@@ -46,11 +42,9 @@ class ImageGallery {
             ImagePackage(baseFileName: "48", caption: "Giraffe, Etosha National Park, Namibia", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "49", caption: "White Lady Spider, Sossusvlei, Namibia", photographer: "Greg Jaehnig")
         ]
-        
-        self.animalImagePackages = self.shuffle(self.animalImagePackages)
+        self.animalImagePackages.shuffle()
         
   
-        
         // NATURE
         self.natureImagePackages = [
             ImagePackage(baseFileName: "01", caption: "Tiger Mountain, Washington", photographer: "Greg Jaehnig"),
@@ -73,9 +67,7 @@ class ImageGallery {
             ImagePackage(baseFileName: "33", caption: "Lavender", photographer: "Dale Arveson"),
             ImagePackage(baseFileName: "56", caption: "Olympic", photographer: "ErikHG Photography")
         ]
-        
-        self.natureImagePackages = self.shuffle(self.natureImagePackages)
-        
+        self.natureImagePackages.shuffle()
         
         
         // PLACES
@@ -95,25 +87,21 @@ class ImageGallery {
             ImagePackage(baseFileName: "54", caption: "Nærøyfjord", photographer: "ErikHG Photography"),
             ImagePackage(baseFileName: "55", caption: "Bog", photographer: "ErikHG Photography")
         ]
-        
-        self.placesImagePackages = self.shuffle(self.placesImagePackages)
-        
-        
+        self.placesImagePackages.shuffle()
     }
-    
-    
-    
-    
-    
-    func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
-        let count = countElements(list)
-        for i in 0..<(count - 2) {
-            let j = Int(arc4random_uniform(UInt32(count - i))) + i
-            swap(&list[i], &list[j])
+}
+
+
+extension Array
+{
+    // Randomizes the order of an array's elements.
+    mutating func shuffle()
+    {
+        for _ in 0..<self.count
+        {
+            sort { (_,_) in arc4random() < arc4random() }
         }
-        return list
     }
-    
 }
 
 
