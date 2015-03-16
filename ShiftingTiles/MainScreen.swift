@@ -22,9 +22,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     let colorPalette = ColorPalette()
     let userDefaults = NSUserDefaults.standardUserDefaults()
     var imageGallery = ImageGallery()
-    var imagePackageArray : [ImagePackage]?
+    var currentImagePackageArray : [ImagePackage]?
     var currentImagePackage : ImagePackage?
-    var currentCategory = 1
+    var currentCategory = ""
     var tilesPerRow = 3
 
     
@@ -75,6 +75,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.sendSubviewToBack(self.imageCapturingButtonArea)
         self.imageCapturingButtonArea.alpha = 0
 
+        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
+        self.tilesPerRowLabel.text = "3 x 3"
+
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
@@ -95,40 +98,34 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.updateColorsAndFonts()
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        self.imageCollection.delegate = self
-        self.imageCollection.dataSource = self
-        
         // Set user defaults upon the first launch
         if(!self.userDefaults.boolForKey("firstlaunch1.0")){
+            // Only gets called once ever
             self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
             self.userDefaults.setBool(true, forKey: "congratsOn")
             self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
             self.userDefaults.synchronize()
         }
         
-        // Register the nib for the CollectionView cells
+
+        // CollectionView
+        self.imageCollection.delegate = self
+        self.imageCollection.dataSource = self
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
         self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
+        
+        
+        // Randomly choose a category and set the initial image
+        var randomInt = Int(arc4random_uniform(UInt32(3)))
+        var categoriesAsStrings = ["ANIMALS", "NATURE", "PLACES"]
+        self.shouldChangeToCategory(categoriesAsStrings[randomInt])
+        // Set initial image to display
+        self.mainImageView.image = self.currentImagePackage?.image
 
-        // Choose which size of images to use based on device
-        self.imagePackageArray = self.imageGallery.animalImagePackages
-        self.currentImagePackage = self.imagePackageArray![0]
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
-        }
-        self.mainImageView.image = self.currentImagePackage?.image!
 
-        // Tiles per row label
-        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
-        self.tilesPerRow = 3
-        self.tilesPerRowLabel.text = "3 x 3"
     }
     
     
@@ -195,59 +192,55 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func animalCategoryPressed(sender: AnyObject) {
-        self.changeToCategory(1)
-    }
-    
-    
-    @IBAction func natureCategoryPressed(sender: AnyObject) {
-        self.changeToCategory(2)
-    }
-    
-    
-    @IBAction func placesCategoryPressed(sender: AnyObject) {
-        self.changeToCategory(3)
-    }
-    
-    
-    func changeToCategory(category: Int) {
-        // Check if it's necessary to change
-        if self.currentCategory != category {
-            // Update the imagePackageArray
-            self.currentCategory = category
-            if category == 1 {
-                self.imagePackageArray = self.imageGallery.animalImagePackages
-            } else if category == 2 {
-                self.imagePackageArray = self.imageGallery.natureImagePackages
-            } else if category == 3 {
-                self.imagePackageArray = self.imageGallery.placesImagePackages
-            }
-            
-            // Update the currentImagePackage
-            self.currentImagePackage = self.imagePackageArray![0]
-            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-                self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
-            }
-            if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-                self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
-            }
-            
-            //Update the mainImageView and the CollectionView
-            UIView.transitionWithView(self.mainImageView,
-                duration: 0.5,
-                options: .TransitionCrossDissolve,
-                animations: { self.mainImageView.image = self.currentImagePackage?.image },
-                completion: nil)
-            self.imageCollection.reloadData()
+        if self.shouldChangeToCategory("ANIMALS") {
+            self.updateMainImageView()
         }
         self.shrinkCategories()
     }
     
-
+    
+    @IBAction func natureCategoryPressed(sender: AnyObject) {
+        if self.shouldChangeToCategory("NATURE") {
+            self.updateMainImageView()
+        }
+        self.shrinkCategories()
+    }
+    
+    
+    @IBAction func placesCategoryPressed(sender: AnyObject) {
+        if self.shouldChangeToCategory("PLACES") {
+            self.updateMainImageView()
+        }
+        self.shrinkCategories()
+    }
+    
+    
+    func shouldChangeToCategory(category: NSString) -> Bool {
+        // Check if it's necessary to change
+        if !category.isEqualToString(self.currentCategory) {
+            // Update the currentCategory and currentImagePackageArray
+            self.currentCategory = category
+            if category.isEqualToString("ANIMALS") {
+                self.currentImagePackageArray = self.imageGallery.animalImagePackages
+            } else if category.isEqualToString("NATURE") {
+                self.currentImagePackageArray = self.imageGallery.natureImagePackages
+            } else if category.isEqualToString("PLACES") {
+                self.currentImagePackageArray = self.imageGallery.placesImagePackages
+            }
+            self.updateCurrentImagePackageWithIndex(0)
+            self.imageCollection.reloadData()
+            return true
+        }
+        return false
+    }
+    
+    
+    
     
     //MARK: COLLECTION VIEW
     // Number of cells = number of images
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.imagePackageArray!.count
+        return self.currentImagePackageArray!.count
     }
     
     
@@ -260,37 +253,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Create cell from nib and load the appropriate image
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
-        cell.imageView.image = UIImage(named: self.imagePackageArray![indexPath.row].getSmallFileName())
+        cell.imageView.image = UIImage(named: self.currentImagePackageArray![indexPath.row].getSmallFileName())
         return cell
     }
     
     
     // Selecting a cell loads the image to the main image view
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        if self.categoriesHeightConstraint.constant != 0 {
-            self.shrinkCategories()
-        }
-        
-        // Grab currentImagePackage
-        self.currentImagePackage = self.imagePackageArray![indexPath.row]
-        
-        // Set the correct size image
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
-        }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
-        }
-        
-        // Update mainImageView
-        UIView.transitionWithView(self.mainImageView,
-            duration: 0.5,
-            options: .TransitionCrossDissolve,
-            animations: { self.mainImageView.image = self.currentImagePackage?.image },
-            completion: nil)
-
+        self.updateCurrentImagePackageWithIndex(indexPath.row)
+        self.updateMainImageView()
+        self.shrinkCategories()
     }
+    
     
     
     
@@ -325,10 +299,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                         self.captureSession!.startRunning()
                     }
                     
-                    // Display the capture button and block out other controls
+                    // Display the imageCapturingArea and captureImageButton button
                     self.view.bringSubviewToFront(self.imageCapturingButtonArea)
                     self.imageCapturingButtonArea.alpha = 1
-                    
                     self.imageCapturingAreaTopConstraint.constant = 5
                     UIView.animateWithDuration(0.8, animations: { () -> Void in
                         self.view.layoutIfNeeded()
@@ -408,6 +381,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.captureSession!.stopRunning()
         self.previewLayer?.removeFromSuperlayer()
 
+        // Slide the imageCapturingArea offscreen
         self.imageCapturingAreaTopConstraint.constant = 300
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.view.layoutIfNeeded()
@@ -420,6 +394,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func captureImage(sender: AnyObject) {
+        // Slide the imageCapturingArea offscreen
         self.imageCapturingAreaTopConstraint.constant = 300
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.view.layoutIfNeeded()
@@ -537,6 +512,27 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     // MARK: Other methods
+    func updateCurrentImagePackageWithIndex(index: Int) {
+        // Load the most appropriate size image
+        self.currentImagePackage = self.currentImagePackageArray![index]
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
+        }
+    }
+    
+    
+    func updateMainImageView() {
+        UIView.transitionWithView(self.mainImageView,
+            duration: 0.5,
+            options: .TransitionCrossDissolve,
+            animations: { self.mainImageView.image = self.currentImagePackage?.image },
+            completion: nil)
+    }
+    
+    
     @IBAction func rightButtonPressed(sender: AnyObject) {
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
