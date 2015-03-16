@@ -475,28 +475,25 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        // Crop the picked image to square
         var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
-        
-        
         var imageWidth  = imagePicked!.size.width
         var imageHeight  = imagePicked!.size.height
         var rect = CGRect()
-        if ( imageWidth < imageHeight) {
-            // Potrait mode
+        if ( imageWidth < imageHeight) { // Image is in potrait mode
             rect = CGRectMake (0, (imageHeight - imageWidth) / 2, imageWidth, imageWidth);
-        } else {
-            // Landscape mode
+        } else { // Image is in landscape mode
             rect = CGRectMake ((imageWidth - imageHeight) / 2, 0, imageHeight, imageHeight);
         }
-        
         var croppedCGImage = CGImageCreateWithImageInRect(imagePicked?.CGImage, rect)
         var croppedUIImage = UIImage(CGImage: croppedCGImage)
         
+        // Update currentImagePackage
         self.currentImagePackage = ImagePackage(baseFileName: "", caption: "", photographer: "")
         self.currentImagePackage?.image = croppedUIImage!
         self.mainImageView.image = croppedUIImage!
 
-        
+        // Dismiss picker
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.selectCategoryButton.userInteractionEnabled = true
     }

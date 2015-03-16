@@ -34,6 +34,7 @@ class SettingsScreen: UIViewController {
     
     
     // Palettes
+    @IBOutlet var colorPalettes: NSArray?
     @IBOutlet weak var colorPalette1: UIView!
     @IBOutlet weak var lightColor1: UIView!
     @IBOutlet weak var darkColor1: UIView!
@@ -73,19 +74,19 @@ class SettingsScreen: UIViewController {
         var congratsTap = UITapGestureRecognizer(target: self, action: "congratsTapped:")
         self.congratsContainer.addGestureRecognizer(congratsTap)
         
-        var colorPalette1Tap = UITapGestureRecognizer(target: self, action: "colorPalette1Selected:")
+        var colorPalette1Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
         self.colorPalette1.addGestureRecognizer(colorPalette1Tap)
         
-        var colorPalette2Tap = UITapGestureRecognizer(target: self, action: "colorPalette2Selected:")
+        var colorPalette2Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
         self.colorPalette2.addGestureRecognizer(colorPalette2Tap)
         
-        var colorPalette3Tap = UITapGestureRecognizer(target: self, action: "colorPalette3Selected:")
+        var colorPalette3Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
         self.colorPalette3.addGestureRecognizer(colorPalette3Tap)
         
-        var colorPalette4Tap = UITapGestureRecognizer(target: self, action: "colorPalette4Selected:")
+        var colorPalette4Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
         self.colorPalette4.addGestureRecognizer(colorPalette4Tap)
         
-        var colorPalette5Tap = UITapGestureRecognizer(target: self, action: "colorPalette5Selected:")
+        var colorPalette5Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
         self.colorPalette5.addGestureRecognizer(colorPalette5Tap)
         
         
@@ -103,16 +104,16 @@ class SettingsScreen: UIViewController {
         
         
         // Set light and dark colors for the palette options
-        self.lightColor1.backgroundColor = self.colorPalette.lightColor1
-        self.darkColor1.backgroundColor = self.colorPalette.darkColor1
-        self.lightColor2.backgroundColor = self.colorPalette.lightColor2
-        self.darkColor2.backgroundColor = self.colorPalette.darkColor2
-        self.lightColor3.backgroundColor = self.colorPalette.lightColor3
-        self.darkColor3.backgroundColor = self.colorPalette.darkColor3
-        self.lightColor4.backgroundColor = self.colorPalette.lightColor4
-        self.darkColor4.backgroundColor = self.colorPalette.darkColor4
-        self.lightColor5.backgroundColor = self.colorPalette.lightColor5
-        self.darkColor5.backgroundColor = self.colorPalette.darkColor5
+        self.lightColor1.backgroundColor = self.colorPalette.lightColors[0]
+        self.darkColor1.backgroundColor = self.colorPalette.darkColors[0]
+        self.lightColor2.backgroundColor = self.colorPalette.lightColors[1]
+        self.darkColor2.backgroundColor = self.colorPalette.darkColors[1]
+        self.lightColor3.backgroundColor = self.colorPalette.lightColors[2]
+        self.darkColor3.backgroundColor = self.colorPalette.darkColors[2]
+        self.lightColor4.backgroundColor = self.colorPalette.lightColors[3]
+        self.darkColor4.backgroundColor = self.colorPalette.darkColors[3]
+        self.lightColor5.backgroundColor = self.colorPalette.lightColors[4]
+        self.darkColor5.backgroundColor = self.colorPalette.darkColors[4]
     }
     
     
@@ -143,31 +144,15 @@ class SettingsScreen: UIViewController {
         self.userDefaults.synchronize()
     }
     
-    
-    func colorPalette1Selected(sender: UIGestureRecognizer) {
-        self.userDefaults.setInteger(1, forKey: "colorPaletteInt")
+
+    func colorPaletteSelected(sender: UIGestureRecognizer) {
+        var tappedPalette = sender.view
+        var index = self.colorPalettes?.indexOfObject(tappedPalette!)
+        self.userDefaults.setInteger(index!, forKey: "colorPaletteInt")
         self.updateColorsAndFonts()
     }
+
     
-    func colorPalette2Selected(sender: UIGestureRecognizer) {
-        self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
-        self.updateColorsAndFonts()
-    }
-    
-    func colorPalette3Selected(sender: UIGestureRecognizer) {
-        self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
-        self.updateColorsAndFonts()
-    }
-    
-    func colorPalette4Selected(sender: UIGestureRecognizer) {
-        self.userDefaults.setInteger(4, forKey: "colorPaletteInt")
-        self.updateColorsAndFonts()
-    }
-    
-    func colorPalette5Selected(sender: UIGestureRecognizer) {
-        self.userDefaults.setInteger(5, forKey: "colorPaletteInt")
-        self.updateColorsAndFonts()
-    }
     
     
     func updateColorsAndFonts() {

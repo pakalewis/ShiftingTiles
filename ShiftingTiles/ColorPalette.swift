@@ -14,60 +14,45 @@ class ColorPalette {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     
+    // The five combos are: 
     // Greens
-    var lightColor1 = UIColor(hex: 0x2f9000, alpha: 1)
-    var darkColor1 = UIColor(hex: 0x083500, alpha: 1)
-
     // Yellow/Blue
-    var lightColor2 = UIColor(hex: 0xf9ec48, alpha: 1)
-    var darkColor2 = UIColor(hex: 0x0c1d9a, alpha: 1)
-    
     // Blues
-    var lightColor3 = UIColor(hex: 0x73b9e6, alpha: 1)
-    var darkColor3 = UIColor(hex: 0x2e4174, alpha: 1)
-    
     // Gryffindor
-    var lightColor4 = UIColor(hex: 0xd3a625, alpha: 1)
-    var darkColor4 = UIColor(hex: 0x740001, alpha: 1)
-
     // Pink/Purple
-    var lightColor5 = UIColor(hex: 0xc79dd7, alpha: 1)
-    var darkColor5 = UIColor(hex: 0x673888, alpha: 1)
+
+    let lightColors = [
+        UIColor(hex: 0x2f9000, alpha: 1),
+        UIColor(hex: 0xf9ec48, alpha: 1),
+        UIColor(hex: 0x73b9e6, alpha: 1),
+        UIColor(hex: 0xd3a625, alpha: 1),
+        UIColor(hex: 0xc79dd7, alpha: 1)
+    ]
     
+    let darkColors = [
+        UIColor(hex: 0x083500, alpha: 1),
+        UIColor(hex: 0x0c1d9a, alpha: 1),
+        UIColor(hex: 0x2e4174, alpha: 1),
+        UIColor(hex: 0x740001, alpha: 1),
+        UIColor(hex: 0x673888, alpha: 1)
+    ]
+
+
     
     func fetchLightColor() -> UIColor {
-        switch userDefaults.integerForKey("colorPaletteInt") {
-        case 1:
-            return lightColor1
-        case 2:
-            return lightColor2
-        case 3:
-            return lightColor3
-        case 4:
-            return lightColor4
-        case 5:
-            return lightColor5
-        default:
-            return lightColor1
+        let index = userDefaults.integerForKey("colorPaletteInt")
+        if index >= 0 && index < 5 {
+            return self.lightColors[index]
         }
+        return self.lightColors[0]
     }
 
 
     func fetchDarkColor() -> UIColor {
-        switch userDefaults.integerForKey("colorPaletteInt") {
-        case 1:
-            return darkColor1
-        case 2:
-            return darkColor2
-        case 3:
-            return darkColor3
-        case 4:
-            return darkColor4
-        case 5:
-            return darkColor5
-        default:
-            return darkColor1
+        let index = userDefaults.integerForKey("colorPaletteInt")
+        if index >= 0 && index < 5 {
+            return self.darkColors[index]
         }
+        return self.darkColors[0]
     }
-
 }
