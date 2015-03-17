@@ -18,8 +18,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     var currentImagePackage : ImagePackage!
     var tilesPerRow = 3
-    var messages : [String]!
-    var originalIsBeingShown = false
+    var congratsMessages : [String]!
+    var originalImageShown = false
     
     var topButtons = [UIImageView]()
     var leftButtons = [UIImageView]()
@@ -54,7 +54,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.messages = [
+        self.congratsMessages = [
             NSLocalizedString("Message01", comment: ""),
             NSLocalizedString("Message02", comment: ""),
             NSLocalizedString("Message03", comment: ""),
@@ -169,7 +169,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     func handleLinePan(gesture:UIPanGestureRecognizer) {
         var startingPoint :CGPoint = gesture.locationInView(self.view)
-        if  !self.originalIsBeingShown {
+        if  !self.originalImageShown {
             switch gesture.state {
             case .Began:
                 if self.findButtonWithPoint(startingPoint) {
@@ -314,11 +314,11 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     // MARK: BUTTONS
-    // These two funcs toggle the image on and off
+    // These two funcs toggle the original image on and off
     @IBAction func showOriginalPressed(sender: AnyObject) {
         
-        if !self.originalIsBeingShown {
-            self.originalIsBeingShown = true
+        if !self.originalImageShown {
+            self.originalImageShown = true
             self.tileArea.allowTileShifting = false
             self.view.bringSubviewToFront(self.originalImageView)
             self.originalImageView.alpha = 1
@@ -335,7 +335,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                 self.leftButtons[index].alpha = 0
             }
         } else {
-            self.originalIsBeingShown = false
+            self.originalImageShown = false
             self.originalImageView.alpha = 0
             self.view.sendSubviewToBack(self.originalImageView)
 
@@ -357,16 +357,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(sender: AnyObject) {
-        self.tileArea.findTilesToSwap()
-        if self.tileArea.firstTile != nil && self.tileArea.secondTile != nil {
-            // Tiles are in correct order
-            self.tileArea.wiggleTile(self.tileArea.firstTile!)
-            self.tileArea.wiggleTile(self.tileArea.secondTile!)
-        } else {
-            self.tileArea.findFirstUnorientedTile()
-            self.tileArea.wiggleTile(self.tileArea.firstUnorientedTile!)
-        }
-        
+        self.tileArea.wiggleTiles()
     }
    
 
@@ -418,8 +409,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         // Display congrats message
         if userDefaults.boolForKey("congratsOn") {
-            var randomInt = Int(arc4random_uniform(UInt32(self.messages.count)))
-            self.congratsMessage.text = self.messages[randomInt]
+            var randomInt = Int(arc4random_uniform(UInt32(self.congratsMessages.count)))
+            self.congratsMessage.text = self.congratsMessages[randomInt]
         }
 
         

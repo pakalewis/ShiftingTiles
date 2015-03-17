@@ -294,7 +294,18 @@ class TileAreaView: UIView {
         }
     }
     
-        
+    func wiggleTiles() {
+        self.findTilesToSwap()
+        if self.firstTile != nil && self.secondTile != nil {
+            // Tiles are not in correct order
+            self.wiggleTile(self.firstTile!)
+            self.wiggleTile(self.secondTile!)
+        } else {
+            self.findFirstUnorientedTile()
+            self.wiggleTile(self.firstUnorientedTile!)
+        }        
+    }
+    
     func wiggleTile(tileToWiggle : Tile) {
         // Animation calculations
         let fullRotation = CGFloat(M_PI * 2) / 30
@@ -511,6 +522,7 @@ class TileAreaView: UIView {
         }
         return false
     }
+
 
 }
 
