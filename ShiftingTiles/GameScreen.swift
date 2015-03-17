@@ -23,12 +23,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     var topButtons = [UIImageView]()
     var leftButtons = [UIImageView]()
-    var firstButton : UIImageView?
-    var secondButton : UIImageView?
+    var rowColumnHandle : UIImageView?
     var firstButtonOriginalFrame : CGRect?
-    var secondButtonOriginalFrame : CGRect?
     var firstLineOfTiles: [Tile]?
-    var secondLineOfTiles: [Tile]?
     
     // MARK: VIEWS
     @IBOutlet weak var originalImageView: UIImageView!
@@ -111,8 +108,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.layer.borderWidth = 2
         
         // Add row/column gestures
-        let panGesture = UIPanGestureRecognizer(target: self, action: "handleLinePan:")
-        self.view.addGestureRecognizer(panGesture)
+        let rowColumnGesture = UIPanGestureRecognizer(target: self, action: "handleRowColumnPan:")
+        self.view.addGestureRecognizer(rowColumnGesture)
         self.initializeRowColumnGestures()
         
         // Set text fields
@@ -167,71 +164,69 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
 
     
-    func handleLinePan(gesture:UIPanGestureRecognizer) {
-        var startingPoint :CGPoint = gesture.locationInView(self.view)
+    func handleRowColumnPan(gesture:UIPanGestureRecognizer) {
+        var selectedRowColumnHandle : UIImageView?
+        // Determine if any movement should occur
         if  !self.originalImageShown {
             switch gesture.state {
             case .Began:
-                if self.findButtonWithPoint(startingPoint) {
-                    self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.firstButton!.tag)
+                var startingPoint:CGPoint = gesture.locationInView(self.view)
+                selectedRowColumnHandle = self.findButtonWithPoint(startingPoint, first: true)
+                if selectedRowColumnHandle != nil { // The first handle was detected
+                    self.rowColumnHandle = selectedRowColumnHandle
+                    self.firstLineOfTiles = self.tileArea.makeLineOfTiles(selectedRowColumnHandle!.tag)
                     for tile in self.firstLineOfTiles! {
                         self.tileArea.bringSubviewToFront(tile.imageView)
                         tile.originalFrame = tile.imageView.frame
                     }
-                    self.view.bringSubviewToFront(self.firstButton!)
-                    self.firstButtonOriginalFrame = self.firstButton!.frame
+                    self.view.bringSubviewToFront(selectedRowColumnHandle!)
+                    self.firstButtonOriginalFrame = selectedRowColumnHandle!.frame
                 }
             case .Changed:
-                if self.firstButton != nil {
-                    
+                if self.rowColumnHandle != nil {
                     let translation = gesture.translationInView(self.view)
-                    
-                    if (self.firstButton!.tag - 100) < 0 { // line 1 is a column
-                        if CGRectGetMinX(self.firstButton!.frame) + translation.x > CGRectGetMinX(self.tileArea.frame) && CGRectGetMaxX(self.firstButton!.frame) + translation.x < CGRectGetMaxX(self.tileArea.frame) {
+                    if (self.rowColumnHandle!.tag - 100) < 0 { // line 1 is a column
+                        if CGRectGetMinX(self.rowColumnHandle!.frame) + translation.x > CGRectGetMinX(self.tileArea.frame) && CGRectGetMaxX(self.rowColumnHandle!.frame) + translation.x < CGRectGetMaxX(self.tileArea.frame) {
                             for tile in self.firstLineOfTiles! {
                                 tile.imageView.center.x = tile.imageView.center.x + translation.x
                             }
-                            self.firstButton!.center.x = self.firstButton!.center.x + translation.x
+                            self.rowColumnHandle!.center.x = self.rowColumnHandle!.center.x + translation.x
                         }
                     } else { // line 1 is a Row
-                        if CGRectGetMinY(self.firstButton!.frame) + translation.y > CGRectGetMinY(self.tileArea.frame) && CGRectGetMaxY(self.firstButton!.frame) + translation.y < CGRectGetMaxY(self.tileArea.frame) {
+                        if CGRectGetMinY(self.rowColumnHandle!.frame) + translation.y > CGRectGetMinY(self.tileArea.frame) && CGRectGetMaxY(self.rowColumnHandle!.frame) + translation.y < CGRectGetMaxY(self.tileArea.frame) {
                             for tile in self.firstLineOfTiles! {
                                 tile.imageView.center.y = tile.imageView.center.y + translation.y
                             }
-                            self.firstButton!.center.y = self.firstButton!.center.y + translation.y
+                            self.rowColumnHandle!.center.y = self.rowColumnHandle!.center.y + translation.y
                         }
                     }
-                    
                     gesture.setTranslation(CGPointZero, inView: self.view)
-                    
                 }
                 
             case .Ended:
-                if self.firstButton != nil {
+                if self.rowColumnHandle != nil {
                     var endingPoint :CGPoint = gesture.locationInView(self.view)
-                    // Check if the release is on another button
-                    if self.findButtonWithPoint(endingPoint) {
+                    var secondRowColumnHandle = self.findButtonWithPoint(endingPoint, first: false)
+                    if secondRowColumnHandle != nil {
                         // Check if they are both rows or both columns
-                        if abs(self.firstButton!.tag - self.secondButton!.tag) < 11 {
+                        if abs(self.rowColumnHandle!.tag - secondRowColumnHandle!.tag) < 11 {
                             
                             // Swap the lines of tiles
-                            self.secondLineOfTiles = self.tileArea.makeLineOfTiles(self.secondButton!.tag)
-                            self.tileArea.swapLines(self.firstLineOfTiles!, line2: self.secondLineOfTiles!)
+                            var secondLineOfTiles = self.tileArea.makeLineOfTiles(secondRowColumnHandle!.tag)
+                            self.tileArea.swapLines(self.firstLineOfTiles!, line2: secondLineOfTiles)
                             
                             // Swap the buttons
                             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                self.firstButton!.frame = self.secondButton!.frame
-                                self.secondButton!.frame = self.firstButtonOriginalFrame!
-                                
+                                self.rowColumnHandle!.frame = secondRowColumnHandle!.frame
+                                secondRowColumnHandle!.frame = self.firstButtonOriginalFrame!
                             })
+                            
                             // Swap the tags of the buttons
-                            var tempTag = self.firstButton!.tag
-                            self.firstButton!.tag = self.secondButton!.tag
-                            self.secondButton!.tag = tempTag
+                            var tempTag = self.rowColumnHandle!.tag
+                            self.rowColumnHandle!.tag = secondRowColumnHandle!.tag
+                            secondRowColumnHandle!.tag = tempTag
                             self.firstButtonOriginalFrame = nil
-                            self.secondButtonOriginalFrame = nil
-                            self.firstButton = nil
-                            self.secondButton = nil
+                            self.rowColumnHandle = nil
                             
                         } else { // Send the button and line of tiles back to where they started
                             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -240,12 +235,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                                     tile.imageView.frame = tile.originalFrame!
                                 }
                                 
-                                
-                                self.firstButton!.frame = self.firstButtonOriginalFrame!
+                                self.rowColumnHandle!.frame = self.firstButtonOriginalFrame!
                                 self.firstButtonOriginalFrame = nil
-                                self.secondButtonOriginalFrame = nil
-                                self.firstButton = nil
-                                self.secondButton = nil
+                                self.rowColumnHandle = nil
                             })
                         }
                     } else { // Send the button and line of tiles back to where they started
@@ -256,11 +248,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
                             }
                             
                             
-                            self.firstButton!.frame = self.firstButtonOriginalFrame!
+                            self.rowColumnHandle!.frame = self.firstButtonOriginalFrame!
                             self.firstButtonOriginalFrame = nil
-                            self.secondButtonOriginalFrame = nil
-                            self.firstButton = nil
-                            self.secondButton = nil
+                            self.rowColumnHandle = nil
                         })
                     }
                 }
@@ -276,38 +266,32 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
     
-    func findButtonWithPoint(point: CGPoint) -> Bool {
-        var currentButton = self.topButtons[0]
+    func findButtonWithPoint(point: CGPoint, first: Bool) -> UIImageView? {
         for index in 0..<self.tilesPerRow {
-            currentButton = self.topButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                if self.firstButton == nil {
-                    self.firstButton = currentButton
-                    return true
-                } else {
-                    if self.firstButton != currentButton {
-                        self.secondButton = currentButton
-                        return true
-                    }
-                }
+            var area : CGRect
+            var currentButton = self.topButtons[index]
+            if first {
+                area = currentButton.frame
+            } else {
+                area = CGRectMake(currentButton.frame.origin.x, currentButton.frame.origin.y - 200, currentButton.frame.size.width, currentButton.frame.size.height + 400)
+            }
+            if CGRectContainsPoint(area, point) && currentButton != self.rowColumnHandle {
+                return currentButton
             }
         }
-        
         for index in 0..<self.tilesPerRow {
-            currentButton = self.leftButtons[index]
-            if CGRectContainsPoint(currentButton.frame, point) {
-                if self.firstButton == nil {
-                    self.firstButton = currentButton
-                    return true
-                } else {
-                    if self.firstButton != currentButton {
-                        self.secondButton = currentButton
-                        return true
-                    }
-                }
+            var area : CGRect
+            var currentButton = self.leftButtons[index]
+            if first {
+                area = currentButton.frame
+            } else {
+                area = CGRectMake(currentButton.frame.origin.x - 200, currentButton.frame.origin.y, currentButton.frame.size.width + 400, currentButton.frame.size.height)
+            }
+            if CGRectContainsPoint(area, point) && currentButton != self.rowColumnHandle {
+                return currentButton
             }
         }
-        return false
+        return nil
     }
 
     

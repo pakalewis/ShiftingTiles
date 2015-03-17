@@ -46,8 +46,8 @@ class TileAreaView: UIView {
     // MARK: SETUP
     func initialize() {
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
-        self.addGestureRecognizer(panGesture)
+        let moveTilePanGesture = UIPanGestureRecognizer(target: self, action: "handleMoveTilePan:")
+        self.addGestureRecognizer(moveTilePanGesture)
         
         self.clipsToBounds = true
         
@@ -204,8 +204,6 @@ class TileAreaView: UIView {
     }
     
     
-    
-    
     func makeLineOfTiles(identifier: Int) -> [Tile] {
         var tileLine = [Tile]()
         
@@ -244,6 +242,8 @@ class TileAreaView: UIView {
             })
         }
     }
+    
+    
     
 
     // MARK: ROTATIONS
@@ -294,6 +294,7 @@ class TileAreaView: UIView {
         }
     }
     
+    
     func wiggleTiles() {
         self.findTilesToSwap()
         if self.firstTile != nil && self.secondTile != nil {
@@ -303,8 +304,9 @@ class TileAreaView: UIView {
         } else {
             self.findFirstUnorientedTile()
             self.wiggleTile(self.firstUnorientedTile!)
-        }        
+        }
     }
+    
     
     func wiggleTile(tileToWiggle : Tile) {
         // Animation calculations
@@ -338,13 +340,14 @@ class TileAreaView: UIView {
         
     
     
+    
     // MARK: INTERACTIONS
-    func handlePan(gesture:UIPanGestureRecognizer) {
-        var startingPoint :CGPoint = gesture.locationInView(self)
-        
+    func handleMoveTilePan(gesture:UIPanGestureRecognizer) {
+        // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
             switch gesture.state {
             case .Began:
+                var startingPoint :CGPoint = gesture.locationInView(self)
                 if self.findTileWithPoint(startingPoint, searchingForFirst: true) {
                     self.firstTile = self.foundTileWithPoint!
                     self.bringSubviewToFront(self.firstTile!.imageView)
@@ -352,14 +355,11 @@ class TileAreaView: UIView {
                 }
             case .Changed:
                 if self.firstTile != nil {
-                    
                     let translation = gesture.translationInView(self)
                     self.firstTile!.imageView.center.x = self.firstTile!.imageView.center.x + translation.x
                     self.firstTile!.imageView.center.y = self.firstTile!.imageView.center.y + translation.y
                     gesture.setTranslation(CGPointZero, inView: self)
-                    
                 }
-                
             case .Ended:
                 if self.firstTile != nil {
                     var endingPoint :CGPoint = gesture.locationInView(self)
@@ -376,13 +376,10 @@ class TileAreaView: UIView {
                         })
                     } else {
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            
                             self.firstTile!.imageView.frame = self.firstTile!.originalFrame!
-                            
                         })
                     }
                 }
-                
             case .Possible:
                 println("possible")
             case .Cancelled:
@@ -390,15 +387,14 @@ class TileAreaView: UIView {
             case .Failed:
                 println("failed")
             }
-
         }
     }
 
     
     func tileDoubleTapped(sender: UIGestureRecognizer) {
+        // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
             if userDefaults.boolForKey("rotationsOn") {
-                
                 // Grab the tag of the tile that was tapped and use it to find the correct tile
                 var tag = sender.view!.tag
                 var pressedTile = self.tileArray[tag / 10][tag % 10]
@@ -414,15 +410,15 @@ class TileAreaView: UIView {
         }
     }
 
+
+    
     
     // MARK: TILE EXAMINATION
     // Checks to see if the image pieces are in the correct order and if the orientations are correct
     func checkIfSolved() -> Bool {
-        
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
                 var tileToCheck = self.tileArray[index1][index2]
-                
                 if (tileToCheck.doubleIndex.rowIndex != index1
                     || tileToCheck.doubleIndex.columnIndex != index2
                     || tileToCheck.orientationCount != 1) {
@@ -430,7 +426,6 @@ class TileAreaView: UIView {
                 }
             }
         }
-        
         return true
     }
 
@@ -504,7 +499,6 @@ class TileAreaView: UIView {
     }
 
 
-
     func findTileWithPoint(point: CGPoint, searchingForFirst : Bool) -> Bool {
         for index1 in 0..<self.tilesPerRow {
             for index2 in 0..<self.tilesPerRow {
@@ -522,7 +516,5 @@ class TileAreaView: UIView {
         }
         return false
     }
-
-
 }
 
