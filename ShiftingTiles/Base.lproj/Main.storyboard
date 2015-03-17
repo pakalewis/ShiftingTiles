@@ -281,7 +281,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="animalCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2pf-uG-tyX"/>
+                                            <action selector="categoryButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aUe-HA-up9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvc-td-qyk">
@@ -289,7 +289,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="natureCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aJr-7x-9vn"/>
+                                            <action selector="categoryButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WZy-RY-fHW"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBj-e8-WAQ">
@@ -297,7 +297,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="placesCategoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j99-IY-SYp"/>
+                                            <action selector="categoryButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jxf-gS-JB4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -357,7 +357,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="animalsCategoryButton" destination="iDH-O9-eqa" id="1Kw-fq-JRL"/>
                         <outlet property="cameraButton" destination="eJp-mf-2KR" id="yUO-Rp-xD1"/>
                         <outlet property="cancelButton" destination="VUI-df-ri1" id="4KC-XH-Jbj"/>
                         <outlet property="captureImageButton" destination="QYD-MI-iZr" id="Mh5-Vp-UcV"/>
@@ -372,14 +371,15 @@
                         <outlet property="infoButton" destination="P6g-9L-RS0" id="Wf6-2r-UJr"/>
                         <outlet property="letsPlayButton" destination="7cw-uc-rQN" id="1z0-aQ-Nlr"/>
                         <outlet property="mainImageView" destination="8Fb-MQ-XGx" id="Yno-Jj-FY7"/>
-                        <outlet property="natureCategoryButton" destination="wvc-td-qyk" id="A5w-7g-f41"/>
-                        <outlet property="placesCategoryButton" destination="JBj-e8-WAQ" id="2BK-F2-pRe"/>
                         <outlet property="selectCategoryButton" destination="daC-ar-zOj" id="WXY-BR-MOy"/>
                         <outlet property="separatorView" destination="b4j-a2-3ko" id="Cm6-Ak-8kv"/>
                         <outlet property="settingsButton" destination="VEQ-Ht-075" id="fWk-6Y-4c7"/>
                         <outlet property="shiftingTilesLabel" destination="6p4-o8-wZC" id="RNq-Wh-JLc"/>
                         <outlet property="statsButton" destination="0ru-It-ZwP" id="Y9s-9A-2WN"/>
                         <outlet property="tilesPerRowLabel" destination="zGq-2D-jDD" id="t3W-yK-ZE7"/>
+                        <outletCollection property="categoryButtons" destination="iDH-O9-eqa" collectionClass="NSMutableArray" id="KD8-6a-IXe"/>
+                        <outletCollection property="categoryButtons" destination="wvc-td-qyk" collectionClass="NSMutableArray" id="v0L-dE-5Mm"/>
+                        <outletCollection property="categoryButtons" destination="JBj-e8-WAQ" collectionClass="NSMutableArray" id="X8J-3Y-u6D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -45,9 +45,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     // Categories
     @IBOutlet weak var categoryArea: UIView!
     @IBOutlet weak var selectCategoryButton: UIButton!
-    @IBOutlet weak var animalsCategoryButton: UIButton!
-    @IBOutlet weak var natureCategoryButton: UIButton!
-    @IBOutlet weak var placesCategoryButton: UIButton!
+    @IBOutlet var categoryButtons: [UIButton]! // Array of three buttons
+    var categoryStrings = [
+        NSLocalizedString("ANIMALS", comment: ""),
+        NSLocalizedString("NATURE", comment: ""),
+        NSLocalizedString("PLACES", comment: "") ]
+
     // Other buttons
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
@@ -82,21 +85,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
         
-        // Set up category buttons
-        self.animalsCategoryButton.setTitle(NSLocalizedString("ANIMALS", comment: ""), forState: .Normal)
-        self.natureCategoryButton.setTitle(NSLocalizedString("NATURE", comment: ""), forState: .Normal)
-        self.placesCategoryButton.setTitle(NSLocalizedString("PLACES", comment: ""), forState: .Normal)
+        for count in 0..<self.categoryButtons.count {
+            self.categoryButtons[count].setTitle(NSLocalizedString(self.categoryStrings[count], comment: ""), forState: .Normal)
+        }
         self.categoryArea.layer.borderWidth = 2
-        self.natureCategoryButton.layer.borderWidth = 2
-        self.animalsCategoryButton.userInteractionEnabled = false
-        self.natureCategoryButton.userInteractionEnabled = false
-        self.placesCategoryButton.userInteractionEnabled = false
-        self.animalsCategoryButton.alpha = 0
-        self.natureCategoryButton.alpha = 0
-        self.placesCategoryButton.alpha = 0
-
+        // Add border to only the middle category button so there aren't double borders
+        self.categoryButtons[1].layer.borderWidth = 2
+        self.enableCategoryButtons(false)
+        
         self.updateColorsAndFonts()
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,12 +119,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         // Randomly choose a category and set the initial image
         var randomInt = Int(arc4random_uniform(UInt32(3)))
-        var categoriesAsStrings = ["ANIMALS", "NATURE", "PLACES"]
-        self.shouldChangeToCategory(categoriesAsStrings[randomInt])
+        self.shouldChangeToCategory(self.categoryStrings[randomInt])
         // Set initial image to display
         self.mainImageView.image = self.currentImagePackage?.image
-
-
     }
     
     
@@ -164,13 +160,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.animalsCategoryButton.userInteractionEnabled = true
-            self.natureCategoryButton.userInteractionEnabled = true
-            self.placesCategoryButton.userInteractionEnabled = true
-            self.animalsCategoryButton.alpha = 1
-            self.natureCategoryButton.alpha = 1
-            self.placesCategoryButton.alpha = 1
-            
+            self.enableCategoryButtons(true)
             self.view.layoutIfNeeded()
         })
     }
@@ -179,36 +169,25 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func shrinkCategories() {
         self.categoriesHeightConstraint.constant = 0
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.animalsCategoryButton.userInteractionEnabled = false
-            self.natureCategoryButton.userInteractionEnabled = false
-            self.placesCategoryButton.userInteractionEnabled = false
-            self.animalsCategoryButton.alpha = 0
-            self.natureCategoryButton.alpha = 0
-            self.placesCategoryButton.alpha = 0
-            
+            self.enableCategoryButtons(false)
             self.view.layoutIfNeeded()
         })
     }
     
-    
-    @IBAction func animalCategoryPressed(sender: AnyObject) {
-        if self.shouldChangeToCategory("ANIMALS") {
-            self.updateMainImageView()
+
+    func enableCategoryButtons(bool: Bool) {
+        for button in self.categoryButtons {
+            button.userInteractionEnabled = bool
+            if bool {
+                button.alpha = 1
+            } else {
+                button.alpha = 0
+            }
         }
-        self.shrinkCategories()
     }
     
-    
-    @IBAction func natureCategoryPressed(sender: AnyObject) {
-        if self.shouldChangeToCategory("NATURE") {
-            self.updateMainImageView()
-        }
-        self.shrinkCategories()
-    }
-    
-    
-    @IBAction func placesCategoryPressed(sender: AnyObject) {
-        if self.shouldChangeToCategory("PLACES") {
+    @IBAction func categoryButtonPressed(sender: UIButton) {
+        if self.shouldChangeToCategory(sender.titleLabel!.text!) {
             self.updateMainImageView()
         }
         self.shrinkCategories()
@@ -220,11 +199,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if !category.isEqualToString(self.currentCategory) {
             // Update the currentCategory and currentImagePackageArray
             self.currentCategory = category
-            if category.isEqualToString("ANIMALS") {
+            if category.isEqualToString(self.categoryStrings[0]) {
                 self.currentImagePackageArray = self.imageGallery.animalImagePackages
-            } else if category.isEqualToString("NATURE") {
+            } else if category.isEqualToString(self.categoryStrings[1]) {
                 self.currentImagePackageArray = self.imageGallery.natureImagePackages
-            } else if category.isEqualToString("PLACES") {
+            } else if category.isEqualToString(self.categoryStrings[2]) {
                 self.currentImagePackageArray = self.imageGallery.placesImagePackages
             }
             self.updateCurrentImagePackageWithIndex(0)
@@ -563,14 +542,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.categoryArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.categoryArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.natureCategoryButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
         self.imageCapturingButtonArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.animalsCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-        self.natureCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-        self.placesCategoryButton.setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+        for count in 0..<self.categoryButtons.count {
+            self.categoryButtons[count].setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
+            self.categoryButtons[count].layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        }
+
         
         // Icons
         self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
@@ -591,18 +571,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 15)
-            self.animalsCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
-            self.natureCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
-            self.placesCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
+            for count in 0..<self.categoryButtons.count {
+                self.categoryButtons[count].titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
+            }
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 30)
-            self.animalsCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
-            self.natureCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
-            self.placesCategoryButton.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
-
+            for count in 0..<self.categoryButtons.count {
+                self.categoryButtons[count].titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
+            }
         }
     }
 

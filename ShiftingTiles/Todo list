@@ -1,13 +1,9 @@
 TODO:
-
 - better app icon
 - sunflower with lines with two tiles swapped
-
 - limit num of tiles on smaller size screens.
 
-- improve imageGallery.swift
 
-- add more comments
 
 - when repeating lines of code that do the same thing (.alpha = 1 for three buttons) put them in an array instead
 
