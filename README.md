@@ -34,6 +34,7 @@ ________________________________________________________________________________
 
 Development Features:
 - Written in Swift
+- Localized to English, German, and Spanish
 - AVFoundation used to capture images via the device's camera
 - UIPageViewController used to present a series of rules pages
 - Custom UICollectionViewCell and accompanying .xib
