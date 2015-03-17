@@ -830,34 +830,29 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="LBb-Ll-ymG" id="TNc-jJ-v1E"/>
-                        <outlet property="colorPalette1" destination="h45-0D-imF" id="kWD-Ew-jht"/>
-                        <outlet property="colorPalette2" destination="9ks-2D-5bM" id="k95-2f-AyL"/>
-                        <outlet property="colorPalette3" destination="Ujq-Gf-SCT" id="gNN-TT-gOx"/>
-                        <outlet property="colorPalette4" destination="ZS0-Ha-sC2" id="XE1-dk-btA"/>
-                        <outlet property="colorPalette5" destination="aYc-Wd-p8T" id="zYX-lW-MxP"/>
                         <outlet property="colorSchemeLabel" destination="Sf0-Cx-u40" id="dfc-b1-zKu"/>
                         <outlet property="congratsContainer" destination="NAm-Oj-lMx" id="9cV-ov-1Gn"/>
                         <outlet property="congratsImage" destination="mY9-8n-44L" id="Cyg-wf-EyI"/>
                         <outlet property="congratsLabel" destination="IE3-Im-BS1" id="zAe-be-dSx"/>
-                        <outlet property="darkColor1" destination="P32-Qo-LSb" id="bOB-O4-Owf"/>
-                        <outlet property="darkColor2" destination="1ft-wO-aPq" id="LyW-JD-esU"/>
-                        <outlet property="darkColor3" destination="vce-Db-ySh" id="0dB-kW-XlU"/>
-                        <outlet property="darkColor4" destination="ARh-0S-gST" id="0oO-7l-dT9"/>
-                        <outlet property="darkColor5" destination="rZO-AG-1jV" id="VJm-NC-jaw"/>
-                        <outlet property="lightColor1" destination="3Jl-2f-99r" id="I31-Uv-eb8"/>
-                        <outlet property="lightColor2" destination="gjg-jV-0ip" id="rHg-Mg-ZNB"/>
-                        <outlet property="lightColor3" destination="Cut-og-KES" id="tgd-ge-poB"/>
-                        <outlet property="lightColor4" destination="WCR-7F-9Cc" id="D5g-FT-iF9"/>
-                        <outlet property="lightColor5" destination="QiM-oj-ado" id="X2N-v2-XnY"/>
                         <outlet property="rotationContainer" destination="KXs-mG-hyE" id="6gw-8p-C7K"/>
                         <outlet property="rotationImage" destination="3jn-bi-ZyQ" id="PaC-Se-odh"/>
                         <outlet property="rotationLabel" destination="T3z-YA-fK6" id="e3R-bR-coO"/>
                         <outlet property="settingLabel" destination="eXT-vh-s4k" id="ndh-la-QFh"/>
-                        <outletCollection property="colorPalettes" destination="h45-0D-imF" collectionClass="NSMutableArray" id="keu-Ed-2V6"/>
-                        <outletCollection property="colorPalettes" destination="9ks-2D-5bM" collectionClass="NSMutableArray" id="dAg-2V-qm8"/>
-                        <outletCollection property="colorPalettes" destination="Ujq-Gf-SCT" collectionClass="NSMutableArray" id="N0l-Kw-zWw"/>
-                        <outletCollection property="colorPalettes" destination="ZS0-Ha-sC2" collectionClass="NSMutableArray" id="WVS-yW-aS6"/>
-                        <outletCollection property="colorPalettes" destination="aYc-Wd-p8T" collectionClass="NSMutableArray" id="eLl-SV-HC0"/>
+                        <outletCollection property="colorPalettes" destination="h45-0D-imF" collectionClass="NSMutableArray" id="CSl-2w-sgj"/>
+                        <outletCollection property="colorPalettes" destination="9ks-2D-5bM" collectionClass="NSMutableArray" id="hOT-Km-lf4"/>
+                        <outletCollection property="colorPalettes" destination="Ujq-Gf-SCT" collectionClass="NSMutableArray" id="n1h-0c-gjo"/>
+                        <outletCollection property="colorPalettes" destination="ZS0-Ha-sC2" collectionClass="NSMutableArray" id="Dev-rj-aI0"/>
+                        <outletCollection property="colorPalettes" destination="aYc-Wd-p8T" collectionClass="NSMutableArray" id="MkJ-Rx-3GS"/>
+                        <outletCollection property="darkColors" destination="P32-Qo-LSb" id="Gb5-ro-LgA"/>
+                        <outletCollection property="darkColors" destination="1ft-wO-aPq" id="P5W-cB-htO"/>
+                        <outletCollection property="darkColors" destination="vce-Db-ySh" id="d1K-Ik-8VS"/>
+                        <outletCollection property="darkColors" destination="ARh-0S-gST" id="vKz-tG-GxE"/>
+                        <outletCollection property="darkColors" destination="rZO-AG-1jV" id="xaw-Q6-lhh"/>
+                        <outletCollection property="lightColors" destination="3Jl-2f-99r" id="bE2-HQ-egn"/>
+                        <outletCollection property="lightColors" destination="gjg-jV-0ip" id="5aQ-P6-iJ5"/>
+                        <outletCollection property="lightColors" destination="Cut-og-KES" id="bKd-xC-rnC"/>
+                        <outletCollection property="lightColors" destination="WCR-7F-9Cc" id="Gf9-PL-ADH"/>
+                        <outletCollection property="lightColors" destination="QiM-oj-ado" id="73F-RN-hgK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="voL-pO-XgH" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -34,26 +34,9 @@ class SettingsScreen: UIViewController {
     
     
     // Palettes
-    @IBOutlet var colorPalettes: NSArray?
-    @IBOutlet weak var colorPalette1: UIView!
-    @IBOutlet weak var lightColor1: UIView!
-    @IBOutlet weak var darkColor1: UIView!
-    
-    @IBOutlet weak var colorPalette2: UIView!
-    @IBOutlet weak var lightColor2: UIView!
-    @IBOutlet weak var darkColor2: UIView!
-    
-    @IBOutlet weak var colorPalette3: UIView!
-    @IBOutlet weak var lightColor3: UIView!
-    @IBOutlet weak var darkColor3: UIView!
-    
-    @IBOutlet weak var colorPalette4: UIView!
-    @IBOutlet weak var lightColor4: UIView!
-    @IBOutlet weak var darkColor4: UIView!
-    
-    @IBOutlet weak var colorPalette5: UIView!
-    @IBOutlet weak var lightColor5: UIView!
-    @IBOutlet weak var darkColor5: UIView!
+    @IBOutlet var colorPalettes: NSArray! // Array of five UIViews
+    @IBOutlet var lightColors: NSArray! // Array of five UIViews
+    @IBOutlet var darkColors: NSArray! // Array of five UIViews
     
     
     
@@ -67,30 +50,7 @@ class SettingsScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add tap gesturess
-        var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
-        self.rotationContainer.addGestureRecognizer(rotationTap)
-        
-        var congratsTap = UITapGestureRecognizer(target: self, action: "congratsTapped:")
-        self.congratsContainer.addGestureRecognizer(congratsTap)
-        
-        var colorPalette1Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
-        self.colorPalette1.addGestureRecognizer(colorPalette1Tap)
-        
-        var colorPalette2Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
-        self.colorPalette2.addGestureRecognizer(colorPalette2Tap)
-        
-        var colorPalette3Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
-        self.colorPalette3.addGestureRecognizer(colorPalette3Tap)
-        
-        var colorPalette4Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
-        self.colorPalette4.addGestureRecognizer(colorPalette4Tap)
-        
-        var colorPalette5Tap = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
-        self.colorPalette5.addGestureRecognizer(colorPalette5Tap)
-        
-        
-        // Set up the check images based on previous defaults
+        // Check/uncheck the Rotations/Congrats based on previous defaults
         if userDefaults.boolForKey("rotationsOn") {
             self.rotationImage.image = UIImage(named: "checkedBox")
         } else {
@@ -103,17 +63,26 @@ class SettingsScreen: UIViewController {
         }
         
         
+        // Add tap gestures
+        var rotationTap = UITapGestureRecognizer(target: self, action: "rotationTapped:")
+        self.rotationContainer.addGestureRecognizer(rotationTap)
+        
+        var congratsTap = UITapGestureRecognizer(target: self, action: "congratsTapped:")
+        self.congratsContainer.addGestureRecognizer(congratsTap)
+        
+        for palette in self.colorPalettes {
+            var tapGesture = UITapGestureRecognizer(target: self, action: "colorPaletteSelected:")
+            palette.addGestureRecognizer(tapGesture)
+        }
+
+        
         // Set light and dark colors for the palette options
-        self.lightColor1.backgroundColor = self.colorPalette.lightColors[0]
-        self.darkColor1.backgroundColor = self.colorPalette.darkColors[0]
-        self.lightColor2.backgroundColor = self.colorPalette.lightColors[1]
-        self.darkColor2.backgroundColor = self.colorPalette.darkColors[1]
-        self.lightColor3.backgroundColor = self.colorPalette.lightColors[2]
-        self.darkColor3.backgroundColor = self.colorPalette.darkColors[2]
-        self.lightColor4.backgroundColor = self.colorPalette.lightColors[3]
-        self.darkColor4.backgroundColor = self.colorPalette.darkColors[3]
-        self.lightColor5.backgroundColor = self.colorPalette.lightColors[4]
-        self.darkColor5.backgroundColor = self.colorPalette.darkColors[4]
+        for index in 0..<self.colorPalettes.count {
+            let lightColorView = self.lightColors[index] as UIView
+            lightColorView.backgroundColor = self.colorPalette.lightColors[index]
+            let darkColorView = self.darkColors[index] as UIView
+            darkColorView.backgroundColor = self.colorPalette.darkColors[index]
+        }
     }
     
     
@@ -146,13 +115,12 @@ class SettingsScreen: UIViewController {
     
 
     func colorPaletteSelected(sender: UIGestureRecognizer) {
+        // Determine which palette was selected and apply the color scheme
         var tappedPalette = sender.view
         var index = self.colorPalettes?.indexOfObject(tappedPalette!)
         self.userDefaults.setInteger(index!, forKey: "colorPaletteInt")
         self.updateColorsAndFonts()
     }
-
-    
     
     
     func updateColorsAndFonts() {
