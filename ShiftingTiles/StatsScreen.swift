@@ -14,7 +14,6 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     let colorPalette = ColorPalette()
 
-    var solvesPerSize = NSArray()
     let stats = Stats()
     
     // VIEWS
@@ -68,46 +67,39 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         self.totalSolvesLabel.text = NSLocalizedString("TOTAL_SOLVES", comment: "TOTAL_SOLVES") + ":  \(self.stats.fetchTotalSolves())"
         
-        // Get the solve stats and store in local array
-        self.solvesPerSize = self.stats.fetchSolvesPerSize()
-        
-        
+        // Register StatCell nib
         let nib = UINib(nibName: "StatCell", bundle: NSBundle.mainBundle())
         self.statsTable.registerNib(nib, forCellReuseIdentifier: "STAT_CELL")
-
     }
     
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = self.statsTable.dequeueReusableCellWithIdentifier("STAT_CELL", forIndexPath: indexPath) as StatCell
-        
         cell.backgroundColor = self.colorPalette.fetchLightColor()
         cell.leftLabel.text = "\(indexPath.row + 2) x \(indexPath.row + 2)"
-        cell.rightLabel.text = "\(self.solvesPerSize[indexPath.row])"
+        cell.rightLabel.text = "\(self.stats.solvesAtSizeInts[indexPath.row])"
         cell.leftLabel.textColor = self.colorPalette.fetchDarkColor()
         cell.rightLabel.textColor = self.colorPalette.fetchDarkColor()
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
             cell.leftLabel.font = UIFont(name: "OpenSans", size: 15)
             cell.rightLabel.font = UIFont(name: "OpenSans", size: 15)
         }
-        
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             cell.leftLabel.font = UIFont(name: "OpenSans", size: 30)
             cell.rightLabel.font = UIFont(name: "OpenSans", size: 30)
         }
-
-
         return cell
     }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return self.stats.solvesAtSizeInts.count
     }
     
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return self.statsTable.frame.height / 9
+        return self.statsTable.frame.height / CGFloat(self.stats.solvesAtSizeInts.count)
     }
     
     

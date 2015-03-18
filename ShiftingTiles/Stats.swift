@@ -9,81 +9,51 @@
 import Foundation
 
 class Stats {
-    let userDefaults : NSUserDefaults!
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let solvesAtSizeKeys = [
+        "solvesAtSize2",
+        "solvesAtSize3",
+        "solvesAtSize4",
+        "solvesAtSize5",
+        "solvesAtSize6",
+        "solvesAtSize7",
+        "solvesAtSize8",
+        "solvesAtSize9",
+        "solvesAtSize10"
+    ]
+    var solvesAtSizeInts = [Int]()
     
     init () {
-        self.userDefaults = NSUserDefaults.standardUserDefaults()
+        self.solvesAtSizeInts = self.fetchSolvesPerSize()
     }
+
     
     func updateSolveStats(tilePerRow: Int) {
         
         // Update total solves
         var totalSolves = userDefaults.integerForKey("totalSolves")
         totalSolves++
-        userDefaults.setInteger(totalSolves, forKey: "totalSolves")
-        
+        self.userDefaults.setInteger(totalSolves, forKey: "totalSolves")
         
         // Update solves for the appropriate size
-        switch tilePerRow {
-        case 2:
-            var solves = userDefaults.integerForKey("solvesAtSize2")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize2")
-        case 3:
-            var solves = userDefaults.integerForKey("solvesAtSize3")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize3")
-        case 4:
-            var solves = userDefaults.integerForKey("solvesAtSize4")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize4")
-        case 5:
-            var solves = userDefaults.integerForKey("solvesAtSize5")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize5")
-        case 6:
-            var solves = userDefaults.integerForKey("solvesAtSize6")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize6")
-        case 7:
-            var solves = userDefaults.integerForKey("solvesAtSize7")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize7")
-        case 8:
-            var solves = userDefaults.integerForKey("solvesAtSize8")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize8")
-        case 9:
-            var solves = userDefaults.integerForKey("solvesAtSize9")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize9")
-        case 10:
-            var solves = userDefaults.integerForKey("solvesAtSize10")
-            solves++
-            userDefaults.setInteger(solves, forKey: "solvesAtSize10")
-        default:
-            println("This should never get printed")
-        }
+        let key = self.solvesAtSizeKeys[tilePerRow - 2]
+        var solves = userDefaults.integerForKey(key)
+        solves++
+        self.userDefaults.setInteger(solves, forKey: key)
 
-        userDefaults.synchronize()
-
+        self.userDefaults.synchronize()
     }
     
     
     func fetchSolvesPerSize() -> [Int] {
-        let solvesPerSizeArray = [
-            userDefaults.integerForKey("solvesAtSize2"),
-            userDefaults.integerForKey("solvesAtSize3"),
-            userDefaults.integerForKey("solvesAtSize4"),
-            userDefaults.integerForKey("solvesAtSize5"),
-            userDefaults.integerForKey("solvesAtSize6"),
-            userDefaults.integerForKey("solvesAtSize7"),
-            userDefaults.integerForKey("solvesAtSize8"),
-            userDefaults.integerForKey("solvesAtSize9"),
-            userDefaults.integerForKey("solvesAtSize10")]
-        
+        var solvesPerSizeArray = [Int]()
+        for key in self.solvesAtSizeKeys {
+            let integerForKey = self.userDefaults.integerForKey(key)
+            solvesPerSizeArray.append(integerForKey)
+        }
         return solvesPerSizeArray
     }
+    
     
     func fetchTotalSolves() -> Int {
         return userDefaults.integerForKey("totalSolves")

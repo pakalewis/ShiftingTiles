@@ -393,19 +393,16 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             // Slide off the banks of buttons
-            for button in self.topGrips {
-                button.center.x = button.center.x + 2000
+            for grip in self.topGrips {
+                grip.center.x = grip.center.x + 2000
             }
-            for button in self.leftGrips {
-                button.center.y = button.center.y + 2000
+            for grip in self.leftGrips {
+                grip.center.y = grip.center.y + 2000
             }
-            
             
             }) { (finished) -> Void in
-                
                 // Grow the tile area by sliding the left bank off screen to the left
                 self.leftBankMarginConstraint.constant =  -self.leftBank.frame.width + 10
-                
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
                     self.view.layoutIfNeeded()
                     
