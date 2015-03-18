@@ -77,9 +77,15 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.view.sendSubviewToBack(self.imageCapturingButtonArea)
         self.imageCapturingButtonArea.alpha = 0
 
-        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
         var tilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        if tilesPerRow < 2 || tilesPerRow > 10 {
+            // This may occur when the tilesPerRow userDefault was never set on a previous version of the app
+            tilesPerRow = 3
+            self.userDefaults.setInteger(3, forKey: "tilesPerRow")
+            self.userDefaults.synchronize()
+        }
         self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
+        self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
 
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
@@ -105,7 +111,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             // Only gets called once ever
             self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
             self.userDefaults.setBool(true, forKey: "congratsOn")
-            self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
+            self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
             self.userDefaults.setInteger(3, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
