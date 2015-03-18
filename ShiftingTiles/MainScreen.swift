@@ -25,7 +25,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var currentImagePackageArray : [ImagePackage]?
     var currentImagePackage : ImagePackage?
     var currentCategory = ""
-    var tilesPerRow = 3
 
     
     // MARK: AVFoundation vars
@@ -79,7 +78,8 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.imageCapturingButtonArea.alpha = 0
 
         self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
-        self.tilesPerRowLabel.text = "3 x 3"
+        var tilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
 
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
@@ -106,6 +106,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
             self.userDefaults.setBool(true, forKey: "congratsOn")
             self.userDefaults.setInteger(3, forKey: "colorPaletteInt")
+            self.userDefaults.setInteger(3, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
         
@@ -135,7 +136,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         if segue.identifier == "playGame" {
             var gameScreen = segue.destinationViewController as GameScreen
             gameScreen.currentImagePackage = self.currentImagePackage
-            gameScreen.tilesPerRow = self.tilesPerRow
+            gameScreen.tilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
         }
     }
     
@@ -514,12 +515,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.shrinkCategories()
         }
 
-        self.tilesPerRow++
-        if self.tilesPerRow > 10 {
-            self.tilesPerRow--
-            return
+        var currentTilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        if currentTilesPerRow < 10 {
+            currentTilesPerRow++
+            self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
+            self.userDefaults.setInteger(currentTilesPerRow, forKey: "tilesPerRow")
+            self.userDefaults.synchronize()
         }
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow) x \(self.tilesPerRow)"
    }
 
     
@@ -528,12 +530,13 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.shrinkCategories()
         }
 
-        self.tilesPerRow--
-        if self.tilesPerRow < 2 {
-            self.tilesPerRow++
-            return
+        var currentTilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        if currentTilesPerRow > 2 {
+            currentTilesPerRow--
+            self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
+            self.userDefaults.setInteger(currentTilesPerRow, forKey: "tilesPerRow")
+            self.userDefaults.synchronize()
         }
-        self.tilesPerRowLabel.text = "\(self.tilesPerRow) x \(self.tilesPerRow)"
     }
     
     
