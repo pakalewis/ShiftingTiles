@@ -21,10 +21,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     var congratsMessages : [String]!
     var originalImageShown = false
     
-    var topButtons = [UIImageView]()
-    var leftButtons = [UIImageView]()
-    var rowColumnHandle : UIImageView?
-    var firstButtonOriginalFrame : CGRect?
+    var topGrips = [UIImageView]()
+    var leftGrips = [UIImageView]()
+    var rowColumnGrip : UIImageView?
+    var firstGripOriginalFrame : CGRect?
     var firstLineOfTiles: [Tile]?
     
     // MARK: VIEWS
@@ -51,7 +51,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.congratsMessages = [
+        self.congratsMessages = [ // Populated from Localizable.strings
             NSLocalizedString("Message01", comment: ""),
             NSLocalizedString("Message02", comment: ""),
             NSLocalizedString("Message03", comment: ""),
@@ -68,9 +68,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             NSLocalizedString("Message14", comment: ""),
             NSLocalizedString("Message15", comment: ""),
             NSLocalizedString("Message16", comment: ""),
-            NSLocalizedString("Message17", comment: "")]
-        
-        
+            NSLocalizedString("Message17", comment: "")
+        ]
     }
     
     
@@ -107,10 +106,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
-        // Add row/column gestures
-        let rowColumnGesture = UIPanGestureRecognizer(target: self, action: "handleRowColumnPan:")
-        self.view.addGestureRecognizer(rowColumnGesture)
-        self.initializeRowColumnGestures()
+        // Add row/column gesture
+        let rowColumnGripPanGesture = UIPanGestureRecognizer(target: self, action: "handleRowColumnGripPan:")
+        self.view.addGestureRecognizer(rowColumnGripPanGesture)
+        self.initializeRowColumnGrips()
         
         // Set text fields
         congratsMessage.text = ""
@@ -118,7 +117,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.imageCaptionLabel.text = ""
         } else {
             if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
-                self.imageCaptionLabel.text = self.currentImagePackage.caption + "\n" + self.currentImagePackage.photographer
+                self.imageCaptionLabel.text = "\"\(self.currentImagePackage.caption)\"" + "\nby " + self.currentImagePackage.photographer
             }
             if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
                 self.imageCaptionLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
@@ -129,132 +128,110 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
     
     
-    // MARK: Gestures to move rows and columns
-    func initializeRowColumnGestures() {
+    // MARK: Grips that allow movement of an entire row or column
+    func initializeRowColumnGrips() {
         
-        // Measuerments to make the frames
-        var topGestureWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
-        var topGestureHeight = self.topBank.frame.height
-        var leftGestureWidth = self.leftBank.frame.width
-        var leftGestureHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
+        // Measurements to make the frames
+        var topWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
+        var topHeight = self.topBank.frame.height
+        var leftWidth = self.leftBank.frame.width
+        var leftHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
         
         for index in 0..<self.tilesPerRow {
-            var topGesturePositionX = self.topBank.frame.origin.x + (topGestureWidth * CGFloat(index))
-            var leftGesturePositionY = self.leftBank.frame.origin.y + (leftGestureHeight * CGFloat(index))
+            var topPositionX = self.topBank.frame.origin.x + (topWidth * CGFloat(index))
+            var leftPositionY = self.leftBank.frame.origin.y + (leftHeight * CGFloat(index))
             
-            // TopGestureArea
-            var topGestureFrame = CGRectMake(topGesturePositionX, self.topBank.frame.origin.y, topGestureWidth, topGestureHeight * 0.9)
-            var topGestureArea = UIImageView(frame: topGestureFrame)
+            // Top Grip Area
+            var topFrame = CGRectMake(topPositionX, self.topBank.frame.origin.y, topWidth, topHeight * 0.9)
+            var topArea = UIImageView(frame: topFrame)
+            topArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            topArea.contentMode = UIViewContentMode.ScaleAspectFit
+            topArea.tag = index // This is used later to determine row vs column
+            self.view.addSubview(topArea)
+            self.topGrips.append(topArea)
             
-            topGestureArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            topGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
-            topGestureArea.tag = index
-            self.view.addSubview(topGestureArea)
-            self.topButtons.append(topGestureArea)
-            
-            // LeftGestureArea
-            var leftGestureFrame = CGRectMake(self.leftBank.frame.origin.x, leftGesturePositionY, leftGestureWidth * 0.9, leftGestureHeight)
-            var leftGestureArea = UIImageView(frame: leftGestureFrame)
-            leftGestureArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            leftGestureArea.contentMode = UIViewContentMode.ScaleAspectFit
-            leftGestureArea.tag = index + 100
-            self.view.addSubview(leftGestureArea)
-            self.leftButtons.append(leftGestureArea)
+            // Left Grip Area
+            var leftFrame = CGRectMake(self.leftBank.frame.origin.x, leftPositionY, leftWidth * 0.9, leftHeight)
+            var leftArea = UIImageView(frame: leftFrame)
+            leftArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            leftArea.contentMode = UIViewContentMode.ScaleAspectFit
+            leftArea.tag = index + 100 // This is used later to determine row vs column
+            self.view.addSubview(leftArea)
+            self.leftGrips.append(leftArea)
         }
     }
 
     
-    func handleRowColumnPan(gesture:UIPanGestureRecognizer) {
-        var selectedRowColumnHandle : UIImageView?
-        // Determine if any movement should occur
-        if  !self.originalImageShown {
+    func handleRowColumnGripPan(gesture:UIPanGestureRecognizer) {
+        if  !self.originalImageShown { // Gesture should be allowed
             switch gesture.state {
             case .Began:
                 var startingPoint:CGPoint = gesture.locationInView(self.view)
-                selectedRowColumnHandle = self.findButtonWithPoint(startingPoint, first: true)
-                if selectedRowColumnHandle != nil { // The first handle was detected
-                    self.rowColumnHandle = selectedRowColumnHandle
-                    self.firstLineOfTiles = self.tileArea.makeLineOfTiles(selectedRowColumnHandle!.tag)
+                self.rowColumnGrip = self.findRowColumnGripWithPoint(startingPoint, first: true)
+                if self.rowColumnGrip != nil { // The first handle was detected and stored for later
+                    self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.rowColumnGrip!.tag)
                     for tile in self.firstLineOfTiles! {
                         self.tileArea.bringSubviewToFront(tile.imageView)
                         tile.originalFrame = tile.imageView.frame
                     }
-                    self.view.bringSubviewToFront(selectedRowColumnHandle!)
-                    self.firstButtonOriginalFrame = selectedRowColumnHandle!.frame
+                    self.view.bringSubviewToFront(self.rowColumnGrip!)
+                    self.firstGripOriginalFrame = self.rowColumnGrip!.frame
                 }
             case .Changed:
-                if self.rowColumnHandle != nil {
+                if self.rowColumnGrip != nil { // There is a grip selected. Determine translation
                     let translation = gesture.translationInView(self.view)
-                    if (self.rowColumnHandle!.tag - 100) < 0 { // line 1 is a column
-                        if CGRectGetMinX(self.rowColumnHandle!.frame) + translation.x > CGRectGetMinX(self.tileArea.frame) && CGRectGetMaxX(self.rowColumnHandle!.frame) + translation.x < CGRectGetMaxX(self.tileArea.frame) {
+                    if (self.rowColumnGrip!.tag - 100) < 0 { // line 1 is a column
+                        if CGRectGetMinX(self.rowColumnGrip!.frame) + translation.x > CGRectGetMinX(self.tileArea.frame) && CGRectGetMaxX(self.rowColumnGrip!.frame) + translation.x < CGRectGetMaxX(self.tileArea.frame) {
+                            // Translation is valid - translate the line of tiles and grip
                             for tile in self.firstLineOfTiles! {
                                 tile.imageView.center.x = tile.imageView.center.x + translation.x
                             }
-                            self.rowColumnHandle!.center.x = self.rowColumnHandle!.center.x + translation.x
+                            self.rowColumnGrip!.center.x = self.rowColumnGrip!.center.x + translation.x
                         }
                     } else { // line 1 is a Row
-                        if CGRectGetMinY(self.rowColumnHandle!.frame) + translation.y > CGRectGetMinY(self.tileArea.frame) && CGRectGetMaxY(self.rowColumnHandle!.frame) + translation.y < CGRectGetMaxY(self.tileArea.frame) {
+                        if CGRectGetMinY(self.rowColumnGrip!.frame) + translation.y > CGRectGetMinY(self.tileArea.frame) && CGRectGetMaxY(self.rowColumnGrip!.frame) + translation.y < CGRectGetMaxY(self.tileArea.frame) {
+                            // Translation is valid - translate the line of tiles and grip
                             for tile in self.firstLineOfTiles! {
                                 tile.imageView.center.y = tile.imageView.center.y + translation.y
                             }
-                            self.rowColumnHandle!.center.y = self.rowColumnHandle!.center.y + translation.y
+                            self.rowColumnGrip!.center.y = self.rowColumnGrip!.center.y + translation.y
                         }
                     }
                     gesture.setTranslation(CGPointZero, inView: self.view)
                 }
-                
             case .Ended:
-                if self.rowColumnHandle != nil {
+                if self.rowColumnGrip != nil {
                     var endingPoint :CGPoint = gesture.locationInView(self.view)
-                    var secondRowColumnHandle = self.findButtonWithPoint(endingPoint, first: false)
-                    if secondRowColumnHandle != nil {
-                        // Check if they are both rows or both columns
-                        if abs(self.rowColumnHandle!.tag - secondRowColumnHandle!.tag) < 11 {
-                            
-                            // Swap the lines of tiles
-                            var secondLineOfTiles = self.tileArea.makeLineOfTiles(secondRowColumnHandle!.tag)
-                            self.tileArea.swapLines(self.firstLineOfTiles!, line2: secondLineOfTiles)
-                            
-                            // Swap the buttons
-                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                self.rowColumnHandle!.frame = secondRowColumnHandle!.frame
-                                secondRowColumnHandle!.frame = self.firstButtonOriginalFrame!
-                            })
-                            
-                            // Swap the tags of the buttons
-                            var tempTag = self.rowColumnHandle!.tag
-                            self.rowColumnHandle!.tag = secondRowColumnHandle!.tag
-                            secondRowColumnHandle!.tag = tempTag
-                            self.firstButtonOriginalFrame = nil
-                            self.rowColumnHandle = nil
-                            
-                        } else { // Send the button and line of tiles back to where they started
-                            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                
-                                for tile in self.firstLineOfTiles! {
-                                    tile.imageView.frame = tile.originalFrame!
-                                }
-                                
-                                self.rowColumnHandle!.frame = self.firstButtonOriginalFrame!
-                                self.firstButtonOriginalFrame = nil
-                                self.rowColumnHandle = nil
-                            })
-                        }
+                    var secondRowColumnGrip = self.findRowColumnGripWithPoint(endingPoint, first: false)
+                    if secondRowColumnGrip != nil { // A valid second grip was found at the endingPoint
+                        // Swap the lines of tiles
+                        var secondLineOfTiles = self.tileArea.makeLineOfTiles(secondRowColumnGrip!.tag)
+                        self.tileArea.swapLines(self.firstLineOfTiles!, line2: secondLineOfTiles)
+                        
+                        // Swap the grips
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            self.rowColumnGrip!.frame = secondRowColumnGrip!.frame
+                            secondRowColumnGrip!.frame = self.firstGripOriginalFrame!
+                        })
+                        
+                        // Swap the tags of the buttons
+                        var tempTag = self.rowColumnGrip!.tag
+                        self.rowColumnGrip!.tag = secondRowColumnGrip!.tag
+                        secondRowColumnGrip!.tag = tempTag
+                        self.firstGripOriginalFrame = nil
+                        self.rowColumnGrip = nil
+
                     } else { // Send the button and line of tiles back to where they started
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            
                             for tile in self.firstLineOfTiles! {
                                 tile.imageView.frame = tile.originalFrame!
                             }
-                            
-                            
-                            self.rowColumnHandle!.frame = self.firstButtonOriginalFrame!
-                            self.firstButtonOriginalFrame = nil
-                            self.rowColumnHandle = nil
+                            self.rowColumnGrip!.frame = self.firstGripOriginalFrame!
+                            self.firstGripOriginalFrame = nil
+                            self.rowColumnGrip = nil
                         })
                     }
                 }
-                
             case .Possible:
                 println("possible")
             case .Cancelled:
@@ -266,29 +243,34 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     }
     
     
-    func findButtonWithPoint(point: CGPoint, first: Bool) -> UIImageView? {
+    // This returns a grip that contains a CGPoint. Used to find the initial grip when first is true. Else, use a larger target space to find a grip when the pan gesture ends
+    func findRowColumnGripWithPoint(point: CGPoint, first: Bool) -> UIImageView? {
         for index in 0..<self.tilesPerRow {
-            var area : CGRect
-            var currentButton = self.topButtons[index]
-            if first {
-                area = currentButton.frame
+            var topArea : CGRect
+            var leftArea : CGRect
+            var topGrip = self.topGrips[index]
+            var leftGrip = self.leftGrips[index]
+            if first { // Find the initial grip
+                topArea = topGrip.frame
+                leftArea = leftGrip.frame
+                if CGRectContainsPoint(topArea, point) {
+                    return topGrip
+                }
+                if CGRectContainsPoint(leftArea, point) {
+                    return leftGrip
+                }
             } else {
-                area = CGRectMake(currentButton.frame.origin.x, currentButton.frame.origin.y - 200, currentButton.frame.size.width, currentButton.frame.size.height + 400)
-            }
-            if CGRectContainsPoint(area, point) && currentButton != self.rowColumnHandle {
-                return currentButton
-            }
-        }
-        for index in 0..<self.tilesPerRow {
-            var area : CGRect
-            var currentButton = self.leftButtons[index]
-            if first {
-                area = currentButton.frame
-            } else {
-                area = CGRectMake(currentButton.frame.origin.x - 200, currentButton.frame.origin.y, currentButton.frame.size.width + 400, currentButton.frame.size.height)
-            }
-            if CGRectContainsPoint(area, point) && currentButton != self.rowColumnHandle {
-                return currentButton
+                // The target areas are larger to make it easier to find the second grip / column to swap
+                // Ensure that it is not the same as the first grip
+                // Check if it is of similar type (row vs column)
+                topArea = CGRectMake(topGrip.frame.origin.x, topGrip.frame.origin.y - 200, topGrip.frame.size.width, topGrip.frame.size.height + 400)
+                leftArea = CGRectMake(leftGrip.frame.origin.x - 200, leftGrip.frame.origin.y, leftGrip.frame.size.width + 400, leftGrip.frame.size.height)
+                if CGRectContainsPoint(topArea, point) && topGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - topGrip.tag) < 11 {
+                    return topGrip
+                }
+                if CGRectContainsPoint(leftArea, point) && leftGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - leftGrip.tag) < 11  {
+                    return leftGrip
+                }
             }
         }
         return nil
@@ -315,8 +297,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.solveButton.userInteractionEnabled = false
             self.hintButton.userInteractionEnabled = false
             for index in 0..<self.tilesPerRow {
-                self.topButtons[index].alpha = 0
-                self.leftButtons[index].alpha = 0
+                self.topGrips[index].alpha = 0
+                self.leftGrips[index].alpha = 0
             }
         } else {
             self.originalImageShown = false
@@ -331,8 +313,8 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.solveButton.userInteractionEnabled = true
             self.hintButton.userInteractionEnabled = true
             for index in 0..<self.tilesPerRow {
-                self.topButtons[index].alpha = 1
-                self.leftButtons[index].alpha = 1
+                self.topGrips[index].alpha = 1
+                self.leftGrips[index].alpha = 1
             }
             self.tileArea.allowTileShifting = true
         }
@@ -354,6 +336,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             numTimesBackButtonPressed++
             self.userDefaults.setInteger(numTimesBackButtonPressed, forKey: "backButtonPressed")
             if userDefaults.integerForKey("backButtonPressed") < 3 {
+                // Only show this alert for the first 3 times the user presses the back button
                 var lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
                 let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
                 let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.Default, handler: { (ok) -> Void in
@@ -370,7 +353,6 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
 
     
     @IBAction func solveButtonPressed(sender: AnyObject) {
-
         var solveAlert = UIAlertController(title: NSLocalizedString("SolveAlert_Part1", comment: ""), message: NSLocalizedString("SolveAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
         let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.Default) { (finished) -> Void in
@@ -388,7 +370,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
     
  
     
-    // MARK: Other funcs
+    // MARK: Other class methods
     func puzzleIsSolved() {
         
         // Display congrats message
@@ -397,11 +379,9 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.congratsMessage.text = self.congratsMessages[randomInt]
         }
 
-        
         // Update stats
         let stats = Stats()
         stats.updateSolveStats(self.tilesPerRow)
-        
         
         // Hide and disable buttons
         self.hintButton.userInteractionEnabled = false
@@ -413,10 +393,10 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             // Slide off the banks of buttons
-            for button in self.topButtons {
+            for button in self.topGrips {
                 button.center.x = button.center.x + 2000
             }
-            for button in self.leftButtons {
+            for button in self.leftGrips {
                 button.center.y = button.center.y + 2000
             }
             
