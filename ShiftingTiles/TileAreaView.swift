@@ -14,7 +14,7 @@ class TileAreaView: UIView {
     let userDefaults = UserDefaults.standard
 
     // MARK: VARS
-    // Enables this class to notify the GameScreen when the puzzle is solved
+    // Enables this class to notify the GameBoardVC when the puzzle is solved
     var delegate : PuzzleSolvedProtocol?
     
     // Set to true when puzzle is solved

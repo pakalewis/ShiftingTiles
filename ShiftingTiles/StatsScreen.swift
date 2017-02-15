@@ -11,7 +11,11 @@ import UIKit
 
 
 class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    class func generate() -> StatsScreen {
+        return UIStoryboard(name: "Stats", bundle: nil).instantiateInitialViewController() as! StatsScreen
+    }
     
+
     let colorPalette = ColorPalette()
 
     let stats = Stats()

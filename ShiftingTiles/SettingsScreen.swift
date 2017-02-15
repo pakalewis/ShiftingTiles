@@ -9,6 +9,9 @@
 import UIKit
 
 class SettingsScreen: UIViewController {
+    class func generate() -> SettingsScreen {
+        return UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController() as! SettingsScreen
+    }
 
     
     let userDefaults = UserDefaults.standard

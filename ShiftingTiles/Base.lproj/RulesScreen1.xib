@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen1">
@@ -20,20 +24,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="3mM-eG-6vu">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mkh-XC-1nC" userLabel="Container1">
-                    <rect key="frame" x="0.0" y="40" width="600" height="73"/>
+                    <rect key="frame" x="0.0" y="40" width="375" height="128.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-vh-MSu">
-                            <rect key="frame" x="30" y="27" width="540" height="18"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="19" y="54.5" width="337.5" height="18"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="CqB-vh-MSu" firstAttribute="width" secondItem="Mkh-XC-1nC" secondAttribute="width" multiplier="0.9" id="KRC-Xc-1eb"/>
                         <constraint firstAttribute="centerY" secondItem="CqB-vh-MSu" secondAttribute="centerY" id="ZgO-wo-WDA"/>
@@ -41,16 +45,16 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WID-Yx-aM4" userLabel="Container2">
-                    <rect key="frame" x="0.0" y="113" width="600" height="72"/>
+                    <rect key="frame" x="0.0" y="168.5" width="375" height="128.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="HF7-gR-TdE" userLabel="label2">
-                            <rect key="frame" x="30" y="27" width="540" height="18"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="19" y="55" width="337.5" height="18"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="HF7-gR-TdE" secondAttribute="centerY" id="E8G-xu-Vxz"/>
                         <constraint firstItem="HF7-gR-TdE" firstAttribute="width" secondItem="WID-Yx-aM4" secondAttribute="width" multiplier="0.9" id="cTj-th-7Td"/>
@@ -58,22 +62,22 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daN-N8-zZO" userLabel="Container3">
-                    <rect key="frame" x="0.0" y="185" width="600" height="73"/>
+                    <rect key="frame" x="0.0" y="297" width="375" height="128.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UBl-0X-6Ot" userLabel="label3">
-                            <rect key="frame" x="30" y="28" width="477" height="18"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="19" y="55.5" width="241" height="18"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roundedSquareIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3DV-hN-RFc">
-                            <rect key="frame" x="527" y="15" width="43" height="43"/>
+                            <rect key="frame" x="280" y="26" width="76.5" height="76.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="3DV-hN-RFc" secondAttribute="height" multiplier="1:1" id="cWV-pW-KCO"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="UBl-0X-6Ot" secondAttribute="centerY" id="d7V-bm-VS6"/>
                         <constraint firstItem="3DV-hN-RFc" firstAttribute="leading" secondItem="UBl-0X-6Ot" secondAttribute="trailing" constant="20" id="es1-ad-LtT"/>
@@ -82,25 +86,25 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambled-sample1.png" translatesAutoresizingMaskIntoConstraints="NO" id="BvP-LA-Sqd">
-                    <rect key="frame" x="15" y="278" width="262" height="262"/>
+                    <rect key="frame" x="15" y="445.5" width="155" height="155"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="BvP-LA-Sqd" secondAttribute="height" multiplier="1:1" id="DJn-Yh-Gge"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40medium.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jJW-zS-DhW">
-                    <rect key="frame" x="323" y="278" width="262" height="262"/>
+                    <rect key="frame" x="205" y="445.5" width="155" height="155"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jJW-zS-DhW" secondAttribute="height" multiplier="1:1" id="R9t-Bg-7Dr"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z62-53-j8p">
-                    <rect key="frame" x="287" y="398" width="26" height="22"/>
+                    <rect key="frame" x="180" y="516.5" width="15" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Z62-53-j8p" secondAttribute="height" multiplier="120:101" id="ii0-HK-PAo"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="BvP-LA-Sqd" firstAttribute="leading" secondItem="3mM-eG-6vu" secondAttribute="leading" constant="15" id="6sO-dF-JKb"/>
                 <constraint firstItem="daN-N8-zZO" firstAttribute="top" secondItem="WID-Yx-aM4" secondAttribute="bottom" id="8IU-rO-LzA"/>

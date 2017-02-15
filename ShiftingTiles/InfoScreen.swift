@@ -9,7 +9,6 @@
 import UIKit
 
 class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-
     let colorPalette = ColorPalette()
 
     var pageViewController : UIPageViewController!

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RulesScreen1a" customModule="ShiftingTiles" customModuleProvider="target">
@@ -18,20 +22,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIa-3x-5u7" userLabel="Container1">
-                    <rect key="frame" x="0.0" y="40" width="600" height="109"/>
+                    <rect key="frame" x="0.0" y="40" width="375" height="192.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-iB-1hN">
-                            <rect key="frame" x="30" y="44" width="540" height="21"/>
+                            <rect key="frame" x="19" y="86" width="337.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="Te8-iB-1hN" secondAttribute="centerY" id="4Gi-wV-gPM"/>
                         <constraint firstItem="Te8-iB-1hN" firstAttribute="width" secondItem="CIa-3x-5u7" secondAttribute="width" multiplier="0.9" id="TBI-mr-cmo"/>
@@ -39,34 +43,34 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrambled-sample2.png" translatesAutoresizingMaskIntoConstraints="NO" id="YEJ-mY-3Ua" userLabel="scrambledImage">
-                    <rect key="frame" x="15" y="278" width="262" height="262"/>
+                    <rect key="frame" x="15" y="445.5" width="155" height="155"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="YEJ-mY-3Ua" secondAttribute="height" multiplier="1:1" id="ICu-gE-UHr"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="kH3-Jz-xNc" userLabel="arrowImage">
-                    <rect key="frame" x="287" y="398" width="26" height="22"/>
+                    <rect key="frame" x="180" y="516.5" width="15" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="kH3-Jz-xNc" secondAttribute="height" multiplier="120:101" id="0De-HL-Xv0"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40medium.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dLS-dy-ptG" userLabel="solvedImage">
-                    <rect key="frame" x="323" y="278" width="262" height="262"/>
+                    <rect key="frame" x="205" y="445.5" width="155" height="155"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="dLS-dy-ptG" secondAttribute="height" multiplier="1:1" id="Qrg-eA-cdK"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-dN-LyD" userLabel="Container2">
-                    <rect key="frame" x="0.0" y="149" width="600" height="109"/>
+                    <rect key="frame" x="0.0" y="232.5" width="375" height="193"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LY5-E9-8sq">
-                            <rect key="frame" x="30" y="44" width="540" height="21"/>
+                            <rect key="frame" x="19" y="86" width="337.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="LY5-E9-8sq" secondAttribute="centerY" id="SFI-kg-yvZ"/>
                         <constraint firstAttribute="centerX" secondItem="LY5-E9-8sq" secondAttribute="centerX" id="hGD-PR-Fj2"/>
@@ -74,7 +78,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6gl-dN-LyD" secondAttribute="trailing" id="5lK-ZR-Bxn"/>
                 <constraint firstItem="CIa-3x-5u7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="Ew3-X7-N3J"/>
@@ -94,7 +98,7 @@
                 <constraint firstItem="YEJ-mY-3Ua" firstAttribute="top" secondItem="6gl-dN-LyD" secondAttribute="bottom" constant="20" id="ucU-Kq-oWd"/>
                 <constraint firstAttribute="trailing" secondItem="dLS-dy-ptG" secondAttribute="trailing" constant="15" id="zsC-wF-UIe"/>
             </constraints>
-            <point key="canvasLocation" x="205" y="128"/>
+            <point key="canvasLocation" x="26" y="51"/>
         </view>
     </objects>
     <resources>

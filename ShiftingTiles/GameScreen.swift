@@ -1,5 +1,5 @@
 //
-//  GameScreen.swift
+//  GameBoardVC.swift
 //  ShiftingTiles
 //
 //  Created by Parker Lewis on 9/3/14.
@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 
-class GameScreen: UIViewController, PuzzleSolvedProtocol {
+class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
+    class func generate() -> GameBoardVC {
+        return UIStoryboard(name: "GameBoard", bundle: nil).instantiateInitialViewController() as! GameBoardVC
+    }
     
     // MARK: VARS
     let colorPalette = ColorPalette()
@@ -107,7 +110,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.layer.borderWidth = 2
         
         // Add row/column gesture
-        let rowColumnGripPanGesture = UIPanGestureRecognizer(target: self, action: #selector(GameScreen.handleRowColumnGripPan(_:)))
+        let rowColumnGripPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handleRowColumnGripPan(_:)))
         self.view.addGestureRecognizer(rowColumnGripPanGesture)
         self.initializeRowColumnGrips()
         
@@ -117,7 +120,7 @@ class GameScreen: UIViewController, PuzzleSolvedProtocol {
             self.imageCaptionLabel.text = ""
         } else {
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-                self.imageCaptionLabel.text = "\"\(self.currentImagePackage.caption)\"" + "\nby " + self.currentImagePackage.photographer
+                self.imageCaptionLabel.text = "\"\(self.currentImagePackage.caption!)\"" + "\nby " + self.currentImagePackage.photographer
             }
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
                 self.imageCaptionLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer

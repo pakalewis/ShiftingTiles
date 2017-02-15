@@ -103,6 +103,11 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        shrinkCategories()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -133,20 +138,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     
-    // Segue to game screen
-    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if self.categoriesHeightConstraint.constant != 0 {
-            self.shrinkCategories()
-        }
-
-        if segue.identifier == "playGame" {
-            let gameScreen = segue.destination as! GameScreen
-            gameScreen.currentImagePackage = self.currentImagePackage
-            gameScreen.tilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
-        }
-    }
-    
-
     
     //MARK: CATEGORIES
     @IBAction func selectCategoryButtonPressed(_ sender: AnyObject) {
@@ -174,7 +165,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     func shrinkCategories() {
-        self.categoriesHeightConstraint.constant = 0
+        if categoriesHeightConstraint.constant == 0 { return }
+        
+        categoriesHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.enableCategoryButtons(false)
             self.view.layoutIfNeeded()
@@ -548,6 +541,29 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
     }
     
+    @IBAction func statsButtonTapped(_ sender: Any) {
+        let stats = StatsScreen.generate()
+        present(stats, animated: true, completion: nil)
+    }
+    
+    @IBAction func infoButtonTapped(_ sender: Any) {
+        let infoVC = InfoScreen()
+        present(infoVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func letsPlayButtonTapped(_ sender: Any) {
+        let gameBoardVC = GameBoardVC.generate()
+        gameBoardVC.currentImagePackage = self.currentImagePackage
+        gameBoardVC.tilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
+        present(gameBoardVC, animated: true, completion: nil)
+
+    }
+    
+    @IBAction func settingsButtonTapped(_ sender: Any) {
+        let settings = SettingsScreen.generate()
+        present(settings, animated: true, completion: nil)
+
+    }
     
     func updateColorsAndFonts() {
         // Colors
@@ -595,11 +611,5 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.categoryButtons[count].titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 30)
             }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        print("MEMORY WARNING")
     }
 }
