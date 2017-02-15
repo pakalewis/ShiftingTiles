@@ -29,7 +29,7 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var dismissButton: UIButton!
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Apply color scheme and font
@@ -41,14 +41,14 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         self.rightLabel.textColor = self.colorPalette.fetchDarkColor()
         self.totalSolvesLabel.textColor = self.colorPalette.fetchDarkColor()
 
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 35)
             self.leftLabel.font = UIFont(name: "OpenSans", size: 25)
             self.rightLabel.font = UIFont(name: "OpenSans", size: 25)
             self.totalSolvesLabel.font = UIFont(name: "OpenSans", size: 25)
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.leftLabel.font = UIFont(name: "OpenSans-Bold", size: 45)
             self.rightLabel.font = UIFont(name: "OpenSans-Bold", size: 45)
@@ -62,30 +62,30 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         self.statsTable.dataSource = self
         self.statsTable.delegate = self
         
-        var dismissTap = UITapGestureRecognizer(target: self, action: "dismissStatsScreen:")
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(StatsScreen.dismissStatsScreen(_:)))
         self.view.addGestureRecognizer(dismissTap)
         
         self.totalSolvesLabel.text = NSLocalizedString("TOTAL_SOLVES", comment: "TOTAL_SOLVES") + ":  \(self.stats.fetchTotalSolves())"
         
         // Register StatCell nib
-        let nib = UINib(nibName: "StatCell", bundle: NSBundle.mainBundle())
-        self.statsTable.registerNib(nib, forCellReuseIdentifier: "STAT_CELL")
+        let nib = UINib(nibName: "StatCell", bundle: Bundle.main)
+        self.statsTable.register(nib, forCellReuseIdentifier: "STAT_CELL")
     }
     
 
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.statsTable.dequeueReusableCellWithIdentifier("STAT_CELL", forIndexPath: indexPath) as StatCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.statsTable.dequeueReusableCell(withIdentifier: "STAT_CELL", for: indexPath) as! StatCell
         cell.backgroundColor = self.colorPalette.fetchLightColor()
         cell.leftLabel.text = "\(indexPath.row + 2) x \(indexPath.row + 2)"
         cell.rightLabel.text = "\(self.stats.solvesAtSizeInts[indexPath.row])"
         cell.leftLabel.textColor = self.colorPalette.fetchDarkColor()
         cell.rightLabel.textColor = self.colorPalette.fetchDarkColor()
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             cell.leftLabel.font = UIFont(name: "OpenSans", size: 15)
             cell.rightLabel.font = UIFont(name: "OpenSans", size: 15)
         }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             cell.leftLabel.font = UIFont(name: "OpenSans", size: 30)
             cell.rightLabel.font = UIFont(name: "OpenSans", size: 30)
         }
@@ -93,18 +93,18 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
 
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.stats.solvesAtSizeInts.count
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.statsTable.frame.height / CGFloat(self.stats.solvesAtSizeInts.count)
     }
     
     
-    func dismissStatsScreen(sender: UIGestureRecognizer) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func dismissStatsScreen(_ sender: UIGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

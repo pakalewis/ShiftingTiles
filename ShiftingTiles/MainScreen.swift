@@ -20,7 +20,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     // MARK: Misc vars
     let colorPalette = ColorPalette()
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     var imageGallery = ImageGallery()
     var currentImagePackageArray : [ImagePackage]?
     var currentImagePackage : ImagePackage?
@@ -70,18 +70,18 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     // MARK: Lifecycle methods
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Set up and style the views
-        self.view.sendSubviewToBack(self.imageCapturingButtonArea)
+        self.view.sendSubview(toBack: self.imageCapturingButtonArea)
         self.imageCapturingButtonArea.alpha = 0
 
-        var tilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        var tilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         if tilesPerRow < 2 || tilesPerRow > 10 {
             // This may occur when the tilesPerRow userDefault was never set on a previous version of the app
             tilesPerRow = 3
-            self.userDefaults.setInteger(3, forKey: "tilesPerRow")
+            self.userDefaults.set(3, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
         self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
@@ -92,7 +92,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.borderWidth = 2
         
         for count in 0..<self.categoryButtons.count {
-            self.categoryButtons[count].setTitle(NSLocalizedString(self.categoryStrings[count], comment: ""), forState: .Normal)
+            self.categoryButtons[count].setTitle(NSLocalizedString(self.categoryStrings[count], comment: ""), for: UIControlState())
         }
         self.categoryArea.layer.borderWidth = 2
         // Add border to only the middle category button so there aren't double borders
@@ -107,12 +107,12 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         super.viewDidLoad()
  
         // Set user defaults upon the first launch
-        if(!self.userDefaults.boolForKey("firstlaunch1.0")){
+        if(!self.userDefaults.bool(forKey: "firstlaunch1.0")){
             // Only gets called once ever
-            self.userDefaults.setBool(true, forKey: "firstlaunch1.0")
-            self.userDefaults.setBool(true, forKey: "congratsOn")
-            self.userDefaults.setInteger(2, forKey: "colorPaletteInt")
-            self.userDefaults.setInteger(3, forKey: "tilesPerRow")
+            self.userDefaults.set(true, forKey: "firstlaunch1.0")
+            self.userDefaults.set(true, forKey: "congratsOn")
+            self.userDefaults.set(2, forKey: "colorPaletteInt")
+            self.userDefaults.set(3, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
         
@@ -120,36 +120,36 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // CollectionView
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
-        let nib = UINib(nibName: "CollectionViewImageCell", bundle: NSBundle.mainBundle())
-        self.imageCollection.registerNib(nib, forCellWithReuseIdentifier: "CELL")
+        let nib = UINib(nibName: "CollectionViewImageCell", bundle: Bundle.main)
+        self.imageCollection.register(nib, forCellWithReuseIdentifier: "CELL")
         
         
         // Randomly choose a category and set the initial image
-        var randomInt = Int(arc4random_uniform(UInt32(3)))
-        self.shouldChangeToCategory(self.categoryStrings[randomInt])
+        let randomInt = Int(arc4random_uniform(UInt32(3)))
+        _ = shouldChangeToCategory(self.categoryStrings[randomInt] as NSString)
         // Set initial image to display
-        self.mainImageView.image = self.currentImagePackage?.image
+        mainImageView.image = self.currentImagePackage?.image
     }
     
     
     
     // Segue to game screen
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
         }
 
         if segue.identifier == "playGame" {
-            var gameScreen = segue.destinationViewController as GameScreen
+            let gameScreen = segue.destination as! GameScreen
             gameScreen.currentImagePackage = self.currentImagePackage
-            gameScreen.tilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+            gameScreen.tilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         }
     }
     
 
     
     //MARK: CATEGORIES
-    @IBAction func selectCategoryButtonPressed(sender: AnyObject) {
+    @IBAction func selectCategoryButtonPressed(_ sender: AnyObject) {
         if self.categoriesHeightConstraint.constant == 0 {
             self.expandCategories()
         } else {
@@ -159,14 +159,14 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     func expandCategories() {
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.categoriesHeightConstraint.constant = 120
         }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.categoriesHeightConstraint.constant = 180
         }
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.enableCategoryButtons(true)
             self.view.layoutIfNeeded()
         })
@@ -175,16 +175,16 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     func shrinkCategories() {
         self.categoriesHeightConstraint.constant = 0
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.enableCategoryButtons(false)
             self.view.layoutIfNeeded()
         })
     }
     
 
-    func enableCategoryButtons(bool: Bool) {
+    func enableCategoryButtons(_ bool: Bool) {
         for button in self.categoryButtons {
-            button.userInteractionEnabled = bool
+            button.isUserInteractionEnabled = bool
             if bool {
                 button.alpha = 1
             } else {
@@ -193,24 +193,24 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
     }
     
-    @IBAction func categoryButtonPressed(sender: UIButton) {
-        if self.shouldChangeToCategory(sender.titleLabel!.text!) {
+    @IBAction func categoryButtonPressed(_ sender: UIButton) {
+        if self.shouldChangeToCategory(sender.titleLabel!.text! as NSString) {
             self.updateMainImageView()
         }
         self.shrinkCategories()
     }
     
     
-    func shouldChangeToCategory(category: NSString) -> Bool {
+    func shouldChangeToCategory(_ category: NSString) -> Bool {
         // Check if it's necessary to change
-        if !category.isEqualToString(self.currentCategory) {
+        if !category.isEqual(to: self.currentCategory) {
             // Update the currentCategory and currentImagePackageArray
-            self.currentCategory = category
-            if category.isEqualToString(self.categoryStrings[0]) {
+            self.currentCategory = category as String
+            if category.isEqual(to: self.categoryStrings[0]) {
                 self.currentImagePackageArray = self.imageGallery.animalImagePackages
-            } else if category.isEqualToString(self.categoryStrings[1]) {
+            } else if category.isEqual(to: self.categoryStrings[1]) {
                 self.currentImagePackageArray = self.imageGallery.natureImagePackages
-            } else if category.isEqualToString(self.categoryStrings[2]) {
+            } else if category.isEqual(to: self.categoryStrings[2]) {
                 self.currentImagePackageArray = self.imageGallery.placesImagePackages
             }
             self.updateCurrentImagePackageWithIndex(0)
@@ -225,27 +225,27 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     //MARK: COLLECTION VIEW
     // Number of cells = number of images
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.currentImagePackageArray!.count
     }
     
     
     // Cells will be square sized
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: IndexPath!) -> CGSize {
         return CGSize(width: self.imageCollection.frame.height * 0.9, height: self.imageCollection.frame.height * 0.9)
     }
 
     
     // Create cell from nib and load the appropriate image
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.imageCollection.dequeueReusableCellWithReuseIdentifier("CELL", forIndexPath: indexPath) as CollectionViewImageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.imageCollection.dequeueReusableCell(withReuseIdentifier: "CELL", for: indexPath) as! CollectionViewImageCell
         cell.imageView.image = UIImage(named: self.currentImagePackageArray![indexPath.row].getSmallFileName())
         return cell
     }
     
     
     // Selecting a cell loads the image to the main image view
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.updateCurrentImagePackageWithIndex(indexPath.row)
         self.updateMainImageView()
         self.shrinkCategories()
@@ -256,77 +256,77 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
 
     // MARK: Camera methods
-    @IBAction func cameraButtonPressed(sender: AnyObject) {
-        self.selectCategoryButton.userInteractionEnabled = false
+    @IBAction func cameraButtonPressed(_ sender: AnyObject) {
+        self.selectCategoryButton.isUserInteractionEnabled = false
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
         }
 
-        var pickPhotoMenu = UIAlertController(title: NSLocalizedString("CameraButtonAlert_Part1", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        let libraryAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part2", comment: ""), style: UIAlertActionStyle.Default) { (handler) -> Void in
+        let pickPhotoMenu = UIAlertController(title: NSLocalizedString("CameraButtonAlert_Part1", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.alert)
+        let libraryAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part2", comment: ""), style: UIAlertActionStyle.default) { (handler) -> Void in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
         }
-        let cameraAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part3", comment: ""), style: UIAlertActionStyle.Default) { (handler) -> Void in
+        let cameraAction = UIAlertAction(title: NSLocalizedString("CameraButtonAlert_Part3", comment: ""), style: UIAlertActionStyle.default) { (handler) -> Void in
             
             // Check if device has a camera
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 
                 // Check authorization status
-                let status = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-                if status == AVAuthorizationStatus.Authorized {
+                let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+                if status == AVAuthorizationStatus.authorized {
                     if self.captureSession == nil {
                         self.setupAVFoundation()
                     } else {
-                        self.view.layer.addSublayer(self.previewLayer)
+                        self.view.layer.addSublayer(self.previewLayer!)
                         self.captureSession!.startRunning()
                     }
                     
                     // Display the imageCapturingArea and captureImageButton button
-                    self.view.bringSubviewToFront(self.imageCapturingButtonArea)
+                    self.view.bringSubview(toFront: self.imageCapturingButtonArea)
                     self.imageCapturingButtonArea.alpha = 1
                     self.imageCapturingAreaTopConstraint.constant = 5
-                    UIView.animateWithDuration(0.8, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.8, animations: { () -> Void in
                         self.view.layoutIfNeeded()
                     })
                 }
-                if status == AVAuthorizationStatus.Denied {
-                    var noAccessAlert = UIAlertController(title: NSLocalizedString("CameraAccessAlert_Part1", comment: ""), message: NSLocalizedString("CameraAccessAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
-                        self.selectCategoryButton.userInteractionEnabled = true
+                if status == AVAuthorizationStatus.denied {
+                    let noAccessAlert = UIAlertController(title: NSLocalizedString("CameraAccessAlert_Part1", comment: ""), message: NSLocalizedString("CameraAccessAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.cancel) { (handler) -> Void in
+                        self.selectCategoryButton.isUserInteractionEnabled = true
                     }
                     noAccessAlert.addAction(okAction)
-                    self.presentViewController(noAccessAlert, animated: true, completion: nil)
+                    self.present(noAccessAlert, animated: true, completion: nil)
                 }
-                if status == AVAuthorizationStatus.NotDetermined {
-                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (granted) -> Void in
+                if status == AVAuthorizationStatus.notDetermined {
+                    AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) -> Void in
                         if granted {
-                            println("Granted access to camera")
+                            print("Granted access to camera")
                         } else {
-                            println("Access to camera denied")
+                            print("Access to camera denied")
                         }
                     })
                 }
             } else { // No camera on device
-                var noCameraAlert = UIAlertController(title: "", message: NSLocalizedString("NoCameraAlert", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
-                    self.selectCategoryButton.userInteractionEnabled = true
+                let noCameraAlert = UIAlertController(title: "", message: NSLocalizedString("NoCameraAlert", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.cancel) { (handler) -> Void in
+                    self.selectCategoryButton.isUserInteractionEnabled = true
                 }
                 noCameraAlert.addAction(okAction)
-                self.presentViewController(noCameraAlert, animated: true, completion: nil)
+                self.present(noCameraAlert, animated: true, completion: nil)
             }
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertActionStyle.Cancel) { (handler) -> Void in
-            self.selectCategoryButton.userInteractionEnabled = true
+        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: UIAlertActionStyle.cancel) { (handler) -> Void in
+            self.selectCategoryButton.isUserInteractionEnabled = true
         }
 
         pickPhotoMenu.addAction(libraryAction)
         pickPhotoMenu.addAction(cameraAction)
         pickPhotoMenu.addAction(cancelAction)
-        self.presentViewController(pickPhotoMenu, animated: true, completion: nil)
+        self.present(pickPhotoMenu, animated: true, completion: nil)
     }
     
     
@@ -338,23 +338,23 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         // Preview layer
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
-        var bounds = self.mainImageView.bounds
-        self.previewLayer!.bounds = CGRectMake(bounds.origin.x + 2, bounds.origin.y + 2, bounds.width - 4, bounds.height - 4)
+        let bounds = self.mainImageView.bounds
+        self.previewLayer!.bounds = CGRect(x: bounds.origin.x + 2, y: bounds.origin.y + 2, width: bounds.width - 4, height: bounds.height - 4)
         self.previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-        self.previewLayer!.position = CGPointMake(CGRectGetMidX(bounds) + self.mainImageView.frame.origin.x, CGRectGetMidY(bounds) + self.mainImageView.frame.origin.y)
-        self.view.layer.addSublayer(self.previewLayer)
+        self.previewLayer!.position = CGPoint(x: bounds.midX + self.mainImageView.frame.origin.x, y: bounds.midY + self.mainImageView.frame.origin.y)
+        self.view.layer.addSublayer(self.previewLayer!)
         
         // Capture Device
-        self.captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        var err : NSError? = nil
-        var input = AVCaptureDeviceInput.deviceInputWithDevice(self.captureDevice, error: &err) as AVCaptureDeviceInput!
-        if err != nil {
-            println("error: \(err?.localizedDescription)")
+        self.captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        do {
+            let input = try AVCaptureDeviceInput(device: self.captureDevice)
+            self.captureSession!.addInput(input)
+        } catch _ {
+            print("error: ")
         }
-        self.captureSession!.addInput(input)
 
     
-        var outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
+        let outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
         self.stillImageOutput = AVCaptureStillImageOutput()
         self.stillImageOutput!.outputSettings = outputSettings
         self.captureSession!.addOutput(self.stillImageOutput)
@@ -363,31 +363,31 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
   
     
-    @IBAction func cancelImageCaptureMode(sender: AnyObject) {
+    @IBAction func cancelImageCaptureMode(_ sender: AnyObject) {
         self.captureSession!.stopRunning()
         self.previewLayer?.removeFromSuperlayer()
 
         // Slide the imageCapturingArea offscreen
         self.imageCapturingAreaTopConstraint.constant = 300
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
+        UIView.animate(withDuration: 0.8, animations: { () -> Void in
             self.view.layoutIfNeeded()
-            }) { (closure) -> Void in
+            }, completion: { (closure) -> Void in
                 self.imageCapturingButtonArea.alpha = 0
-                self.view.sendSubviewToBack(self.imageCapturingButtonArea)
-        }
-        self.selectCategoryButton.userInteractionEnabled = true
+                self.view.sendSubview(toBack: self.imageCapturingButtonArea)
+        }) 
+        self.selectCategoryButton.isUserInteractionEnabled = true
     }
     
     
-    @IBAction func captureImage(sender: AnyObject) {
+    @IBAction func captureImage(_ sender: AnyObject) {
         // Slide the imageCapturingArea offscreen
         self.imageCapturingAreaTopConstraint.constant = 300
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
+        UIView.animate(withDuration: 0.8, animations: { () -> Void in
             self.view.layoutIfNeeded()
-        }) { (closure) -> Void in
+        }, completion: { (closure) -> Void in
             self.imageCapturingButtonArea.alpha = 0
-            self.view.sendSubviewToBack(self.imageCapturingButtonArea)
-        }
+            self.view.sendSubview(toBack: self.imageCapturingButtonArea)
+        }) 
 
         var videoConnection : AVCaptureConnection?
         for connection in self.stillImageOutput!.connections {
@@ -409,43 +409,43 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         // This might not be necessary
         var newOrientation: AVCaptureVideoOrientation
-        switch UIDevice.currentDevice().orientation {
-        case .PortraitUpsideDown:
-            newOrientation = .PortraitUpsideDown;
+        switch UIDevice.current.orientation {
+        case .portraitUpsideDown:
+            newOrientation = .portraitUpsideDown;
             break;
-        case .LandscapeLeft:
-            newOrientation = .LandscapeRight;
+        case .landscapeLeft:
+            newOrientation = .landscapeRight;
             break;
-        case .LandscapeRight:
-            newOrientation = .LandscapeLeft;
+        case .landscapeRight:
+            newOrientation = .landscapeLeft;
             break;
         default:
-            newOrientation = .Portrait;
+            newOrientation = .portrait;
         }
         videoConnection!.videoOrientation = newOrientation
         
         
         
-        
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            self.stillImageOutput!.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(buffer : CMSampleBuffer!, error : NSError!) -> Void in
-                var data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
+        DispatchQueue.main.async {
+            
+            self.stillImageOutput!.captureStillImageAsynchronously(from: videoConnection, completionHandler: { (buffer, error) in
+                
+                let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)!
                 var capturedImage = UIImage(data: data)
                 self.previewLayer?.removeFromSuperlayer()
                 self.captureSession!.stopRunning()
-
+                
                 // Rotates the image if its imageOrientation property is not Up
-                if !(capturedImage!.imageOrientation == UIImageOrientation.Up) {
+                if !(capturedImage!.imageOrientation == UIImageOrientation.up) {
                     UIGraphicsBeginImageContextWithOptions(capturedImage!.size, false, capturedImage!.scale)
-                    capturedImage!.drawInRect(CGRect(origin: CGPointZero, size: capturedImage!.size))
-                    var properImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+                    capturedImage!.draw(in: CGRect(origin: CGPoint.zero, size: capturedImage!.size))
+                    let properImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
                     
                     // Now crop to square
-                    var squareRect = CGRectMake(0, (properImage.size.height / 2) - (properImage.size.width / 2), properImage.size.width, properImage.size.width)
-                    var croppedCGImage = CGImageCreateWithImageInRect(properImage.CGImage, squareRect)
-                    var croppedUIImage = UIImage(CGImage: croppedCGImage)
-
+                    let squareRect = CGRect(x: 0, y: (properImage.size.height / 2) - (properImage.size.width / 2), width: properImage.size.width, height: properImage.size.width)
+                    let croppedCGImage = properImage.cgImage!.cropping(to: squareRect)!
+                    let croppedUIImage = UIImage(cgImage: croppedCGImage)
+                    
                     capturedImage = croppedUIImage
                     UIGraphicsEndImageContext()
                 }
@@ -453,94 +453,97 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 self.currentImagePackage = ImagePackage(baseFileName: "", caption: "", photographer: "")
                 self.currentImagePackage?.image = capturedImage!
                 self.mainImageView.image = capturedImage!
-
+                
             })
+            
+
         }
-        self.selectCategoryButton.userInteractionEnabled = true
+
+        self.selectCategoryButton.isUserInteractionEnabled = true
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [AnyHashable: Any]) {
         // Crop the picked image to square
-        var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
-        var imageWidth  = imagePicked!.size.width
-        var imageHeight  = imagePicked!.size.height
+        let imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
+        let imageWidth  = imagePicked!.size.width
+        let imageHeight  = imagePicked!.size.height
         var rect = CGRect()
         if ( imageWidth < imageHeight) { // Image is in potrait mode
-            rect = CGRectMake (0, (imageHeight - imageWidth) / 2, imageWidth, imageWidth);
+            rect = CGRect (x: 0, y: (imageHeight - imageWidth) / 2, width: imageWidth, height: imageWidth);
         } else { // Image is in landscape mode
-            rect = CGRectMake ((imageWidth - imageHeight) / 2, 0, imageHeight, imageHeight);
+            rect = CGRect (x: (imageWidth - imageHeight) / 2, y: 0, width: imageHeight, height: imageHeight);
         }
-        var croppedCGImage = CGImageCreateWithImageInRect(imagePicked?.CGImage, rect)
-        var croppedUIImage = UIImage(CGImage: croppedCGImage)
+        let croppedCGImage = imagePicked?.cgImage?.cropping(to: rect)
+        let croppedUIImage = UIImage(cgImage: croppedCGImage!)
         
         // Update currentImagePackage
         self.currentImagePackage = ImagePackage(baseFileName: "", caption: "", photographer: "")
-        self.currentImagePackage?.image = croppedUIImage!
-        self.mainImageView.image = croppedUIImage!
+        self.currentImagePackage?.image = croppedUIImage
+        self.mainImageView.image = croppedUIImage
 
         // Dismiss picker
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.selectCategoryButton.userInteractionEnabled = true
+        picker.dismiss(animated: true, completion: nil)
+        self.selectCategoryButton.isUserInteractionEnabled = true
     }
     
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         //this gets fired when the users cancel out of the process
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.selectCategoryButton.userInteractionEnabled = true
+        picker.dismiss(animated: true, completion: nil)
+        self.selectCategoryButton.isUserInteractionEnabled = true
     }
 
     
     
     
     // MARK: Other methods
-    func updateCurrentImagePackageWithIndex(index: Int) {
+    func updateCurrentImagePackageWithIndex(_ index: Int) {
         // Load the most appropriate size image
         self.currentImagePackage = self.currentImagePackageArray![index]
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getMediumFileName())
         }
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.currentImagePackage?.image = UIImage(named: self.currentImagePackage!.getLargeFileName())
         }
     }
     
     
     func updateMainImageView() {
-        UIView.transitionWithView(self.mainImageView,
+        UIView.transition(with: self.mainImageView,
             duration: 0.5,
-            options: .TransitionCrossDissolve,
+            options: .transitionCrossDissolve,
             animations: { self.mainImageView.image = self.currentImagePackage?.image },
             completion: nil)
     }
     
     
-    @IBAction func rightButtonPressed(sender: AnyObject) {
+    @IBAction func rightButtonPressed(_ sender: AnyObject) {
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
         }
 
-        var currentTilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         if currentTilesPerRow < 10 {
-            currentTilesPerRow++
+            currentTilesPerRow += 1
             self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
-            self.userDefaults.setInteger(currentTilesPerRow, forKey: "tilesPerRow")
+            self.userDefaults.set(currentTilesPerRow, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
    }
 
     
-    @IBAction func leftButtonPressed(sender: AnyObject) {
+    @IBAction func leftButtonPressed(_ sender: AnyObject) {
         if self.categoriesHeightConstraint.constant != 0 {
             self.shrinkCategories()
         }
 
-        var currentTilesPerRow = self.userDefaults.integerForKey("tilesPerRow")
+        var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         if currentTilesPerRow > 2 {
-            currentTilesPerRow--
+            currentTilesPerRow -= 1
             self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
-            self.userDefaults.setInteger(currentTilesPerRow, forKey: "tilesPerRow")
+            self.userDefaults.set(currentTilesPerRow, forKey: "tilesPerRow")
             self.userDefaults.synchronize()
         }
     }
@@ -550,34 +553,34 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
         self.categoryArea.backgroundColor = self.colorPalette.fetchLightColor()
-        self.categoryArea.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.categoryArea.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         self.imageCapturingButtonArea.backgroundColor = self.colorPalette.fetchLightColor()
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         for count in 0..<self.categoryButtons.count {
-            self.categoryButtons[count].setTitleColor(self.colorPalette.fetchDarkColor(), forState: UIControlState.Normal)
-            self.categoryButtons[count].layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+            self.categoryButtons[count].setTitleColor(self.colorPalette.fetchDarkColor(), for: UIControlState())
+            self.categoryButtons[count].layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         }
 
         
         // Icons
-        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.cameraButton.setImage(UIImage(named: "cameraIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
-        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
-        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
         self.imageCapturingButtonAreaFakeBorder.backgroundColor = self.colorPalette.fetchDarkColor()
-        self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
-        self.cancelButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), forState: UIControlState.Normal)
+        self.captureImageButton.setImage(UIImage(named: "targetIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.cancelButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
  
         // Fonts
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 15)
             for count in 0..<self.categoryButtons.count {
@@ -585,7 +588,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             }
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
             self.tilesPerRowLabel.font = UIFont(name: "OpenSans-Bold", size: 30)
             for count in 0..<self.categoryButtons.count {
@@ -597,6 +600,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        println("MEMORY WARNING")
+        print("MEMORY WARNING")
     }
 }

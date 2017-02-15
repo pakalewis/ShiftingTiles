@@ -20,7 +20,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Apply color scheme
@@ -31,20 +31,20 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tapGestureDismiss = UITapGestureRecognizer(target: self, action: "dismissInfoScreen:")
+        let tapGestureDismiss = UITapGestureRecognizer(target: self, action: #selector(InfoScreen.dismissInfoScreen(_:)))
         self.view.addGestureRecognizer(tapGestureDismiss)
 
         
         // Setup pageViewController
-        self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
         
         
         // Set the initial ViewController
-        self.firstVC = RulesScreen1(nibName: "RulesScreen1", bundle: NSBundle.mainBundle())
-        let viewControllers: NSArray = [self.firstVC]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+        self.firstVC = RulesScreen1(nibName: "RulesScreen1", bundle: Bundle.main)
+        let viewControllers: [UIViewController] = [self.firstVC]
+        pageViewController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         self.viewControllers.append(self.firstVC)
         
         // Set up the rest of the VCs
@@ -58,17 +58,17 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         // Appearance of the page control dots
         let appearance = UIPageControl.appearance()
         appearance.pageIndicatorTintColor = self.colorPalette.fetchDarkColor()
-        appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-        appearance.backgroundColor = UIColor.clearColor()
+        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.backgroundColor = UIColor.clear
 
     }
     
     
     func setupVCArray() {
-        let page2 = RulesScreen1a(nibName: "RulesScreen1a", bundle: NSBundle.mainBundle())
-        let page3 = RulesScreen2(nibName: "RulesScreen2", bundle: NSBundle.mainBundle())
-        let page4 = RulesScreen3(nibName: "RulesScreen3", bundle: NSBundle.mainBundle())
-        let page5 = Acknowledgements(nibName: "Acknowledgements", bundle: NSBundle.mainBundle())
+        let page2 = RulesScreen1a(nibName: "RulesScreen1a", bundle: Bundle.main)
+        let page3 = RulesScreen2(nibName: "RulesScreen2", bundle: Bundle.main)
+        let page4 = RulesScreen3(nibName: "RulesScreen3", bundle: Bundle.main)
+        let page5 = Acknowledgements(nibName: "Acknowledgements", bundle: Bundle.main)
     
         self.viewControllers.append(page2)
         self.viewControllers.append(page3)
@@ -78,36 +78,36 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        if viewController.isKindOfClass(RulesScreen1a) {
+        if viewController.isKind(of: RulesScreen1a.self) {
             return self.viewControllers[0]
         }
-        if viewController.isKindOfClass(RulesScreen2) {
+        if viewController.isKind(of: RulesScreen2.self) {
             return self.viewControllers[1]
         }
-        if viewController.isKindOfClass(RulesScreen3) {
+        if viewController.isKind(of: RulesScreen3.self) {
             return self.viewControllers[2]
         }
-        if viewController.isKindOfClass(Acknowledgements) {
+        if viewController.isKind(of: Acknowledgements.self) {
             return self.viewControllers[3]
         }
         return nil
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
 
-        if viewController.isKindOfClass(RulesScreen1) {
+        if viewController.isKind(of: RulesScreen1.self) {
             return self.viewControllers[1]
         }
-        if viewController.isKindOfClass(RulesScreen1a) {
+        if viewController.isKind(of: RulesScreen1a.self) {
             return self.viewControllers[2]
         }
-        if viewController.isKindOfClass(RulesScreen2) {
+        if viewController.isKind(of: RulesScreen2.self) {
             return self.viewControllers[3]
         }
-        if viewController.isKindOfClass(RulesScreen3) {
+        if viewController.isKind(of: RulesScreen3.self) {
             return self.viewControllers[4]
         }
         return nil
@@ -118,17 +118,17 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     // MARK: - Page Indicator
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return 5
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
 
     
-    func dismissInfoScreen(sender: UIGestureRecognizer) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func dismissInfoScreen(_ sender: UIGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     

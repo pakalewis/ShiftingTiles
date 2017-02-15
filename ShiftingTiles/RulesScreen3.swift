@@ -24,13 +24,13 @@ class RulesScreen3: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.label1.font = UIFont(name: "OpenSans", size: 15)
             self.label2.font = UIFont(name: "OpenSans", size: 15)
             self.label3.font = UIFont(name: "OpenSans", size: 15)
         }
 
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.label1.font = UIFont(name: "OpenSans", size: 30)
             self.label2.font = UIFont(name: "OpenSans", size: 30)
             self.label3.font = UIFont(name: "OpenSans", size: 30)

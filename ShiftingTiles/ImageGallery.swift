@@ -99,7 +99,7 @@ extension Array
     {
         for _ in 0..<self.count
         {
-            sort { (_,_) in arc4random() < arc4random() }
+            let _ = sorted { (_,_) in arc4random() < arc4random() }
         }
     }
 }

@@ -20,14 +20,14 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.label1.font = UIFont(name: "OpenSans", size: 15)
             self.label2.font = UIFont(name: "OpenSans", size: 15)
             self.label3.font = UIFont(name: "OpenSans", size: 15)
             self.emailButton.titleLabel!.font = UIFont(name: "OpenSans", size: 15)
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.label1.font = UIFont(name: "OpenSans", size: 30)
             self.label2.font = UIFont(name: "OpenSans", size: 30)
             self.label3.font = UIFont(name: "OpenSans", size: 30)
@@ -39,10 +39,10 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         self.label1.textColor = self.colorPalette.fetchDarkColor()
         self.label2.textColor = self.colorPalette.fetchDarkColor()
         self.label3.textColor = self.colorPalette.fetchDarkColor()
-        self.emailButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.emailButton.setTitleColor(UIColor.black, for: UIControlState())
         self.emailButton.layer.cornerRadius = 5
         self.emailButton.layer.borderWidth = 2
-        self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
 
 
         self.label1.text = NSLocalizedString("Acknowledgements_Part1", comment: "") + "\nParker Lewis"
@@ -51,24 +51,24 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     
-    @IBAction func emailAddressedTapped(sender: AnyObject) {
+    @IBAction func emailAddressedTapped(_ sender: AnyObject) {
         
         if MFMailComposeViewController.canSendMail() {
             let mailComposeViewController = MFMailComposeViewController()
             mailComposeViewController.mailComposeDelegate = self
             mailComposeViewController.setToRecipients(["shiftingtiles@gmail.com"])
             mailComposeViewController.setSubject("Shifting Tiles feedback")
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
-            let mailErrorAlert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("EmailAlert", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+            let mailErrorAlert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("EmailAlert", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
             mailErrorAlert.addAction(okAction)
-            self.presentViewController(mailErrorAlert, animated: true, completion: nil)
+            self.present(mailErrorAlert, animated: true, completion: nil)
         }
     }
 
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

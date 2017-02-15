@@ -11,7 +11,7 @@ import UIKit
 
 class ColorPalette {
     
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     
     
     // The five combos are: 
@@ -40,7 +40,7 @@ class ColorPalette {
 
     
     func fetchLightColor() -> UIColor {
-        let index = userDefaults.integerForKey("colorPaletteInt")
+        let index = userDefaults.integer(forKey: "colorPaletteInt")
         if index >= 0 && index < 5 {
             return self.lightColors[index]
         }
@@ -49,7 +49,7 @@ class ColorPalette {
 
 
     func fetchDarkColor() -> UIColor {
-        let index = userDefaults.integerForKey("colorPaletteInt")
+        let index = userDefaults.integer(forKey: "colorPaletteInt")
         if index >= 0 && index < 5 {
             return self.darkColors[index]
         }

@@ -26,14 +26,14 @@ class RulesScreen2: UIViewController {
         super.viewDidLoad()
 
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.label1.font = UIFont(name: "OpenSans", size: 15)
             self.label2.font = UIFont(name: "OpenSans", size: 15)
             self.label3.font = UIFont(name: "OpenSans", size: 15)
             self.label4.font = UIFont(name: "OpenSans", size: 15)
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             self.label1.font = UIFont(name: "OpenSans", size: 30)
             self.label2.font = UIFont(name: "OpenSans", size: 30)
             self.label3.font = UIFont(name: "OpenSans", size: 30)
@@ -43,7 +43,7 @@ class RulesScreen2: UIViewController {
         self.image1.image = self.image1.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image2.image = self.image2.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.image3.image = self.image3.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        self.image4.layer.borderColor = self.colorPalette.fetchDarkColor().CGColor
+        self.image4.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         self.image4.layer.borderWidth = 2
         self.image4.layer.cornerRadius = self.image4.frame.width * 0.25
         self.image4.image = self.image4.image?.imageWithColor(self.colorPalette.fetchDarkColor())
