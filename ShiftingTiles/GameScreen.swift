@@ -9,17 +9,24 @@
 import Foundation
 import UIKit
 
+struct GameBoard {
+    let imagePackage: ImagePackage
+    let tilesPerRow: Int
+}
 
 class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
-    class func generate() -> GameBoardVC {
-        return UIStoryboard(name: "GameBoard", bundle: nil).instantiateInitialViewController() as! GameBoardVC
+    class func generate(board: GameBoard) -> GameBoardVC {
+        let gbvc = UIStoryboard(name: "GameBoard", bundle: nil).instantiateInitialViewController() as! GameBoardVC
+        gbvc.gameBoard = board
+        return gbvc
     }
     
     // MARK: VARS
     let colorPalette = ColorPalette()
     let userDefaults = UserDefaults.standard
     
-    var currentImagePackage : ImagePackage!
+    var gameBoard: GameBoard!
+//    var currentImagePackage: ImagePackage!
     var tilesPerRow = 3
     var congratsMessages : [String]!
     var originalImageShown = false
@@ -89,7 +96,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         }
 
         
-        self.originalImageView.image = self.currentImagePackage.image!
+        self.originalImageView.image = self.gameBoard.imagePackage.image()
         self.originalImageView.layer.borderWidth = 2
         self.originalImageView.alpha = 0
         self.view.sendSubviewToBack(originalImageView)
@@ -103,7 +110,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         
         // Initialize tileArea
         self.tileArea.delegate = self
-        self.tileArea.imageToSolve = self.currentImagePackage.image!
+        self.tileArea.imageToSolve = self.gameBoard.imagePackage.image()
         self.tileArea.tilesPerRow = self.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
@@ -116,14 +123,14 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         
         // Set text fields
         congratsMessage.text = ""
-        if self.currentImagePackage.caption == "" {
+        if self.gameBoard.imagePackage.caption == "" {
             self.imageCaptionLabel.text = ""
         } else {
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-                self.imageCaptionLabel.text = "\"\(self.currentImagePackage.caption!)\"" + "\nby " + self.currentImagePackage.photographer
+                self.imageCaptionLabel.text = "\"\(self.gameBoard.imagePackage.caption)\"" + "\nby " + self.gameBoard.imagePackage.photographer
             }
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-                self.imageCaptionLabel.text = self.currentImagePackage.caption + " — " + self.currentImagePackage.photographer
+                self.imageCaptionLabel.text = self.gameBoard.imagePackage.caption + " — " + self.gameBoard.imagePackage.photographer
             }
         }
     }

@@ -21,6 +21,7 @@ class CategoryButton: UIButton {
         self.setTitle(self.category.titleText(), for: .normal)
         self.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
         self.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        self.layer.borderWidth = 2
         self.delegate = delegate
     }
     
@@ -56,8 +57,12 @@ class PhotoBrowser {
         let randomInt = Int.random(in: 0...2)
         currentCategory = PhotoCategory(rawValue: randomInt)!
     }
-    var currentCategory: PhotoCategory
-
+    var currentCategory: PhotoCategory {
+        didSet {
+            index = 0
+        }
+    }
+    var index: Int = 0
     var imageGallery = ImageGallery()
     var currentImagePackageArray : [ImagePackage]?
 
@@ -65,7 +70,11 @@ class PhotoBrowser {
         return [.animals, .nature, .places]
     }
     
-    func currentPackage() -> [ImagePackage] {
+    func currentPackage() -> ImagePackage {
+        return currentPackages()[self.index]
+    }
+    
+    func currentPackages() -> [ImagePackage] {
         switch currentCategory {
         case .animals:
             return imageGallery.animalImagePackages
@@ -74,17 +83,6 @@ class PhotoBrowser {
         case .places:
             return imageGallery.placesImagePackages
         }
-    }
-    
-    func image(index: Int? = nil) -> UIImage {
-        let fileName: String
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-            fileName = currentPackage()[index ?? 0].getMediumFileName()
-        } else {
-            fileName = currentPackage()[index ?? 0].getLargeFileName()
-        }
-        
-        return UIImage(named: fileName)!
     }
 }
 

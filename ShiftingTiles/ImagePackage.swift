@@ -11,20 +11,15 @@ import UIKit
 
 class ImagePackage {
     
-    var baseFileName : String!
-    var caption : String!
-    var photographer : String!
-    var image : UIImage?
-    
+    let baseFileName: String
+    let caption: String
+    let photographer: String
     
     init(baseFileName: String, caption: String, photographer: String) {
-        
         self.baseFileName = baseFileName
         self.caption = caption
         self.photographer = photographer
     }
-    
-    
     
     func getSmallFileName() -> String {
         return self.baseFileName + "small.jpg"
@@ -38,4 +33,14 @@ class ImagePackage {
         return self.baseFileName + "large.jpg"
     }
 
+    func image() -> UIImage {
+        let fileName: String
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
+            fileName = getMediumFileName()
+        } else {
+            fileName = getLargeFileName()
+        }
+        
+        return UIImage(named: fileName)!
+    }
 }
