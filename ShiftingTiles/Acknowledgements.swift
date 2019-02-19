@@ -39,7 +39,7 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         self.label1.textColor = self.colorPalette.fetchDarkColor()
         self.label2.textColor = self.colorPalette.fetchDarkColor()
         self.label3.textColor = self.colorPalette.fetchDarkColor()
-        self.emailButton.setTitleColor(UIColor.black, for: UIControlState())
+        self.emailButton.setTitleColor(UIColor.black, for: UIControl.State())
         self.emailButton.layer.cornerRadius = 5
         self.emailButton.layer.borderWidth = 2
         self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
@@ -60,8 +60,8 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
             mailComposeViewController.setSubject("Shifting Tiles feedback")
             self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
-            let mailErrorAlert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("EmailAlert", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
+            let mailErrorAlert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("EmailAlert", comment: ""), preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
             mailErrorAlert.addAction(okAction)
             self.present(mailErrorAlert, animated: true, completion: nil)
         }

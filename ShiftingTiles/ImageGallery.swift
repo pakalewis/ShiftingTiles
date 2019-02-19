@@ -11,15 +11,15 @@ import UIKit
 
 class ImageGallery {
     
-    var animalImagePackages : [ImagePackage]!
-    var natureImagePackages : [ImagePackage]!
-    var placesImagePackages : [ImagePackage]!
+    let animalImagePackages: [ImagePackage]
+    let natureImagePackages: [ImagePackage]
+    let placesImagePackages: [ImagePackage]
 
     
     init() {
         
         // ANIMAL
-        self.animalImagePackages = [
+        let animals = [
             ImagePackage(baseFileName: "02", caption: "Great Blue Heron", photographer: "Dale Arveson"),
             ImagePackage(baseFileName: "08", caption: "Zebras, Etosha National Park, Namibia", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "09", caption: "Garden Cat", photographer: "Parker Lewis"),
@@ -42,11 +42,10 @@ class ImageGallery {
             ImagePackage(baseFileName: "48", caption: "Giraffe, Etosha National Park, Namibia", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "49", caption: "White Lady Spider, Sossusvlei, Namibia", photographer: "Greg Jaehnig")
         ]
-        self.animalImagePackages.shuffle()
+        self.animalImagePackages = animals.shuffled()
         
-  
         // NATURE
-        self.natureImagePackages = [
+        let nature = [
             ImagePackage(baseFileName: "01", caption: "Tiger Mountain, Washington", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "03", caption: "Fish River Canyon, Namibia", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "04", caption: "Fish River Canyon, Namibia", photographer: "Greg Jaehnig"),
@@ -67,11 +66,11 @@ class ImageGallery {
             ImagePackage(baseFileName: "33", caption: "Lavender", photographer: "Dale Arveson"),
             ImagePackage(baseFileName: "56", caption: "Olympic", photographer: "ErikHG Photography")
         ]
-        self.natureImagePackages.shuffle()
+        self.natureImagePackages = nature.shuffled()
         
         
         // PLACES
-        self.placesImagePackages = [
+        let places = [
             ImagePackage(baseFileName: "11", caption: "At Sea, Antarctica", photographer: "Kate Lewis"),
             ImagePackage(baseFileName: "20", caption: "Kolmanskop, Namibia", photographer: "Greg Jaehnig"),
             ImagePackage(baseFileName: "21", caption: "Rusty Reflection", photographer: "Dale Arveson"),
@@ -87,21 +86,6 @@ class ImageGallery {
             ImagePackage(baseFileName: "54", caption: "Nærøyfjord", photographer: "ErikHG Photography"),
             ImagePackage(baseFileName: "55", caption: "Bog", photographer: "ErikHG Photography")
         ]
-        self.placesImagePackages.shuffle()
+        self.placesImagePackages = places.shuffled()
     }
 }
-
-
-extension Array
-{
-    // Randomizes the order of an array's elements.
-    mutating func shuffle()
-    {
-        for _ in 0..<self.count
-        {
-            let _ = sorted { (_,_) in arc4random() < arc4random() }
-        }
-    }
-}
-
-

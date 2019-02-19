@@ -91,7 +91,7 @@ class SettingsScreen: UIViewController {
     
     
     
-    func rotationTapped(_ sender: UIGestureRecognizer) {
+    @objc func rotationTapped(_ sender: UIGestureRecognizer) {
         let rotationsOn = userDefaults.bool(forKey: "rotationsOn")
         if rotationsOn {
             self.userDefaults.set(false, forKey: "rotationsOn")
@@ -104,7 +104,7 @@ class SettingsScreen: UIViewController {
     }
     
     
-    func congratsTapped(_ sender: UIGestureRecognizer) {
+    @objc func congratsTapped(_ sender: UIGestureRecognizer) {
         let congratsOn = userDefaults.bool(forKey: "congratsOn")
         if congratsOn {
             self.userDefaults.set(false, forKey: "congratsOn")
@@ -117,7 +117,7 @@ class SettingsScreen: UIViewController {
     }
     
 
-    func colorPaletteSelected(_ sender: UIGestureRecognizer) {
+    @objc func colorPaletteSelected(_ sender: UIGestureRecognizer) {
         // Determine which palette was selected and apply the color scheme
         let tappedPalette = sender.view
         let index = self.colorPalettes?.index(of: tappedPalette!)
@@ -135,7 +135,7 @@ class SettingsScreen: UIViewController {
         self.rotationImage.image = self.rotationImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.congratsImage.image = self.congratsImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
         self.colorSchemeLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {

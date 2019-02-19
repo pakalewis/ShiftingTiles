@@ -92,7 +92,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         self.originalImageView.image = self.currentImagePackage.image!
         self.originalImageView.layer.borderWidth = 2
         self.originalImageView.alpha = 0
-        self.view.sendSubview(toBack: originalImageView)
+        self.view.sendSubviewToBack(originalImageView)
 
         self.updateColorsAndFonts()
     }
@@ -105,7 +105,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.delegate = self
         self.tileArea.imageToSolve = self.currentImagePackage.image!
         self.tileArea.tilesPerRow = self.tilesPerRow
-        self.view.bringSubview(toFront: self.tileArea)
+        self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
         
@@ -148,7 +148,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             let topFrame = CGRect(x: topPositionX, y: self.topBank.frame.origin.y, width: topWidth, height: topHeight * 0.9)
             let topArea = UIImageView(frame: topFrame)
             topArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            topArea.contentMode = UIViewContentMode.scaleAspectFit
+            topArea.contentMode = UIView.ContentMode.scaleAspectFit
             topArea.tag = index // This is used later to determine row vs column
             self.view.addSubview(topArea)
             self.topGrips.append(topArea)
@@ -157,7 +157,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             let leftFrame = CGRect(x: self.leftBank.frame.origin.x, y: leftPositionY, width: leftWidth * 0.9, height: leftHeight)
             let leftArea = UIImageView(frame: leftFrame)
             leftArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
-            leftArea.contentMode = UIViewContentMode.scaleAspectFit
+            leftArea.contentMode = UIView.ContentMode.scaleAspectFit
             leftArea.tag = index + 100 // This is used later to determine row vs column
             self.view.addSubview(leftArea)
             self.leftGrips.append(leftArea)
@@ -165,7 +165,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     }
 
     
-    func handleRowColumnGripPan(_ gesture:UIPanGestureRecognizer) {
+    @objc func handleRowColumnGripPan(_ gesture:UIPanGestureRecognizer) {
         if  !self.originalImageShown { // Gesture should be allowed
             switch gesture.state {
             case .began:
@@ -174,10 +174,10 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                 if self.rowColumnGrip != nil { // The first handle was detected and stored for later
                     self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.rowColumnGrip!.tag)
                     for tile in self.firstLineOfTiles! {
-                        self.tileArea.bringSubview(toFront: tile.imageView)
+                        self.tileArea.bringSubviewToFront(tile.imageView)
                         tile.originalFrame = tile.imageView.frame
                     }
-                    self.view.bringSubview(toFront: self.rowColumnGrip!)
+                    self.view.bringSubviewToFront(self.rowColumnGrip!)
                     self.firstGripOriginalFrame = self.rowColumnGrip!.frame
                 }
             case .changed:
@@ -289,7 +289,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         if !self.originalImageShown {
             self.originalImageShown = true
             self.tileArea.allowTileShifting = false
-            self.view.bringSubview(toFront: self.originalImageView)
+            self.view.bringSubviewToFront(self.originalImageView)
             self.originalImageView.alpha = 1
 
             // Turn off and hide buttons
@@ -306,7 +306,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         } else {
             self.originalImageShown = false
             self.originalImageView.alpha = 0
-            self.view.sendSubview(toBack: self.originalImageView)
+            self.view.sendSubviewToBack(self.originalImageView)
 
             // Turn on and show buttons
             self.backButton.imageView?.alpha = 1
@@ -340,9 +340,9 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             self.userDefaults.set(numTimesBackButtonPressed, forKey: "backButtonPressed")
             if userDefaults.integer(forKey: "backButtonPressed") < 3 {
                 // Only show this alert for the first 3 times the user presses the back button
-                let lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-                let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
-                let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.default, handler: { (ok) -> Void in
+                let lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertController.Style.alert)
+                let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
+                let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default, handler: { (ok) -> Void in
                     self.dismiss(animated: true, completion: nil)
                 })
                 lossOfProgressAlert.addAction(yesAction)
@@ -356,9 +356,9 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
 
     
     @IBAction func solveButtonPressed(_ sender: AnyObject) {
-        let solveAlert = UIAlertController(title: NSLocalizedString("SolveAlert_Part1", comment: ""), message: NSLocalizedString("SolveAlert_Part2", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
-        let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertActionStyle.default) { (finished) -> Void in
+        let solveAlert = UIAlertController(title: NSLocalizedString("SolveAlert_Part1", comment: ""), message: NSLocalizedString("SolveAlert_Part2", comment: ""), preferredStyle: UIAlertController.Style.alert)
+        let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
+        let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default) { (finished) -> Void in
             
             self.puzzleIsSolved()
             self.tileArea.layoutTiles()
@@ -425,10 +425,10 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
         self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
-        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
-        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
-        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControlState())
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
+        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
+        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
+        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
 
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {

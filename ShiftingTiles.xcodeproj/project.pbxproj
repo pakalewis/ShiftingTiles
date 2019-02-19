@@ -229,10 +229,10 @@
 		2CD974CA1A958902006AA16B /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974C01A958902006AA16B /* OpenSans-Semibold.ttf */; };
 		2CD974CD1A97AB4A006AA16B /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD974CC1A97AB4A006AA16B /* menuIcon.png */; };
 		2CE5AFDB1E54FFC900119D3A /* GameBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFDA1E54FFC900119D3A /* GameBoard.storyboard */; };
-		2CE5AFDD1E5502F600119D3A /* MainScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFDC1E5502F600119D3A /* MainScreen.storyboard */; };
 		2CE5AFDF1E55050500119D3A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFDE1E55050500119D3A /* Settings.storyboard */; };
 		2CE5AFE11E5506FD00119D3A /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFE01E5506FD00119D3A /* Stats.storyboard */; };
 		2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */; };
+		91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -464,10 +464,10 @@
 		2CD974C01A958902006AA16B /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "ShiftingTiles/Fonts/OpenSans-Semibold.ttf"; sourceTree = SOURCE_ROOT; };
 		2CD974CC1A97AB4A006AA16B /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = ShiftingTiles/Icons/menuIcon.png; sourceTree = SOURCE_ROOT; };
 		2CE5AFDA1E54FFC900119D3A /* GameBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GameBoard.storyboard; sourceTree = SOURCE_ROOT; };
-		2CE5AFDC1E5502F600119D3A /* MainScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		2CE5AFDE1E55050500119D3A /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = SOURCE_ROOT; };
 		2CE5AFE01E5506FD00119D3A /* Stats.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Stats.storyboard; sourceTree = SOURCE_ROOT; };
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
+		91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,7 +772,7 @@
 				2C7F087A1A5DF1750083F668 /* MainScreen.swift */,
 				2C7F08561A5DF05D0083F668 /* CollectionViewImageCell.swift */,
 				2C7F08571A5DF05D0083F668 /* CollectionViewImageCell.xib */,
-				2CE5AFDC1E5502F600119D3A /* MainScreen.storyboard */,
+				91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -876,7 +876,7 @@
 					2C30EF1C19B7C17500675799 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 4M43W6YZHW;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -948,7 +948,6 @@
 				2CC6358A1A7866CA0079BB1D /* 39small.jpg in Resources */,
 				2C90A1301A78CA3000447AE4 /* 23large.jpg in Resources */,
 				2C90A16B1A7909F100447AE4 /* statsIcon.png in Resources */,
-				2CE5AFDD1E5502F600119D3A /* MainScreen.storyboard in Resources */,
 				2CC6357D1A7866CA0079BB1D /* 26small.jpg in Resources */,
 				2C90A0D91A78CA1E00447AE4 /* 16medium.jpg in Resources */,
 				2C90A0EA1A78CA1E00447AE4 /* 33medium.jpg in Resources */,
@@ -1128,6 +1127,7 @@
 				2C025E6E1A660D4900BEFB87 /* ColorPalette.swift in Sources */,
 				2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */,
 				2C6BB4B51AA2CA8B0048E07E /* ImagePackage.swift in Sources */,
+				91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */,
 				2C9AF62F1AA68D1200A830DF /* RulesScreen1a.swift in Sources */,
 				2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */,
 				2C805DDF1A6E1E7E004FCF8B /* RulesScreen3.swift in Sources */,
@@ -1257,7 +1257,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1300,7 +1300,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1323,7 +1323,8 @@
 				PRODUCT_NAME = ShiftingTiles;
 				PROVISIONING_PROFILE = "1f52df84-9f87-41d4-a9af-1f3d1246e5c2";
 				PROVISIONING_PROFILE_SPECIFIER = "Shifting Tiles";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1341,7 +1342,8 @@
 				PRODUCT_NAME = ShiftingTiles;
 				PROVISIONING_PROFILE = "1f52df84-9f87-41d4-a9af-1f3d1246e5c2";
 				PROVISIONING_PROFILE_SPECIFIER = "Shifting Tiles";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1379,7 +1381,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1401,7 +1403,8 @@
 				PRODUCT_NAME = ShiftingTiles;
 				PROVISIONING_PROFILE = "1f52df84-9f87-41d4-a9af-1f3d1246e5c2";
 				PROVISIONING_PROFILE_SPECIFIER = "Shifting Tiles";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Distribution;
 		};

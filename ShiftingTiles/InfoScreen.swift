@@ -50,7 +50,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         self.setupVCArray()
         
         // Add PageViewController to the InfoScreen VC
-        self.addChildViewController(self.pageViewController)
+        self.addChild(self.pageViewController)
         self.view.addSubview(self.pageViewController.view)
 
         
@@ -126,7 +126,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
 
     
-    func dismissInfoScreen(_ sender: UIGestureRecognizer) {
+    @objc func dismissInfoScreen(_ sender: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
     

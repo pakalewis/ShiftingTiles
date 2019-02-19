@@ -135,7 +135,7 @@ class TileAreaView: UIView {
                 
                 // TODO: play around with this animation more
                 // Update and animate the tile's frame
-                UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(), animations: ({
+                UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIView.AnimationOptions(), animations: ({
 
                     self.tileArray[index1][index2].imageView.frame = tileFrame
                     
@@ -311,7 +311,7 @@ class TileAreaView: UIView {
         let fullRotation = CGFloat(M_PI * 2) / 30
         let duration = 0.7
         let relativeDuration = duration / 6
-        let options = UIViewKeyframeAnimationOptions()
+        let options = UIView.KeyframeAnimationOptions()
         UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: options, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: relativeDuration, animations: {
                 tileToWiggle.imageView.transform = tileToWiggle.imageView.transform.rotated(by: fullRotation)
@@ -342,7 +342,7 @@ class TileAreaView: UIView {
     
     
     // MARK: INTERACTIONS
-    func handleMoveTilePan(_ gesture:UIPanGestureRecognizer) {
+    @objc func handleMoveTilePan(_ gesture:UIPanGestureRecognizer) {
         // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
             switch gesture.state {
@@ -350,7 +350,7 @@ class TileAreaView: UIView {
                 let startingPoint :CGPoint = gesture.location(in: self)
                 if self.findTileWithPoint(startingPoint, searchingForFirst: true) {
                     self.firstTile = self.foundTileWithPoint!
-                    self.bringSubview(toFront: self.firstTile!.imageView)
+                    self.bringSubviewToFront(self.firstTile!.imageView)
                     self.firstTile!.originalFrame = self.firstTile!.imageView.frame
                 }
             case .changed:
@@ -391,7 +391,7 @@ class TileAreaView: UIView {
     }
 
     
-    func tileDoubleTapped(_ sender: UIGestureRecognizer) {
+    @objc func tileDoubleTapped(_ sender: UIGestureRecognizer) {
         // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
             if userDefaults.bool(forKey: "rotationsOn") {

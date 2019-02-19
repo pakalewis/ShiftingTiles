@@ -107,7 +107,7 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     
-    func dismissStatsScreen(_ sender: UIGestureRecognizer) {
+    @objc func dismissStatsScreen(_ sender: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
 
