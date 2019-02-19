@@ -7,6 +7,7 @@ TODO:
 Todo - extract PhotoBrowser
 
 
+
 QUESTIONS:
 - tapping an image from the collectionview add 4mb to the memory for each image. why??
 - Why does the photo library take so long to load the first time?
