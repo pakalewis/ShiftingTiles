@@ -11,7 +11,7 @@
 import Foundation
 import UIKit
 
-class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MainScreen: UIViewController, UINavigationControllerDelegate {
 
     // MARK: Misc vars
     let colorPalette = ColorPalette()
@@ -25,8 +25,7 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var tilesPerRowLabel: UILabel!
-    // Categories
-//    @IBOutlet weak var categoryArea: UIView!
+
     @IBOutlet weak var selectCategoryButton: UIButton!
     @IBOutlet weak var categoryStack: UIStackView!
     
@@ -61,8 +60,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
         
-        self.enableCategoryButtons(false)
-        
         self.updateColorsAndFonts()
     }
     
@@ -87,10 +84,9 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
 
         // CollectionView
-        self.imageCollection.delegate = self
-        self.imageCollection.dataSource = self
         let nib = UINib(nibName: "CollectionViewImageCell", bundle: Bundle.main)
         self.imageCollection.register(nib, forCellWithReuseIdentifier: "CELL")
+        self.photoBrowser.observe(collectionView: imageCollection, delegate: self)
         
         
         // Randomly choose a category and set the initial image
@@ -98,9 +94,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             let button = CategoryButton(category: category, delegate: self)
             categoryStack.addArrangedSubview(button)
         }
-        
-        // Set initial image to display
-        updateMainImageView(image: photoBrowser.currentPackage().image())
     }
     
     
@@ -114,9 +107,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             self.shrinkCategories()
 
         }
-//        if self.categoriesHeightConstraint.constant == 0 {
-//        } else {
-//        }
     }
     
     
@@ -138,46 +128,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
 
-    func enableCategoryButtons(_ bool: Bool) {
-//        for button in self.categoryButtons {
-//            button.isUserInteractionEnabled = bool
-//            if bool {
-//                button.alpha = 1
-//            } else {
-//                button.alpha = 0
-//            }
-//        }
-    }
-    
-    //MARK: COLLECTION VIEW
-    // Number of cells = number of images
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photoBrowser.currentPackages().count
-    }
-    
-    
-    // Cells will be square sized
-    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: IndexPath!) -> CGSize {
-        return CGSize(width: self.imageCollection.frame.height * 0.9, height: self.imageCollection.frame.height * 0.9)
-    }
-
-    
-    // Create cell from nib and load the appropriate image
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.imageCollection.dequeueReusableCell(withReuseIdentifier: "CELL", for: indexPath) as! CollectionViewImageCell
-        let package = photoBrowser.currentPackages()[indexPath.row]
-        cell.imageView.image = UIImage(named: package.getSmallFileName())
-        return cell
-    }
-    
-    
-    // Selecting a cell loads the image to the main image view
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.photoBrowser.index = indexPath.row
-        self.updateMainImageView(image: photoBrowser.currentPackage().image())
-        self.shrinkCategories()
-    }
-    
     
     
     
@@ -199,10 +149,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     
     @IBAction func rightButtonPressed(_ sender: AnyObject) {
-//        if self.categoriesHeightConstraint.constant != 0 {
-//            self.shrinkCategories()
-//        }
-
         var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         if currentTilesPerRow < 10 {
             currentTilesPerRow += 1
@@ -214,10 +160,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     
     @IBAction func leftButtonPressed(_ sender: AnyObject) {
-//        if self.categoriesHeightConstraint.constant != 0 {
-//            self.shrinkCategories()
-//        }
-
         var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
         if currentTilesPerRow > 2 {
             currentTilesPerRow -= 1
@@ -240,8 +182,6 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @IBAction func letsPlayButtonTapped(_ sender: Any) {
         let board = GameBoard(imagePackage: self.photoBrowser.currentPackage(), tilesPerRow: self.userDefaults.integer(forKey: "tilesPerRow"))
         let gameBoardVC = GameBoardVC.generate(board: board)
-//        gameBoardVC.currentImagePackage = self.currentImagePackage
-//        gameBoardVC.tilesPerRow =
         present(gameBoardVC, animated: true, completion: nil)
 
     }
@@ -255,23 +195,17 @@ class MainScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func updateColorsAndFonts() {
         // Colors
         self.view.backgroundColor = self.colorPalette.fetchLightColor()
-//        self.categoryArea.backgroundColor = self.colorPalette.fetchLightColor()
-//        self.categoryArea.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+
         self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
         self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
         self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
-//        for count in 0..<self.categoryButtons.count {
-//            self.categoryButtons[count].setTitleColor(self.colorPalette.fetchDarkColor(), for: UIControl.State())
-//            self.categoryButtons[count].layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
-//        }
 
-        
         // Icons
         self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
+        self.separatorView.backgroundColor = self.colorPalette.fetchLightColor()
         self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
         self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
@@ -310,3 +244,8 @@ extension MainScreen: CategoryButtonDelegate {
 }
 
 
+extension MainScreen: PhotoBrowserDelegate {
+    func display() {
+        self.updateMainImageView(image: photoBrowser.currentPackage().image())
+    }
+}

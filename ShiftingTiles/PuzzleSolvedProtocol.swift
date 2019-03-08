@@ -10,7 +10,7 @@ import Foundation
 
 
 
-protocol PuzzleSolvedProtocol {
+protocol PuzzleSolvedProtocol: class {
     func puzzleIsSolved()
 }
 

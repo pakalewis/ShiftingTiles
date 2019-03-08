@@ -9,11 +9,6 @@
 import Foundation
 import UIKit
 
-struct GameBoard {
-    let imagePackage: ImagePackage
-    let tilesPerRow: Int
-}
-
 class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     class func generate(board: GameBoard) -> GameBoardVC {
         let gbvc = UIStoryboard(name: "GameBoard", bundle: nil).instantiateInitialViewController() as! GameBoardVC

@@ -13,9 +13,7 @@ class TileAreaView: UIView {
     
     let userDefaults = UserDefaults.standard
 
-    // MARK: VARS
-    // Enables this class to notify the GameBoardVC when the puzzle is solved
-    var delegate : PuzzleSolvedProtocol?
+    weak var delegate: PuzzleSolvedProtocol?
     
     // Set to true when puzzle is solved
     var isPuzzleSolved = false
@@ -232,9 +230,8 @@ class TileAreaView: UIView {
                 
                 if counter == line1.count - 1 {
                     if self.checkIfSolved() {
-                        // Notify GameScreen
                         self.isPuzzleSolved = true
-                        self.delegate!.puzzleIsSolved()
+                        self.delegate?.puzzleIsSolved()
                     }
                 }
             })
@@ -371,7 +368,7 @@ class TileAreaView: UIView {
                             if self.checkIfSolved() {
                                 // Notify GameScreen
                                 self.isPuzzleSolved = true
-                                self.delegate!.puzzleIsSolved()
+                                self.delegate?.puzzleIsSolved()
                             }
                         })
                     } else {
@@ -403,7 +400,7 @@ class TileAreaView: UIView {
                     if self.checkIfSolved() {
                         // Notify GameScreen
                         self.isPuzzleSolved = true
-                        self.delegate!.puzzleIsSolved()
+                        self.delegate?.puzzleIsSolved()
                     }
                 })
             }
