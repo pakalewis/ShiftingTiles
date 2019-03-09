@@ -43,4 +43,18 @@ class ImagePackage {
         
         return UIImage(named: fileName)!
     }
+
+    func captionText() -> String {
+        if self.caption == "" {
+            return ""
+        } else {
+            return caption + "\n " + photographer
+//            if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
+//                self.imageCaptionLabel.text = "\"\(self.gameBoard.imagePackage.caption)\"" + "\nby " + self.gameBoard.imagePackage.photographer
+//            }
+//            if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+//                self.imageCaptionLabel.text = self.gameBoard.imagePackage.caption + " — " + self.gameBoard.imagePackage.photographer
+//            }
+        }
+    }
 }

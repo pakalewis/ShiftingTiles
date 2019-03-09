@@ -21,9 +21,6 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     let userDefaults = UserDefaults.standard
     
     var gameBoard: GameBoard!
-//    var currentImagePackage: ImagePackage!
-    var tilesPerRow = 3
-    var congratsMessages : [String]!
     var originalImageShown = false
     
     var topGrips = [UIImageView]()
@@ -56,30 +53,6 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     // MARK: Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.congratsMessages = [ // Populated from Localizable.strings
-            NSLocalizedString("Message01", comment: ""),
-            NSLocalizedString("Message02", comment: ""),
-            NSLocalizedString("Message03", comment: ""),
-            NSLocalizedString("Message04", comment: ""),
-            NSLocalizedString("Message05", comment: ""),
-            NSLocalizedString("Message06", comment: ""),
-            NSLocalizedString("Message07", comment: ""),
-            NSLocalizedString("Message08", comment: ""),
-            NSLocalizedString("Message09", comment: ""),
-            NSLocalizedString("Message10", comment: ""),
-            NSLocalizedString("Message11", comment: ""),
-            NSLocalizedString("Message12", comment: ""),
-            NSLocalizedString("Message13", comment: ""),
-            NSLocalizedString("Message14", comment: ""),
-            NSLocalizedString("Message15", comment: ""),
-            NSLocalizedString("Message16", comment: ""),
-            NSLocalizedString("Message17", comment: "")
-        ]
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.leftBankWidthConstraint.constant = 30
@@ -106,7 +79,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         // Initialize tileArea
         self.tileArea.delegate = self
         self.tileArea.imageToSolve = self.gameBoard.imagePackage.image()
-        self.tileArea.tilesPerRow = self.tilesPerRow
+        self.tileArea.tilesPerRow = self.gameBoard.tilesPerRow
         self.view.bringSubviewToFront(self.tileArea)
         self.tileArea.initialize()
         self.tileArea.layer.borderWidth = 2
@@ -117,17 +90,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         self.initializeRowColumnGrips()
         
         // Set text fields
-        congratsMessage.text = ""
-        if self.gameBoard.imagePackage.caption == "" {
-            self.imageCaptionLabel.text = ""
-        } else {
-            if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-                self.imageCaptionLabel.text = "\"\(self.gameBoard.imagePackage.caption)\"" + "\nby " + self.gameBoard.imagePackage.photographer
-            }
-            if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-                self.imageCaptionLabel.text = self.gameBoard.imagePackage.caption + " — " + self.gameBoard.imagePackage.photographer
-            }
-        }
+        self.imageCaptionLabel.text = gameBoard.imagePackage.captionText()
     }
     
     
@@ -137,12 +100,12 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     func initializeRowColumnGrips() {
         
         // Measurements to make the frames
-        let topWidth = self.topBank.frame.width / CGFloat(self.tilesPerRow)
+        let topWidth = self.topBank.frame.width / CGFloat(self.gameBoard.tilesPerRow)
         let topHeight = self.topBank.frame.height
         let leftWidth = self.leftBank.frame.width
-        let leftHeight = self.leftBank.frame.height / CGFloat(self.tilesPerRow)
+        let leftHeight = self.leftBank.frame.height / CGFloat(self.gameBoard.tilesPerRow)
         
-        for index in 0..<self.tilesPerRow {
+        for index in 0..<self.gameBoard.tilesPerRow {
             let topPositionX = self.topBank.frame.origin.x + (topWidth * CGFloat(index))
             let leftPositionY = self.leftBank.frame.origin.y + (leftHeight * CGFloat(index))
             
@@ -250,7 +213,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     
     // This returns a grip that contains a CGPoint. Used to find the initial grip when first is true. Else, use a larger target space to find a grip when the pan gesture ends
     func findRowColumnGripWithPoint(_ point: CGPoint, first: Bool) -> UIImageView? {
-        for index in 0..<self.tilesPerRow {
+        for index in 0..<self.gameBoard.tilesPerRow {
             var topArea : CGRect
             var leftArea : CGRect
             let topGrip = self.topGrips[index]
@@ -301,7 +264,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             self.backButton.isUserInteractionEnabled = false
             self.solveButton.isUserInteractionEnabled = false
             self.hintButton.isUserInteractionEnabled = false
-            for index in 0..<self.tilesPerRow {
+            for index in 0..<self.gameBoard.tilesPerRow {
                 self.topGrips[index].alpha = 0
                 self.leftGrips[index].alpha = 0
             }
@@ -317,7 +280,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             self.backButton.isUserInteractionEnabled = true
             self.solveButton.isUserInteractionEnabled = true
             self.hintButton.isUserInteractionEnabled = true
-            for index in 0..<self.tilesPerRow {
+            for index in 0..<self.gameBoard.tilesPerRow {
                 self.topGrips[index].alpha = 1
                 self.leftGrips[index].alpha = 1
             }
@@ -337,56 +300,29 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         if self.tileArea.isPuzzleSolved {
             self.dismiss(animated: true, completion: nil)
         } else {
-            var numTimesBackButtonPressed = self.userDefaults.integer(forKey: "backButtonPressed")
-            numTimesBackButtonPressed += 1
-            self.userDefaults.set(numTimesBackButtonPressed, forKey: "backButtonPressed")
-            if userDefaults.integer(forKey: "backButtonPressed") < 3 {
-                // Only show this alert for the first 3 times the user presses the back button
-                let lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertController.Style.alert)
-                let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
-                let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default, handler: { (ok) -> Void in
-                    self.dismiss(animated: true, completion: nil)
-                })
-                lossOfProgressAlert.addAction(yesAction)
-                lossOfProgressAlert.addAction(noAction)
-                self.present(lossOfProgressAlert, animated: true, completion: nil)
+            if let alert = LossOfProgressAlert(delegate: self).make() {
+                self.present(alert, animated: true, completion: nil)
             } else {
                 self.dismiss(animated: true, completion: nil)
             }
-        }        
+        }
     }
 
     
     @IBAction func solveButtonPressed(_ sender: AnyObject) {
-        let solveAlert = UIAlertController(title: NSLocalizedString("SolveAlert_Part1", comment: ""), message: NSLocalizedString("SolveAlert_Part2", comment: ""), preferredStyle: UIAlertController.Style.alert)
-        let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
-        let yesAction = UIAlertAction(title: NSLocalizedString("YES", comment: ""), style: UIAlertAction.Style.default) { (finished) -> Void in
-            
-            self.puzzleIsSolved()
-            self.tileArea.layoutTiles()
-            self.tileArea.orientAllTiles()
-            self.tileArea.isPuzzleSolved = true
-        }
-
-        solveAlert.addAction(yesAction)
-        solveAlert.addAction(noAction)
-        self.present(solveAlert, animated: true, completion: nil)
+        let alert = AutoSolveAlert(delegate: self).make()
+        self.present(alert, animated: true, completion: nil)
     }
     
  
     
     // MARK: Other class methods
     func puzzleIsSolved() {
-        
-        // Display congrats message
-        if userDefaults.bool(forKey: "congratsOn") {
-            let randomInt = Int(arc4random_uniform(UInt32(self.congratsMessages.count)))
-            self.congratsMessage.text = self.congratsMessages[randomInt]
-        }
+        self.congratsMessage.text = Congrats.generateMessage()
 
         // Update stats
         let stats = Stats()
-        stats.updateSolveStats(self.tilesPerRow)
+        stats.updateSolveStats(self.gameBoard.tilesPerRow)
         
         // Hide and disable buttons
         self.hintButton.isUserInteractionEnabled = false
@@ -444,4 +380,19 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
 
     }
     
+}
+
+extension GameBoardVC: AutoSolveAlertDelegate {
+    func autosolve() {
+        self.puzzleIsSolved()
+        self.tileArea.layoutTiles()
+        self.tileArea.orientAllTiles()
+        self.tileArea.isPuzzleSolved = true
+    }
+}
+
+extension GameBoardVC: LossOfProgressAlertDelegate {
+    func lossOfProgressAccepted() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
