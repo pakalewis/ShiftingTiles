@@ -9,9 +9,6 @@
 import UIKit
 
 class RulesScreen3: UIViewController {
-
-    let colorPalette = ColorPalette()
-    
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
@@ -37,13 +34,13 @@ class RulesScreen3: UIViewController {
         }
         
 
-        self.image1.image = self.image1.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        self.image2.image = self.image2.image?.imageWithColor(self.colorPalette.fetchDarkColor())
-        self.image3.image = self.image3.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.image1.image = self.image1.image?.imageWithColor(ColorPalette.fetchDarkColor())
+        self.image2.image = self.image2.image?.imageWithColor(ColorPalette.fetchDarkColor())
+        self.image3.image = self.image3.image?.imageWithColor(ColorPalette.fetchDarkColor())
         
-        self.label1.textColor = self.colorPalette.fetchDarkColor()
-        self.label2.textColor = self.colorPalette.fetchDarkColor()
-        self.label3.textColor = self.colorPalette.fetchDarkColor()
+        self.label1.textColor = ColorPalette.fetchDarkColor()
+        self.label2.textColor = ColorPalette.fetchDarkColor()
+        self.label3.textColor = ColorPalette.fetchDarkColor()
         
         self.label1.text = NSLocalizedString("Rules3_Part1", comment: "")
         self.label2.text = NSLocalizedString("Rules3_Part2", comment: "")

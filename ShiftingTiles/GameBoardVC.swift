@@ -17,7 +17,6 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     }
     
     // MARK: VARS
-    let colorPalette = ColorPalette()
     let userDefaults = UserDefaults.standard
     
     var gameBoard: GameBoard!
@@ -112,7 +111,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             // Top Grip Area
             let topFrame = CGRect(x: topPositionX, y: self.topBank.frame.origin.y, width: topWidth, height: topHeight * 0.9)
             let topArea = UIImageView(frame: topFrame)
-            topArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            topArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(ColorPalette.fetchDarkColor())
             topArea.contentMode = UIView.ContentMode.scaleAspectFit
             topArea.tag = index // This is used later to determine row vs column
             self.view.addSubview(topArea)
@@ -121,7 +120,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             // Left Grip Area
             let leftFrame = CGRect(x: self.leftBank.frame.origin.x, y: leftPositionY, width: leftWidth * 0.9, height: leftHeight)
             let leftArea = UIImageView(frame: leftFrame)
-            leftArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(self.colorPalette.fetchDarkColor())
+            leftArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(ColorPalette.fetchDarkColor())
             leftArea.contentMode = UIView.ContentMode.scaleAspectFit
             leftArea.tag = index + 100 // This is used later to determine row vs column
             self.view.addSubview(leftArea)
@@ -357,16 +356,16 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     
     func updateColorsAndFonts() {
         // Colors
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
-        self.congratsMessage.textColor = self.colorPalette.fetchDarkColor()
-        self.imageCaptionLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.tileArea.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
-        self.originalImageView.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
-        self.separatorView.backgroundColor = self.colorPalette.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
+        self.view.backgroundColor = ColorPalette.fetchLightColor()
+        self.congratsMessage.textColor = ColorPalette.fetchDarkColor()
+        self.imageCaptionLabel.textColor = ColorPalette.fetchDarkColor()
+        self.tileArea.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.originalImageView.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.separatorView.backgroundColor = ColorPalette.fetchDarkColor()
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
 
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {

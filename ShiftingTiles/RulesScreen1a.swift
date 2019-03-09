@@ -9,9 +9,6 @@
 import UIKit
 
 class RulesScreen1a: UIViewController {
-
-    let colorPalette = ColorPalette()
-    
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     
@@ -37,16 +34,16 @@ class RulesScreen1a: UIViewController {
         self.label2.text = NSLocalizedString("Rules1_Part5", comment: "")
         
         
-        self.label1.textColor = self.colorPalette.fetchDarkColor()
-        self.label2.textColor = self.colorPalette.fetchDarkColor()
+        self.label1.textColor = ColorPalette.fetchDarkColor()
+        self.label2.textColor = ColorPalette.fetchDarkColor()
         
         
-        self.scrambledImage.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+        self.scrambledImage.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
         self.scrambledImage.layer.borderWidth = 2
-        self.solvedImage.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+        self.solvedImage.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
         self.solvedImage.layer.borderWidth = 2
         
-        self.arrowImage.image = self.arrowImage.image?.imageWithColor(self.colorPalette.fetchDarkColor())
+        self.arrowImage.image = self.arrowImage.image?.imageWithColor(ColorPalette.fetchDarkColor())
         
         
     }

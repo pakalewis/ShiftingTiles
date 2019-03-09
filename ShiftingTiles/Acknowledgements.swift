@@ -10,9 +10,6 @@ import UIKit
 import MessageUI
 
 class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
-
-    let colorPalette = ColorPalette()
-
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -36,13 +33,13 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         
 
         
-        self.label1.textColor = self.colorPalette.fetchDarkColor()
-        self.label2.textColor = self.colorPalette.fetchDarkColor()
-        self.label3.textColor = self.colorPalette.fetchDarkColor()
+        self.label1.textColor = ColorPalette.fetchDarkColor()
+        self.label2.textColor = ColorPalette.fetchDarkColor()
+        self.label3.textColor = ColorPalette.fetchDarkColor()
         self.emailButton.setTitleColor(UIColor.black, for: UIControl.State())
         self.emailButton.layer.cornerRadius = 5
         self.emailButton.layer.borderWidth = 2
-        self.emailButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+        self.emailButton.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
 
 
         self.label1.text = NSLocalizedString("Acknowledgements_Part1", comment: "") + "\nParker Lewis"

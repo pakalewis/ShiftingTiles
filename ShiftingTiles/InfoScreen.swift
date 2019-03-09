@@ -9,8 +9,6 @@
 import UIKit
 
 class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    let colorPalette = ColorPalette()
-
     var pageViewController : UIPageViewController!
     var firstVC : UIViewController!
     var viewControllers = [UIViewController]()
@@ -23,7 +21,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         super.viewWillAppear(animated)
         
         // Apply color scheme
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.view.backgroundColor = ColorPalette.fetchLightColor()
     }
     
 
@@ -56,7 +54,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         
         // Appearance of the page control dots
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = self.colorPalette.fetchDarkColor()
+        appearance.pageIndicatorTintColor = ColorPalette.fetchDarkColor()
         appearance.currentPageIndicatorTintColor = UIColor.white
         appearance.backgroundColor = UIColor.clear
 

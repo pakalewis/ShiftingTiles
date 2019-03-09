@@ -14,7 +14,6 @@ import UIKit
 class MainScreen: UIViewController, UINavigationControllerDelegate {
 
     // MARK: Misc vars
-    let colorPalette = ColorPalette()
     let userDefaults = UserDefaults.standard
 
     let photoBrowser = PhotoBrowser()
@@ -194,22 +193,22 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     
     func updateColorsAndFonts() {
         // Colors
-        self.view.backgroundColor = self.colorPalette.fetchLightColor()
+        self.view.backgroundColor = ColorPalette.fetchLightColor()
 
-        self.shiftingTilesLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.tilesPerRowLabel.textColor = self.colorPalette.fetchDarkColor()
-        self.mainImageView.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
+        self.shiftingTilesLabel.textColor = ColorPalette.fetchDarkColor()
+        self.tilesPerRowLabel.textColor = ColorPalette.fetchDarkColor()
+        self.mainImageView.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
 
         // Icons
-        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.separatorView.backgroundColor = self.colorPalette.fetchLightColor()
-        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
-        self.letsPlayButton.layer.borderColor = self.colorPalette.fetchDarkColor().cgColor
-        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(self.colorPalette.fetchDarkColor()), for: UIControl.State())
+        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.separatorView.backgroundColor = ColorPalette.fetchLightColor()
+        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.letsPlayButton.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
  
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
