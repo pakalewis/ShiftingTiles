@@ -34,13 +34,13 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
         super.viewWillAppear(animated)
         
         // Apply color scheme and font
-        self.view.backgroundColor = ColorPalette.fetchLightColor()
-        self.topBorder.backgroundColor = ColorPalette.fetchDarkColor()
-        self.bottomBorder.backgroundColor = ColorPalette.fetchDarkColor()
-        self.statsLabel.textColor = ColorPalette.fetchDarkColor()
-        self.leftLabel.textColor = ColorPalette.fetchDarkColor()
-        self.rightLabel.textColor = ColorPalette.fetchDarkColor()
-        self.totalSolvesLabel.textColor = ColorPalette.fetchDarkColor()
+        self.view.backgroundColor = Colors.fetchLightColor()
+        self.topBorder.backgroundColor = Colors.fetchDarkColor()
+        self.bottomBorder.backgroundColor = Colors.fetchDarkColor()
+        self.statsLabel.textColor = Colors.fetchDarkColor()
+        self.leftLabel.textColor = Colors.fetchDarkColor()
+        self.rightLabel.textColor = Colors.fetchDarkColor()
+        self.totalSolvesLabel.textColor = Colors.fetchDarkColor()
 
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.statsLabel.font = UIFont(name: "OpenSans-Bold", size: 35)
@@ -77,11 +77,11 @@ class StatsScreen: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.statsTable.dequeueReusableCell(withIdentifier: "STAT_CELL", for: indexPath) as! StatCell
-        cell.backgroundColor = ColorPalette.fetchLightColor()
+        cell.backgroundColor = Colors.fetchLightColor()
         cell.leftLabel.text = "\(indexPath.row + 2) x \(indexPath.row + 2)"
         cell.rightLabel.text = "\(self.stats.solvesAtSizeInts[indexPath.row])"
-        cell.leftLabel.textColor = ColorPalette.fetchDarkColor()
-        cell.rightLabel.textColor = ColorPalette.fetchDarkColor()
+        cell.leftLabel.textColor = Colors.fetchDarkColor()
+        cell.rightLabel.textColor = Colors.fetchDarkColor()
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             cell.leftLabel.font = UIFont(name: "OpenSans", size: 15)
             cell.rightLabel.font = UIFont(name: "OpenSans", size: 15)

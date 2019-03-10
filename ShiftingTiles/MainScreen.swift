@@ -193,23 +193,30 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     
     func updateColorsAndFonts() {
         // Colors
-        self.view.backgroundColor = ColorPalette.fetchLightColor()
+        self.view.backgroundColor = Colors.fetchLightColor()
 
-        self.shiftingTilesLabel.textColor = ColorPalette.fetchDarkColor()
-        self.tilesPerRowLabel.textColor = ColorPalette.fetchDarkColor()
-        self.mainImageView.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.shiftingTilesLabel.textColor = Colors.fetchDarkColor()
+        self.tilesPerRowLabel.textColor = Colors.fetchDarkColor()
+        self.mainImageView.layer.borderColor = Colors.fetchDarkColor().cgColor
 
         // Icons
-        self.selectCategoryButton.setImage(UIImage(named: "menuIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.statsButton.setImage(UIImage(named: "statsIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.decreaseButton.setImage(UIImage(named: "decreaseIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.increaseButton.setImage(UIImage(named: "increaseIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.separatorView.backgroundColor = ColorPalette.fetchLightColor()
-        self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.letsPlayButton.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
-        self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
- 
+        self.selectCategoryButton.setImage(Icon.menu.image(), for: .normal)
+        self.selectCategoryButton.tintColor = Colors.fetchDarkColor()
+        self.statsButton.setImage(Icon.stats.image(), for: .normal)
+        self.statsButton.tintColor = Colors.fetchDarkColor()
+        self.decreaseButton.setImage(Icon.decrease.image(), for: .normal)
+        self.decreaseButton.tintColor = Colors.fetchDarkColor()
+        self.increaseButton.setImage(Icon.increase.image(), for: .normal)
+        self.increaseButton.tintColor = Colors.fetchDarkColor()
+        self.infoButton.setImage(Icon.info.image(), for: .normal)
+        self.infoButton.tintColor = Colors.fetchDarkColor()
+        self.letsPlayButton.setImage(Icon.go.image(), for: .normal)
+        self.letsPlayButton.tintColor = Colors.fetchDarkColor()
+        self.settingsButton.setImage(Icon.settings.image(), for: .normal)
+        self.settingsButton.tintColor = Colors.fetchDarkColor()
+
+        self.separatorView.backgroundColor = Colors.fetchLightColor()
+
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.shiftingTilesLabel.font = UIFont(name: "OpenSans-Bold", size: 40)

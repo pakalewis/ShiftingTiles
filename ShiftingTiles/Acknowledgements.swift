@@ -33,13 +33,13 @@ class Acknowledgements: UIViewController, MFMailComposeViewControllerDelegate {
         
 
         
-        self.label1.textColor = ColorPalette.fetchDarkColor()
-        self.label2.textColor = ColorPalette.fetchDarkColor()
-        self.label3.textColor = ColorPalette.fetchDarkColor()
+        self.label1.textColor = Colors.fetchDarkColor()
+        self.label2.textColor = Colors.fetchDarkColor()
+        self.label3.textColor = Colors.fetchDarkColor()
         self.emailButton.setTitleColor(UIColor.black, for: UIControl.State())
         self.emailButton.layer.cornerRadius = 5
         self.emailButton.layer.borderWidth = 2
-        self.emailButton.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.emailButton.layer.borderColor = Colors.fetchDarkColor().cgColor
 
 
         self.label1.text = NSLocalizedString("Acknowledgements_Part1", comment: "") + "\nParker Lewis"

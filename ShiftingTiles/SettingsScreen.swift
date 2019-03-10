@@ -79,9 +79,9 @@ class SettingsScreen: UIViewController {
         // Set light and dark colors for the palette options
         for index in 0..<colorPalettes.count {
             let lightColorView = self.lightColors[index] as! UIView
-            lightColorView.backgroundColor = ColorPalette.lights()[index]
+            lightColorView.backgroundColor = Colors.lights()[index]
             let darkColorView = self.darkColors[index] as! UIView
-            darkColorView.backgroundColor = ColorPalette.darks()[index]
+            darkColorView.backgroundColor = Colors.darks()[index]
         }
     }
     
@@ -92,10 +92,10 @@ class SettingsScreen: UIViewController {
         let rotationsOn = userDefaults.bool(forKey: "rotationsOn")
         if rotationsOn {
             self.userDefaults.set(false, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette.fetchDarkColor())
+            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(Colors.fetchDarkColor())
         } else {
             self.userDefaults.set(true, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette.fetchDarkColor())
+            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(Colors.fetchDarkColor())
         }
         self.userDefaults.synchronize()
     }
@@ -105,10 +105,10 @@ class SettingsScreen: UIViewController {
         let congratsOn = userDefaults.bool(forKey: "congratsOn")
         if congratsOn {
             self.userDefaults.set(false, forKey: "congratsOn")
-            self.congratsImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(ColorPalette.fetchDarkColor())
+            self.congratsImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(Colors.fetchDarkColor())
         } else {
             self.userDefaults.set(true, forKey: "congratsOn")
-            self.congratsImage.image = UIImage(named: "checkedBox")?.imageWithColor(ColorPalette.fetchDarkColor())
+            self.congratsImage.image = UIImage(named: "checkedBox")?.imageWithColor(Colors.fetchDarkColor())
         }
         self.userDefaults.synchronize()
     }
@@ -125,14 +125,14 @@ class SettingsScreen: UIViewController {
     
     func updateColorsAndFonts() {
         // Colors
-        self.view.backgroundColor = ColorPalette.fetchLightColor()
-        self.settingLabel.textColor = ColorPalette.fetchDarkColor()
-        self.rotationLabel.textColor = ColorPalette.fetchDarkColor()
-        self.congratsLabel.textColor = ColorPalette.fetchDarkColor()
-        self.rotationImage.image = self.rotationImage.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.congratsImage.image = self.congratsImage.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.colorSchemeLabel.textColor = ColorPalette.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.view.backgroundColor = Colors.fetchLightColor()
+        self.settingLabel.textColor = Colors.fetchDarkColor()
+        self.rotationLabel.textColor = Colors.fetchDarkColor()
+        self.congratsLabel.textColor = Colors.fetchDarkColor()
+        self.rotationImage.image = self.rotationImage.image?.imageWithColor(Colors.fetchDarkColor())
+        self.congratsImage.image = self.congratsImage.image?.imageWithColor(Colors.fetchDarkColor())
+        self.colorSchemeLabel.textColor = Colors.fetchDarkColor()
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
         
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6A1A660D3600BEFB87 /* InfoScreen.swift */; };
-		2C025E6E1A660D4900BEFB87 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */; };
+		2C025E6E1A660D4900BEFB87 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6C1A660D4900BEFB87 /* Colors.swift */; };
 		2C025E6F1A660D4900BEFB87 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */; };
 		2C5525761A9BBE7F004334EC /* 41large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525671A9BBE7F004334EC /* 41large.jpg */; };
 		2C5525771A9BBE7F004334EC /* 42large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525681A9BBE7F004334EC /* 42large.jpg */; };
@@ -234,6 +234,7 @@
 		2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */; };
 		91A3154222333451006C6017 /* CongratsMessaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154122333451006C6017 /* CongratsMessaging.swift */; };
 		91A3154422333A03006C6017 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154322333A03006C6017 /* AlertHelper.swift */; };
+		91A315482235D821006C6017 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A315472235D821006C6017 /* Icons.swift */; };
 		91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */; };
 		91B2FFD6221B9E9100DB4597 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFD5221B9E9100DB4597 /* CategoryButton.swift */; };
 		91B2FFDD221BA67F00DB4597 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFDC221BA67F00DB4597 /* GameBoard.swift */; };
@@ -241,7 +242,7 @@
 
 /* Begin PBXFileReference section */
 		2C025E6A1A660D3600BEFB87 /* InfoScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoScreen.swift; path = ShiftingTiles/InfoScreen.swift; sourceTree = SOURCE_ROOT; };
-		2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPalette.swift; path = ShiftingTiles/ColorPalette.swift; sourceTree = SOURCE_ROOT; };
+		2C025E6C1A660D4900BEFB87 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = ShiftingTiles/Colors.swift; sourceTree = SOURCE_ROOT; };
 		2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = ShiftingTiles/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
 		2C30EF1D19B7C17500675799 /* ShiftingTiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftingTiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5525671A9BBE7F004334EC /* 41large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 41large.jpg; path = ShiftingTiles/images/Large/41large.jpg; sourceTree = SOURCE_ROOT; };
@@ -473,6 +474,7 @@
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
 		91A3154122333451006C6017 /* CongratsMessaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CongratsMessaging.swift; path = ShiftingTiles/CongratsMessaging.swift; sourceTree = SOURCE_ROOT; };
 		91A3154322333A03006C6017 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertHelper.swift; path = ShiftingTiles/AlertHelper.swift; sourceTree = SOURCE_ROOT; };
+		91A315472235D821006C6017 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Icons.swift; path = ShiftingTiles/Icons.swift; sourceTree = SOURCE_ROOT; };
 		91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoBrowser.swift; path = "TileGame/TileGame/Photo Browsing/PhotoBrowser.swift"; sourceTree = SOURCE_ROOT; };
 		91B2FFD5221B9E9100DB4597 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = SOURCE_ROOT; };
 		91B2FFDC221BA67F00DB4597 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = SOURCE_ROOT; };
@@ -787,6 +789,7 @@
 		2CD422B41A453D6000B08420 /* Game Screen */ = {
 			isa = PBXGroup;
 			children = (
+				2C7F086D1A5DF0980083F668 /* Tile.swift */,
 				2C7F085F1A5DF0730083F668 /* TileAreaView.swift */,
 				2C7F085E1A5DF0730083F668 /* GameBoardVC.swift */,
 				2CE5AFDA1E54FFC900119D3A /* GameBoard.storyboard */,
@@ -801,12 +804,12 @@
 				2CD974A31A9588AE006AA16B /* Fonts */,
 				91A3154322333A03006C6017 /* AlertHelper.swift */,
 				91A3154122333451006C6017 /* CongratsMessaging.swift */,
-				2C025E6C1A660D4900BEFB87 /* ColorPalette.swift */,
+				2C025E6C1A660D4900BEFB87 /* Colors.swift */,
 				2C7F086A1A5DF0980083F668 /* DoubleIndex.swift */,
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
+				91A315472235D821006C6017 /* Icons.swift */,
 				2C6BB4B41AA2CA8B0048E07E /* ImagePackage.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
-				2C7F086D1A5DF0980083F668 /* Tile.swift */,
 				2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */,
 				2C805DD01A6BABFD004FCF8B /* UIImageExtension.swift */,
 				2CD4DF6B1A8C3B38004BE933 /* Localizable.strings */,
@@ -1146,7 +1149,8 @@
 				2C7F08681A5DF0810083F668 /* Stats.swift in Sources */,
 				2C7F08751A5DF0AA0083F668 /* AppDelegate.swift in Sources */,
 				2C7F086F1A5DF0980083F668 /* ImageGallery.swift in Sources */,
-				2C025E6E1A660D4900BEFB87 /* ColorPalette.swift in Sources */,
+				2C025E6E1A660D4900BEFB87 /* Colors.swift in Sources */,
+				91A315482235D821006C6017 /* Icons.swift in Sources */,
 				2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */,
 				2C6BB4B51AA2CA8B0048E07E /* ImagePackage.swift in Sources */,
 				91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 
 typealias Coordinate = IndexPath
 extension IndexPath {
-    init(row: Int, column: Int) {
+    private init(row: Int, column: Int) {
         self.init(row: row, section: column)
     }
     init(_ row: Int, _ column: Int) {
@@ -21,9 +21,12 @@ extension IndexPath {
     }
 }
 
-class DoubleIndex {
-    let rowIndex: Int!
-    let columnIndex: Int!
+class DoubleIndex: NSObject {
+    override var description: String {
+        return "\(rowIndex).\(rowIndex)"
+    }
+    let rowIndex: Int
+    let columnIndex: Int
     
     
     init(index1 : Int, index2 : Int) {
@@ -33,11 +36,12 @@ class DoubleIndex {
 
     
     func concatenateToInt() -> Int {
-        var coo = Coordinate(row: 2, column: 5)
-        print(coo.gridCoordinate())
+        var coo = Coordinate(6, 7)
+//        let v = Coordinate(
+//        print(coo.gridCoordinate())
 
-        coo = Coordinate(row: 4, column: 3)
-        print(coo.gridCoordinate())
+//        coo = Coordinate(row: 4, column: 3)
+//        print(coo.gridCoordinate())
 
         return ((self.rowIndex * 10) + self.columnIndex)
     }

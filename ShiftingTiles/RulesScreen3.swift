@@ -34,13 +34,13 @@ class RulesScreen3: UIViewController {
         }
         
 
-        self.image1.image = self.image1.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.image2.image = self.image2.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.image3.image = self.image3.image?.imageWithColor(ColorPalette.fetchDarkColor())
+        self.image1.image = self.image1.image?.imageWithColor(Colors.fetchDarkColor())
+        self.image2.image = self.image2.image?.imageWithColor(Colors.fetchDarkColor())
+        self.image3.image = self.image3.image?.imageWithColor(Colors.fetchDarkColor())
         
-        self.label1.textColor = ColorPalette.fetchDarkColor()
-        self.label2.textColor = ColorPalette.fetchDarkColor()
-        self.label3.textColor = ColorPalette.fetchDarkColor()
+        self.label1.textColor = Colors.fetchDarkColor()
+        self.label2.textColor = Colors.fetchDarkColor()
+        self.label3.textColor = Colors.fetchDarkColor()
         
         self.label1.text = NSLocalizedString("Rules3_Part1", comment: "")
         self.label2.text = NSLocalizedString("Rules3_Part2", comment: "")

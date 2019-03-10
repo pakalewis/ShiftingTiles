@@ -77,10 +77,9 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         
         // Initialize tileArea
         self.tileArea.delegate = self
-        self.tileArea.imageToSolve = self.gameBoard.imagePackage.image()
-        self.tileArea.tilesPerRow = self.gameBoard.tilesPerRow
+
         self.view.bringSubviewToFront(self.tileArea)
-        self.tileArea.initialize()
+        self.tileArea.initialize(gameBoard: self.gameBoard)
         self.tileArea.layer.borderWidth = 2
         
         // Add row/column gesture
@@ -111,7 +110,8 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             // Top Grip Area
             let topFrame = CGRect(x: topPositionX, y: self.topBank.frame.origin.y, width: topWidth, height: topHeight * 0.9)
             let topArea = UIImageView(frame: topFrame)
-            topArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(ColorPalette.fetchDarkColor())
+            topArea.image = Icon.roundedSquare.image()
+            topArea.tintColor = Colors.fetchDarkColor()
             topArea.contentMode = UIView.ContentMode.scaleAspectFit
             topArea.tag = index // This is used later to determine row vs column
             self.view.addSubview(topArea)
@@ -120,7 +120,8 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             // Left Grip Area
             let leftFrame = CGRect(x: self.leftBank.frame.origin.x, y: leftPositionY, width: leftWidth * 0.9, height: leftHeight)
             let leftArea = UIImageView(frame: leftFrame)
-            leftArea.image = UIImage(named: "roundedSquareIcon")?.imageWithColor(ColorPalette.fetchDarkColor())
+            leftArea.image = Icon.roundedSquare.image()
+            leftArea.tintColor = Colors.fetchDarkColor()
             leftArea.contentMode = UIView.ContentMode.scaleAspectFit
             leftArea.tag = index + 100 // This is used later to determine row vs column
             self.view.addSubview(leftArea)
@@ -138,8 +139,8 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                 if self.rowColumnGrip != nil { // The first handle was detected and stored for later
                     self.firstLineOfTiles = self.tileArea.makeLineOfTiles(self.rowColumnGrip!.tag)
                     for tile in self.firstLineOfTiles! {
-                        self.tileArea.bringSubviewToFront(tile.imageView)
-                        tile.originalFrame = tile.imageView.frame
+                        self.tileArea.bringSubviewToFront(tile)
+                        tile.originalFrame = tile.frame
                     }
                     self.view.bringSubviewToFront(self.rowColumnGrip!)
                     self.firstGripOriginalFrame = self.rowColumnGrip!.frame
@@ -151,7 +152,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                         if self.rowColumnGrip!.frame.minX + translation.x > self.tileArea.frame.minX && self.rowColumnGrip!.frame.maxX + translation.x < self.tileArea.frame.maxX {
                             // Translation is valid - translate the line of tiles and grip
                             for tile in self.firstLineOfTiles! {
-                                tile.imageView.center.x = tile.imageView.center.x + translation.x
+                                tile.center.x = tile.center.x + translation.x
                             }
                             self.rowColumnGrip!.center.x = self.rowColumnGrip!.center.x + translation.x
                         }
@@ -159,7 +160,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                         if self.rowColumnGrip!.frame.minY + translation.y > self.tileArea.frame.minY && self.rowColumnGrip!.frame.maxY + translation.y < self.tileArea.frame.maxY {
                             // Translation is valid - translate the line of tiles and grip
                             for tile in self.firstLineOfTiles! {
-                                tile.imageView.center.y = tile.imageView.center.y + translation.y
+                                tile.center.y = tile.center.y + translation.y
                             }
                             self.rowColumnGrip!.center.y = self.rowColumnGrip!.center.y + translation.y
                         }
@@ -191,7 +192,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                     } else { // Send the button and line of tiles back to where they started
                         UIView.animate(withDuration: 0.3, animations: { () -> Void in
                             for tile in self.firstLineOfTiles! {
-                                tile.imageView.frame = tile.originalFrame!
+                                tile.frame = tile.originalFrame!
                             }
                             self.rowColumnGrip!.frame = self.firstGripOriginalFrame!
                             self.firstGripOriginalFrame = nil
@@ -348,24 +349,24 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
                     
                     }, completion: { (finished) -> Void in
                         // Calling this again to resize all the tiles to take up the full TileArea
-                        self.tileArea.layoutTiles()
-                }) 
+//                        self.tileArea.layoutTiles()
+                })
         }) 
     }
 
     
     func updateColorsAndFonts() {
         // Colors
-        self.view.backgroundColor = ColorPalette.fetchLightColor()
-        self.congratsMessage.textColor = ColorPalette.fetchDarkColor()
-        self.imageCaptionLabel.textColor = ColorPalette.fetchDarkColor()
-        self.tileArea.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
-        self.originalImageView.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
-        self.separatorView.backgroundColor = ColorPalette.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
-        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(ColorPalette.fetchDarkColor()), for: UIControl.State())
+        self.view.backgroundColor = Colors.fetchLightColor()
+        self.congratsMessage.textColor = Colors.fetchDarkColor()
+        self.imageCaptionLabel.textColor = Colors.fetchDarkColor()
+        self.tileArea.layer.borderColor = Colors.fetchDarkColor().cgColor
+        self.originalImageView.layer.borderColor = Colors.fetchDarkColor().cgColor
+        self.separatorView.backgroundColor = Colors.fetchDarkColor()
+        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
+        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
+        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
+        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
 
         // Fonts
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
@@ -384,7 +385,7 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
 extension GameBoardVC: AutoSolveAlertDelegate {
     func autosolve() {
         self.puzzleIsSolved()
-        self.tileArea.layoutTiles()
+//        self.tileArea.layoutTiles()
         self.tileArea.orientAllTiles()
         self.tileArea.isPuzzleSolved = true
     }

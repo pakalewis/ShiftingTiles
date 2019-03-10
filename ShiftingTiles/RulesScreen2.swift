@@ -37,18 +37,18 @@ class RulesScreen2: UIViewController {
             self.label4.font = UIFont(name: "OpenSans", size: 30)
         }
         
-        self.image1.image = self.image1.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.image2.image = self.image2.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.image3.image = self.image3.image?.imageWithColor(ColorPalette.fetchDarkColor())
-        self.image4.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.image1.image = self.image1.image?.imageWithColor(Colors.fetchDarkColor())
+        self.image2.image = self.image2.image?.imageWithColor(Colors.fetchDarkColor())
+        self.image3.image = self.image3.image?.imageWithColor(Colors.fetchDarkColor())
+        self.image4.layer.borderColor = Colors.fetchDarkColor().cgColor
         self.image4.layer.borderWidth = 2
         self.image4.layer.cornerRadius = self.image4.frame.width * 0.25
-        self.image4.image = self.image4.image?.imageWithColor(ColorPalette.fetchDarkColor())
+        self.image4.image = self.image4.image?.imageWithColor(Colors.fetchDarkColor())
         
-        self.label1.textColor = ColorPalette.fetchDarkColor()
-        self.label2.textColor = ColorPalette.fetchDarkColor()
-        self.label3.textColor = ColorPalette.fetchDarkColor()
-        self.label4.textColor = ColorPalette.fetchDarkColor()
+        self.label1.textColor = Colors.fetchDarkColor()
+        self.label2.textColor = Colors.fetchDarkColor()
+        self.label3.textColor = Colors.fetchDarkColor()
+        self.label4.textColor = Colors.fetchDarkColor()
         
         
         self.label1.text = NSLocalizedString("Rules2_Part1", comment: "")

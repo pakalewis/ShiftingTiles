@@ -20,9 +20,9 @@ class CategoryButton: UIButton {
     init(category: PhotoCategory, delegate: CategoryButtonDelegate) {
         self.category = category
         super.init(frame: CGRect(x: 0, y: 0, width: 100.0, height: 45.0))
-        self.setTitleColor(ColorPalette.fetchDarkColor(), for: .normal)
-        self.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
-        self.backgroundColor = ColorPalette.fetchLightColor()
+        self.setTitleColor(Colors.fetchDarkColor(), for: .normal)
+        self.layer.borderColor = Colors.fetchDarkColor().cgColor
+        self.backgroundColor = Colors.fetchLightColor()
         self.setTitle(self.category.titleText(), for: .normal)
         self.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 15)
         self.addTarget(self, action: #selector(tap), for: .touchUpInside)

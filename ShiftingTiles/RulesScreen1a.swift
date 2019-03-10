@@ -34,16 +34,16 @@ class RulesScreen1a: UIViewController {
         self.label2.text = NSLocalizedString("Rules1_Part5", comment: "")
         
         
-        self.label1.textColor = ColorPalette.fetchDarkColor()
-        self.label2.textColor = ColorPalette.fetchDarkColor()
+        self.label1.textColor = Colors.fetchDarkColor()
+        self.label2.textColor = Colors.fetchDarkColor()
         
         
-        self.scrambledImage.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.scrambledImage.layer.borderColor = Colors.fetchDarkColor().cgColor
         self.scrambledImage.layer.borderWidth = 2
-        self.solvedImage.layer.borderColor = ColorPalette.fetchDarkColor().cgColor
+        self.solvedImage.layer.borderColor = Colors.fetchDarkColor().cgColor
         self.solvedImage.layer.borderWidth = 2
         
-        self.arrowImage.image = self.arrowImage.image?.imageWithColor(ColorPalette.fetchDarkColor())
+        self.arrowImage.image = self.arrowImage.image?.imageWithColor(Colors.fetchDarkColor())
         
         
     }

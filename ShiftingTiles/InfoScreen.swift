@@ -21,7 +21,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         super.viewWillAppear(animated)
         
         // Apply color scheme
-        self.view.backgroundColor = ColorPalette.fetchLightColor()
+        self.view.backgroundColor = Colors.fetchLightColor()
     }
     
 
@@ -54,7 +54,7 @@ class InfoScreen: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         
         // Appearance of the page control dots
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = ColorPalette.fetchDarkColor()
+        appearance.pageIndicatorTintColor = Colors.fetchDarkColor()
         appearance.currentPageIndicatorTintColor = UIColor.white
         appearance.backgroundColor = UIColor.clear
 

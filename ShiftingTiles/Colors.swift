@@ -1,5 +1,5 @@
 //
-//  ColorPalette.swift
+//  Colors.swift
 //  ShiftingTiles
 //
 //  Created by Parker Lewis on 1/13/15.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ColorPalette {
+class Colors {
     // The five combos are:
     // Greens
     // Yellow/Blue
@@ -25,11 +25,11 @@ class ColorPalette {
 
     class func lights() -> [UIColor] {
         return [
-            ColorPalette.LightGreen,
-            ColorPalette.LightYelllow,
-            ColorPalette.LightBlue,
-            ColorPalette.LightOrange,
-            ColorPalette.LightPink
+            Colors.LightGreen,
+            Colors.LightYelllow,
+            Colors.LightBlue,
+            Colors.LightOrange,
+            Colors.LightPink
         ]
     }
 
@@ -41,11 +41,11 @@ class ColorPalette {
 
     class func darks() -> [UIColor] {
         return [
-            ColorPalette.DarkGreen,
-            ColorPalette.DarkNavy,
-            ColorPalette.DarkBlue,
-            ColorPalette.DarkRed,
-            ColorPalette.DarkPurple
+            Colors.DarkGreen,
+            Colors.DarkNavy,
+            Colors.DarkBlue,
+            Colors.DarkRed,
+            Colors.DarkPurple
         ]
     }
 
@@ -54,16 +54,16 @@ class ColorPalette {
 
         let index = UserDefaults.standard.integer(forKey: "colorPaletteInt")
         if index >= 0 && index < 5 {
-            return ColorPalette.lights()[index]
+            return Colors.lights()[index]
         }
-        return ColorPalette.lights()[0]
+        return Colors.lights()[0]
     }
 
     class func fetchDarkColor() -> UIColor {
         let index = UserDefaults.standard.integer(forKey: "colorPaletteInt")
         if index >= 0 && index < 5 {
-            return ColorPalette.darks()[index]
+            return Colors.darks()[index]
         }
-        return ColorPalette.darks()[0]
+        return Colors.darks()[0]
     }
 }
