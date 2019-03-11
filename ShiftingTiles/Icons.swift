@@ -17,33 +17,47 @@ enum Icon {
     info,
     go,
     settings,
-    roundedSquare
+    roundedSquare,
+    back,
+    showOriginal,
+    solve,
+    hint,
+    checkedBox,
+    uncheckedBox
 
 
     func image() -> UIImage? {
+        let image: UIImage?
         switch self {
         case .menu:
-            return UIImage(named: "menuIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "menuIcon")
         case .stats:
-            return UIImage(named: "statsIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "statsIcon")
         case .decrease:
-            return UIImage(named: "decreaseIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "decreaseIcon")
         case .increase:
-            return UIImage(named: "increaseIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "increaseIcon")
         case .info:
-            return UIImage(named: "infoIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "infoIcon")
         case .go:
-            return UIImage(named: "goIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "goIcon")
         case .settings:
-            return UIImage(named: "settingsIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "settingsIcon")
         case .roundedSquare:
-            return UIImage(named: "roundedSquareIcon")?.withRenderingMode(.alwaysTemplate)
+            image = UIImage(named: "roundedSquareIcon")
+        case .back:
+            image = UIImage(named: "backIcon")
+        case .showOriginal:
+            image = UIImage(named: "originalImageIcon")
+        case .solve:
+            image = UIImage(named: "solveIcon")
+        case .hint:
+            image = UIImage(named: "hintIcon")
+        case .checkedBox:
+            image = UIImage(named: "checkedBox")
+        case .uncheckedBox:
+            image = UIImage(named: "uncheckedBox")
         }
+        return image?.withRenderingMode(.alwaysTemplate)
     }
 }
-
-//self.separatorView.backgroundColor = Colors.fetchLightColor()
-//self.infoButton.setImage(UIImage(named: "infoIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-//self.letsPlayButton.setImage(UIImage(named: "goIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-//self.letsPlayButton.layer.borderColor = Colors.fetchDarkColor().cgColor
-//self.settingsButton.setImage(UIImage(named: "settingsIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())

@@ -13,10 +13,7 @@ class SettingsScreen: UIViewController {
         return UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController() as! SettingsScreen
     }
 
-    
-    let userDefaults = UserDefaults.standard
-    
-    // Labels and buttons
+
     @IBOutlet weak var settingLabel: UILabel!
     
     
@@ -38,31 +35,35 @@ class SettingsScreen: UIViewController {
     @IBOutlet var lightColors: NSArray! // Array of five UIViews
     @IBOutlet var darkColors: NSArray! // Array of five UIViews
     
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.updateColorsAndFonts()
+    var rotationsOn: Bool = false {
+        didSet {
+            if rotationsOn {
+                self.rotationImage.image = Icon.checkedBox.image()
+            } else {
+                self.rotationImage.image = Icon.uncheckedBox.image()
+            }
+        }
     }
 
-    
-    
+    var showCongrats: Bool = false {
+        didSet {
+            if showCongrats {
+                self.congratsImage.image = Icon.checkedBox.image()
+            } else {
+                self.congratsImage.image = Icon.uncheckedBox.image()
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Check/uncheck the Rotations/Congrats based on previous defaults
-        if userDefaults.bool(forKey: "rotationsOn") {
-            self.rotationImage.image = UIImage(named: "checkedBox")
-        } else {
-            self.rotationImage.image = UIImage(named: "uncheckedBox")
-        }
-        if userDefaults.bool(forKey: "congratsOn") {
-            self.congratsImage.image = UIImage(named: "checkedBox")
-        } else {
-            self.congratsImage.image = UIImage(named: "uncheckedBox")
-        }
-        
-        
+
+        self.rotationImage.tintColor = Colors.fetchDarkColor()
+        self.congratsImage.tintColor = Colors.fetchDarkColor()
+
+        self.rotationsOn = UserSettings.boolValue(for: .rotations)
+        self.showCongrats = UserSettings.boolValue(for: .congratsMessages)
+
         // Add tap gestures
         let rotationTap = UITapGestureRecognizer(target: self, action: #selector(SettingsScreen.rotationTapped(_:)))
         self.rotationContainer.addGestureRecognizer(rotationTap)
@@ -83,42 +84,46 @@ class SettingsScreen: UIViewController {
             let darkColorView = self.darkColors[index] as! UIView
             darkColorView.backgroundColor = Colors.darks()[index]
         }
+
+
+
+
+        // Fonts
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
+            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
+            self.rotationLabel.font = UIFont(name: "OpenSans", size: 20)
+            self.congratsLabel.font = UIFont(name: "OpenSans", size: 20)
+            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 20)
+        }
+
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
+            self.rotationLabel.font = UIFont(name: "OpenSans", size: 40)
+            self.congratsLabel.font = UIFont(name: "OpenSans", size: 40)
+            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 40)
+        }
+
     }
     
     
     
     
     @objc func rotationTapped(_ sender: UIGestureRecognizer) {
-        let rotationsOn = userDefaults.bool(forKey: "rotationsOn")
-        if rotationsOn {
-            self.userDefaults.set(false, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(Colors.fetchDarkColor())
-        } else {
-            self.userDefaults.set(true, forKey: "rotationsOn")
-            self.rotationImage.image = UIImage(named: "checkedBox")?.imageWithColor(Colors.fetchDarkColor())
-        }
-        self.userDefaults.synchronize()
+        UserSettings.toggle(key: .rotations)
+        self.rotationsOn = UserSettings.boolValue(for: .rotations)
     }
     
     
     @objc func congratsTapped(_ sender: UIGestureRecognizer) {
-        let congratsOn = userDefaults.bool(forKey: "congratsOn")
-        if congratsOn {
-            self.userDefaults.set(false, forKey: "congratsOn")
-            self.congratsImage.image = UIImage(named: "uncheckedBox")?.imageWithColor(Colors.fetchDarkColor())
-        } else {
-            self.userDefaults.set(true, forKey: "congratsOn")
-            self.congratsImage.image = UIImage(named: "checkedBox")?.imageWithColor(Colors.fetchDarkColor())
-        }
-        self.userDefaults.synchronize()
+        UserSettings.toggle(key: .congratsMessages)
+        self.showCongrats = UserSettings.boolValue(for: .congratsMessages)
     }
-    
 
     @objc func colorPaletteSelected(_ sender: UIGestureRecognizer) {
         // Determine which palette was selected and apply the color scheme
         let tappedPalette = sender.view
         let index = colorPalettes?.index(of: tappedPalette!)
-        self.userDefaults.set(index!, forKey: "colorPaletteInt")
+        UserSettings.set(value: index!, for: .colorScheme)
         self.updateColorsAndFonts()
     }
     
@@ -129,25 +134,9 @@ class SettingsScreen: UIViewController {
         self.settingLabel.textColor = Colors.fetchDarkColor()
         self.rotationLabel.textColor = Colors.fetchDarkColor()
         self.congratsLabel.textColor = Colors.fetchDarkColor()
-        self.rotationImage.image = self.rotationImage.image?.imageWithColor(Colors.fetchDarkColor())
-        self.congratsImage.image = self.congratsImage.image?.imageWithColor(Colors.fetchDarkColor())
         self.colorSchemeLabel.textColor = Colors.fetchDarkColor()
         self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-        
-        // Fonts
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 40)
-            self.rotationLabel.font = UIFont(name: "OpenSans", size: 20)
-            self.congratsLabel.font = UIFont(name: "OpenSans", size: 20)
-            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 20)
-        }
-        
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-            self.settingLabel.font = UIFont(name: "OpenSans-Bold", size: 70)
-            self.rotationLabel.font = UIFont(name: "OpenSans", size: 40)
-            self.congratsLabel.font = UIFont(name: "OpenSans", size: 40)
-            self.colorSchemeLabel.font = UIFont(name: "OpenSans", size: 40)
-        }
+
     }
     
     @IBAction func dismissInfo(_ sender: AnyObject) {
@@ -160,3 +149,4 @@ class SettingsScreen: UIViewController {
     
 
 }
+

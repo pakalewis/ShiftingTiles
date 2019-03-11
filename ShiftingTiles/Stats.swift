@@ -9,17 +9,17 @@
 import Foundation
 
 class Stats {
-    let userDefaults = UserDefaults.standard
-    let solvesAtSizeKeys = [
-        "solvesAtSize2",
-        "solvesAtSize3",
-        "solvesAtSize4",
-        "solvesAtSize5",
-        "solvesAtSize6",
-        "solvesAtSize7",
-        "solvesAtSize8",
-        "solvesAtSize9",
-        "solvesAtSize10"
+
+    let solvesAtSizeKeys: [UserSettingsIntKey] = [
+        .solvesAtSize2,
+        .solvesAtSize3,
+        .solvesAtSize4,
+        .solvesAtSize5,
+        .solvesAtSize6,
+        .solvesAtSize7,
+        .solvesAtSize8,
+        .solvesAtSize9,
+        .solvesAtSize10
     ]
     var solvesAtSizeInts = [Int]()
     
@@ -31,32 +31,29 @@ class Stats {
     func updateSolveStats(_ tilePerRow: Int) {
         
         // Update total solves
-        var totalSolves = userDefaults.integer(forKey: "totalSolves")
+        var totalSolves = fetchTotalSolves()
         totalSolves += 1
-        self.userDefaults.set(totalSolves, forKey: "totalSolves")
-        
+        UserSettings.set(value: totalSolves, for: .totalSolves)
+
         // Update solves for the appropriate size
         let key = self.solvesAtSizeKeys[tilePerRow - 2]
-        var solves = userDefaults.integer(forKey: key)
+        var solves = UserSettings.intValue(for: key)
         solves += 1
-        self.userDefaults.set(solves, forKey: key)
-
-        self.userDefaults.synchronize()
+        UserSettings.set(value: solves, for: key)
     }
     
     
     func fetchSolvesPerSize() -> [Int] {
         var solvesPerSizeArray = [Int]()
         for key in self.solvesAtSizeKeys {
-            let integerForKey = self.userDefaults.integer(forKey: key)
-            solvesPerSizeArray.append(integerForKey)
+            solvesPerSizeArray.append(UserSettings.intValue(for: key))
         }
         return solvesPerSizeArray
     }
     
     
     func fetchTotalSolves() -> Int {
-        return userDefaults.integer(forKey: "totalSolves")
+        return UserSettings.intValue(for: .totalSolves)
     }
 }
 

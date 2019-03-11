@@ -11,8 +11,6 @@ import UIKit
 
 class TileAreaView: UIView {
     
-    let userDefaults = UserDefaults.standard
-
     weak var delegate: PuzzleSolvedProtocol?
     
     // Set to true when puzzle is solved
@@ -53,7 +51,7 @@ class TileAreaView: UIView {
             self.shuffle(index: 0)
         }
 
-        if userDefaults.bool(forKey: "rotationsOn") {
+        if UserSettings.boolValue(for: .rotations) {
             self.rotateTiles()
         }
     }
@@ -305,7 +303,7 @@ class TileAreaView: UIView {
     @objc func tileDoubleTapped(_ sender: UIGestureRecognizer) {
         // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
-            if userDefaults.bool(forKey: "rotationsOn") {
+            if UserSettings.boolValue(for: .rotations) {
                 // Grab the tag of the tile that was tapped and use it to find the correct tile
                 let tag = sender.view!.tag
                 let pressedTile = self.tileArray[tag / 10][tag % 10]

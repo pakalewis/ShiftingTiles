@@ -10,7 +10,7 @@ import Foundation
 
 class Congrats {
     class func generateMessage() -> String {
-        guard UserDefaults.standard.bool(forKey: "congratsOn") else { return "" }
+        guard UserSettings.boolValue(for: .rotations) else { return "" }
 
         let randomInt = Int(arc4random_uniform(UInt32(17)))
         var key = "Message"

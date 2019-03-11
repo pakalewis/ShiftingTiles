@@ -16,9 +16,6 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         return gbvc
     }
     
-    // MARK: VARS
-    let userDefaults = UserDefaults.standard
-    
     var gameBoard: GameBoard!
     var originalImageShown = false
     
@@ -68,7 +65,32 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         self.originalImageView.alpha = 0
         self.view.sendSubviewToBack(originalImageView)
 
-        self.updateColorsAndFonts()
+        // Colors
+        self.view.backgroundColor = Colors.fetchLightColor()
+        self.congratsMessage.textColor = Colors.fetchDarkColor()
+        self.imageCaptionLabel.textColor = Colors.fetchDarkColor()
+        self.tileArea.layer.borderColor = Colors.fetchDarkColor().cgColor
+        self.originalImageView.layer.borderColor = Colors.fetchDarkColor().cgColor
+        self.separatorView.backgroundColor = Colors.fetchDarkColor()
+
+        self.backButton.setImage(Icon.back.image(), for: .normal)
+        self.backButton.tintColor = Colors.fetchDarkColor()
+        self.showOriginalButton.setImage(Icon.showOriginal.image(), for: .normal)
+        self.showOriginalButton.tintColor = Colors.fetchDarkColor()
+        self.solveButton.setImage(Icon.solve.image(), for: .normal)
+        self.solveButton.tintColor = Colors.fetchDarkColor()
+        self.hintButton.setImage(Icon.hint.image(), for: .normal)
+        self.hintButton.tintColor = Colors.fetchDarkColor()
+
+        // Fonts
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
+            self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 35)
+            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 15)
+        }
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 60)
+            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 23)
+        }
     }
 
     
@@ -354,31 +376,6 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         }) 
     }
 
-    
-    func updateColorsAndFonts() {
-        // Colors
-        self.view.backgroundColor = Colors.fetchLightColor()
-        self.congratsMessage.textColor = Colors.fetchDarkColor()
-        self.imageCaptionLabel.textColor = Colors.fetchDarkColor()
-        self.tileArea.layer.borderColor = Colors.fetchDarkColor().cgColor
-        self.originalImageView.layer.borderColor = Colors.fetchDarkColor().cgColor
-        self.separatorView.backgroundColor = Colors.fetchDarkColor()
-        self.backButton.setImage(UIImage(named: "backIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-        self.showOriginalButton.setImage(UIImage(named: "originalImageIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-        self.solveButton.setImage(UIImage(named: "solveIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-        self.hintButton.setImage(UIImage(named: "hintIcon")?.imageWithColor(Colors.fetchDarkColor()), for: UIControl.State())
-
-        // Fonts
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
-            self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 35)
-            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 15)
-        }
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-            self.congratsMessage.font = UIFont(name: "OpenSans-Bold", size: 60)
-            self.imageCaptionLabel.font = UIFont(name: "OpenSans", size: 23)
-        }
-
-    }
     
 }
 

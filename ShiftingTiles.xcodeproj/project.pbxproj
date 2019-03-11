@@ -235,6 +235,7 @@
 		91A3154222333451006C6017 /* CongratsMessaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154122333451006C6017 /* CongratsMessaging.swift */; };
 		91A3154422333A03006C6017 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154322333A03006C6017 /* AlertHelper.swift */; };
 		91A315482235D821006C6017 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A315472235D821006C6017 /* Icons.swift */; };
+		91A3154A22360A77006C6017 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154922360A77006C6017 /* UserSettings.swift */; };
 		91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */; };
 		91B2FFD6221B9E9100DB4597 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFD5221B9E9100DB4597 /* CategoryButton.swift */; };
 		91B2FFDD221BA67F00DB4597 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2FFDC221BA67F00DB4597 /* GameBoard.swift */; };
@@ -475,6 +476,7 @@
 		91A3154122333451006C6017 /* CongratsMessaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CongratsMessaging.swift; path = ShiftingTiles/CongratsMessaging.swift; sourceTree = SOURCE_ROOT; };
 		91A3154322333A03006C6017 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertHelper.swift; path = ShiftingTiles/AlertHelper.swift; sourceTree = SOURCE_ROOT; };
 		91A315472235D821006C6017 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Icons.swift; path = ShiftingTiles/Icons.swift; sourceTree = SOURCE_ROOT; };
+		91A3154922360A77006C6017 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		91B2FFD3221B7F8200DB4597 /* PhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoBrowser.swift; path = "TileGame/TileGame/Photo Browsing/PhotoBrowser.swift"; sourceTree = SOURCE_ROOT; };
 		91B2FFD5221B9E9100DB4597 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = SOURCE_ROOT; };
 		91B2FFDC221BA67F00DB4597 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = SOURCE_ROOT; };
@@ -808,6 +810,7 @@
 				2C7F086A1A5DF0980083F668 /* DoubleIndex.swift */,
 				2C7F086B1A5DF0980083F668 /* ImageGallery.swift */,
 				91A315472235D821006C6017 /* Icons.swift */,
+				91A3154922360A77006C6017 /* UserSettings.swift */,
 				2C6BB4B41AA2CA8B0048E07E /* ImagePackage.swift */,
 				2C7F086C1A5DF0980083F668 /* PuzzleSolvedProtocol.swift */,
 				2C025E6D1A660D4900BEFB87 /* UIColorExtension.swift */,
@@ -1166,6 +1169,7 @@
 				2C7F085A1A5DF05D0083F668 /* CollectionViewImageCell.swift in Sources */,
 				2C7F08661A5DF0810083F668 /* StatCell.swift in Sources */,
 				91B2FFD6221B9E9100DB4597 /* CategoryButton.swift in Sources */,
+				91A3154A22360A77006C6017 /* UserSettings.swift in Sources */,
 				2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */,
 				2C7F08701A5DF0980083F668 /* PuzzleSolvedProtocol.swift in Sources */,
 				2C7F08611A5DF0730083F668 /* TileAreaView.swift in Sources */,

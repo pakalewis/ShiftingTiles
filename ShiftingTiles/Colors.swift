@@ -51,8 +51,7 @@ class Colors {
 
 
     class func fetchLightColor() -> UIColor {
-
-        let index = UserDefaults.standard.integer(forKey: "colorPaletteInt")
+        let index = UserSettings.intValue(for: .colorScheme)
         if index >= 0 && index < 5 {
             return Colors.lights()[index]
         }
@@ -60,7 +59,7 @@ class Colors {
     }
 
     class func fetchDarkColor() -> UIColor {
-        let index = UserDefaults.standard.integer(forKey: "colorPaletteInt")
+        let index = UserSettings.intValue(for: .colorScheme)
         if index >= 0 && index < 5 {
             return Colors.darks()[index]
         }

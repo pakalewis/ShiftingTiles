@@ -13,9 +13,6 @@ import UIKit
 
 class MainScreen: UIViewController, UINavigationControllerDelegate {
 
-    // MARK: Misc vars
-    let userDefaults = UserDefaults.standard
-
     let photoBrowser = PhotoBrowser()
 
     
@@ -45,20 +42,15 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(animated)
         
 
-        var tilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
-        if tilesPerRow < 2 || tilesPerRow > 10 {
-            // This may occur when the tilesPerRow userDefault was never set on a previous version of the app
-            tilesPerRow = 3
-            self.userDefaults.set(3, forKey: "tilesPerRow")
-            self.userDefaults.synchronize()
-        }
+        var tilesPerRow = UserSettings.intValue(for: .tilePerRow)
         self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
         self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
 
         self.mainImageView.layer.borderWidth = 2
         self.letsPlayButton.layer.cornerRadius = self.letsPlayButton.frame.width * 0.25
         self.letsPlayButton.layer.borderWidth = 2
-        
+        self.letsPlayButton.layer.borderColor = Colors.fetchDarkColor().cgColor
+
         self.updateColorsAndFonts()
     }
     
@@ -71,15 +63,6 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        // Set user defaults upon the first launch
-        if(!self.userDefaults.bool(forKey: "firstlaunch1.0")){
-            // Only gets called once ever
-            self.userDefaults.set(true, forKey: "firstlaunch1.0")
-            self.userDefaults.set(true, forKey: "congratsOn")
-            self.userDefaults.set(2, forKey: "colorPaletteInt")
-            self.userDefaults.set(3, forKey: "tilesPerRow")
-            self.userDefaults.synchronize()
-        }
         
 
         // CollectionView
@@ -148,23 +131,22 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     
     
     @IBAction func rightButtonPressed(_ sender: AnyObject) {
-        var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
+        var currentTilesPerRow = UserSettings.intValue(for: .tilePerRow)
+
         if currentTilesPerRow < 10 {
             currentTilesPerRow += 1
             self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
-            self.userDefaults.set(currentTilesPerRow, forKey: "tilesPerRow")
-            self.userDefaults.synchronize()
+            UserSettings.set(value: currentTilesPerRow, for: .tilePerRow)
         }
    }
 
     
     @IBAction func leftButtonPressed(_ sender: AnyObject) {
-        var currentTilesPerRow = self.userDefaults.integer(forKey: "tilesPerRow")
+        var currentTilesPerRow = UserSettings.intValue(for: .tilePerRow)
         if currentTilesPerRow > 2 {
             currentTilesPerRow -= 1
             self.tilesPerRowLabel.text = "\(currentTilesPerRow) x \(currentTilesPerRow)"
-            self.userDefaults.set(currentTilesPerRow, forKey: "tilesPerRow")
-            self.userDefaults.synchronize()
+            UserSettings.set(value: currentTilesPerRow, for: .tilePerRow)
         }
     }
     
@@ -179,7 +161,8 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func letsPlayButtonTapped(_ sender: Any) {
-        let board = GameBoard(imagePackage: self.photoBrowser.currentPackage(), tilesPerRow: self.userDefaults.integer(forKey: "tilesPerRow"))
+        let board = GameBoard(imagePackage: self.photoBrowser.currentPackage(), tilesPerRow:             UserSettings.intValue(for: .tilePerRow))
+
         let gameBoardVC = GameBoardVC.generate(board: board)
         present(gameBoardVC, animated: true, completion: nil)
 

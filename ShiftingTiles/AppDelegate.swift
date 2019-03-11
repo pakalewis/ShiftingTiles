@@ -15,7 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Set user defaults upon the first launch
+        if !UserSettings.boolValue(for: .firstLaunch) {
+            UserSettings.set(bool: true, for: .firstLaunch)
+            UserSettings.set(bool: true, for: .congratsMessages)
+            UserSettings.set(value: 2, for: .colorScheme)
+            UserSettings.set(value: 3, for: .tilePerRow)
+        }
+
+
         return true
     }
 
