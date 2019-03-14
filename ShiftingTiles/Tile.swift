@@ -34,13 +34,13 @@ class Tile: UIImageView {
 
     weak var delegate: TileDelegate?
 
-    init(image: UIImage, doubleIndex: DoubleIndex, coordinate: Coordinate, delegate: TileDelegate) {
+    init(image: UIImage, doubleIndex: DoubleIndex, coordinate: Coordinate, delegate: TileDelegate, frame: CGRect) {
         self.doubleIndex = doubleIndex
         self.targetCoordinate = coordinate
         self.delegate = delegate
 
         super.init(image: image)
-        
+
         self.tag = doubleIndex.concatenateToInt()
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.addGestureRecognizer(tap)
@@ -50,6 +50,7 @@ class Tile: UIImageView {
         self.addGestureRecognizer(doubleTapGesture)
         self.addSubview(self.overlay)
         self.isUserInteractionEnabled = true
+        self.frame = frame
     }
 
     required init?(coder aDecoder: NSCoder) {

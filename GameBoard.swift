@@ -24,41 +24,44 @@ class GameBoard {
     }
 
 
-
     func createTiles(in view: UIView) -> [[Tile]] {
         var tiles = [[Tile]]()
-        // Image measurements
         guard let cgimage = self.imagePackage.image().cgImage else { return tiles }
-
-        let totalImageWidth = CGFloat(cgimage.width)
-        let imageWidth : CGFloat = CGFloat(totalImageWidth / CGFloat(self.tilesPerRow))
-
-        let tileWidth: CGFloat = (view.frame.width) / CGFloat(self.tilesPerRow)
 
         for index1 in 0..<self.tilesPerRow { // go down the rows
             // Make the row array of Tiles
             var rowArray = [Tile]()
 
-            let tileAreaPositionY:CGFloat = CGFloat(index1) * (tileWidth)
-
-            for index2 in 0..<self.tilesPerRow { // get the tiles in each row
-
-                let tileAreaPositionX:CGFloat = CGFloat(index2) * (tileWidth)
-
-                let doubleIndex = DoubleIndex(index1: index1, index2: index2)
-                let coordinate = Coordinate(index1,index2)
+            for index2 in 0..<self.tilesPerRow { // make the tiles in each row
                 // Create the image for the Tile
-                let imagePositionY:CGFloat = CGFloat(index1) * (imageWidth)
-                let imagePositionX:CGFloat = CGFloat(index2) * (imageWidth)
-                let imageFrame = CGRect(x: imagePositionX, y: imagePositionY, width: imageWidth, height: imageWidth)
+                let imageWidth: CGFloat = CGFloat(CGFloat(cgimage.width) / CGFloat(self.tilesPerRow))
+                let imageFrame = CGRect(
+                    x: CGFloat(index2) * (imageWidth),
+                    y: CGFloat(index1) * (imageWidth),
+                    width: imageWidth,
+                    height: imageWidth
+                )
                 let tileCGImage = cgimage.cropping(to: imageFrame)
                 let tileUIImage = UIImage(cgImage: tileCGImage!)
 
-                // Make a new tile with that doubleIndex
-                let tile = Tile(image: tileUIImage, doubleIndex: doubleIndex, coordinate: coordinate, delegate: self)
                 // set the boundaries of the tile
-                let tileFrame = CGRect(x: tileAreaPositionX, y: tileAreaPositionY, width: tileWidth, height: tileWidth)
-                tile.frame = tileFrame
+                let tileWidth: CGFloat = (view.frame.width) / CGFloat(self.tilesPerRow)
+                let tileFrame = CGRect(
+                    x: CGFloat(index2) * (tileWidth),
+                    y: CGFloat(index1) * (tileWidth),
+                    width: tileWidth,
+                    height: tileWidth
+                )
+
+                // Make a new tile
+                let tile = Tile(
+                    image: tileUIImage,
+                    doubleIndex: DoubleIndex(index1: index1, index2: index2),
+                    coordinate: Coordinate(index1,index2),
+                    delegate: self,
+                    frame: tileFrame
+                )
+
                 view.addSubview(tile)
 
                 // Add to row array
