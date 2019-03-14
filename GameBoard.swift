@@ -15,7 +15,8 @@ protocol GameBoardDelegate {
 class GameBoard {
     let imagePackage: ImagePackage
     let tilesPerRow: Int
-    
+    var tiles = [[Tile]]()
+
     weak var delegate: PuzzleSolvedProtocol?
 
     init(imagePackage: ImagePackage, tilesPerRow: Int) {
@@ -25,7 +26,7 @@ class GameBoard {
 
 
     func createTiles(in view: UIView) -> [[Tile]] {
-        var tiles = [[Tile]]()
+        tiles.removeAll()
         guard let cgimage = self.imagePackage.image().cgImage else { return tiles }
 
         for index1 in 0..<self.tilesPerRow { // go down the rows
@@ -74,8 +75,17 @@ class GameBoard {
         return tiles
     }
 
-    
+    private func randomIndex() -> Int {
+        return Int.random(in: 0 ..< self.tilesPerRow)
+    }
+
+    func twoRandomTiles() -> (tile1: Tile, tile2: Tile) {
+        let tile1 = self.tiles[self.randomIndex()][self.randomIndex()]
+        let tile2 = self.tiles[self.randomIndex()][self.randomIndex()]
+        return (tile1: tile1, tile2: tile2)
+    }
 }
+
 extension GameBoard: TileDelegate {
     func selected(at coordinate: Coordinate) {
 

@@ -47,22 +47,22 @@
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-gL-U5e" userLabel="LeftBank">
                                 <rect key="frame" x="5" y="173" width="40" height="321"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="B9E-Xb-LJ5"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWH-la-4PN" userLabel="OriginalImageView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dlz-Qn-7Mr">
                                 <rect key="frame" x="45" y="173" width="321" height="321"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dlz-Qn-7Mr" customClass="TileAreaView" customModule="ShiftingTiles" customModuleProvider="target">
-                                <rect key="frame" x="45" y="173" width="321" height="321"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dlz-Qn-7Mr" secondAttribute="height" multiplier="1:1" id="xpY-zT-g6m"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01large.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qWH-la-4PN" userLabel="OriginalImageView">
+                                <rect key="frame" x="45" y="173" width="321" height="321"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwi-al-ROP" userLabel="Image Caption">
                                 <rect key="frame" x="10" y="499" width="355" height="83.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -225,7 +225,7 @@
                         <outlet property="separatorView" destination="Zbu-ZO-bqj" id="CUk-Kn-ffM"/>
                         <outlet property="showOriginalButton" destination="33U-oP-EAe" id="qxG-vC-swb"/>
                         <outlet property="solveButton" destination="b3N-U2-3sl" id="lT1-67-XbL"/>
-                        <outlet property="tileArea" destination="Dlz-Qn-7Mr" id="j4m-je-ce6"/>
+                        <outlet property="tileArea" destination="Dlz-Qn-7Mr" id="67s-1Z-m9S"/>
                         <outlet property="topBank" destination="c37-58-RaC" id="XSg-NC-qOj"/>
                         <outlet property="topBankHeightConstraint" destination="G6n-sX-rd3" id="fmj-nM-QA5"/>
                     </connections>
@@ -236,6 +236,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="01large.jpg" width="960" height="960"/>
         <image name="backIcon.png" width="120" height="120"/>
         <image name="hintIcon.png" width="120" height="120"/>
         <image name="originalImageIcon.png" width="120" height="120"/>

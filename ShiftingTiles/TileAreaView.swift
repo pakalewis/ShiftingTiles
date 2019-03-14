@@ -18,7 +18,9 @@ class TileAreaView: UIView {
     
     // Indicates whether tiles should be movable
     var allowTileShifting = true;
-    
+
+    let gameBoard: GameBoard
+
     // 2D array of Tiles
     var tileArray = [[Tile]]()
     var newTileArray = [Tile]()
@@ -37,11 +39,15 @@ class TileAreaView: UIView {
     var firstUnorientedTile: Tile?
     
     // MARK: SETUP
-    func initialize(gameBoard: GameBoard) {
+    init(gameBoard: GameBoard, frame: CGRect) {
         print("initialize game board")
 
-        self.tileArray = gameBoard.createTiles(in: self)
+        self.gameBoard = gameBoard
+        super.init(frame: frame)
 
+        self.layer.borderWidth = 2
+
+        self.tileArray = gameBoard.createTiles(in: self)
         let moveTilePanGesture = UIPanGestureRecognizer(target: self, action: #selector(TileAreaView.handleMoveTilePan(_:)))
         self.addGestureRecognizer(moveTilePanGesture)
         
@@ -56,20 +62,17 @@ class TileAreaView: UIView {
         }
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 
     func shuffle(index: Int, complete: (() -> Void)? = nil) {
-        let randomInt1 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
-        let randomInt2 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
-        let randomInt3 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
-        let randomInt4 = Int(arc4random_uniform(UInt32(self.tilesPerRow)))
-
-        let tile1 = self.tileArray[randomInt1][randomInt2]
-        let tile2 = self.tileArray[randomInt3][randomInt4]
-        tile1.originalFrame = tile1.frame
-        tile2.originalFrame = tile2.frame
-
         print("starting shuffle \(index)")
-        self.swapTiles(tile1, tile2: tile2) {
+
+        let randomTiles = self.gameBoard.twoRandomTiles()
+
+        self.animateSwap(randomTiles.tile1, tile2: randomTiles.tile2, duration: 0.02) {
             if index < 50 || self.checkIfSolved() {
                 print("\(index) do it again")
                 self.shuffle(index: index + 1, complete: complete)
@@ -80,15 +83,18 @@ class TileAreaView: UIView {
     }
 
 
-    
-    // Swap the images and tags when the second tile is tapped
-    func swapTiles(_ tile1: Tile, tile2: Tile, complete: (() -> Void)? = nil) {
+    func animateSwap(_ tile1: Tile, tile2: Tile, duration: TimeInterval = 0.2, complete: (() -> Void)? = nil) {
         print("swapping \(tile1.doubleIndex) with \(tile2.doubleIndex) ")
 //        if tile1.tag == tile2.tag {
 //            // tiles are the same so do nothing
 ////            complete?()
 //            return
 //        } else {
+
+
+        tile1.originalFrame = tile1.frame
+        tile2.originalFrame = tile2.frame
+
 
             // Swap doubleindex
             let tempDoubleIndex = tile1.doubleIndex
@@ -97,7 +103,7 @@ class TileAreaView: UIView {
             
             self.insertSubview(tile2, belowSubview: tile1)
             
-            UIView.animate(withDuration: 0.02, animations: { () -> Void in
+            UIView.animate(withDuration: duration, animations: { () -> Void in
                 
                 // Swap frames
                 tile1.frame = tile2.originalFrame!
@@ -139,7 +145,7 @@ class TileAreaView: UIView {
     func swapLines(_ line1: [Tile], line2: [Tile]) {
         // swap the tiles in the lines
         for counter in 0..<line1.count {
-            self.swapTiles(line1[counter], tile2: line2[counter]) {
+            self.animateSwap(line1[counter], tile2: line2[counter]) {
                 if counter == line1.count - 1 {
                     if self.checkIfSolved() {
                         self.isPuzzleSolved = true
@@ -275,7 +281,7 @@ class TileAreaView: UIView {
                     if self.findTileWithPoint(endingPoint, searchingForFirst: false) {
                         self.secondTile = self.foundTileWithPoint!
                         self.secondTile!.originalFrame = self.secondTile!.frame
-                        self.swapTiles(self.firstTile!, tile2: self.secondTile!) {
+                        self.animateSwap(self.firstTile!, tile2: self.secondTile!) {
                             // Swap the tiles and then check if the puzzle is solved
                             if self.checkIfSolved() {
                                 // Notify GameScreen
