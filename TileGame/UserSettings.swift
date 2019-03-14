@@ -28,7 +28,8 @@ enum UserSettingsIntKey: String {
     solvesAtSize7,
     solvesAtSize8,
     solvesAtSize9,
-    solvesAtSize10
+    solvesAtSize10,
+    backButtonPressed
 }
 
 class UserSettings {
@@ -61,4 +62,22 @@ class UserSettings {
     class func intValue(for key: UserSettingsIntKey) -> Int {
         return UserDefaults.standard.integer(forKey: key.rawValue)
     }
+
+    class func increase(key: UserSettingsIntKey) {
+        let value = UserSettings.intValue(for: key)
+        UserDefaults.standard.set(value + 1, forKey: key.rawValue)
+    }
+
+
+
+//
+//
+//    var numTimesBackButtonPressed = UserDefaults.standard.integer(forKey: "backButtonPressed")
+//    numTimesBackButtonPressed += 1
+//    UserDefaults.standard.set(numTimesBackButtonPressed, forKey: "backButtonPressed")
+//
+//    // Only show this alert for the first 3 times the user presses the back button
+//    guard UserDefaults.standard.integer(forKey: "backButtonPressed") < 3 else { return nil}
+//
+
 }

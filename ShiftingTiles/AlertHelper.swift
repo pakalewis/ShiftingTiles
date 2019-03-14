@@ -54,12 +54,10 @@ class LossOfProgressAlert {
     }
 
     func make() -> UIAlertController? {
-        var numTimesBackButtonPressed = UserDefaults.standard.integer(forKey: "backButtonPressed")
-        numTimesBackButtonPressed += 1
-        UserDefaults.standard.set(numTimesBackButtonPressed, forKey: "backButtonPressed")
+        UserSettings.increase(key: .backButtonPressed)
 
         // Only show this alert for the first 3 times the user presses the back button
-        guard UserDefaults.standard.integer(forKey: "backButtonPressed") < 3 else { return nil}
+        guard UserSettings.intValue(for: .backButtonPressed) < 3 else { return nil}
 
         let lossOfProgressAlert = UIAlertController(title: NSLocalizedString("LossOfProgressAlert_Part1", comment: ""), message: NSLocalizedString("LossOfProgressAlert_Part2", comment: ""), preferredStyle: UIAlertController.Style.alert)
         let noAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
