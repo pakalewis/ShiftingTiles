@@ -45,13 +45,17 @@ class TileAreaView: UIView {
         self.gameBoard = gameBoard
         super.init(frame: frame)
 
+        self.gameBoard.delegate = self
+
         self.layer.borderWidth = 2
+        self.clipsToBounds = true
+
 
         self.tileArray = gameBoard.createTiles(in: self)
-        let moveTilePanGesture = UIPanGestureRecognizer(target: self, action: #selector(TileAreaView.handleMoveTilePan(_:)))
-        self.addGestureRecognizer(moveTilePanGesture)
-        
-        self.clipsToBounds = true
+
+//        let moveTilePanGesture = UIPanGestureRecognizer(target: self, action: #selector(TileAreaView.handleMoveTilePan(_:)))
+//        self.addGestureRecognizer(moveTilePanGesture)
+
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.shuffle(index: 0)
@@ -71,51 +75,51 @@ class TileAreaView: UIView {
         print("starting shuffle \(index)")
 
         let randomTiles = self.gameBoard.twoRandomTiles()
+        if randomTiles.tile1.targetCoordinate == randomTiles.tile2.targetCoordinate {
+            // tiles are the same so do nothing
+            print("skip this swap since the two random tiles are the same")
+            self.shuffle(index: index, complete: complete)
+            return
+        }
 
         self.animateSwap(randomTiles.tile1, tile2: randomTiles.tile2, duration: 0.02) {
-            if index < 50 || self.checkIfSolved() {
-                print("\(index) do it again")
-                self.shuffle(index: index + 1, complete: complete)
+            if index == self.gameBoard.shuffleCount  {
+                if self.gameBoard.isSolved() {
+                    // the shuffling resulted in a solved board - restart
+                    print("the shuffling resulted in a solved board - restart")
+                    self.shuffle(index: 0, complete: complete)
+                } else {
+                    print("shuffling complete!")
+                    complete?()
+                }
             } else {
-                complete?()
+                print("shuffled \(index) times so far. keep going")
+                self.shuffle(index: index + 1, complete: complete)
             }
         }
     }
 
 
     func animateSwap(_ tile1: Tile, tile2: Tile, duration: TimeInterval = 0.2, complete: (() -> Void)? = nil) {
-        print("swapping \(tile1.doubleIndex) with \(tile2.doubleIndex) ")
-//        if tile1.tag == tile2.tag {
-//            // tiles are the same so do nothing
-////            complete?()
-//            return
-//        } else {
+        print("swapping \(tile1.targetCoordinate) with \(tile2.targetCoordinate) ")
 
+        let t1originalFrame = tile1.frame
+        let t2originalFrame = tile2.frame
 
-        tile1.originalFrame = tile1.frame
-        tile2.originalFrame = tile2.frame
+        // Swap coordinate
+        let tempCoordinate = tile1.targetCoordinate
+        tile1.targetCoordinate = tile2.targetCoordinate
+        tile2.targetCoordinate = tempCoordinate
 
+        self.insertSubview(tile2, belowSubview: tile1)
 
-            // Swap doubleindex
-            let tempDoubleIndex = tile1.doubleIndex
-            tile1.doubleIndex = tile2.doubleIndex
-            tile2.doubleIndex = tempDoubleIndex
-            
-            self.insertSubview(tile2, belowSubview: tile1)
-            
-            UIView.animate(withDuration: duration, animations: { () -> Void in
-                
-                // Swap frames
-                tile1.frame = tile2.originalFrame!
-                tile2.frame = tile1.originalFrame!
-                tile1.originalFrame = tile1.frame
-                tile2.originalFrame = tile2.frame
-                
-            }, completion: { (finished) -> Void in
-                print("swap finished")
-                    complete?()
-            })
-//        }
+        UIView.animate(withDuration: duration, animations: { () -> Void in
+            tile1.frame = t2originalFrame
+            tile2.frame = t1originalFrame
+
+        }, completion: { (finished) -> Void in
+            complete?()
+        })
     }
     
     
@@ -147,7 +151,7 @@ class TileAreaView: UIView {
         for counter in 0..<line1.count {
             self.animateSwap(line1[counter], tile2: line2[counter]) {
                 if counter == line1.count - 1 {
-                    if self.checkIfSolved() {
+                    if self.gameBoard.isSolved() {
                         self.isPuzzleSolved = true
                         self.delegate?.puzzleIsSolved()
                     }
@@ -283,7 +287,7 @@ class TileAreaView: UIView {
                         self.secondTile!.originalFrame = self.secondTile!.frame
                         self.animateSwap(self.firstTile!, tile2: self.secondTile!) {
                             // Swap the tiles and then check if the puzzle is solved
-                            if self.checkIfSolved() {
+                            if self.gameBoard.isSolved() {
                                 // Notify GameScreen
                                 self.isPuzzleSolved = true
                                 self.delegate?.puzzleIsSolved()
@@ -310,12 +314,12 @@ class TileAreaView: UIView {
         // Determine whether any tile movement should occur
         if !self.isPuzzleSolved && self.allowTileShifting {
             if UserSettings.boolValue(for: .rotations) {
-                // Grab the tag of the tile that was tapped and use it to find the correct tile
+                 //   Grab the tag of the tile that was tapped and use it to find the correct tile
                 let tag = sender.view!.tag
                 let pressedTile = self.tileArray[tag / 10][tag % 10]
                 self.rotateTile(pressedTile, duration: 0.3, completionClosure: { () -> () in
                     // Rotate the tile and then check if the puzzle is solved
-                    if self.checkIfSolved() {
+                    if self.gameBoard.isSolved() {
                         // Notify GameScreen
                         self.isPuzzleSolved = true
                         self.delegate?.puzzleIsSolved()
@@ -326,25 +330,6 @@ class TileAreaView: UIView {
     }
 
 
-    
-    
-    // MARK: TILE EXAMINATION
-    // Checks to see if the image pieces are in the correct order and if the orientations are correct
-    func checkIfSolved() -> Bool {
-        for index1 in 0..<self.tilesPerRow {
-            for index2 in 0..<self.tilesPerRow {
-                let tileToCheck = self.tileArray[index1][index2]
-                if (tileToCheck.doubleIndex.rowIndex != index1
-                    || tileToCheck.doubleIndex.columnIndex != index2
-                    || tileToCheck.orientationCount != 1) {
-                        return false
-                }
-            }
-        }
-        return true
-    }
-
-    
     func findTilesToSwap() {
         self.firstTile = nil
         self.secondTile = nil
@@ -436,12 +421,13 @@ class TileAreaView: UIView {
     }
 }
 
-extension TileAreaView: TileDelegate {
-    func selected(at coordinate: Coordinate) {
-        print("tile selected at coordinate \(coordinate)")
-    }
-
-    func deselected() {
-        
+extension TileAreaView: GameBoardDelegate {
+    func swapTiles(_ tile1: Tile, _ tile2: Tile) {
+        self.animateSwap(tile1, tile2: tile2) {
+            if self.gameBoard.isSolved() {
+                self.isPuzzleSolved = true
+                self.delegate?.puzzleIsSolved()
+            }
+        }
     }
 }

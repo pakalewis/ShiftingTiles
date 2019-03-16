@@ -13,16 +13,20 @@ enum TileState {
 }
 
 protocol TileDelegate: class {
-    func selected(at coordinate: Coordinate)
+    func selected(tile: Tile)
     func deselected()
 }
 
 class Tile: UIImageView {
+    deinit {
+        print("DEINIT Tile")
+    }
+
     override var description: String {
         return "targetCoordinate = \(self.targetCoordinate)\n"
     }
     var doubleIndex: DoubleIndex
-    let targetCoordinate: Coordinate
+    var targetCoordinate: Coordinate
     var orientationCount : CGFloat = 1
     var originalFrame: CGRect?
     var state = TileState.normal {
@@ -37,6 +41,7 @@ class Tile: UIImageView {
     init(image: UIImage, doubleIndex: DoubleIndex, coordinate: Coordinate, delegate: TileDelegate, frame: CGRect) {
         self.doubleIndex = doubleIndex
         self.targetCoordinate = coordinate
+        print(targetCoordinate)
         self.delegate = delegate
 
         super.init(image: image)
@@ -45,9 +50,9 @@ class Tile: UIImageView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.addGestureRecognizer(tap)
 
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        doubleTapGesture.numberOfTapsRequired = 2
-        self.addGestureRecognizer(doubleTapGesture)
+//        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+//        doubleTapGesture.numberOfTapsRequired = 2
+//        self.addGestureRecognizer(doubleTapGesture)
         self.addSubview(self.overlay)
         self.isUserInteractionEnabled = true
         self.frame = frame
@@ -58,12 +63,8 @@ class Tile: UIImageView {
     }
 
     @objc func tapped() {
-        print("tapped \(tag)")
-        if self.state == .normal {
-            self.state = .selected
-        } else {
-            self.state = .normal
-        }
+        print("tapped \(self.targetCoordinate)")
+        self.delegate?.selected(tile: self)
     }
 
     @objc func doubleTapped() {
@@ -83,8 +84,8 @@ class Tile: UIImageView {
         case .selected:
             self.layer.borderColor = UIColor.black.cgColor
             self.layer.borderWidth = 2
-            self.delegate?.selected(at: self.targetCoordinate)
-//            overlay.backgroundColor = .yellow
+
+            //            overlay.backgroundColor = .yellow
 //            self.bringSubviewToFront(self.overlay)
         }
     }

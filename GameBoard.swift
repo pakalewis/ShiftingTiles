@@ -8,16 +8,26 @@
 
 import UIKit
 
-protocol GameBoardDelegate {
-    func isSolved()
+protocol GameBoardDelegate: class {
+    func swapTiles(_ tile1: Tile, _ tile2: Tile)
 }
 
 class GameBoard {
+    deinit {
+        print("DEINIT GameBoard")
+    }
+
     let imagePackage: ImagePackage
     let tilesPerRow: Int
     var tiles = [[Tile]]()
 
-    weak var delegate: PuzzleSolvedProtocol?
+    var shuffleCount: Int {
+        return tilesPerRow * 10
+    }
+
+    var selectedTile: Tile?
+
+    weak var delegate: GameBoardDelegate?
 
     init(imagePackage: ImagePackage, tilesPerRow: Int) {
         self.imagePackage = imagePackage
@@ -58,7 +68,7 @@ class GameBoard {
                 let tile = Tile(
                     image: tileUIImage,
                     doubleIndex: DoubleIndex(index1: index1, index2: index2),
-                    coordinate: Coordinate(index1,index2),
+                    coordinate: Coordinate(index1, index2),
                     delegate: self,
                     frame: tileFrame
                 )
@@ -84,17 +94,52 @@ class GameBoard {
         let tile2 = self.tiles[self.randomIndex()][self.randomIndex()]
         return (tile1: tile1, tile2: tile2)
     }
+
+
+    // MARK: TILE EXAMINATION
+    // Checks to see if the image pieces are in the correct order and if the orientations are correct
+    func isSolved() -> Bool {
+        for row in 0..<self.tilesPerRow {
+            for column in 0..<self.tilesPerRow {
+                let coordinate = Coordinate(row, column)
+                let tileToCheck = self.tiles[row][column]
+
+                print("coordinate = \(coordinate)")
+                print("tileToCheck.targetCoordinate = \(tileToCheck.targetCoordinate)")
+
+                if tileToCheck.targetCoordinate != coordinate  { return false }
+                if tileToCheck.orientationCount != 1 { return false }
+            }
+        }
+        return true
+    }
 }
 
 extension GameBoard: TileDelegate {
-    func selected(at coordinate: Coordinate) {
+    func selected(tile: Tile) {
+        if tile.state == .selected {
+            tile.state = .normal
+            self.selectedTile = nil
+            return
+        }
 
+        guard let first = self.selectedTile else {
+            tile.state = .selected
+            self.selectedTile = tile
+            return
+        }
+
+        for row in self.tiles {
+            for tile in row {
+                tile.state = .normal
+            }
+        }
+        self.delegate?.swapTiles(first, tile)
+        self.selectedTile = nil
     }
 
     func deselected() {
-        
+        self.selectedTile = nil
     }
-
-
 }
 
