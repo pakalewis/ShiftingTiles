@@ -27,6 +27,7 @@ class Tile: UIImageView {
     }
     var doubleIndex: DoubleIndex
     var targetCoordinate: Coordinate
+    var currentCoordinate: Coordinate
     var orientationCount : CGFloat = 1
     var originalFrame: CGRect?
     var state = TileState.normal {
@@ -41,6 +42,7 @@ class Tile: UIImageView {
     init(image: UIImage, doubleIndex: DoubleIndex, coordinate: Coordinate, delegate: TileDelegate, frame: CGRect) {
         self.doubleIndex = doubleIndex
         self.targetCoordinate = coordinate
+        self.currentCoordinate = coordinate
         print(targetCoordinate)
         self.delegate = delegate
 

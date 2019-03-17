@@ -23,7 +23,8 @@ enum Icon {
     solve,
     hint,
     checkedBox,
-    uncheckedBox
+    uncheckedBox,
+    triangle
 
 
     func image() -> UIImage? {
@@ -57,6 +58,8 @@ enum Icon {
             image = UIImage(named: "checkedBox")
         case .uncheckedBox:
             image = UIImage(named: "uncheckedBox")
+        case .triangle:
+            image = UIImage(named: "triangle")
         }
         return image?.withRenderingMode(.alwaysTemplate)
     }

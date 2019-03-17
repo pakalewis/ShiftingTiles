@@ -107,9 +107,9 @@ class TileAreaView: UIView {
         let t2originalFrame = tile2.frame
 
         // Swap coordinate
-        let tempCoordinate = tile1.targetCoordinate
-        tile1.targetCoordinate = tile2.targetCoordinate
-        tile2.targetCoordinate = tempCoordinate
+        let tempCoordinate = tile1.currentCoordinate
+        tile1.currentCoordinate = tile2.currentCoordinate
+        tile2.currentCoordinate = tempCoordinate
 
         self.insertSubview(tile2, belowSubview: tile1)
 

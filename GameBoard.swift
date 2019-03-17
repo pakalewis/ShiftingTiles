@@ -95,6 +95,56 @@ class GameBoard {
         return (tile1: tile1, tile2: tile2)
     }
 
+//    func makeLineOfTiles(_ identifier: Int) -> [Tile] {
+//        var tileLine = [Tile]()
+//
+//        // Create array of Tiles
+//        if (identifier - 100) < 0 { // Is a column
+//            for index in 0..<self.tilesPerRow {
+//                let coordinate = DoubleIndex(index1: index, index2: identifier)
+//                let tile = self.findTileAtCoordinate(coordinate)
+//                tile.originalFrame = tile.frame
+//                tileLine.append(tile)
+//            }
+//        } else { // Is a row
+//            for index in 0..<self.tilesPerRow {
+//                let coordinate = DoubleIndex(index1: identifier - 100, index2: index)
+//                let tile = self.findTileAtCoordinate(coordinate)
+//                tile.originalFrame = tile.frame
+//                tileLine.append(tile)
+//            }
+//        }
+//        return tileLine
+//    }
+//
+
+    func lineOfTiles(row: Int? = nil, column: Int? = nil) -> [Tile] {
+        var tiles = [Tile]()
+        if let row = row {
+            for index in 0..<self.tilesPerRow {
+                let coordinate = Coordinate(row, index)
+                tiles.append(self.findTile(at: coordinate))
+            }
+        } else if let column = column {
+            for index in 0..<self.tilesPerRow {
+                let coordinate = Coordinate(index, column)
+                tiles.append(self.findTile(at: coordinate))
+            }
+        }
+        return tiles
+    }
+
+    func findTile(at coordinate: Coordinate) -> Tile {
+        for index1 in 0..<self.tilesPerRow {
+            for index2 in 0..<self.tilesPerRow {
+                let t = self.tiles[index1][index2]
+                if t.currentCoordinate == coordinate {
+                    return t
+                }
+            }
+        }
+        return self.tiles[0][0]
+    }
 
     // MARK: TILE EXAMINATION
     // Checks to see if the image pieces are in the correct order and if the orientations are correct
@@ -105,9 +155,9 @@ class GameBoard {
                 let tileToCheck = self.tiles[row][column]
 
                 print("coordinate = \(coordinate)")
-                print("tileToCheck.targetCoordinate = \(tileToCheck.targetCoordinate)")
+                print("tileToCheck.currentCoordinate = \(tileToCheck.currentCoordinate)")
 
-                if tileToCheck.targetCoordinate != coordinate  { return false }
+                if tileToCheck.currentCoordinate != coordinate  { return false }
                 if tileToCheck.orientationCount != 1 { return false }
             }
         }

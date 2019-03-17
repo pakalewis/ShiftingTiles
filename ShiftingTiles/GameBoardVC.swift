@@ -19,11 +19,14 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     var gameBoard: GameBoard!
     var originalImageShown = false
     
-    var topGrips = [UIImageView]()
-    var leftGrips = [UIImageView]()
+    var topGrips = [Grip]()
+    var leftGrips = [Grip]()
     var rowColumnGrip : UIImageView?
     var firstGripOriginalFrame : CGRect?
     var firstLineOfTiles: [Tile]?
+
+    var selectedGrip: Grip?
+    var highlightedRowColumn: UIView?
     
     // MARK: VIEWS
     @IBOutlet weak var originalImageView: UIImageView!
@@ -117,9 +120,8 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     
     
     
-    // MARK: Grips that allow movement of an entire row or column
+    // MARK: Grips that allow selection/movement of an entire row or column
     func initializeRowColumnGrips() {
-        
         // Measurements to make the frames
         let topWidth = self.topBank.frame.width / CGFloat(self.gameBoard.tilesPerRow)
         let topHeight = self.topBank.frame.height
@@ -132,23 +134,15 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
             
             // Top Grip Area
             let topFrame = CGRect(x: topPositionX, y: self.topBank.frame.origin.y, width: topWidth, height: topHeight * 0.9)
-            let topArea = UIImageView(frame: topFrame)
-            topArea.image = Icon.roundedSquare.image()
-            topArea.tintColor = Colors.fetchDarkColor()
-            topArea.contentMode = UIView.ContentMode.scaleAspectFit
-            topArea.tag = index // This is used later to determine row vs column
-            self.view.addSubview(topArea)
-            self.topGrips.append(topArea)
+            let topGrip = Grip(gripType: .column, index: index, frame: topFrame, delegate: self)
+            self.view.addSubview(topGrip)
+            self.topGrips.append(topGrip)
             
             // Left Grip Area
             let leftFrame = CGRect(x: self.leftBank.frame.origin.x, y: leftPositionY, width: leftWidth * 0.9, height: leftHeight)
-            let leftArea = UIImageView(frame: leftFrame)
-            leftArea.image = Icon.roundedSquare.image()
-            leftArea.tintColor = Colors.fetchDarkColor()
-            leftArea.contentMode = UIView.ContentMode.scaleAspectFit
-            leftArea.tag = index + 100 // This is used later to determine row vs column
-            self.view.addSubview(leftArea)
-            self.leftGrips.append(leftArea)
+            let leftGrip = Grip(gripType: .row, index: index, frame: leftFrame, delegate: self)
+            self.view.addSubview(leftGrip)
+            self.leftGrips.append(leftGrip)
         }
     }
 
@@ -236,34 +230,34 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
     
     // This returns a grip that contains a CGPoint. Used to find the initial grip when first is true. Else, use a larger target space to find a grip when the pan gesture ends
     func findRowColumnGripWithPoint(_ point: CGPoint, first: Bool) -> UIImageView? {
-        for index in 0..<self.gameBoard.tilesPerRow {
-            var topArea : CGRect
-            var leftArea : CGRect
-            let topGrip = self.topGrips[index]
-            let leftGrip = self.leftGrips[index]
-            if first { // Find the initial grip
-                topArea = topGrip.frame
-                leftArea = leftGrip.frame
-                if topArea.contains(point) {
-                    return topGrip
-                }
-                if leftArea.contains(point) {
-                    return leftGrip
-                }
-            } else {
-                // The target areas are larger to make it easier to find the second grip / column to swap
-                // Ensure that it is not the same as the first grip
-                // Check if it is of similar type (row vs column)
-                topArea = CGRect(x: topGrip.frame.origin.x, y: topGrip.frame.origin.y - 200, width: topGrip.frame.size.width, height: topGrip.frame.size.height + 400)
-                leftArea = CGRect(x: leftGrip.frame.origin.x - 200, y: leftGrip.frame.origin.y, width: leftGrip.frame.size.width + 400, height: leftGrip.frame.size.height)
-                if topArea.contains(point) && topGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - topGrip.tag) < 11 {
-                    return topGrip
-                }
-                if leftArea.contains(point) && leftGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - leftGrip.tag) < 11  {
-                    return leftGrip
-                }
-            }
-        }
+//        for index in 0..<self.gameBoard.tilesPerRow {
+//            var topArea : CGRect
+//            var leftArea : CGRect
+//            let topGrip = self.topGrips[index]
+//            let leftGrip = self.leftGrips[index]
+//            if first { // Find the initial grip
+//                topArea = topGrip.frame
+//                leftArea = leftGrip.frame
+//                if topArea.contains(point) {
+//                    return topGrip
+//                }
+//                if leftArea.contains(point) {
+//                    return leftGrip
+//                }
+//            } else {
+//                // The target areas are larger to make it easier to find the second grip / column to swap
+//                // Ensure that it is not the same as the first grip
+//                // Check if it is of similar type (row vs column)
+//                topArea = CGRect(x: topGrip.frame.origin.x, y: topGrip.frame.origin.y - 200, width: topGrip.frame.size.width, height: topGrip.frame.size.height + 400)
+//                leftArea = CGRect(x: leftGrip.frame.origin.x - 200, y: leftGrip.frame.origin.y, width: leftGrip.frame.size.width + 400, height: leftGrip.frame.size.height)
+//                if topArea.contains(point) && topGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - topGrip.tag) < 11 {
+//                    return topGrip
+//                }
+//                if leftArea.contains(point) && leftGrip != self.rowColumnGrip && abs(self.rowColumnGrip!.tag - leftGrip.tag) < 11  {
+//                    return leftGrip
+//                }
+//            }
+//        }
         return nil
     }
 
@@ -378,7 +372,76 @@ class GameBoardVC: UIViewController, PuzzleSolvedProtocol {
         }) 
     }
 
-    
+    func addMask(row: Int? = nil, column: Int? = nil) {
+        var rect: CGRect?
+        if let row = row {
+            rect = CGRect(
+                x: 0,
+                y: self.tileArea.frame.height * CGFloat(row) / CGFloat(self.gameBoard.tilesPerRow),
+                width: self.tileArea.frame.width,
+                height: self.tileArea.frame.height / CGFloat(self.gameBoard.tilesPerRow)
+            )
+        } else if let column = column {
+            rect = CGRect(
+                x: self.tileArea.frame.width * CGFloat(column) / CGFloat(self.gameBoard.tilesPerRow),
+                y: 0,
+                width: self.tileArea.frame.width / CGFloat(self.gameBoard.tilesPerRow),
+                height: self.tileArea.frame.height
+            )
+        }
+        guard let frame = rect else { return }
+        let convertedRect = self.tileArea.convert(frame, to: self.view)
+        let mask = UIView(frame: convertedRect)
+        mask.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        mask.layer.borderColor = UIColor.black.cgColor
+        mask.layer.borderWidth = 2
+        self.view.addSubview(mask)
+        self.highlightedRowColumn = mask
+    }
+}
+
+extension GameBoardVC: GripDelegate {
+    func selected(grip: Grip) {
+        if grip.isSelected {
+            grip.isSelected = false
+            self.selectedGrip = nil
+            self.highlightedRowColumn?.removeFromSuperview()
+            return
+        }
+
+        guard let first = self.selectedGrip else {
+            grip.isSelected = true
+            self.selectedGrip = grip
+            switch grip.gripType {
+            case .column:
+                self.addMask(column: grip.index)
+            case .row:
+                self.addMask(row: grip.index)
+            }
+
+            return
+        }
+
+        // a second different grip was selected
+        // find tiles in the two columns and swap
+        let t1 = self.gameBoard.lineOfTiles(row: first.index)
+        let t2 = self.gameBoard.lineOfTiles(row: grip.index)
+//        for i in t1 {
+//            self.tileArea
+//            for tile in row {
+//                tile.state = .normal
+//            }
+//        }
+//        self.delegate?.swapTiles(first, tile)
+//        self.selectedTile = nil
+
+
+
+
+
+
+
+    }
 }
 
 extension GameBoardVC: AutoSolveAlertDelegate {
