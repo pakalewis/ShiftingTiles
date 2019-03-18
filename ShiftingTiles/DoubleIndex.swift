@@ -10,6 +10,9 @@ import Foundation
 
 typealias Coordinate = IndexPath
 extension IndexPath {
+    var column: Int {
+        return self.section
+    }
     private init(row: Int, column: Int) {
         self.init(row: row, section: column)
     }

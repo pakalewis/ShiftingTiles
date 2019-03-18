@@ -14,6 +14,7 @@ enum GripType: String {
 
 protocol GripDelegate: class {
     func selected(grip: Grip)
+    func deselectGrip()
 }
 
 class Grip: UIButton {
@@ -41,7 +42,7 @@ class Grip: UIButton {
         self.initialRotation()
         self.updateImage()
 
-        self.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = false
 
         self.addTarget(self, action: #selector(tapped), for: .touchUpInside)
     }
@@ -52,7 +53,12 @@ class Grip: UIButton {
 
     @objc func tapped() {
         print("tapped grip at \(self.gripType.rawValue) \(self.index)")
-        self.delegate?.selected(grip: self)
+        if self.isSelected {
+            self.isSelected = false
+            self.delegate?.deselectGrip()
+        } else {
+            self.delegate?.selected(grip: self)
+        }
     }
 
     func initialRotation() {

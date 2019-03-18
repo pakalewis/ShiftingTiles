@@ -12,6 +12,14 @@ enum TileState {
     case normal, selected
 }
 
+enum TileOrientation: Int, CaseIterable {
+    case zero = 1, ninety = 2, oneEighty = 3, twoSeventy = 4
+
+    func degree() -> CGFloat {
+        return CGFloat(self.rawValue)
+    }
+}
+
 protocol TileDelegate: class {
     func selected(tile: Tile)
     func deselected()
@@ -29,6 +37,7 @@ class Tile: UIImageView {
     var targetCoordinate: Coordinate
     var currentCoordinate: Coordinate
     var orientationCount : CGFloat = 1
+    var orientation: TileOrientation
     var originalFrame: CGRect?
     var state = TileState.normal {
         didSet {
@@ -43,6 +52,7 @@ class Tile: UIImageView {
         self.doubleIndex = doubleIndex
         self.targetCoordinate = coordinate
         self.currentCoordinate = coordinate
+        self.orientation = .zero
         print(targetCoordinate)
         self.delegate = delegate
 
@@ -52,11 +62,8 @@ class Tile: UIImageView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.addGestureRecognizer(tap)
 
-//        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-//        doubleTapGesture.numberOfTapsRequired = 2
-//        self.addGestureRecognizer(doubleTapGesture)
         self.addSubview(self.overlay)
-        self.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = false
         self.frame = frame
     }
 
@@ -65,8 +72,13 @@ class Tile: UIImageView {
     }
 
     @objc func tapped() {
-        print("tapped \(self.targetCoordinate)")
-        self.delegate?.selected(tile: self)
+        switch state {
+        case .normal:
+            self.delegate?.selected(tile: self)
+        case .selected:
+            self.state = .normal
+            self.delegate?.deselected()
+        }
     }
 
     @objc func doubleTapped() {

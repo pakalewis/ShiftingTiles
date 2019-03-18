@@ -225,7 +225,7 @@
                         <outlet property="separatorView" destination="Zbu-ZO-bqj" id="CUk-Kn-ffM"/>
                         <outlet property="showOriginalButton" destination="33U-oP-EAe" id="qxG-vC-swb"/>
                         <outlet property="solveButton" destination="b3N-U2-3sl" id="lT1-67-XbL"/>
-                        <outlet property="tileArea" destination="Dlz-Qn-7Mr" id="67s-1Z-m9S"/>
+                        <outlet property="tileAreaContainer" destination="Dlz-Qn-7Mr" id="CaQ-u2-fpS"/>
                         <outlet property="topBank" destination="c37-58-RaC" id="XSg-NC-qOj"/>
                         <outlet property="topBankHeightConstraint" destination="G6n-sX-rd3" id="fmj-nM-QA5"/>
                     </connections>
