@@ -12,7 +12,7 @@ class Congrats {
     class func generateMessage() -> String {
         guard UserSettings.boolValue(for: .rotations) else { return "" }
 
-        let randomInt = Int(arc4random_uniform(UInt32(17)))
+        let randomInt = Int.random(in: 1...17)
         var key = "Message"
         if randomInt < 10 {
             key += "0"

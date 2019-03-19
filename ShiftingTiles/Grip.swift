@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum GripState {
+    case normal, selected, disabled
+}
+
 enum GripType: String {
     case column, row
 }
@@ -25,9 +29,9 @@ class Grip: UIButton {
     var index: Int
     weak var delegate: GripDelegate?
 
-    override var isSelected: Bool {
+    var gripState: GripState {
         didSet {
-            updateForSelection()
+            self.updateForState()
         }
     }
 
@@ -35,12 +39,15 @@ class Grip: UIButton {
         self.gripType = gripType
         self.index = index
         self.delegate = delegate
+        self.gripState = .disabled
+
         super.init(frame: frame)
         self.imageView?.contentMode = .scaleAspectFit
         self.tintColor = Colors.fetchDarkColor()
 
         self.initialRotation()
-        self.updateImage()
+        self.updateForState()
+        self.setImage(Icon.triangle.image(), for: .normal)
 
         self.isUserInteractionEnabled = false
 
@@ -53,8 +60,9 @@ class Grip: UIButton {
 
     @objc func tapped() {
         print("tapped grip at \(self.gripType.rawValue) \(self.index)")
-        if self.isSelected {
-            self.isSelected = false
+        if self.gripState == .selected {
+            self.gripState = .normal
+            self.rotate()
             self.delegate?.deselectGrip()
         } else {
             self.delegate?.selected(grip: self)
@@ -71,18 +79,18 @@ class Grip: UIButton {
 
     }
 
-    func updateImage() {
-        self.setImage(Icon.triangle.image(), for: .normal)
-        if self.isSelected {
-            self.tintColor = Colors.fetchDarkColor()
-        } else {
+    func updateForState() {
+        switch self.gripState {
+        case .normal:
             self.tintColor = Colors.fetchDarkColor().withAlphaComponent(0.5)
+            self.isUserInteractionEnabled = true
+        case .selected:
+            self.tintColor = Colors.fetchDarkColor()
+            self.isUserInteractionEnabled = true
+        case .disabled:
+            self.tintColor = Colors.fetchDarkColor().withAlphaComponent(0.1)
+            self.isUserInteractionEnabled = false
         }
-    }
-
-    func updateForSelection() {
-        self.rotate()
-        self.updateImage()
     }
 
     func rotate() {

@@ -56,9 +56,9 @@ class TileAreaView: UIView {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.shuffle(index: 0, complete: {
-    //                if UserSettings.boolValue(for: .rotations) {
-    //                    self.rotateTiles()
-    //                }
+//                if UserSettings.boolValue(for: .rotations) {
+//                    self.rotateTiles()
+//                }
                 self.gameBoard.setTiles(enabled: true)
                 self.delegate?.doneShuffling()
             })
@@ -177,48 +177,46 @@ class TileAreaView: UIView {
     }
     
     
-    func wiggleTiles() {
-        self.findTilesToSwap()
-        if self.firstTile != nil && self.secondTile != nil {
-            // Tiles are not in correct order
-            self.wiggleTile(self.firstTile!)
-            self.wiggleTile(self.secondTile!)
-        } else {
-            if let tile = self.gameBoard.findFirstUnorientedTile() {
-                self.wiggleTile(tile)
-            }
+    func showHintByWigglingTiles() {
+        if
+            let misplaced = self.gameBoard.findFirstMisplacedTile(),
+            let correctTile = self.gameBoard.findTile(at: misplaced.targetCoordinate)
+        {
+            self.wiggleTile(misplaced)
+            self.wiggleTile(correctTile)
+        } else if let unoriented = self.gameBoard.findFirstUnorientedTile() {
+            self.wiggleTile(unoriented)
         }
     }
     
     
-    func wiggleTile(_ tileToWiggle : Tile) {
-        // Animation calculations
-        let fullRotation = CGFloat(Double.pi * 2) / 30
-        let duration = 0.7
-        let relativeDuration = duration / 6
-        let options = UIView.KeyframeAnimationOptions()
-        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: options, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: fullRotation)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 1/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: -2 * fullRotation)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 2/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: 2 * fullRotation)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 3/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: -2 * fullRotation)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 4/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: 2 * fullRotation)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 5/6, relativeDuration: relativeDuration, animations: {
-                tileToWiggle.transform = tileToWiggle.transform.rotated(by: -fullRotation)
-            })
-
+    func wiggleTile(_ tile : Tile) {
+        let NUM_WIGGLES: Int = 6
+        let ANGLE = CGFloat(Double.pi / 15)
+        let TOTAL_DURATION: TimeInterval = 0.5
+        let relativeDuration = TOTAL_DURATION / 6
+        UIView.animateKeyframes(withDuration: TOTAL_DURATION, delay: 0.0, options: [], animations: {
+            for i in 0..<NUM_WIGGLES {
+                let partialAngle: CGFloat
+                if i == 0 {
+                    partialAngle = ANGLE
+                } else if i == NUM_WIGGLES - 1 {
+                    partialAngle = -ANGLE
+                } else if i % 2 == 1 {
+                    partialAngle = -2 * ANGLE
+                } else {
+                    partialAngle = 2 * ANGLE
+                }
+                UIView.addKeyframe(
+                    withRelativeStartTime: Double(i) / Double(NUM_WIGGLES),
+                    relativeDuration: relativeDuration,
+                    animations: {
+                        tile.transform = tile.transform.rotated(by: partialAngle)
+                    }
+                )
+            }
         }) { (done) in
-                print("done")
+                print("done wiggling")
             
         }
     }

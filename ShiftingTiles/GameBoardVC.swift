@@ -139,9 +139,9 @@ class GameBoardVC: UIViewController {
         }
     }
 
-    func setGrips(enabled: Bool) {
+    func resetGrips() {
         for grip in self.columnGrips + self.rowGrips {
-            grip.isUserInteractionEnabled = enabled
+            grip.gripState = .normal
         }
     }
 
@@ -193,6 +193,7 @@ class GameBoardVC: UIViewController {
     
     // Hint button to wiggle two tiles
     @IBAction func hintButtonPressed(_ sender: AnyObject) {
+        self.tileArea.showHintByWigglingTiles()
 //        guard
 //            let t1 = self.gameBoard.findTile(at: Coordinate(0,0)),
 //            let t2 = self.gameBoard.findTile(at: Coordinate(0,1)),
@@ -298,31 +299,34 @@ extension GameBoardVC: GripDelegate {
     func deselectGrip() {
         self.selectedGrip = nil
         self.highlightedRowColumnMask?.removeFromSuperview()
-        self.setGrips(enabled: true)
+        self.resetGrips()
     }
 
     func selected(grip: Grip) {
         if let firstGrip = self.selectedGrip {
-            firstGrip.isSelected = false
-            
+            firstGrip.gripState = .normal
+            firstGrip.rotate()
+
             // a second different grip was selected
             // find tiles in the two columns and swap
             self.tileArea.swapLines(firstGrip.index, grip.index, type: grip.gripType)
             self.selectedGrip = nil
             self.highlightedRowColumnMask?.removeFromSuperview()
-            self.setGrips(enabled: true)
+            self.resetGrips()
         } else {
-            grip.isSelected = true
+            grip.rotate()
+            grip.gripState = .selected
+
             self.selectedGrip = grip
             switch grip.gripType {
             case .column:
                 for grip in self.rowGrips {
-                    grip.isUserInteractionEnabled = false
+                    grip.gripState = .disabled
                 }
                 self.addMask(column: grip.index)
             case .row:
                 for grip in self.columnGrips {
-                    grip.isUserInteractionEnabled = false
+                    grip.gripState = .disabled
                 }
                 self.addMask(row: grip.index)
             }
@@ -347,7 +351,7 @@ extension GameBoardVC: LossOfProgressAlertDelegate {
 
 extension GameBoardVC: TileAreaViewDelegate {
     func doneShuffling() {
-        self.setGrips(enabled: true)
+        self.resetGrips()
     }
 
     func puzzleSolved() {

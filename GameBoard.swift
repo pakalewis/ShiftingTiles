@@ -19,7 +19,6 @@ class GameBoard {
 
     let imagePackage: ImagePackage
     let tilesPerRow: Int
-    var tiles = [[Tile]]()
     var singleArrayOfTiles = [Tile]()
 
     var shuffleCount: Int {
@@ -87,9 +86,6 @@ class GameBoard {
 
 
     func twoRandomTiles() -> (tile1: Tile, tile2: Tile) {
-//        func randomIndex() -> Int {
-//            return Int.random(in: 0 ..< self.tilesPerRow)
-//        }
         func randomIndex() -> Int {
             return Int.random(in: 0 ..< self.singleArrayOfTiles.count)
         }
@@ -97,63 +93,18 @@ class GameBoard {
         let tile1 = self.singleArrayOfTiles[randomIndex()]
         let tile2 = self.singleArrayOfTiles[randomIndex()]
 
-//        let tile1 = self.tiles[randomIndex()][randomIndex()]
-//        let tile2 = self.tiles[randomIndex()][randomIndex()]
         return (tile1: tile1, tile2: tile2)
     }
 
-    func tile(at coordinate: Coordinate) -> Tile? {
-        guard coordinate.row < self.tilesPerRow else { return nil }
-        guard coordinate.column < self.tilesPerRow else { return nil }
 
-        return self.tiles[coordinate.row][coordinate.column]
-    }
-
-//    func makeLineOfTiles(_ identifier: Int) -> [Tile] {
-//        var tileLine = [Tile]()
-//
-//        // Create array of Tiles
-//        if (identifier - 100) < 0 { // Is a column
-//            for index in 0..<self.tilesPerRow {
-//                let coordinate = DoubleIndex(index1: index, index2: identifier)
-//                let tile = self.findTileAtCoordinate(coordinate)
-//                tile.originalFrame = tile.frame
-//                tileLine.append(tile)
-//            }
-//        } else { // Is a row
-//            for index in 0..<self.tilesPerRow {
-//                let coordinate = DoubleIndex(index1: identifier - 100, index2: index)
-//                let tile = self.findTileAtCoordinate(coordinate)
-//                tile.originalFrame = tile.frame
-//                tileLine.append(tile)
-//            }
-//        }
-//        return tileLine
-//    }
-//
 
     func lineOfTiles(row: Int? = nil, column: Int? = nil) -> [Tile] {
         if let row = row {
             let tiles = self.singleArrayOfTiles.filter({ $0.currentCoordinate.row == row } )
             return tiles.sorted(by: { $0.currentCoordinate.column < $1.currentCoordinate.column })
-//            for index in 0..<self.tilesPerRow {
-//                let coordinate = Coordinate(row, index)
-//                if let tile =
-//                tiles.append(self.findTile(at: coordinate))
-//            }
         } else if let column = column {
             let tiles = self.singleArrayOfTiles.filter({ $0.currentCoordinate.column == column } )
             return tiles.sorted(by: { $0.currentCoordinate.row < $1.currentCoordinate.row })
-//
-//            return self.singleArrayOfTiles.filter({ $0.currentCoordinate.column == column } )
-
-//            return self.singleArrayOfTiles.compactMap({ $0.currentCoordinate.row == row } )
-//            return self.singleArrayOfTiles.map(where: { $0.currentCoordinate.column == column } )
-
-//            for index in 0..<self.tilesPerRow {
-//                let coordinate = Coordinate(index, column)
-//                tiles.append(self.findTile(at: coordinate))
-//            }
         }
         return []
     }
@@ -161,6 +112,11 @@ class GameBoard {
     func findTile(at coordinate: Coordinate) -> Tile? {
         return self.singleArrayOfTiles.first(where: { $0.currentCoordinate == coordinate } )
     }
+
+    func findFirstMisplacedTile() -> Tile? {
+        return self.singleArrayOfTiles.first(where: { $0.currentCoordinate != $0.targetCoordinate } )
+    }
+
 
     func findFirstUnorientedTile() -> Tile? {
         return self.singleArrayOfTiles.first(where: { $0.orientationCount != 1 } )
