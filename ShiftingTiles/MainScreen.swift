@@ -42,7 +42,7 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(animated)
         
 
-        var tilesPerRow = UserSettings.intValue(for: .tilePerRow)
+        let tilesPerRow = UserSettings.intValue(for: .tilePerRow)
         self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
         self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
 

@@ -143,6 +143,7 @@ class GameBoardVC: UIViewController {
         for grip in self.columnGrips + self.rowGrips {
             grip.gripState = .normal
         }
+        self.tileArea.gameBoard.tileSelectionAllowed = true
     }
 
 
@@ -304,16 +305,19 @@ extension GameBoardVC: GripDelegate {
 
     func selected(grip: Grip) {
         if let firstGrip = self.selectedGrip {
+            // firstGrip was already selected. now a second grip was selected
+            // find tiles in the two lines and swap
             firstGrip.gripState = .normal
             firstGrip.rotate()
 
-            // a second different grip was selected
-            // find tiles in the two columns and swap
             self.tileArea.swapLines(firstGrip.index, grip.index, type: grip.gripType)
             self.selectedGrip = nil
             self.highlightedRowColumnMask?.removeFromSuperview()
             self.resetGrips()
         } else {
+            // this is the first grip selected
+            self.tileArea.gameBoard.tileSelectionAllowed = false
+            self.tileArea.gameBoard.deselectAnySelectedTiles()
             grip.rotate()
             grip.gripState = .selected
 

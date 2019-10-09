@@ -20,6 +20,7 @@ class GameBoard {
     let imagePackage: ImagePackage
     let tilesPerRow: Int
     var singleArrayOfTiles = [Tile]()
+    var tileSelectionAllowed = false
 
     var shuffleCount: Int {
         return tilesPerRow * 10
@@ -128,6 +129,10 @@ class GameBoard {
         tile2.currentCoordinate = tempCoordinate
     }
 
+    func deselectAnySelectedTiles() {
+        self.selectedTile?.swapState()
+        self.selectedTile = nil
+    }
 
     // MARK: TILE EXAMINATION
     // Checks to see if the image pieces are in the correct order and if the orientations are correct
@@ -155,24 +160,24 @@ class GameBoard {
 }
 
 extension GameBoard: TileDelegate {
-    func selected(tile: Tile) {
-        if let firstTile = self.selectedTile {
-            // firstTile was already selected, now a second tile is being selected
+    func tileTapped(_ tile: Tile) {
+        guard self.tileSelectionAllowed else { return }
 
-            // reset it and then swap the two selected tiles
-            firstTile.state = .normal
+        if let firstTile = self.selectedTile {
+            // firstTile was already selected, now another tile was tapped
+
+            self.deselectAnySelectedTiles()
+
+            if tile == firstTile { return } // same tile tapped
+
+            // swap the two selected tiles
             self.swapCoordinates(firstTile, tile)
             self.delegate?.swapTiles(firstTile, tile)
-            self.selectedTile = nil
         } else {
-            // this is a first tile being selected
-            tile.state = .selected
+            // this is a first tile being tapped
+            tile.swapState()
             self.selectedTile = tile
         }
-    }
-
-    func deselected() {
-        self.selectedTile = nil
     }
 }
 

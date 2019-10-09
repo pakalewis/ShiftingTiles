@@ -21,8 +21,7 @@ enum TileOrientation: Int, CaseIterable {
 }
 
 protocol TileDelegate: class {
-    func selected(tile: Tile)
-    func deselected()
+    func tileTapped(_ tile: Tile)
 }
 
 class Tile: UIImageView {
@@ -72,12 +71,15 @@ class Tile: UIImageView {
     }
 
     @objc func tapped() {
+        self.delegate?.tileTapped(self)
+    }
+
+    func swapState() {
         switch state {
         case .normal:
-            self.delegate?.selected(tile: self)
+            self.state = .selected
         case .selected:
             self.state = .normal
-            self.delegate?.deselected()
         }
     }
 

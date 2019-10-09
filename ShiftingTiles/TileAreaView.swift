@@ -20,9 +20,6 @@ class TileAreaView: UIView {
 
     // Set to true when puzzle is solved
     var isPuzzleSolved = false
-    
-    // Indicates whether tiles should be movable
-    var allowTileShifting = true;
 
     let gameBoard: GameBoard
 
@@ -31,14 +28,7 @@ class TileAreaView: UIView {
     
     // This is a temporary view that appears as a black border around the selected tile
     var highlightedView = UIView()
-    
-    // Vars for the tiles to be swapped
-    var foundTileWithPoint : Tile?
-    var firstTile : Tile?
-    var secondTile : Tile?
 
-    var firstUnorientedTile: Tile?
-    
     // MARK: SETUP
     init(gameBoard: GameBoard, frame: CGRect) {
         print("initialize game board")
@@ -221,26 +211,6 @@ class TileAreaView: UIView {
         }
     }
         
-    func findTilesToSwap() {
-//        self.firstTile = nil
-//        self.secondTile = nil
-//        for index1 in 0..<self.tilesPerRow {
-//            for index2 in 0..<self.tilesPerRow {
-//                
-//                // Iterate through the array to find the first spot with the wrong tile
-//                // Then find the tile that should go there
-//                let doubleIndex = DoubleIndex(index1: index1, index2: index2)
-//                let currentTile = self.findTileAtCoordinate(doubleIndex)
-//                let currentTag = currentTile.tag
-//                
-//                if (currentTag / 10) != index1 || (currentTag % 10) != index2 {
-//                    self.firstTile = currentTile
-//                    self.secondTile = self.findTileWithTag(currentTile.doubleIndex.concatenateToInt())
-//                    return
-//                }
-//            }
-//        }
-    }
 }
 
 extension TileAreaView: GameBoardDelegate {
@@ -254,3 +224,26 @@ extension TileAreaView: GameBoardDelegate {
         }
     }
 }
+
+
+
+//    func findTilesToSwap() {
+//        self.firstTile = nil
+//        self.secondTile = nil
+//        for index1 in 0..<self.tilesPerRow {
+//            for index2 in 0..<self.tilesPerRow {
+//
+//                // Iterate through the array to find the first spot with the wrong tile
+//                // Then find the tile that should go there
+//                let doubleIndex = DoubleIndex(index1: index1, index2: index2)
+//                let currentTile = self.findTileAtCoordinate(doubleIndex)
+//                let currentTag = currentTile.tag
+//
+//                if (currentTag / 10) != index1 || (currentTag % 10) != index2 {
+//                    self.firstTile = currentTile
+//                    self.secondTile = self.findTileWithTag(currentTile.doubleIndex.concatenateToInt())
+//                    return
+//                }
+//            }
+//        }
+//    }
