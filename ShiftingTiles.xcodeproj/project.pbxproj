@@ -231,6 +231,8 @@
 		2CE5AFDF1E55050500119D3A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFDE1E55050500119D3A /* Settings.storyboard */; };
 		2CE5AFE11E5506FD00119D3A /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE5AFE01E5506FD00119D3A /* Stats.storyboard */; };
 		2CF7E4171A68F88800E39B14 /* RulesScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */; };
+		91142D5B234ED6790039AC67 /* LineGripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91142D5A234ED6790039AC67 /* LineGripsView.swift */; };
+		91142D5F23504BE70039AC67 /* LineGripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91142D5E23504BE70039AC67 /* LineGripsView.xib */; };
 		915B04AE223D9A64006D3653 /* Grip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915B04AD223D9A64006D3653 /* Grip.swift */; };
 		915B04B0223D9ECB006D3653 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 915B04AF223D9ECB006D3653 /* triangle.png */; };
 		91A3154222333451006C6017 /* CongratsMessaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3154122333451006C6017 /* CongratsMessaging.swift */; };
@@ -473,6 +475,8 @@
 		2CE5AFDE1E55050500119D3A /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = SOURCE_ROOT; };
 		2CE5AFE01E5506FD00119D3A /* Stats.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Stats.storyboard; sourceTree = SOURCE_ROOT; };
 		2CF7E4161A68F88800E39B14 /* RulesScreen1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RulesScreen1.swift; path = ShiftingTiles/RulesScreen1.swift; sourceTree = SOURCE_ROOT; };
+		91142D5A234ED6790039AC67 /* LineGripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGripsView.swift; sourceTree = "<group>"; };
+		91142D5E23504BE70039AC67 /* LineGripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LineGripsView.xib; sourceTree = "<group>"; };
 		915B04AD223D9A64006D3653 /* Grip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Grip.swift; path = ShiftingTiles/Grip.swift; sourceTree = SOURCE_ROOT; };
 		915B04AF223D9ECB006D3653 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
 		91A3154122333451006C6017 /* CongratsMessaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CongratsMessaging.swift; path = ShiftingTiles/CongratsMessaging.swift; sourceTree = SOURCE_ROOT; };
@@ -794,12 +798,12 @@
 		2CD422B41A453D6000B08420 /* Game Screen */ = {
 			isa = PBXGroup;
 			children = (
+				91142D59234ED6530039AC67 /* Views */,
 				2C7F086D1A5DF0980083F668 /* Tile.swift */,
 				2C7F085F1A5DF0730083F668 /* TileAreaView.swift */,
 				2C7F085E1A5DF0730083F668 /* GameBoardVC.swift */,
 				2CE5AFDA1E54FFC900119D3A /* GameBoard.storyboard */,
 				91B2FFDC221BA67F00DB4597 /* GameBoard.swift */,
-				915B04AD223D9A64006D3653 /* Grip.swift */,
 			);
 			name = "Game Screen";
 			sourceTree = "<group>";
@@ -861,6 +865,16 @@
 				2CD4DF601A8C29A2004BE933 /* Acknowledgements.xib */,
 			);
 			name = InfoScreen;
+			sourceTree = "<group>";
+		};
+		91142D59234ED6530039AC67 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				915B04AD223D9A64006D3653 /* Grip.swift */,
+				91142D5A234ED6790039AC67 /* LineGripsView.swift */,
+				91142D5E23504BE70039AC67 /* LineGripsView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		91B2FFD7221BA52200DB4597 /* Photo Browsing */ = {
@@ -965,6 +979,7 @@
 				2CC635741A7866CA0079BB1D /* 17small.jpg in Resources */,
 				2C55257E1A9BBE7F004334EC /* 49large.jpg in Resources */,
 				2C90A0D21A78CA1E00447AE4 /* 09medium.jpg in Resources */,
+				91142D5F23504BE70039AC67 /* LineGripsView.xib in Resources */,
 				2CD4DF4F1A8C295A004BE933 /* Main.storyboard in Resources */,
 				2C90A1341A78CA3000447AE4 /* 27large.jpg in Resources */,
 				2C90A1281A78CA3000447AE4 /* 15large.jpg in Resources */,
@@ -1162,6 +1177,7 @@
 				2C7F087B1A5DF1750083F668 /* MainScreen.swift in Sources */,
 				2C6BB4B51AA2CA8B0048E07E /* ImagePackage.swift in Sources */,
 				91B2FFD4221B7F8200DB4597 /* PhotoBrowser.swift in Sources */,
+				91142D5B234ED6790039AC67 /* LineGripsView.swift in Sources */,
 				91A3154222333451006C6017 /* CongratsMessaging.swift in Sources */,
 				2C9AF62F1AA68D1200A830DF /* RulesScreen1a.swift in Sources */,
 				2C025E6B1A660D3600BEFB87 /* InfoScreen.swift in Sources */,

@@ -20,9 +20,8 @@ class GameBoardVC: UIViewController {
     var tileArea: TileAreaView!
     var originalImageShown = false
     
-    var columnGrips = [Grip]()
-    var rowGrips = [Grip]()
-    var selectedGrip: Grip?
+    var selectedGrip: GripSelection?
+    let GRADIENT = false
 
     var highlightedRowColumnMask: UIView?
     
@@ -30,8 +29,8 @@ class GameBoardVC: UIViewController {
     @IBOutlet weak var originalImageView: UIImageView!
     @IBOutlet weak var tileAreaContainer: UIView!
     @IBOutlet weak var congratsMessage: UILabel!
-    @IBOutlet weak var topBank: UIView!
-    @IBOutlet weak var leftBank: UIView!
+    @IBOutlet weak var columnGrips: LineGripsView!
+    @IBOutlet weak var rowGrips: LineGripsView!
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var imageCaptionLabel: UILabel!
 
@@ -51,8 +50,8 @@ class GameBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.topBank.backgroundColor = .clear
-        self.leftBank.backgroundColor = .clear
+        self.columnGrips.setup(type: .column, count: self.gameBoard.tilesPerRow, delegate: self)
+        self.rowGrips.setup(type: .row, count: self.gameBoard.tilesPerRow, delegate: self)
 
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             self.leftBankWidthConstraint.constant = 30
@@ -96,57 +95,26 @@ class GameBoardVC: UIViewController {
         }
     }
 
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
 
         self.tileArea = TileAreaView(gameBoard: self.gameBoard, frame: self.tileAreaContainer.frame)
         self.tileArea.delegate = self
         self.view.addSubview(tileArea)
         setOriginalImage(hidden: true)
         self.view.bringSubviewToFront(tileArea)
-
-        // Add row/column grips
-        self.initializeRowColumnGrips()
         
         // Set text fields
         self.imageCaptionLabel.text = gameBoard.imagePackage.captionText()
     }
 
-    // MARK: Grips that allow selection/movement of an entire row or column
-    func initializeRowColumnGrips() {
-        // Measurements to make the frames
-        let topWidth = self.topBank.frame.width / CGFloat(self.gameBoard.tilesPerRow)
-        let topHeight = self.topBank.frame.height
-        let leftWidth = self.leftBank.frame.width
-        let leftHeight = self.leftBank.frame.height / CGFloat(self.gameBoard.tilesPerRow)
-        
-        for index in 0..<self.gameBoard.tilesPerRow {
-            let topPositionX = self.topBank.frame.origin.x + (topWidth * CGFloat(index))
-            let leftPositionY = self.leftBank.frame.origin.y + (leftHeight * CGFloat(index))
-            
-            // Top Grip Area
-            let topFrame = CGRect(x: topPositionX, y: self.topBank.frame.origin.y, width: topWidth, height: topHeight * 0.9)
-            let topGrip = Grip(gripType: .column, index: index, frame: topFrame, delegate: self)
-            self.view.addSubview(topGrip)
-            self.columnGrips.append(topGrip)
-            
-            // Left Grip Area
-            let leftFrame = CGRect(x: self.leftBank.frame.origin.x, y: leftPositionY, width: leftWidth * 0.9, height: leftHeight)
-            let leftGrip = Grip(gripType: .row, index: index, frame: leftFrame, delegate: self)
-            self.view.addSubview(leftGrip)
-            self.rowGrips.append(leftGrip)
-        }
-    }
-
     func resetGrips() {
-        for grip in self.columnGrips + self.rowGrips {
-            grip.gripState = .normal
-        }
+        self.columnGrips.reset()
+        self.rowGrips.reset()
         self.tileArea.gameBoard.tileSelectionAllowed = true
     }
-
-
 
     
     // MARK: BUTTONS
@@ -215,7 +183,7 @@ class GameBoardVC: UIViewController {
             if let alert = LossOfProgressAlert(delegate: self).make() {
                 self.present(alert, animated: true, completion: nil)
             } else {
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
 //        }
     }
@@ -266,18 +234,20 @@ class GameBoardVC: UIViewController {
         }) 
     }
 
-    func addMask(row: Int? = nil, column: Int? = nil) {
+    func addMask(gripSelection: GripSelection) {
         var rect: CGRect?
-        if let row = row {
+        let index = gripSelection.index
+        switch gripSelection.type {
+        case .row:
             rect = CGRect(
                 x: 0,
-                y: self.tileArea.frame.height * CGFloat(row) / CGFloat(self.gameBoard.tilesPerRow),
+                y: self.tileArea.frame.height * CGFloat(index) / CGFloat(self.gameBoard.tilesPerRow),
                 width: self.tileArea.frame.width,
                 height: self.tileArea.frame.height / CGFloat(self.gameBoard.tilesPerRow)
             )
-        } else if let column = column {
+        case .column:
             rect = CGRect(
-                x: self.tileArea.frame.width * CGFloat(column) / CGFloat(self.gameBoard.tilesPerRow),
+                x: self.tileArea.frame.width * CGFloat(index) / CGFloat(self.gameBoard.tilesPerRow),
                 y: 0,
                 width: self.tileArea.frame.width / CGFloat(self.gameBoard.tilesPerRow),
                 height: self.tileArea.frame.height
@@ -285,56 +255,65 @@ class GameBoardVC: UIViewController {
         }
         guard let frame = rect else { return }
         let convertedRect = self.tileArea.convert(frame, to: self.view)
-        let mask = UIView(frame: convertedRect)
-        mask.backgroundColor = UIColor.white.withAlphaComponent(0.25)
-        mask.layer.borderColor = UIColor.black.cgColor
-        mask.layer.borderWidth = 2
-        self.view.addSubview(mask)
-        self.highlightedRowColumnMask = mask
+
+        let overlay = UIView(frame: convertedRect)
+        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+
+        if GRADIENT {
+            let mask = CAShapeLayer()
+            mask.lineWidth = 2
+            mask.path = UIBezierPath(roundedRect: overlay.bounds.insetBy(dx: 1, dy: 1), cornerRadius: 2).cgPath
+            mask.strokeColor = UIColor.black.cgColor
+            mask.fillColor = UIColor.clear.cgColor
+
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame =  CGRect(origin: CGPoint.zero, size: convertedRect.size)
+            //        gradientLayer.colors = [UIColor.blue.cgColor, UIColor.cyan.cgColor, UIColor.cyan.cgColor, UIColor.blue.cgColor]
+            gradientLayer.colors = [Colors.fetchDarkColor().cgColor, Colors.fetchLightColor().cgColor, Colors.fetchLightColor().cgColor, Colors.fetchDarkColor().cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+            gradientLayer.mask = mask
+            overlay.layer.addSublayer(gradientLayer)
+        } else {
+            overlay.layer.borderColor = UIColor.black.cgColor
+            overlay.layer.borderWidth = 2
+            overlay.layer.cornerRadius = 2
+        }
+
+        self.view.addSubview(overlay)
+        self.highlightedRowColumnMask = overlay
     }
 
 }
 
 
-extension GameBoardVC: GripDelegate {
-    func deselectGrip() {
-        self.selectedGrip = nil
+extension GameBoardVC: LineGripsViewDelegate {
+    func gripSelected(_ gripSelection: GripSelection) {
+        self.selectedGrip = gripSelection
+        self.addMask(gripSelection: gripSelection)
+        self.tileArea.gameBoard.tileSelectionAllowed = false
+        self.tileArea.gameBoard.deselectAnySelectedTiles()
+
+        switch gripSelection.type {
+        case .column:
+            self.rowGrips.setAllGripsTo(.disabled)
+        case .row:
+            self.columnGrips.setAllGripsTo(.disabled)
+        }
+    }
+
+    func gripDeselected(_ gripSelection: GripSelection) {
         self.highlightedRowColumnMask?.removeFromSuperview()
         self.resetGrips()
     }
 
-    func selected(grip: Grip) {
-        if let firstGrip = self.selectedGrip {
-            // firstGrip was already selected. now a second grip was selected
-            // find tiles in the two lines and swap
-            firstGrip.gripState = .normal
-            firstGrip.rotate()
+    func secondGripSelected(_ gripSelection: GripSelection) {
+        guard let gs = self.selectedGrip else { return }
+        self.tileArea.swapLines(gs.index, gripSelection.index, type: gripSelection.type)
 
-            self.tileArea.swapLines(firstGrip.index, grip.index, type: grip.gripType)
-            self.selectedGrip = nil
-            self.highlightedRowColumnMask?.removeFromSuperview()
-            self.resetGrips()
-        } else {
-            // this is the first grip selected
-            self.tileArea.gameBoard.tileSelectionAllowed = false
-            self.tileArea.gameBoard.deselectAnySelectedTiles()
-            grip.rotate()
-            grip.gripState = .selected
-
-            self.selectedGrip = grip
-            switch grip.gripType {
-            case .column:
-                for grip in self.rowGrips {
-                    grip.gripState = .disabled
-                }
-                self.addMask(column: grip.index)
-            case .row:
-                for grip in self.columnGrips {
-                    grip.gripState = .disabled
-                }
-                self.addMask(row: grip.index)
-            }
-        }
+        self.selectedGrip = nil
+        self.highlightedRowColumnMask?.removeFromSuperview()
+        self.resetGrips()
     }
 }
 

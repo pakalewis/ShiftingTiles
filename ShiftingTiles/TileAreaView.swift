@@ -207,7 +207,6 @@ class TileAreaView: UIView {
             }
         }) { (done) in
                 print("done wiggling")
-            
         }
     }
         

@@ -17,8 +17,7 @@ enum GripType: String {
 }
 
 protocol GripDelegate: class {
-    func selected(grip: Grip)
-    func deselectGrip()
+    func gripTapped(grip: Grip)
 }
 
 class Grip: UIButton {
@@ -35,48 +34,34 @@ class Grip: UIButton {
         }
     }
 
-    init(gripType: GripType, index: Int, frame: CGRect, delegate: GripDelegate) {
+    init(gripType: GripType, index: Int, delegate: GripDelegate) {
         self.gripType = gripType
         self.index = index
         self.delegate = delegate
-        self.gripState = .disabled
+        self.gripState = .normal
 
-        super.init(frame: frame)
+        super.init(frame: .zero)
         self.imageView?.contentMode = .scaleAspectFit
         self.tintColor = Colors.fetchDarkColor()
 
-        self.initialRotation()
-        self.updateForState()
+        self.setInitialRotation()
         self.setImage(Icon.triangle.image(), for: .normal)
-
-        self.isUserInteractionEnabled = false
 
         self.addTarget(self, action: #selector(tapped), for: .touchUpInside)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     @objc func tapped() {
+        self.delegate?.gripTapped(grip: self)
         print("tapped grip at \(self.gripType.rawValue) \(self.index)")
-        if self.gripState == .selected {
-            self.gripState = .normal
-            self.rotate()
-            self.delegate?.deselectGrip()
-        } else {
-            self.delegate?.selected(grip: self)
-        }
     }
 
-    func initialRotation() {
+    func setInitialRotation() {
         switch self.gripType {
         case .column:
             return
         case .row:
             self.transform = self.transform.rotated(by: -self.NINETY)
         }
-
     }
 
     func updateForState() {
@@ -97,5 +82,9 @@ class Grip: UIButton {
         UIView.animate(withDuration: 0.25) {
             self.transform = self.transform.rotated(by: self.ONE_EIGHTY)
         }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

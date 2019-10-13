@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineGripsView" customModule="ShiftingTiles" customModuleProvider="target">
+            <connections>
+                <outlet property="stack" destination="O9p-pn-LeX" id="84b-KC-eQw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bHP-wl-5VF"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="559" height="305"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9p-pn-LeX">
+                    <rect key="frame" x="0.0" y="0.0" width="559" height="305"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="O9p-pn-LeX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EzN-CY-WCf"/>
+                <constraint firstItem="O9p-pn-LeX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jVu-V3-eCD"/>
+                <constraint firstAttribute="bottom" secondItem="O9p-pn-LeX" secondAttribute="bottom" id="nSp-6f-pLq"/>
+                <constraint firstAttribute="trailing" secondItem="O9p-pn-LeX" secondAttribute="trailing" id="uxY-Iu-bKg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="242.75362318840581" y="334.48660714285711"/>
+        </view>
+    </objects>
+</document>

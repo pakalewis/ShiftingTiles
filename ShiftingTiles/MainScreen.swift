@@ -41,7 +41,6 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-
         let tilesPerRow = UserSettings.intValue(for: .tilePerRow)
         self.tilesPerRowLabel.text = "\(tilesPerRow) x \(tilesPerRow)"
         self.tilesPerRowLabel.adjustsFontSizeToFitWidth = true
@@ -108,19 +107,7 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
             }
         })
     }
-    
 
-    
-    
-    
-    
-  
-    
-    
-    
-
-    
-    
     func updateMainImageView(image: UIImage) {
         UIView.transition(with: self.mainImageView,
             duration: 0.5,
@@ -164,8 +151,7 @@ class MainScreen: UIViewController, UINavigationControllerDelegate {
         let board = GameBoard(imagePackage: self.photoBrowser.currentPackage(), tilesPerRow:             UserSettings.intValue(for: .tilePerRow))
 
         let gameBoardVC = GameBoardVC.generate(board: board)
-        present(gameBoardVC, animated: true, completion: nil)
-
+        self.navigationController?.pushViewController(gameBoardVC, animated: true)
     }
     
     @IBAction func settingsButtonTapped(_ sender: Any) {

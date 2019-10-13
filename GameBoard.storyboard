@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aDV-sQ-vFz">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aDV-sQ-vFz">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2N-eb-asY" userLabel="TopContainer">
-                                <rect key="frame" x="0.0" y="20" width="375" height="153"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="173"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Tpg-Xc-44u" userLabel="CongratsLabel">
-                                        <rect key="frame" x="19" y="76.5" width="337.5" height="0.0"/>
+                                        <rect key="frame" x="19" y="86.5" width="337.5" height="0.0"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="30"/>
                                         <nil key="highlightedColor"/>
@@ -38,14 +36,14 @@
                                     <constraint firstAttribute="centerX" secondItem="Tpg-Xc-44u" secondAttribute="centerX" id="vtq-Yq-kMC"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c37-58-RaC" userLabel="TopBank">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c37-58-RaC" userLabel="columnGrips" customClass="LineGripsView" customModule="ShiftingTiles" customModuleProvider="target">
                                 <rect key="frame" x="45" y="133" width="321" height="40"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="G6n-sX-rd3"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-gL-U5e" userLabel="LeftBank">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-gL-U5e" userLabel="rowGrips" customClass="LineGripsView" customModule="ShiftingTiles" customModuleProvider="target">
                                 <rect key="frame" x="5" y="173" width="40" height="321"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -215,18 +213,18 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="6vG-Yv-DJe" id="nEu-a8-xRF"/>
+                        <outlet property="columnGrips" destination="c37-58-RaC" id="ssu-G5-2X4"/>
                         <outlet property="congratsMessage" destination="Tpg-Xc-44u" id="0C4-VH-MQd"/>
                         <outlet property="hintButton" destination="HO4-dR-lAZ" id="VBp-F4-jbg"/>
                         <outlet property="imageCaptionLabel" destination="uwi-al-ROP" id="y5f-gz-VrX"/>
-                        <outlet property="leftBank" destination="DMY-gL-U5e" id="JVS-8T-sW3"/>
                         <outlet property="leftBankMarginConstraint" destination="TER-HX-47S" id="pml-eY-ssm"/>
                         <outlet property="leftBankWidthConstraint" destination="B9E-Xb-LJ5" id="Uh3-Hn-qY0"/>
                         <outlet property="originalImageView" destination="qWH-la-4PN" id="PxA-XU-gQR"/>
+                        <outlet property="rowGrips" destination="DMY-gL-U5e" id="WuO-7p-NRH"/>
                         <outlet property="separatorView" destination="Zbu-ZO-bqj" id="CUk-Kn-ffM"/>
                         <outlet property="showOriginalButton" destination="33U-oP-EAe" id="qxG-vC-swb"/>
                         <outlet property="solveButton" destination="b3N-U2-3sl" id="lT1-67-XbL"/>
                         <outlet property="tileAreaContainer" destination="Dlz-Qn-7Mr" id="CaQ-u2-fpS"/>
-                        <outlet property="topBank" destination="c37-58-RaC" id="XSg-NC-qOj"/>
                         <outlet property="topBankHeightConstraint" destination="G6n-sX-rd3" id="fmj-nM-QA5"/>
                     </connections>
                 </viewController>
@@ -236,10 +234,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="01large.jpg" width="960" height="960"/>
+        <image name="01large.jpg" width="691.20001220703125" height="691.20001220703125"/>
         <image name="backIcon.png" width="120" height="120"/>
-        <image name="hintIcon.png" width="120" height="120"/>
-        <image name="originalImageIcon.png" width="120" height="120"/>
-        <image name="solveIcon.png" width="120" height="120"/>
+        <image name="hintIcon.png" width="17.245508193969727" height="17.245508193969727"/>
+        <image name="originalImageIcon.png" width="6" height="6"/>
+        <image name="solveIcon.png" width="96" height="96"/>
     </resources>
 </document>
